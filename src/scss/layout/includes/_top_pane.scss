@@ -96,7 +96,7 @@ header {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            @include mq($until: large) {
+            @include mq($until: medium) {
                 display: none;
             }
         }
