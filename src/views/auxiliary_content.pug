@@ -1,0 +1,7 @@
+button.open('(click)'='toggleAux()' '[ngClass]'='{"slide": !isAuxOpen}')
+    i.icon-plus('*ngIf'='!isAuxOpen')
+    i.icon-cross('*ngIf'='isAuxOpen')
+.auxiliary('[ngClass]'='{"slide": !isAuxOpen}')
+    span('*ngIf'= '!auxItems') Some content...
+    .content
+        div('*ngFor'='let item of auxItems') Some future content

@@ -1,0 +1,6 @@
+nav('[ngClass]'='{"slideIn": isNavMenuOpen && !isSearchOpen}')
+    ul
+        li('*ngFor'='let item of menuItems')
+            a
+                i(class='{{item.icon}}')
+                span {{item.title}}

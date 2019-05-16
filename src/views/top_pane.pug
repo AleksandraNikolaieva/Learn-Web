@@ -8,7 +8,7 @@ header
         button('(click)'='doSearch(forSearch.value); forSearch.value=""')
             i.icon-search
         button.close('*ngIf'='isSearchOpen' '(click)'='toggleSearch()') x
-    button.search-icon('[ngClass]'='{"hide": isSearchOpen}' '(click)'='toggleSearch()')
+    button.search-icon('*ngIf'='!isSearchOpen' '(click)'='toggleSearch()')
         i.icon-search
     .userAccount('*ngIf'='!isSearchOpen' '(click)'='toggleUserMenu()')
         span {{user.name}}

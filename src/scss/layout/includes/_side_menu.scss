@@ -1,0 +1,70 @@
+nav {
+    @include size($menu-w, calc(100vh - #{$header-h}));
+    background-color: $grey;
+    padding: 10px 0;
+    transform: translateX(0%);
+    transition: transform 0.6s, width 0.6s;
+    display: inline-block;
+    position: absolute;
+    overflow-y: auto;
+    top: 0;
+    left: 0;
+    @include mq($until: small) {
+        transform: translateX(-100%);
+        width: 80%;
+        padding-left: 10px;
+    }
+
+    &.slideIn {
+        transform: translateX(0%);
+        @include mq($from: small) {
+            width: $menu-w;
+        }
+    }
+
+    ul {
+        margin: 0;
+        list-style: none;
+        padding: 0;
+
+        a {
+            @include size(68px, 68px);
+            @include flex(column, center, center);
+            color: $yellow;
+            margin: 5px 0;
+            border: 1px solid $grey;
+            border-radius: 5px;
+            cursor: pointer;
+            @include mq($until: small) {
+                @include flex(row, flex-start, center);
+                width: 99%;
+            }
+
+            &:hover {
+                border: 1px solid $light-grey;
+                background-color: lighten($grey, 10%);
+            }
+        }
+
+        i {
+            font-size: 30px;
+            padding: 5px;
+            text-align: center;
+            vertical-align: bottom;
+            @include mq($until: small) {
+                font-size: 35px;
+            }
+        }
+
+        span {
+            font-size: 14px;
+            margin: 0 3px;
+            @include mq($until: medium) {
+                color: transparent
+            }
+            @include mq($until: small) {
+                color: $yellow;
+            }
+        }
+    }
+}
