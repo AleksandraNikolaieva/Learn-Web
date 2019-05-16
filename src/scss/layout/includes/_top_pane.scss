@@ -2,61 +2,51 @@ header {
     @include size(96%, $header-h);
     background-color: $grey;
     @include flex(row, space-between, center);
-    padding: 0px 2%;
+    padding: 5px 2%;
 
-     > img {
+    > img {
         @include size(30px);
-        @include mq($until: medium) {
+        @include mq($until: small) {
             display: none;
         }
     }
 
-     button.menu {
+    button.menu {
         @include size(50px, 50px);
         background-color: transparent;
         border: none;
         display: none;
         outline: none;
-        @include mq($until: medium) {
+        @include mq($until: small) {
             display: inline;
         }
 
-         i {
+        i {
             color: $yellow;
             font-size: 35px;
             vertical-align: middle;
         }
     }
 
-     button.search-icon {
-        @include size(26px, 26px);
-        cursor: pointer;
-        border: none;
-        border-radius: 50%;
+    button.search-icon {
         background-color: $white;
-        outline: none;
+        @include size(26px, 26px);
+        border-radius: 50%;
         display: none;
-        @include mq($until: medium) {
+        @include mq($until: small) {
             display: inline;
         }
     }
 
-     button.search-icon.hide {
-        display: none;
-        @include mq($from: medium) {
-            display: none;
-        }
-    }
-
-     div.search { 
+    div.search { 
         @include size(250px, 26px);
         font-size: 15px;
         text-align: center;
-        @include mq($until: medium) {
+        @include mq($until: small) {
             display: none;
         }
 
-         input {
+        input {
             @include size(78%, 26px);
             padding-left: 5px;
             border: none;
@@ -64,46 +54,43 @@ header {
             outline: none;
         }
 
-         button {
+        button {
             @include size(26px, 26px);
-            cursor: pointer;
-            border: none;
             border-radius: 50%;
-            background-color: $white;
-            outline: none;
             margin-left: -25px;
         }
 
-         button.close {
+        button.close {
             margin-left: 0px;
             color: $white;
             background-color: transparent;
         }
     }
 
-     div.search.wide {
-        width: 100%;
+    div.search.wide {
         display: block;
+        width: 100%;
+        animation: wide 0.5s;
+        margin: auto;
     }
 
-     div.search.hide {
+    div.search.hide {
         display: none;
-        @include mq($from: medium) {
+        @include mq($from: small) {
             display: block;
         }
     }
-
-     div.userAccount {
+    div.userAccount {
         height: 50px;
         color: $white;
         @include flex(row, flex-end, center);
 
-         img {
+        img {
             @include size(50px);
             margin-left: 10px;
         }
 
-         span {
+        span {
             max-width: 140px;
             white-space: nowrap;
             overflow: hidden;
@@ -113,4 +100,9 @@ header {
             }
         }
     }
+}
+
+@keyframes wide {
+    from {width: 250px}
+    to {width: 100%}
 }
