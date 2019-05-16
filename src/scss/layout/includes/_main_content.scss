@@ -5,6 +5,7 @@ main {
     top: 0;
     left: $menu-w;
     overflow-y: auto;
+    transition: width 0.4s;
     @include flex(column, space-between, center);
     @include mq($until: medium) {
         width: calc(100% - #{$menu-w});
@@ -49,7 +50,7 @@ main {
 
         .info {
             width: 100%;
-            height: 50px;
+            height: 40px;
             @include flex(row, space-between, center);
         }
     }
