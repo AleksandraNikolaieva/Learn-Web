@@ -1,0 +1,25 @@
+$mq-responsive: true;
+$mq-breakpoints: (
+    small: 320px,
+    medium: 740px,
+    large: 980px,
+    huge: 1300px
+);
+$mq-static-breakpoint: small;
+$mq-show-breakpoints: (small, medium, large, huge);
+
+$poppins: 'Poppins';
+$titillium: 'Titillium Web';
+
+$white: #ffffff;
+$yellow: #fac921;
+$light-grey: #8b8b8b;
+$grey: #2c2d32;
+$dark-grey: #2a2a2e;
+$black: #000000;
+$text-color: #878c9f;
+
+$header-h: 60px;
+$menu-w: 80px;
+$aux-w: 300px;
+

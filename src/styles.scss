@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'sass-mq';
+
+@import 'abstracts/variables.scss';
+@import 'abstracts/functions.scss';
+@import 'abstracts/extends.scss';
+@import 'abstracts/mixins.scss';
+
+@import 'base/normalize/normalize.scss';
+@import 'base/typography.scss';
+@import 'base/icomoon.scss';
+
+@import 'layout/general.scss';
+@import 'layout/includes/top_pane.scss';
+@import 'layout/includes/side_menu.scss';
+@import 'layout/includes/main_content.scss';
+@import 'layout/includes/auxiliary_content.scss';
