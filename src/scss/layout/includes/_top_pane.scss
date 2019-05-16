@@ -1,0 +1,116 @@
+header {
+    @include size(96%, $header-h);
+    background-color: $grey;
+    @include flex(row, space-between, center);
+    padding: 0px 2%;
+
+     > img {
+        @include size(30px);
+        @include mq($until: medium) {
+            display: none;
+        }
+    }
+
+     button.menu {
+        @include size(50px, 50px);
+        background-color: transparent;
+        border: none;
+        display: none;
+        outline: none;
+        @include mq($until: medium) {
+            display: inline;
+        }
+
+         i {
+            color: $yellow;
+            font-size: 35px;
+            vertical-align: middle;
+        }
+    }
+
+     button.search-icon {
+        @include size(26px, 26px);
+        cursor: pointer;
+        border: none;
+        border-radius: 50%;
+        background-color: $white;
+        outline: none;
+        display: none;
+        @include mq($until: medium) {
+            display: inline;
+        }
+    }
+
+     button.search-icon.hide {
+        display: none;
+        @include mq($from: medium) {
+            display: none;
+        }
+    }
+
+     div.search { 
+        @include size(250px, 26px);
+        font-size: 15px;
+        text-align: center;
+        @include mq($until: medium) {
+            display: none;
+        }
+
+         input {
+            @include size(78%, 26px);
+            padding-left: 5px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+        }
+
+         button {
+            @include size(26px, 26px);
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            background-color: $white;
+            outline: none;
+            margin-left: -25px;
+        }
+
+         button.close {
+            margin-left: 0px;
+            color: $white;
+            background-color: transparent;
+        }
+    }
+
+     div.search.wide {
+        width: 100%;
+        display: block;
+    }
+
+     div.search.hide {
+        display: none;
+        @include mq($from: medium) {
+            display: block;
+        }
+    }
+
+     div.userAccount {
+        height: 50px;
+        color: $white;
+        @include flex(row, flex-end, center);
+
+         img {
+            @include size(50px);
+            margin-left: 10px;
+        }
+
+         span {
+            max-width: 140px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            @include mq($until: large) {
+                display: none;
+            }
+        }
+    }
+}
