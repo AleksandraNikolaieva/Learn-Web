@@ -5,9 +5,12 @@
 button.open {
     position: absolute;
     top: 5px;
-    right: 20px;
+    right: $aux-w + 15;
     @include mq($until: medium) {
         display: none;
+    }
+    &.slide {
+        right: 10px;
     }
 }
 .auxiliary {
@@ -16,6 +19,9 @@ button.open {
     position: absolute;
     right: 0;
     top: 0;
+    transition: 0.6s;
+    background-color: darken($white, 5%);
+    transform: translateX(0%);
     @include mq($until: medium) {
         display: none;
     }
@@ -41,5 +47,8 @@ button.open {
 
     span {
         margin-left: 10px;
+    }
+    &.slide {
+        transform: translateX(+100%);
     }
 } 
