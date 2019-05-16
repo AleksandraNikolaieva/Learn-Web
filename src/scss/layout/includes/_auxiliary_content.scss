@@ -5,7 +5,7 @@
 button.open {
     position: absolute;
     top: 5px;
-    right: $aux-w + 15;
+    right: $aux-w + 10;
     @include mq($until: medium) {
         display: none;
     }

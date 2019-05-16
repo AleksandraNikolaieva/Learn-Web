@@ -17,6 +17,7 @@ main {
     }
     @include mq($from: huge) {
         max-width: 1440px;
+        left: calc((100vw - 1440px - #{$menu-w} - #{$aux-w})/2);
     }
     &.wide {
         width: calc(100% - #{$menu-w});
