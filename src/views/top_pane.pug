@@ -1,0 +1,15 @@
+header
+    img(src='../assets/images/logo.png', alt='logo')
+    button.menu('*ngIf'='!isSearchOpen' '(click)'='toggleNavMenu()')
+        i.icon-menu('*ngIf'='!isNavMenuOpen')
+        i.icon-cross('*ngIf'='isNavMenuOpen')
+    .search('[ngClass]'='{"wide": isSearchOpen, "hide": !isSearchOpen}')
+        input(type='text' placeholder='Search' '#forSearch'='' '(keyup.enter)'='doSearch(forSearch.value); forSearch.value=""')
+        button('(click)'='doSearch(forSearch.value); forSearch.value=""')
+            i.icon-search
+        button.close('*ngIf'='isSearchOpen' '(click)'='toggleSearch()') x
+    button.search-icon('[ngClass]'='{"hide": isSearchOpen}' '(click)'='toggleSearch()')
+        i.icon-search
+    .userAccount('*ngIf'='!isSearchOpen' '(click)'='toggleUserMenu()')
+        span {{user.name}}
+        img('[src]'='user.imgSrc', alt='user.name')
