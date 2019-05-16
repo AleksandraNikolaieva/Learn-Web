@@ -34,7 +34,7 @@ nav {
             margin: 5px 0;
             border: 1px solid $grey;
             border-radius: 5px;
-            cursor: pointer;
+            transition: background-color 0.3s;
             @include mq($until: small) {
                 @include flex(row, flex-start, center);
                 width: 99%;
