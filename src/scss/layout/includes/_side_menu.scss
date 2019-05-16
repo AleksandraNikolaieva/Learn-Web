@@ -1,0 +1,65 @@
+nav {
+    @include size($menu-w, calc(100vh - #{$header-h}));
+    background-color: $grey;
+    padding: 10px 0;
+    transform: translateX(0%);
+    transition: transform 1s, width 1s;
+    @include mq($until: medium) {
+        transform: translateX(-100%);
+        width: 80%;
+    }
+
+    &.slideIn {
+        transform: translateX(0%);
+        @include mq($from: medium) {
+            width: $menu-w;
+        }
+    }
+
+    ul {
+        margin: 0;
+        list-style: none;
+        padding: 0;
+
+        a {
+            display: block;
+            @include size(68px, 68px);
+            @include flex(column, center, center);
+            color: $yellow;
+            margin: 5px 0;
+            border: 1px solid $grey;
+            border-radius: 5px;
+            cursor: pointer;
+            @include mq($until: medium) {
+                @include flex(row, flex-start, center);
+                width: 99%;
+            }
+
+            &:hover {
+                border: 1px solid $light-grey;
+                background-color: lighten($grey, 10%);
+            }
+        }
+
+        i {
+            font-size: 30px;
+            padding: 5px;
+            text-align: center;
+            vertical-align: bottom;
+            @include mq($until: large) {
+                font-size: 35px;
+            }
+        }
+
+        span {
+            font-size: 14px;
+            margin: 0 3px;
+            @include mq($until: large) {
+                color: transparent
+            }
+            @include mq($until: medium) {
+                color: $yellow;
+            }
+        }
+    }
+}

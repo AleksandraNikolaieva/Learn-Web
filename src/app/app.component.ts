@@ -15,6 +15,20 @@ export class AppComponent {
     isUserMenuOpen: boolean = false;
     isNavMenuOpen: boolean = false;
     isSearchOpen: boolean = false;
+    menuItems = [
+        {
+            title: 'Dashboard',
+            icon: 'icon-stats-dots'
+        },
+        {
+            title: 'Lessons',
+            icon: 'icon-graduation-cap'
+        },
+        {
+            title: 'Settings',
+            icon: 'icon-gear'
+        }
+    ];
 
     private toggleUserMenu(): void {
         this.isUserMenuOpen = !this.isUserMenuOpen;
@@ -31,5 +45,6 @@ export class AppComponent {
 
     private toggleSearch(): void {
         this.isSearchOpen = !this.isSearchOpen;
+        this.isNavMenuOpen = false;
     }
 }
