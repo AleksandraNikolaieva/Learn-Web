@@ -1,0 +1,10 @@
+main('[ngClass]'='{"wide": !isAuxOpen}')
+    article('*ngFor' = 'let article of articles')
+        a
+            img(src='{{article.img}}', alt='{{article.title}}')
+            h3 {{article.title}}
+            p.description {{article.description}}
+            p.info
+                span 
+                    i.icon-user  {{article.author}}
+                span {{article.date}}
