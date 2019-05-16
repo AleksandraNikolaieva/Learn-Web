@@ -5,12 +5,12 @@
 button.open {
     position: absolute;
     top: 5px;
-    right: $aux-w + 10;
+    right: $aux-w + 15;
     @include mq($until: medium) {
         display: none;
     }
     &.slide {
-        right: 10px;
+        right: 15px;
     }
 }
 .auxiliary {
