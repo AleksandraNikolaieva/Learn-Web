@@ -1,3 +1,27 @@
-h1 {
+body {
+    font-family: $titillium;
+}
+
+ h1, h2 {
+    font-family: $poppins;
+}
+
+ h3 {
+    font-weight: 600;
+    font-size: 18px;
+    color: #666;
+}
+
+ main p {
+    font-family: $poppins;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 500;
+    color: $text-color;
+    text-align: justify;
+}
+
+ main span {
+    font-weight: bold;
     font-family: $poppins;
 }

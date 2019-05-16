@@ -14,3 +14,27 @@
 @import 'layout/includes/side_menu.scss';
 @import 'layout/includes/main_content.scss';
 @import 'layout/includes/auxiliary_content.scss';
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: lighten($light-grey, 20%);
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f100; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: lighten($grey, 20%);
+    border-radius: 10px;
+}
+
+a, button {
+    cursor: pointer;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
