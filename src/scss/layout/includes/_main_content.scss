@@ -1,0 +1,56 @@
+main {
+    @include size(calc(100% - #{$menu-w} - #{$aux-w}), calc(100vh - #{$header-h}));
+    position: absolute;
+    padding: 1% 0;
+    top: 0;
+    left: $menu-w;
+    overflow-y: auto;
+    @include flex(column, space-between, center);
+    @include mq($until: medium) {
+        width: calc(100% - #{$menu-w});
+        left: $menu-w;
+    }
+    @include mq($until: small) {
+        left: 0;
+        width: 100%;
+    }
+    @include mq($from: huge) {
+        max-width: 1440px;
+    }
+    &.wide {
+        width: calc(100% - #{$menu-w});
+        @include mq($until: small) {
+            width: 100%;
+        }
+    }
+
+    a {
+        display: block;
+    }
+
+    article {
+        @include size(60%);
+        min-width: 280px;
+        text-align: center;
+        padding: 20px 0;
+
+        h3 {
+            width: 100%;
+        }
+
+        img {
+            @include size(100%);
+        }
+
+        p {
+            @include size(100%, 100px);
+            overflow-y: hidden;
+        }
+
+        .info {
+            width: 100%;
+            height: 50px;
+            @include flex(row, space-between, center);
+        }
+    }
+}
