@@ -3,15 +3,21 @@ nav {
     background-color: $grey;
     padding: 10px 0;
     transform: translateX(0%);
-    transition: transform 1s, width 1s;
-    @include mq($until: medium) {
+    transition: transform 0.6s, width 0.6s;
+    display: inline-block;
+    position: absolute;
+    overflow-y: auto;
+    top: 0;
+    left: 0;
+    @include mq($until: small) {
         transform: translateX(-100%);
         width: 80%;
+        padding-left: 10px;
     }
 
     &.slideIn {
         transform: translateX(0%);
-        @include mq($from: medium) {
+        @include mq($from: small) {
             width: $menu-w;
         }
     }
@@ -22,7 +28,6 @@ nav {
         padding: 0;
 
         a {
-            display: block;
             @include size(68px, 68px);
             @include flex(column, center, center);
             color: $yellow;
@@ -30,7 +35,7 @@ nav {
             border: 1px solid $grey;
             border-radius: 5px;
             cursor: pointer;
-            @include mq($until: medium) {
+            @include mq($until: small) {
                 @include flex(row, flex-start, center);
                 width: 99%;
             }
@@ -46,7 +51,7 @@ nav {
             padding: 5px;
             text-align: center;
             vertical-align: bottom;
-            @include mq($until: large) {
+            @include mq($until: small) {
                 font-size: 35px;
             }
         }
@@ -54,10 +59,10 @@ nav {
         span {
             font-size: 14px;
             margin: 0 3px;
-            @include mq($until: large) {
+            @include mq($until: medium) {
                 color: transparent
             }
-            @include mq($until: medium) {
+            @include mq($until: small) {
                 color: $yellow;
             }
         }
