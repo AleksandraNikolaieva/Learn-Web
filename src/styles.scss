@@ -9,11 +9,13 @@
 @import 'base/typography.scss';
 @import 'base/icomoon.scss';
 
-@import 'layout/general.scss';
-@import 'layout/includes/top_pane.scss';
-@import 'layout/includes/side_menu.scss';
 @import 'layout/includes/main_content.scss';
 @import 'layout/includes/auxiliary_content.scss';
+
+body {
+    height: 100%;
+    overflow: hidden;
+}
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -31,6 +33,10 @@
 
 a, button {
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
 }
 
 button {

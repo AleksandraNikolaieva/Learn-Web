@@ -3,7 +3,7 @@ header
         i('[ngClass]'='isNavMenuOpen ? "icon-cross" : "icon-menu"')
     div('[ngClass]' = '{"wide": isSearchOpen}')
         a
-            img(src='../assets/images/logo.png', alt='logo')
+            img(src='../../../assets/images/logo.png', alt='logo')
         .search('[ngClass]'='{"wide": isSearchOpen}')
             input(placeholder='Search' '#forSearch'='' '(keyup.enter)'='doSearch(forSearch.value); forSearch.value=""')
             button('(click)'='doSearch(forSearch.value); forSearch.value=""')

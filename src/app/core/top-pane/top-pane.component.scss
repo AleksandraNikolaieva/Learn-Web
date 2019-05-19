@@ -1,3 +1,7 @@
+@import 'sass-mq';
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
 header {
     @include size(calc(100% - 20px), $header-h);
     @include flex(row, space-between, center);
