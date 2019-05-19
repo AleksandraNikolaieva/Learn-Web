@@ -6,4 +6,17 @@ body {
 .wrapper {
     position: relative;
     width: 100%;
+    height: calc(100vh - #{$header-h});
+}
+
+.inner-wrapper {
+    position: absolute;
+    left: $menu-w;
+    width: calc(100% - #{$menu-w});
+    height: 100%;
+    display: flex;
+    @include mq($until: small) {
+        left: 0;
+        width: 100%;
+    }
 }

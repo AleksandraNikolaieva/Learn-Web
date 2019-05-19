@@ -1,26 +1,20 @@
 header {
-    @include size(96%, $header-h);
-    background-color: $grey;
+    @include size(calc(100% - 20px), $header-h);
     @include flex(row, space-between, center);
-    padding: 5px 2%;
-
-    > img {
-        @include size(30px);
-        @include mq($until: small) {
-            display: none;
-        }
-    }
-
+    background-color: $grey;
+    padding: 0 10px;
+ 
     button.menu {
-        @include size(50px, 50px);
+        @include size(35px, 35px);
         background-color: transparent;
-        border: none;
         display: none;
-        outline: none;
         @include mq($until: small) {
-            display: inline;
+            display: inline-block;
+            &.hide {
+                display: none;
+            }
         }
-
+    
         i {
             color: $yellow;
             font-size: 35px;
@@ -28,63 +22,91 @@ header {
         }
     }
 
+    > div {
+        @include size(300px, 50px);
+        @include flex(row, space-between, center);
+        transition: width 0.4s;
+        @include mq($until: small) {
+            display: none;
+        }
+        &.wide {
+            width: 100%;
+            display: flex;
+            @include mq($from: small) {
+                width: 300px;
+            }
+        }
 
-    button.search-icon {
+        a { 
+            display: inline-block;
+            width: 55px;
+            padding-left: 15px;
+            flex-grow: 0;
+            flex-shrink: 0;
+            @include mq($until: small) {
+                display: none;
+            }
+
+            img {
+                @include size(30px);
+            }
+        }
+
+        .search {
+            @include size(100%, 30px);
+            font-size: 15px;
+            @include mq($until: small) {
+                display: none;
+            }
+
+            &.wide {
+                display: inline-block;
+                animation: wide 0.5s;
+            }
+
+            input {
+                @include size(calc(100% - 33px), 30px);
+                padding-left: 5px;
+                border-radius: 20px;
+                outline: none;
+                border: none;
+            }
+
+            button {
+                @include size(26px, 26px);
+                border-radius: 50%;
+                margin-left: -25px;
+            }
+
+            button.close {
+                margin-left: 0px;
+                color: $white;
+                background-color: transparent;
+                @include mq($from: small) {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .search-icon {
         background-color: $white;
         @include size(26px, 26px);
         border-radius: 50%;
         display: none;
         @include mq($until: small) {
-            display: inline;
+            display: inline-block;
         }
     }
 
-    div.search { 
-        @include size(250px, 26px);
-        font-size: 15px;
-        text-align: center;
-        @include mq($until: small) {
-            display: none;
-        }
-
-        input {
-            @include size(78%, 26px);
-            padding-left: 5px;
-            border: none;
-            border-radius: 20px;
-            outline: none;
-        }
-
-        button {
-            @include size(26px, 26px);
-            border-radius: 50%;
-            margin-left: -25px;
-        }
-
-        button.close {
-            margin-left: 0px;
-            color: $white;
-            background-color: transparent;
-        }
-    }
-
-    div.search.wide {
-        display: block;
-        width: 100%;
-        animation: wide 0.5s;
-        margin: auto;
-    }
-
-    div.search.hide {
-        display: none;
-        @include mq($from: small) {
-            display: block;
-        }
-    }
-    div.userAccount {
+    .userAccount {
         height: 50px;
-        color: $white;
-        @include flex(row, flex-end, center);
+        &.hide {
+            display: none;
+            @include mq($from: small) {
+                display: flex;
+            }
+        }
 
         img {
             @include size(50px);
@@ -92,7 +114,10 @@ header {
         }
 
         span {
+            display: inline-block;
+            line-height: 50px;
             max-width: 140px;
+            color: $white;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -104,6 +129,6 @@ header {
 }
 
 @keyframes wide {
-    from {width: 250px}
+    from {width: 30px}
     to {width: 100%}
 }
