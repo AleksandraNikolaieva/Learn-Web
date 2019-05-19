@@ -7,6 +7,7 @@ export interface User {
 export interface MenuItem {
     title: string;
     icon: string;
+    link: string;
 }
 
 export interface Article {

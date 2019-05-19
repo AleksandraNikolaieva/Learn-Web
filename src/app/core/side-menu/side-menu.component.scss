@@ -1,3 +1,7 @@
+@import 'sass-mq';
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
 .backdrop {
     position: absolute;
     top: 0;
@@ -27,14 +31,13 @@ nav {
         width: 80%;
         padding-left: 10px;
     }
-
     &.slideIn {
         transform: translateX(0%);
         @include mq($from: small) {
             width: $menu-w;
         }
     }
-
+    
     ul {
         list-style: none;
         padding: 0;
@@ -50,6 +53,10 @@ nav {
             @include mq($until: small) {
                 @include flex(row, flex-start, center);
                 width: 99%;
+            }
+
+            &.active {
+                background-color: darken($grey, 10%)
             }
 
             &:hover {

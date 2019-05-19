@@ -7,29 +7,8 @@ import { User, MenuItem, Article } from './models';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    user: User = {
-        id: 1,
-        name: 'Name Loooooooooooooooong',
-        imgSrc: '../assets/images/defUser.png'
-    };
-    isUserMenuOpen = false;
     isNavMenuOpen = false;
-    isSearchOpen = false;
     isAuxOpen = true;
-    menuItems: Array<MenuItem> = [
-        {
-            title: 'Dashboard',
-            icon: 'icon-stats-dots'
-        },
-        {
-            title: 'Lessons',
-            icon: 'icon-graduation-cap'
-        },
-        {
-            title: 'Settings',
-            icon: 'icon-gear'
-        }
-    ];
 
     articles: Array<Article> = [
         {
@@ -83,28 +62,6 @@ export class AppComponent {
     ];
 
     auxItems = new Array(10);
-
-    private toggleUserMenu(): void {
-        this.isUserMenuOpen = !this.isUserMenuOpen;
-    }
-
-    private doSearch(forSearch: string): void {
-        console.log(forSearch);
-        // do search
-    }
-
-    private toggleNavMenu(): void {
-        this.isNavMenuOpen = !this.isNavMenuOpen;
-    }
-
-    private closeNavMenu(): void {
-        this.isNavMenuOpen = false;
-    }
-
-    private toggleSearch(): void {
-        this.isSearchOpen = !this.isSearchOpen;
-        this.isNavMenuOpen = false;
-    }
 
     private toggleAux() {
         this.isAuxOpen = !this.isAuxOpen;
