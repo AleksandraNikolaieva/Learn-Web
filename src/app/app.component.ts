@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { User } from './models';
-import { MenuItem } from './models';
-import { Article } from './models';
+import { User, MenuItem, Article } from './models';
 
 @Component({
     selector: 'app-root',
@@ -97,6 +95,10 @@ export class AppComponent {
 
     private toggleNavMenu(): void {
         this.isNavMenuOpen = !this.isNavMenuOpen;
+    }
+
+    private closeNavMenu(): void {
+        this.isNavMenuOpen = false;
     }
 
     private toggleSearch(): void {

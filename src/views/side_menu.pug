@@ -1,3 +1,4 @@
+.backdrop('*ngIf'='isNavMenuOpen' '(click)'='closeNavMenu()')
 nav('[ngClass]'='{"slideIn": isNavMenuOpen && !isSearchOpen}')
     ul
         li('*ngFor'='let item of menuItems')

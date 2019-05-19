@@ -1,5 +1,16 @@
+.backdrop {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.3);
+    @include mq($from: small) {
+        display: none;
+    }
+}
 nav {
-    @include size($menu-w, calc(100vh - #{$header-h}));
+    @include size($menu-w, calc(100% - 20px));
     background-color: $grey;
     padding: 10px 0;
     transform: translateX(0%);
@@ -7,6 +18,8 @@ nav {
     display: inline-block;
     position: absolute;
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: lighten($grey, 20%) #f1f1f100;
     top: 0;
     left: 0;
     @include mq($until: small) {
@@ -23,12 +36,11 @@ nav {
     }
 
     ul {
-        margin: 0;
         list-style: none;
         padding: 0;
 
         a {
-            @include size(68px, 68px);
+            @include size(95%, 76px);
             @include flex(column, center, center);
             color: $yellow;
             margin: 5px 0;
@@ -58,7 +70,6 @@ nav {
 
         span {
             font-size: 14px;
-            margin: 0 3px;
             @include mq($until: medium) {
                 color: transparent
             }

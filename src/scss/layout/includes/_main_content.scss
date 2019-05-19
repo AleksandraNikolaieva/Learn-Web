@@ -1,30 +1,11 @@
 main {
-    @include size(calc(100% - #{$menu-w} - #{$aux-w}), calc(100vh - #{$header-h}));
-    position: absolute;
+    height: 98%;
+    flex-grow: 1;
     padding: 1% 0;
-    top: 0;
-    left: $menu-w;
     overflow-y: auto;
-    transition: width 0.4s;
+    scrollbar-width: thin;
+    scrollbar-color: lighten($grey, 20%) #f1f1f100;
     @include flex(column, space-between, center);
-    @include mq($until: medium) {
-        width: calc(100% - #{$menu-w});
-        left: $menu-w;
-    }
-    @include mq($until: small) {
-        left: 0;
-        width: 100%;
-    }
-    @include mq($from: huge) {
-        max-width: 1440px;
-        left: calc((100vw - 1440px - #{$menu-w} - #{$aux-w})/2);
-    }
-    &.wide {
-        width: calc(100% - #{$menu-w});
-        @include mq($until: small) {
-            width: 100%;
-        }
-    }
 
     a {
         display: block;
@@ -35,6 +16,12 @@ main {
         min-width: 280px;
         text-align: center;
         padding: 20px 0;
+        @include mq($until: small) {
+           width: 90%;
+        }
+        @include mq($from: huge) {
+            max-width: 1440px;
+        }
 
         h3 {
             width: 100%;
