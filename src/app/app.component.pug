@@ -1,7 +1,4 @@
 app-top-pane([isNavMenuOpen]='isNavMenuOpen', (navMenuChange)='isNavMenuOpen = $event')
 .wrapper
-    .inner-wrapper
-        include ../views/main_content.pug
-            <router-outlet></router-outlet>
-        include ../views/auxiliary_content.pug
     app-side-menu([isNavMenuOpen]='isNavMenuOpen', (closeMenu)='isNavMenuOpen = false')
+    <router-outlet></router-outlet>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SideMenuComponent } from './side-menu.component';
+import { WorkshopPageComponent } from './workshop-page.component';
 
-describe('SideMenuComponent', () => {
-    let component: SideMenuComponent;
-    let fixture: ComponentFixture<SideMenuComponent>;
+describe('WorkshopPageComponent', () => {
+    let component: WorkshopPageComponent;
+    let fixture: ComponentFixture<WorkshopPageComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SideMenuComponent]
+            declarations: [WorkshopPageComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SideMenuComponent);
+        fixture = TestBed.createComponent(WorkshopPageComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

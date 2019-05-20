@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MenuItem } from '../../models';
+import { MenuItem } from '../models';
 
 @Component({
     selector: 'app-side-menu',
@@ -14,7 +14,7 @@ export class SideMenuComponent implements OnInit {
         {
             title: 'Dashboard',
             icon: 'icon-stats-dots',
-            link: '/dashboard'
+            link: 'dashboard'
         },
         {
             title: 'Workshops',

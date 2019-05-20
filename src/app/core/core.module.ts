@@ -5,7 +5,10 @@ import { TopPaneComponent } from './top-pane/top-pane.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [SideMenuComponent, TopPaneComponent],
+  declarations: [
+      SideMenuComponent,
+      TopPaneComponent
+    ],
   imports: [
     CommonModule,
     RouterModule

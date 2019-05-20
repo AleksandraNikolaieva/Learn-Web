@@ -78,10 +78,10 @@ nav {
         span {
             font-size: 14px;
             @include mq($until: medium) {
-                color: transparent
+                display: none;
             }
             @include mq($until: small) {
-                color: $yellow;
+                display: inline;
             }
         }
     }
