@@ -25,7 +25,6 @@ nav {
     @include mq($until: small) {
         transform: translateX(-100%);
         width: 80%;
-        padding-left: 10px;
     }
 
     &.slideIn {
@@ -49,7 +48,8 @@ nav {
             transition: background-color 0.3s;
             @include mq($until: small) {
                 @include flex(row, flex-start, center);
-                width: 99%;
+                width: 97%;
+                padding-left: 2%;
             }
 
             &:hover {

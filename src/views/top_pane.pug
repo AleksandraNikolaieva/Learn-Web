@@ -1,16 +1,16 @@
 header
-    button.menu('[ngClass]'='{"hide": isSearchOpen}' '(click)'='toggleNavMenu()')
+    button.menu('[ngClass]'='{"hide":isSearchOpen}' '(click)'='toggleNavMenu()')
         i('[ngClass]'='isNavMenuOpen ? "icon-cross" : "icon-menu"')
     div('[ngClass]' = '{"wide": isSearchOpen}')
         a
             img(src='../assets/images/logo.png', alt='logo')
-        .search('[ngClass]'='{"wide": isSearchOpen}')
+        .search('[ngClass]'='{"wide":isSearchOpen}')
             input(placeholder='Search' '#forSearch'='' '(keyup.enter)'='doSearch(forSearch.value); forSearch.value=""')
             button('(click)'='doSearch(forSearch.value); forSearch.value=""')
                 i.icon-search
             button.close('*ngIf'='isSearchOpen' '(click)'='toggleSearch()') x
     button.search-icon('*ngIf'='!isSearchOpen' '(click)'='toggleSearch()')
         i.icon-search
-    button.userAccount('[ngClass]'='{"hide": isSearchOpen}' '(click)'='toggleUserMenu()')
+    button.user-account('[ngClass]'='{"hide":isSearchOpen}' '(click)'='toggleUserMenu()')
         span {{user.name}}
-        img('[src]'='user.imgSrc', alt='user.name')
+        img('[src]'='user.imgSrc', alt='{{user.name}}')
