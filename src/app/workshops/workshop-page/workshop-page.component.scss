@@ -43,4 +43,25 @@
             border-radius: 5px;
         }
     }
+
+    span {
+        font-size: 15px;
+        font-weight: normal;
+        color: $text-color;
+    }
+
+    button {
+        color: $white;
+        margin-right: 5px;
+        border-radius: 5px;
+        padding: 3px 5px;
+    }
+
+    button:nth-of-type(1) {
+        background-color: $yellow;
+    }
+
+    button:nth-of-type(2) {
+        background-color: $grey;
+    }
 }

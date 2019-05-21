@@ -1,0 +1,27 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+:host {
+    margin: 5px 0;
+    @include flex(row, space-between, center);
+    button {
+        border-radius: 5px;
+        margin-left: 10px;
+        background-color: $text-color;
+        color: $white;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    input {
+        width: 95%;
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid $text-color;
+        padding: 3px 0;
+        padding-left: 5px;
+        &:focus {
+            box-shadow: inset 2px 2px 2px $text-color;
+        }
+    }
+}

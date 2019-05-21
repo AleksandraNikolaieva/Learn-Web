@@ -25,4 +25,13 @@ app-viewport
         p.tags
             span('*ngFor'='let tag of article.tags') {{tag}}
         p Comments:
-        app-comment('*ngFor'='let commentItem of article.comments', [comment]='commentItem')
+        span Add comment:
+        app-edit-add-comment([comment]='newComment', (changeComment)='addComment($event)')
+        div('*ngFor'='let commentItem of article.comments, let i = index')
+            app-comment([comment]='commentItem')
+            div('*ngIf'='loggedUser == commentItem.author')
+                div('*ngIf'='editorNumber == i')
+                    span Edit comment:
+                    app-edit-add-comment([comment]='commentItem', (changeComment)='editComment($event, i)')
+                button((click)='openEditor(i)') edit
+                button((click)='deleteComment(i)') delete
