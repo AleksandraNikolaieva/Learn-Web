@@ -18,4 +18,8 @@ export class WorkshopPageComponent implements OnInit {
         });
     }
 
+    private changeLikeHandler(to: boolean) {
+        console.log('workshop page like', to);
+        // send changes to server
+    }
 }

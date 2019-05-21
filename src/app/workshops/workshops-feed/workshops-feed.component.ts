@@ -18,7 +18,7 @@ export class WorkshopsFeedComponent implements OnInit {
             title: 'HTML',
             isActive: false
         },
-        { 
+        {
             title: 'SCSS',
             isActive: false
         },

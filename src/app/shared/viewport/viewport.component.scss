@@ -20,8 +20,13 @@
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: lighten($grey, 20%) #f1f1f100;
-        /* @include flex(column, space-between, center); */
         position: relative;
+
+        app-to-top-button {
+            position: sticky;
+            bottom: 10px;
+            margin-left: calc(100% - 28px);
+        }
     }
 
     app-auxiliary-content {

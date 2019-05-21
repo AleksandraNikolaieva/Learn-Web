@@ -1,5 +1,5 @@
 app-viewport
-    .page(main)
+    .page(main #host='')
         h2 {{article.title}}
         img(src='{{article.img}}' alt='{{article.title}}')
         p 
@@ -16,7 +16,13 @@ app-viewport
         p.workshop-page-info
             span 
                 i.icon-user  {{article.author}}
-            app-like([isActive]='false', [likesNumber]='article.likes')
+            app-like(
+                [isActive]='false',
+                [likesNumber]='article.likes',
+                (changeLike)='changeLikeHandler($event)'
+            )
             app-timestamp([date]='article.date')
         p.tags
             span('*ngFor'='let tag of article.tags') {{tag}}
+        p Comments:
+        app-comment('*ngFor'='let commentItem of article.comments', [comment]='commentItem')

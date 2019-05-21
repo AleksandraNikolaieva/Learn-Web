@@ -12,11 +12,12 @@ export class UserPicComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+        this.getInitials();
     }
 
     getInitials() {
         const name = this.user.name.split(' ');
-        this.initials = name[0][1] + [1][1];
+        this.initials = name[0][0] + name[1][0];
     }
 
 }

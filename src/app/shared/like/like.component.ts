@@ -16,10 +16,11 @@ export class LikeComponent implements OnInit {
 
     private toggleLike() {
         this.isActive = !this.isActive;
-        if(this.isActive) {
+        if (this.isActive) {
             this.likesNumber++;
         } else {
             this.likesNumber--;
         }
+        this.changeLike.emit(this.isActive);
     }
 }

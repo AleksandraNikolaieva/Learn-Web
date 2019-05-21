@@ -9,7 +9,27 @@ export let articles: Array<Article> = [
         description: 'Grid layouts are fundamental to the design of websites, and the CSS Grid module is the most powerful and easiest tool for creating it.',
         img: '../assets/images/css1.jpg',
         tags: ['css', 'design'],
-        likes: 10
+        likes: 10,
+        comments: [
+            {
+                author: {
+                    id: 2,
+                    name: 'Sasha Nikolaieva',
+                    imgSrc: ''
+                },
+                text: 'nice article!',
+                date: new Date(2019, 4, 20)
+            },
+            {
+                author: {
+                    id: 3,
+                    name: 'Dima Brody',
+                    imgSrc: ''
+                },
+                text: 'tanks',
+                date: new Date(2019, 4, 21)
+            }
+        ]
     },
     {
         id: 2,

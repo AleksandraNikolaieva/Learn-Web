@@ -13,4 +13,8 @@ export class ArticleComponent implements OnInit {
     ngOnInit() {
     }
 
+    private changeLikeHandler(to: boolean) {
+        console.log('article handler', to);
+        // send changes to server
+    }
 }

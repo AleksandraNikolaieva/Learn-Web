@@ -1,7 +1,7 @@
 button('(click)'='toggleAux()' '[ngClass]'='{"slide":!isAuxOpen}')
     i('[ngClass]'='isAuxOpen ? "icon-close" : "icon-plus"')
-.auxiliary('[ngClass]'='{"slide":!isAuxOpen}')
+.auxiliary('[ngClass]'='{"slide":!isAuxOpen}' #host='')
     span('*ngIf'='!auxItems') Some content...
     .content
         div('*ngFor'='let item of auxItems') Some future content
-        app-to-top-button
+    app-to-top-button([hostElement]='host')

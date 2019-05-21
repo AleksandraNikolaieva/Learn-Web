@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'app-to-top-button',
@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./to-top-button.component.scss']
 })
 export class ToTopButtonComponent implements OnInit {
-
+    @Input() hostElement: HTMLElement;
     constructor() { }
 
     ngOnInit() {
     }
 
     private goToTop(): void {
-        console.log('going top');
+        this.hostElement.scrollTo({left: 0, top: 0, behavior: 'smooth'});
     }
 }

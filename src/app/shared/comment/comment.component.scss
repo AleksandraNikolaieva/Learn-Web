@@ -1,0 +1,12 @@
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+
+:host {
+    @include flex(row, space-between, center);
+    font-size: 13px;
+    margin: 10px 0;
+
+    span {
+        color: $text-color;
+    }
+}
