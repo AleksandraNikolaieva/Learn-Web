@@ -1,1 +1,13 @@
-p articleeeee works
+app-card
+    h3(header) {{article.title}}
+    a(content routerLink='{{article.id}}')
+        img(src='{{article.img}}' alt='{{article.title}}')
+        p {{article.description}}
+    .footer(footer)
+        p.row
+            span 
+                i.icon-user  {{article.author}}
+            app-like([isActive]='false', [likesNumber]='article.likes')
+            app-timestamp([date]='article.date')
+        p.tags
+            span('*ngFor'='let tag of article.tags') {{tag}}

@@ -1,8 +1,8 @@
 header
     button.menu('[ngClass]'='{"hide": isSearchOpen}' '(click)'='toggleNavMenu()')
-        i('[ngClass]'='isNavMenuOpen ? "icon-cross" : "icon-menu"')
+        i('[ngClass]'='isNavMenuOpen ? "icon-close" : "icon-menu"')
     div('[ngClass]' = '{"wide": isSearchOpen}')
-        a
+        a(routerLink='/workshop')
             img(src='../../../assets/images/logo.png', alt='logo')
         .search('[ngClass]'='{"wide": isSearchOpen}')
             input(placeholder='Search' '#forSearch'='' '(keyup.enter)'='doSearch(forSearch.value); forSearch.value=""')
@@ -13,4 +13,7 @@ header
         i.icon-search
     button.userAccount('[ngClass]'='{"hide": isSearchOpen}' '(click)'='toggleUserMenu()')
         span {{user.name}}
-        img('[src]'='user.imgSrc', alt='user.name')
+        img('*ngIf'='user.imgSrc; else noImage' '[src]'='user.imgSrc', alt='{{user.name}}')
+        ng-template('#noImage'='')
+            .avatar
+                span {{initials}}

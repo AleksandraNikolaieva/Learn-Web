@@ -7,11 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     isNavMenuOpen = false;
-    isAuxOpen = true;
-
-    auxItems = new Array(10);
-
-    private toggleAux() {
-        this.isAuxOpen = !this.isAuxOpen;
-    }
 }

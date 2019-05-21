@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Tag } from '../models';
 
 @Component({
     selector: 'app-tag',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./tag.component.scss']
 })
 export class TagComponent implements OnInit {
-
+    @Input() tag: Tag;
     constructor() { }
 
     ngOnInit() {
     }
 
+    toggleActive() {
+        this.tag.isActive = !this.tag.isActive;
+    }
 }

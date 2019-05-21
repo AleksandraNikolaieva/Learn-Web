@@ -23,7 +23,7 @@ export class SideMenuComponent implements OnInit {
         },
         {
             title: 'Quizzes',
-            icon: 'icon-gear',
+            icon: 'icon-question_answer',
             link: '/quizzes'
         }
     ];

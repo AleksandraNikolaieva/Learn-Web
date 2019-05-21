@@ -6,15 +6,10 @@ import { WorkshopPageComponent } from './workshop-page/workshop-page.component';
 const workshopsRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'feed',
-        pathMatch: 'full'
-    },
-    {
-        path: 'feed',
         component: WorkshopsFeedComponent
     },
     {
-        path: 'feed/:id',
+        path: ':id',
         component: WorkshopPageComponent
     }
 ];

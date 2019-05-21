@@ -10,8 +10,10 @@ export class TopPaneComponent implements OnInit {
     user: User = {
         id: 1,
         name: 'Name Loooooooooooooooong',
+        /* imgSrc: '' */
         imgSrc: '../assets/images/defUser.png'
     };
+    initials: string;
     @Input() isNavMenuOpen: boolean;
     @Output() navMenuChange = new EventEmitter<boolean>();
     isUserMenuOpen = false;
@@ -20,6 +22,7 @@ export class TopPaneComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+        this.getInitials();
     }
 
     private toggleUserMenu(): void {
@@ -39,5 +42,10 @@ export class TopPaneComponent implements OnInit {
     private toggleSearch(): void {
         this.isSearchOpen = !this.isSearchOpen;
         this.navMenuChange.emit(false);
+    }
+
+    private getInitials(): void {
+        const nameArr: Array<string> = this.user.name.split(' ');
+        this.initials = nameArr[0][0] + nameArr[1][0];
     }
 }

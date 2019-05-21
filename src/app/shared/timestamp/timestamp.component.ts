@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, TRANSLATIONS_FORMAT } from '@angular/core';
 
 @Component({
     selector: 'app-timestamp',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./timestamp.component.scss']
 })
 export class TimestampComponent implements OnInit {
-
+    @Input() date: Date;
     constructor() { }
 
     ngOnInit() {
     }
 
+    private toFormat() {
+    }
 }

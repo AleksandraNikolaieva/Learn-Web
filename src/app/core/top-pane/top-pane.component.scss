@@ -129,6 +129,17 @@ header {
                 display: none;
             }
         }
+
+        .avatar {
+            display: inline-block;
+            @include size(50px, 50px);
+            background-color: $yellow;
+            border-radius: 50%;
+
+            span {
+                line-height: 50px;
+            }
+        }
     }
 }
 

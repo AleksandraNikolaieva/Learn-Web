@@ -1,0 +1,16 @@
+@import 'abstracts/variables';
+
+button {
+    margin: 0 5px;
+}
+
+span {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+}
+
+span,
+button {
+    color: $text-color;
+}

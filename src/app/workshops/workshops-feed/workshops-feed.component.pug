@@ -1,1 +1,6 @@
-span workshops-feed works!
+app-viewport
+    .tag-group(main)
+        app-tag('*ngFor'='let tagItem of tags', [tag]='tagItem')
+    .workshop-feed-content(main)
+        app-article('*ngFor'='let articleItem of articles', [article]='articleItem')
+    app-to-top-button(main)

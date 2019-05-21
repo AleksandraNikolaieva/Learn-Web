@@ -12,4 +12,7 @@ export class ToTopButtonComponent implements OnInit {
     ngOnInit() {
     }
 
+    private goToTop(): void {
+        console.log('going top');
+    }
 }

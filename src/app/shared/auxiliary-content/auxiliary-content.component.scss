@@ -1,4 +1,8 @@
-button.aux {
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'sass-mq';
+
+button {
     position: absolute;
     top: 5px;
     right: $aux-w + 15;
@@ -19,12 +23,11 @@ button.aux {
     @include size(#{$aux-w}, 100%);
     overflow-y: auto;
     transition: width 0.4s;
-    flex-shrink: 0;
     background-color: darken($white, 5%);
     scrollbar-width: thin;
     scrollbar-color: lighten($grey, 20%) #f1f1f100;
     &.slide {
-        width: 0%;
+        width: 0px;
     }
     @include mq($until: medium) {
         display: none;
@@ -48,4 +51,10 @@ button.aux {
     span {
         margin-left: 10px;
     }
-} 
+
+    app-to-top-button {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+    }
+}

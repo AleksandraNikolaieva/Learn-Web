@@ -5,11 +5,6 @@ import { FeedComponent } from './feed/feed.component';
 const quizzesdRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'feed',
-        pathMatch: 'full'
-    },
-    {
-        path: 'feed',
         component: FeedComponent
     }
 ];

@@ -5,11 +5,6 @@ import { StatisticComponent } from './statistic/statistic.component';
 const dashboardRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'statistic',
-        pathMatch: 'full'
-    },
-    {
-        path: 'statistic',
         component: StatisticComponent
     }
 ];

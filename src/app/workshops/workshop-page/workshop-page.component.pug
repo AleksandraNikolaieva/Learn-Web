@@ -1,6 +1,22 @@
-h3 {{article.title}}
-p.description {{article.description}}
-p.info
-    span 
-        i.icon-user  {{article.author}}
-    span {{article.date}}
+app-viewport
+    .page(main)
+        h2 {{article.title}}
+        img(src='{{article.img}}' alt='{{article.title}}')
+        p 
+            |Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur temporibus nemo sint molestiae maxime recusandae animi ratione, voluptatum ea quibusdam eveniet dolore mollitia atque nisi cupiditate voluptatibus et expedita perspiciatis!
+            |Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quas in nostrum natus, ex eos, magni similique debitis atque aspernatur odit provident tempora perspiciatis voluptatum distinctio. Eum ea aspernatur quas.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate rem officia, magni dignissimos nulla sit expedita debitis deserunt consequatur exercitationem enim, vel sint, labore ducimus ipsam tempora? Autem, temporibus eveniet?
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+        p.workshop-page-info
+            span 
+                i.icon-user  {{article.author}}
+            app-like([isActive]='false', [likesNumber]='article.likes')
+            app-timestamp([date]='article.date')
+        p.tags
+            span('*ngFor'='let tag of article.tags') {{tag}}

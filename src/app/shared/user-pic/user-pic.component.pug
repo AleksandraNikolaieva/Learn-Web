@@ -1,3 +1,4 @@
-<p>
-    user-pic works!
-</p>
+img('*ngIf'='user.imgSrc; else noImage' '[src]'='user.imgSrc', alt='{{user.name}}')
+ng-template('#noImage'='')
+    div
+        span {{initials}}

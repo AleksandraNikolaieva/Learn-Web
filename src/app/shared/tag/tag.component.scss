@@ -1,0 +1,19 @@
+@import 'abstracts/variables';
+
+button {
+    background-color: $yellow;
+    width: 100%;
+    min-width: 80px;
+    color: $white;
+    border-radius: 5px;
+    padding: 5px 0;
+    margin: 3px 0;
+    font-size: 14px;
+    &:hover {
+        background-color: darken($yellow, 20%);
+    }
+    &.active {
+        background-color: darken($yellow, 20%);
+        color: $grey;
+    }
+}
