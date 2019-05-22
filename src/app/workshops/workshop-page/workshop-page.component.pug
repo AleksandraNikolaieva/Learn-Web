@@ -1,0 +1,39 @@
+app-viewport
+    .page(main #host='')
+        h2 {{article.title}}
+        img(src='{{article.img}}' alt='{{article.title}}')
+        p 
+            |Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur temporibus nemo sint molestiae maxime recusandae animi ratione, voluptatum ea quibusdam eveniet dolore mollitia atque nisi cupiditate voluptatibus et expedita perspiciatis!
+            |Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quas in nostrum natus, ex eos, magni similique debitis atque aspernatur odit provident tempora perspiciatis voluptatum distinctio. Eum ea aspernatur quas.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate rem officia, magni dignissimos nulla sit expedita debitis deserunt consequatur exercitationem enim, vel sint, labore ducimus ipsam tempora? Autem, temporibus eveniet?
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+            |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
+        .workshop-page-info
+            span 
+                i.icon-user  {{article.author}}
+            app-like(
+                [isActive]='false',
+                [likesNumber]='article.likes',
+                (changeLike)='changeLikeHandler($event)'
+            )
+            app-timestamp([date]='article.date')
+        p.tags
+            span('*ngFor'='let tag of article.tags') {{tag}}
+        p Comments:
+        span Add comment:
+        app-edit-add-comment([comment]='newComment', (changeComment)='addComment($event)')
+        div.holder('*ngFor'='let commentItem of article.comments, let i = index')
+            app-comment([comment]='commentItem' '*ngIf'='editorNumber != i')
+            div('*ngIf'='loggedUser.id == commentItem.author.id')
+                div('*ngIf'='editorNumber == i')
+                    span Edit comment:
+                    app-edit-add-comment([comment]='commentItem', (changeComment)='editComment($event, i)')
+                div('*ngIf'='editorNumber != i')
+                    button((click)='openEditor(i)') edit
+                    button((click)='deleteComment(i)') delete
+    app-auxiliary-content(auxiliary)

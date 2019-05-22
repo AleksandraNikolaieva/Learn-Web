@@ -1,0 +1,9 @@
+@import 'abstracts/variables';
+
+span {
+    font-weight: bold;
+    font-family: "Poppins";
+    line-height: 24px;
+    color: $text-color;
+    white-space: nowrap;
+}

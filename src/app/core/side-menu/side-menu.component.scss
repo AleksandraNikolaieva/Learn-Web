@@ -2,7 +2,7 @@
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
 
-.backdrop {
+div {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -13,6 +13,7 @@
         display: none;
     }
 }
+
 nav {
     @include size($menu-w, calc(100% - 20px));
     background-color: $grey;
@@ -21,16 +22,16 @@ nav {
     transition: transform 0.6s, width 0.6s;
     display: inline-block;
     position: absolute;
+    top: 0;
+    left: 0;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: lighten($grey, 20%) #f1f1f100;
-    top: 0;
-    left: 0;
     @include mq($until: small) {
         transform: translateX(-100%);
         width: 80%;
-        padding-left: 10px;
     }
+
     &.slideIn {
         transform: translateX(0%);
         @include mq($from: small) {
@@ -52,7 +53,9 @@ nav {
             transition: background-color 0.3s;
             @include mq($until: small) {
                 @include flex(row, flex-start, center);
-                width: 99%;
+                width: 96%;
+                padding-left: 10px;
+                margin-left: 2px;
             }
 
             &.active {
@@ -69,7 +72,6 @@ nav {
             font-size: 30px;
             padding: 5px;
             text-align: center;
-            vertical-align: bottom;
             @include mq($until: small) {
                 font-size: 35px;
             }
@@ -78,10 +80,10 @@ nav {
         span {
             font-size: 14px;
             @include mq($until: medium) {
-                color: transparent
+                display: none;
             }
             @include mq($until: small) {
-                color: $yellow;
+                display: inline;
             }
         }
     }

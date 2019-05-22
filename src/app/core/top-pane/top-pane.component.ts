@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { User } from '../../models'
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { User } from '../models';
 
 @Component({
     selector: 'app-top-pane',
     templateUrl: './top-pane.component.pug',
-    styleUrls: ['./top-pane.component.scss']
+    styleUrls: ['./top-pane.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopPaneComponent implements OnInit {
     user: User = {
@@ -12,6 +13,7 @@ export class TopPaneComponent implements OnInit {
         name: 'Name Loooooooooooooooong',
         imgSrc: '../assets/images/defUser.png'
     };
+    initials: string;
     @Input() isNavMenuOpen: boolean;
     @Output() navMenuChange = new EventEmitter<boolean>();
     isUserMenuOpen = false;
@@ -20,6 +22,7 @@ export class TopPaneComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+        this.getInitials();
     }
 
     private toggleUserMenu(): void {
@@ -39,5 +42,10 @@ export class TopPaneComponent implements OnInit {
     private toggleSearch(): void {
         this.isSearchOpen = !this.isSearchOpen;
         this.navMenuChange.emit(false);
+    }
+
+    private getInitials(): void {
+        const nameArr: Array<string> = this.user.name.split(' ');
+        this.initials = nameArr[0][0] + nameArr[1][0];
     }
 }

@@ -1,0 +1,31 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'sass-mq';
+
+:host {
+    position: absolute;
+    left: $menu-w;
+    width: calc(100% - #{$menu-w});
+    height: 100%;
+    display: flex;
+    @include mq($until: small) {
+        left: 0;
+        width: 100%;
+    }
+
+    main {
+        height: calc(100% - 20px);
+        flex-grow: 1;
+        padding: 10px 0;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: lighten($grey, 20%) #f1f1f100;
+        position: relative;
+
+        app-to-top-button {
+            position: sticky;
+            bottom: 10px;
+            margin-left: calc(100% - 28px);
+        }
+    }
+}

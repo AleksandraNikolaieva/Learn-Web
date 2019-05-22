@@ -1,0 +1,26 @@
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+
+:host {
+    @include flex(row, space-between, center);
+    position: relative;
+    width: 280px;
+    margin-left: 10px;
+    border-bottom: 3px solid black;
+}
+
+.tabs-body {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    width: 100%;
+    @include flex(column, space-around, center);
+    padding: 10px 0;
+
+    div {
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        background-color: pink;
+    }
+}

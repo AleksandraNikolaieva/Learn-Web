@@ -1,0 +1,19 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+img {
+    @include size(30px, 30px);
+}
+
+div{
+    display: inline-block;
+    @include size(30px, 30px);
+    background-color: $yellow;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 15px;
+
+    span {
+        line-height: 30px;
+    }
+}

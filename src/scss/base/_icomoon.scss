@@ -24,35 +24,50 @@ $path: 'assets/icons/icomoon';
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
+  }
   
 .icon-user:before {
-    content: "\e901";
+    content: "\e903";
+}
+.icon-cog:before {
+    content: "\e994";
 }
 .icon-stats-dots:before {
     content: "\e99b";
 }
-.icon-plus:before {
-    content: "\ea0a";
-}
-.icon-cross:before {
-    content: "\ea0f";
+.icon-question_answer:before {
+    content: "\e900";
 }
 .icon-menu:before {
-    content: "\e900";
+    content: "\e904";
+}
+.icon-plus:before {
+    content: "\f067";
 }
 .icon-search:before {
     content: "\f002";
 }
-.icon-cog:before {
-    content: "\f013";
+.icon-close:before {
+    content: "\f00d";
 }
-.icon-gear:before {
-    content: "\f013";
+.icon-remove:before {
+    content: "\f00d";
+}
+.icon-times:before {
+    content: "\f00d";
+}
+.icon-chevron-circle-up:before {
+    content: "\f139";
 }
 .icon-graduation-cap:before {
     content: "\f19d";
 }
 .icon-mortar-board:before {
     content: "\f19d";
+}
+.icon-heart-o:before {
+    content: "\e901";
+}
+.icon-heart:before {
+    content: "\e902";
 }

@@ -1,0 +1,18 @@
+app-card
+    a(header routerLink='{{article.id}}')
+        h3 {{article.title}}
+    a(content routerLink='{{article.id}}')
+        img(src='{{article.img}}' alt='{{article.title}}')
+        p {{article.description}}
+    div(footer)
+        .row
+            span 
+                i.icon-user  {{article.author}}
+            app-like(
+                [isActive]='false',
+                [likesNumber]='article.likes',
+                (changeLike)='changeLikeHandler($event)'
+            )
+            app-timestamp([date]='article.date' toFormat='day')
+        p.tags
+            span('*ngFor'='let tag of article.tags') {{tag}}

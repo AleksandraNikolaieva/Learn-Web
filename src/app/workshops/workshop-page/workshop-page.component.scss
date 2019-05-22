@@ -1,0 +1,78 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'sass-mq';
+
+.page {
+    width: 60%;
+    margin: auto;
+    @include mq($until: small) {
+        width: 90%;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    p {
+        text-align: justify; 
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .workshop-page-info {
+        width: 100%;
+        height: 40px;
+        @include flex(row, space-between, center);
+    }
+
+    .tags {
+        width: 100%;
+        height: 20px;
+        @include flex(row, center, center);
+    
+        span {
+            padding: 0 5px;
+            margin: 0 3px;
+            text-decoration: underline;
+            font-size: 14px;
+            background-color: $text-color;
+            color: $white;
+            border-radius: 5px;
+        }
+    }
+
+    span {
+        font-size: 15px;
+        font-weight: normal;
+        color: $text-color;
+    }
+
+    .holder {
+        min-height: 55px;
+    }
+
+    button {
+        color: $white;
+        margin-right: 5px;
+        border-radius: 5px;
+        padding: 3px 5px;
+        font-size: 13px;
+        float: right;
+
+        &:hover {
+            box-shadow: 0 0 2px 2px $text-color;
+        }
+    }
+
+    button:nth-of-type(1) {
+        background-color: $yellow;
+        color: black;
+    }
+
+    button:nth-of-type(2) {
+        background-color: $grey;
+    }
+}

@@ -1,31 +1,35 @@
-button.aux {
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'sass-mq';
+
+button {
     position: absolute;
     top: 5px;
     right: $aux-w + 15;
     transition: right 0.4s;
     padding: 0px;
-    &.slide {
-        right: 15px;
-    }
     @include mq($until: medium) {
         display: none;
     }
+
+    &.slide {
+        right: 15px;
+    }
+
     .icon-plus,
-    .icon-cross {
+    .icon-close {
         color: grey;
     }
 }
+
 .auxiliary {
-    @include size(#{$aux-w}, 100%);
+    @include size($aux-w, calc(100% - 20px));
+    padding: 10px 0;
     overflow-y: auto;
     transition: width 0.4s;
-    flex-shrink: 0;
     background-color: darken($white, 5%);
     scrollbar-width: thin;
     scrollbar-color: lighten($grey, 20%) #f1f1f100;
-    &.slide {
-        width: 0%;
-    }
     @include mq($until: medium) {
         display: none;
     }
@@ -33,19 +37,11 @@ button.aux {
         width: 600px;
     }
 
-    .content {
-        width: 100%;
-        padding: 16px 0;
-        @include flex(column, space-around, center);
-
-        div {
-            width: 80%;
-            height: 200px;
-            margin: 10px 0;
-            background-color: pink;
-        }
+    &.slide {
+        width: 0px;
     }
+    
     span {
         margin-left: 10px;
     }
-} 
+}

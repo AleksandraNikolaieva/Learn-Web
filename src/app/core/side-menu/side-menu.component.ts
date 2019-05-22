@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MenuItem } from '../../models';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { MenuItem } from '../models';
 
 @Component({
     selector: 'app-side-menu',
     templateUrl: './side-menu.component.pug',
-    styleUrls: ['./side-menu.component.scss']
+    styleUrls: ['./side-menu.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SideMenuComponent implements OnInit {
     @Input() isNavMenuOpen: boolean;
@@ -14,7 +15,7 @@ export class SideMenuComponent implements OnInit {
         {
             title: 'Dashboard',
             icon: 'icon-stats-dots',
-            link: '/dashboard'
+            link: 'dashboard'
         },
         {
             title: 'Workshops',
@@ -23,7 +24,7 @@ export class SideMenuComponent implements OnInit {
         },
         {
             title: 'Quizzes',
-            icon: 'icon-gear',
+            icon: 'icon-question_answer',
             link: '/quizzes'
         }
     ];

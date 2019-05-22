@@ -1,0 +1,31 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'sass-mq';
+
+.workshop-feed-content {
+    @include flex(column, space-between, center);
+}
+
+app-article {
+    @include size(60%);
+    min-width: 280px;
+    text-align: center;
+    padding: 20px 0;
+    @include mq($until: small) {
+       width: 90%;
+    }
+    @include mq($from: huge) {
+        max-width: 1440px;
+    }
+}
+
+.tag-group {
+    position: absolute;
+    top: 30px;
+    right: 7px;
+    width: 105px;
+
+    @include mq($until: small) {
+        display: none;
+    }
+}

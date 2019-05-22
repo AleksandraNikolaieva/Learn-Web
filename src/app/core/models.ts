@@ -9,12 +9,3 @@ export interface MenuItem {
     icon: string;
     link: string;
 }
-
-export interface Article {
-    id: number;
-    title: string;
-    author: string;
-    date: string;
-    description: string;
-    img: string;
-}
