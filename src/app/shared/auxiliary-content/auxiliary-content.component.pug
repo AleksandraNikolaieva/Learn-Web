@@ -2,6 +2,4 @@ button('(click)'='toggleAux()' '[ngClass]'='{"slide":!isAuxOpen}')
     i('[ngClass]'='isAuxOpen ? "icon-close" : "icon-plus"')
 .auxiliary('[ngClass]'='{"slide":!isAuxOpen}' #host='')
     span('*ngIf'='!auxItems') Some content...
-    .content
-        app-tab-group
-        div('*ngFor'='let item of auxItems') Some future content
+    app-tab-group

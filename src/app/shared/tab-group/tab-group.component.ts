@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-tab-group',
     templateUrl: './tab-group.component.pug',
-    styleUrls: ['./tab-group.component.scss']
+    styleUrls: ['./tab-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabGroupComponent implements OnInit {
-    tabTitles = ['One', 'Two', 'Three', 'Four'];
-    constructor() { }
+    tabs = ['First', 'Second', 'Third', 'Fourth'];
+    contents = [new Array(3), new Array(1), new Array(5), new Array(2)];
+    selected = 'First';
 
+    constructor() {}
     ngOnInit() {
     }
-
 }

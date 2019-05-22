@@ -14,3 +14,7 @@ span,
 button {
     color: $text-color;
 }
+
+i:hover {
+    color: darken($grey, 5%);
+}

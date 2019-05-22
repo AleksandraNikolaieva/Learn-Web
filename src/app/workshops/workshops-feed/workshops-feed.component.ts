@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { articles } from '../workshops';
 import { Tag } from '../models';
 
 @Component({
     selector: 'app-workshops-feed',
     templateUrl: './workshops-feed.component.pug',
-    styleUrls: ['./workshops-feed.component.scss']
+    styleUrls: ['./workshops-feed.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkshopsFeedComponent implements OnInit {
     articles = articles;

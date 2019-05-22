@@ -51,7 +51,7 @@
     }
 
     .holder {
-        height: 55px;
+        min-height: 55px;
     }
 
     button {
@@ -61,6 +61,10 @@
         padding: 3px 5px;
         font-size: 13px;
         float: right;
+
+        &:hover {
+            box-shadow: 0 0 2px 2px $text-color;
+        }
     }
 
     button:nth-of-type(1) {

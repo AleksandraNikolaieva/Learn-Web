@@ -1,3 +1,25 @@
-span {
-    text-decoration: underline;
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+
+a {
+    display: inline-block;
+    width: 58px;
+    padding: 5px;
+    background-color: $grey;
+    color: $white;
+    font-size: 13px;
+    border-radius: 5px 5px 0px 0px;
+    text-align: center;
+
+    &:hover {
+        font-weight: bolder;
+    }
+
+    &:active {
+        font-weight: bolder;
+    }
+}
+
+.content {
+    @include flex(column, space-between, center);
 }

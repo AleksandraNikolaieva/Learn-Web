@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article, Comment } from '../models';
 import { articles } from '../workshops';
@@ -7,11 +7,12 @@ import { User } from 'src/app/core/models';
 @Component({
     selector: 'app-workshop-page',
     templateUrl: './workshop-page.component.pug',
-    styleUrls: ['./workshop-page.component.scss']
+    styleUrls: ['./workshop-page.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkshopPageComponent implements OnInit {
     article: Article;
-    loggedUser: User = {
+    loggedUser: User = { // get from the state
         id: 2,
         name: 'Sasha Nikolaieva',
         imgSrc: ''
@@ -37,6 +38,11 @@ export class WorkshopPageComponent implements OnInit {
 
     private addComment(newComment: Comment): void {
         this.article.comments.push(newComment);
+        this.newComment = {
+            author: this.loggedUser,
+            text: '',
+            date: new Date()
+        };
     }
 
     private editComment(comment: Comment, index: number): void {

@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, TRANSLATIONS_FORMAT } from '@angular/core';
+import { Component, OnInit, Input, TRANSLATIONS_FORMAT, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-timestamp',
     templateUrl: './timestamp.component.pug',
-    styleUrls: ['./timestamp.component.scss']
+    styleUrls: ['./timestamp.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimestampComponent implements OnInit {
     @Input() date: Date;

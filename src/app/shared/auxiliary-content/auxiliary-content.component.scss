@@ -17,13 +17,14 @@ button {
     }
 
     .icon-plus,
-    .icon-cross {
+    .icon-close {
         color: grey;
     }
 }
 
 .auxiliary {
-    @include size(#{$aux-w}, 100%);
+    @include size($aux-w, calc(100% - 20px));
+    padding: 10px 0;
     overflow-y: auto;
     transition: width 0.4s;
     background-color: darken($white, 5%);
@@ -38,19 +39,6 @@ button {
 
     &.slide {
         width: 0px;
-    }
-
-    .content {
-        width: 100%;
-        padding: 16px 0;
-        @include flex(column, space-around, center);
-
-        div {
-            width: 80%;
-            height: 200px;
-            margin: 10px 0;
-            background-color: pink;
-        }
     }
     
     span {

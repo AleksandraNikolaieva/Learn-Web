@@ -26,7 +26,7 @@ export let articles: Array<Article> = [
                     name: 'Dima Brody',
                     imgSrc: ''
                 },
-                text: 'tanks',
+                text: 'tanks for share!',
                 date: new Date(2019, 4, 21)
             }
         ]
@@ -39,7 +39,27 @@ export let articles: Array<Article> = [
         description: 'The simplest form of the event-driven nature is the callback style of some of the popular Node.js functions — for example, fs.readFile. In this analogy, the event will be fired once (when Node is ready to call the callback) and the callback acts as the event handler. Let’s explore this basic form first.',
         img: '../assets/images/node1.jpg',
         tags: ['node', 'java script'],
-        likes: 15
+        likes: 15,
+        comments: [
+            {
+                author: {
+                    id: 2,
+                    name: 'Sasha Nikolaieva',
+                    imgSrc: ''
+                },
+                text: 'nice article!',
+                date: new Date(2019, 4, 20)
+            },
+            {
+                author: {
+                    id: 3,
+                    name: 'Dima Brody',
+                    imgSrc: ''
+                },
+                text: 'tanks',
+                date: new Date(2019, 4, 21)
+            }
+        ]
     },
     {
         id: 3,
@@ -49,7 +69,27 @@ export let articles: Array<Article> = [
         description: 'Most elements don’t have any interesting methods, so unless you actually sift through the spec for things you’ll almost never use, it’s easy to miss the little nuggets that are scattered throughout.',
         img: '../assets/images/html1.jpg',
         tags: ['html'],
-        likes: 20
+        likes: 20,
+        comments: [
+            {
+                author: {
+                    id: 2,
+                    name: 'Sasha Nikolaieva',
+                    imgSrc: ''
+                },
+                text: 'nice article!',
+                date: new Date(2019, 4, 20)
+            },
+            {
+                author: {
+                    id: 3,
+                    name: 'Dima Brody',
+                    imgSrc: ''
+                },
+                text: 'tanks',
+                date: new Date(2019, 4, 21)
+            }
+        ]
     },
     {
         id: 4,
@@ -59,7 +99,27 @@ export let articles: Array<Article> = [
         description: 'Clean and organize HTML, that’s what we as Front-end Developers always aim for. Well with Pug, formerly known as “Jade” (a registered trademark, and as a result a rename was needed) it’s a high performance and feature-rich templating engine that’s easy to achieve. Simply put, Pug is a clean, white space/indentation sensitive syntax for writing html.',
         img: '../assets/images/pug1.png',
         tags: ['pug'],
-        likes: 30
+        likes: 30,
+        comments: [
+            {
+                author: {
+                    id: 2,
+                    name: 'Sasha Nikolaieva',
+                    imgSrc: ''
+                },
+                text: 'nice article!',
+                date: new Date(2019, 4, 20)
+            },
+            {
+                author: {
+                    id: 3,
+                    name: 'Dima Brody',
+                    imgSrc: ''
+                },
+                text: 'tanks',
+                date: new Date(2019, 4, 21)
+            }
+        ]
     },
     {
         id: 5,
@@ -69,7 +129,27 @@ export let articles: Array<Article> = [
         description: 'In this tutorial Sassy, Sass and SCSS will refer to roughly the same thing. Conceptually, there isn’t much difference. You will learn the difference as you learn more, but basically SCSS is the one most people use now. It’s just a more recent (and according to some, superior) version of the original Sass syntax.',
         img: '../assets/images/scss1.png',
         tags: ['sass', 'design'],
-        likes: 35
+        likes: 35,
+        comments: [
+            {
+                author: {
+                    id: 2,
+                    name: 'Sasha Nikolaieva',
+                    imgSrc: ''
+                },
+                text: 'nice article!',
+                date: new Date(2019, 4, 20)
+            },
+            {
+                author: {
+                    id: 3,
+                    name: 'Dima Brody',
+                    imgSrc: ''
+                },
+                text: 'tanks',
+                date: new Date(2019, 4, 21)
+            }
+        ]
     },
     {
         id: 6,

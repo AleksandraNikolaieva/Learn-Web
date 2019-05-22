@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { User } from '../models';
 
 @Component({
     selector: 'app-top-pane',
     templateUrl: './top-pane.component.pug',
-    styleUrls: ['./top-pane.component.scss']
+    styleUrls: ['./top-pane.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopPaneComponent implements OnInit {
     user: User = {
