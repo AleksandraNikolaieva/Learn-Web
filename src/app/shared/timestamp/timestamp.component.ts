@@ -7,11 +7,9 @@ import { Component, OnInit, Input, TRANSLATIONS_FORMAT } from '@angular/core';
 })
 export class TimestampComponent implements OnInit {
     @Input() date: Date;
+    @Input() toFormat: string;
     constructor() { }
 
     ngOnInit() {
-    }
-
-    private toFormat() {
     }
 }

@@ -44,7 +44,8 @@ import { FormsModule } from '@angular/forms';
         TabComponent,
         CommentComponent,
         LikeComponent,
-        EditAddCommentComponent
+        EditAddCommentComponent,
+        AuxiliaryContentComponent
     ]
 })
 export class SharedModule { }

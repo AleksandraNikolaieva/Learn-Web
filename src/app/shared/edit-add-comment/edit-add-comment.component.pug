@@ -1,2 +1,2 @@
-input('value'='{{comment.text}}', '(keyup.enter)'='submit(text.value)' #text='')
-button((click)='submit(text.value)') ok
+input(#text='' value='{{comment.text}}', '(keyup.enter)'='submit(text.value); text.value = ""')
+button((click)='submit(text.value); text.value = ""') ok

@@ -14,6 +14,7 @@ header {
         display: none;
         @include mq($until: small) {
             display: inline-block;
+
             &.hide {
                 display: none;
             }
@@ -33,6 +34,7 @@ header {
         @include mq($until: small) {
             display: none;
         }
+
         &.wide {
             width: 100%;
             display: flex;
@@ -45,8 +47,6 @@ header {
             display: inline-block;
             width: 55px;
             padding-left: 15px;
-            flex-grow: 0;
-            flex-shrink: 0;
             @include mq($until: small) {
                 display: none;
             }
@@ -103,7 +103,7 @@ header {
         }
     }
 
-    .userAccount {
+    .user-account {
         height: 50px;
         &.hide {
             display: none;

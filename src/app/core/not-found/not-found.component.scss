@@ -1,0 +1,21 @@
+@import 'abstracts/variables';
+@import 'sass-mq';
+
+:host {
+    position: absolute;
+    left: $menu-w;
+    width: calc(100% - #{$menu-w});
+    height: calc(100vh - #{$header-h});
+    background-image: url('../../../assets/images/404.jpg');
+    background-repeat: no-repeat;
+    background-size: auto 70%;
+    background-position: bottom;
+    @include mq($until: small) {
+        left: 0;
+        width: 100%;
+    }
+
+    h1 {
+        text-align: center;
+    }
+}

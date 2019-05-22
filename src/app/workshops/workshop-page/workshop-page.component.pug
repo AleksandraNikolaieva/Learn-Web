@@ -13,7 +13,7 @@ app-viewport
             |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
             |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
             |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
-        p.workshop-page-info
+        .workshop-page-info
             span 
                 i.icon-user  {{article.author}}
             app-like(
@@ -27,11 +27,13 @@ app-viewport
         p Comments:
         span Add comment:
         app-edit-add-comment([comment]='newComment', (changeComment)='addComment($event)')
-        div('*ngFor'='let commentItem of article.comments, let i = index')
-            app-comment([comment]='commentItem')
-            div('*ngIf'='loggedUser == commentItem.author')
+        div.holder('*ngFor'='let commentItem of article.comments, let i = index')
+            app-comment([comment]='commentItem' '*ngIf'='editorNumber != i')
+            div('*ngIf'='loggedUser.id == commentItem.author.id')
                 div('*ngIf'='editorNumber == i')
                     span Edit comment:
                     app-edit-add-comment([comment]='commentItem', (changeComment)='editComment($event, i)')
-                button((click)='openEditor(i)') edit
-                button((click)='deleteComment(i)') delete
+                div('*ngIf'='editorNumber != i')
+                    button((click)='openEditor(i)') edit
+                    button((click)='deleteComment(i)') delete
+    app-auxiliary-content(auxiliary)

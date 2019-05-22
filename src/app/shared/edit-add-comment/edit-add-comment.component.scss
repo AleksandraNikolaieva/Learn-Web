@@ -4,6 +4,7 @@
 :host {
     margin: 5px 0;
     @include flex(row, space-between, center);
+
     button {
         border-radius: 5px;
         margin-left: 10px;
@@ -20,6 +21,8 @@
         border: 1px solid $text-color;
         padding: 3px 0;
         padding-left: 5px;
+        transition: box-shadow 0.2s;
+        
         &:focus {
             box-shadow: inset 2px 2px 2px $text-color;
         }

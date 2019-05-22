@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./tab-group.component.scss']
 })
 export class TabGroupComponent implements OnInit {
-
+    tabTitles = ['One', 'Two', 'Three', 'Four'];
     constructor() { }
 
     ngOnInit() {

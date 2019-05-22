@@ -4,6 +4,7 @@
 img {
     @include size(30px, 30px);
 }
+
 div{
     display: inline-block;
     @include size(30px, 30px);

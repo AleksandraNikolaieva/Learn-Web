@@ -11,7 +11,11 @@ import { User } from 'src/app/core/models';
 })
 export class WorkshopPageComponent implements OnInit {
     article: Article;
-    loggedUser: User = {id: 10, name: 'Ivan Pupkin', imgSrc: ''};
+    loggedUser: User = {
+        id: 2,
+        name: 'Sasha Nikolaieva',
+        imgSrc: ''
+    };
     newComment: Comment = {
         author: this.loggedUser,
         text: '',
@@ -33,11 +37,6 @@ export class WorkshopPageComponent implements OnInit {
 
     private addComment(newComment: Comment): void {
         this.article.comments.push(newComment);
-        this.newComment = {
-            author: this.loggedUser,
-            text: '',
-            date: new Date()
-        };
     }
 
     private editComment(comment: Comment, index: number): void {
@@ -45,11 +44,11 @@ export class WorkshopPageComponent implements OnInit {
         this.editorNumber = null;
     }
 
-    private deleteComment(index: number) {
+    private deleteComment(index: number): void {
         this.article.comments.splice(index, 1);
     }
 
-    private openEditor(index: number) {
+    private openEditor(index: number): void {
         this.editorNumber = index;
     }
 }

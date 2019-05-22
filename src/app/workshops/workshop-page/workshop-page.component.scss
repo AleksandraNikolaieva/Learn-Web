@@ -50,15 +50,22 @@
         color: $text-color;
     }
 
+    .holder {
+        height: 55px;
+    }
+
     button {
         color: $white;
         margin-right: 5px;
         border-radius: 5px;
         padding: 3px 5px;
+        font-size: 13px;
+        float: right;
     }
 
     button:nth-of-type(1) {
         background-color: $yellow;
+        color: black;
     }
 
     button:nth-of-type(2) {

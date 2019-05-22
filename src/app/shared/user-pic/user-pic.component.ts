@@ -15,9 +15,8 @@ export class UserPicComponent implements OnInit {
         this.getInitials();
     }
 
-    getInitials() {
+    private getInitials(): void {
         const name = this.user.name.split(' ');
         this.initials = name[0][0] + name[1][0];
     }
-
 }

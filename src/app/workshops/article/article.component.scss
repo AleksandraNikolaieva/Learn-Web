@@ -19,6 +19,7 @@ p {
     width: 100%;
     height: 40px;
     @include flex(row, space-between, center);
+    color: $text-color;
 }
 
 .tags {

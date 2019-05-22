@@ -1,4 +1,4 @@
 app-top-pane([isNavMenuOpen]='isNavMenuOpen', (navMenuChange)='isNavMenuOpen = $event')
-.wrapper
+.app-wrapper
     router-outlet
     app-side-menu([isNavMenuOpen]='isNavMenuOpen', (closeMenu)='isNavMenuOpen = false')

@@ -8,17 +8,20 @@ button {
     right: $aux-w + 15;
     transition: right 0.4s;
     padding: 0px;
-    &.slide {
-        right: 15px;
-    }
     @include mq($until: medium) {
         display: none;
     }
+
+    &.slide {
+        right: 15px;
+    }
+
     .icon-plus,
     .icon-cross {
         color: grey;
     }
 }
+
 .auxiliary {
     @include size(#{$aux-w}, 100%);
     overflow-y: auto;
@@ -26,14 +29,15 @@ button {
     background-color: darken($white, 5%);
     scrollbar-width: thin;
     scrollbar-color: lighten($grey, 20%) #f1f1f100;
-    &.slide {
-        width: 0px;
-    }
     @include mq($until: medium) {
         display: none;
     }
     @include mq($from: huge) {
         width: 600px;
+    }
+
+    &.slide {
+        width: 0px;
     }
 
     .content {
@@ -48,13 +52,8 @@ button {
             background-color: pink;
         }
     }
+    
     span {
         margin-left: 10px;
-    }
-
-    app-to-top-button {
-        position: sticky;
-        bottom: 10px;
-        margin-left: calc(100% - 28px);
     }
 }

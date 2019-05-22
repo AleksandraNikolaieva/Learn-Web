@@ -15,7 +15,7 @@ export class LikeComponent implements OnInit {
     ngOnInit() {
     }
 
-    private toggleLike() {
+    private toggleLike(): void {
         this.isActive = !this.isActive;
         console.log(this.isActive);
         if (this.isActive) {

@@ -10,7 +10,6 @@ export class TopPaneComponent implements OnInit {
     user: User = {
         id: 1,
         name: 'Name Loooooooooooooooong',
-        /* imgSrc: '' */
         imgSrc: '../assets/images/defUser.png'
     };
     initials: string;

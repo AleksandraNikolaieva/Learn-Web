@@ -13,7 +13,7 @@ export class AuxiliaryContentComponent implements OnInit {
     ngOnInit() {
     }
 
-    private toggleAux() {
+    private toggleAux(): void {
         this.isAuxOpen = !this.isAuxOpen;
     }
 }
