@@ -13,7 +13,7 @@ export class ToTopButtonComponent implements OnInit {
     ngOnInit() {
     }
 
-    private goToTop(): void {
+    goToTop(): void {
         this.hostElement.scrollTo({left: 0, top: 0, behavior: 'smooth'});
     }
 }

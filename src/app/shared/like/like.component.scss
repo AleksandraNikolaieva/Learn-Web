@@ -15,6 +15,16 @@ button {
     color: $text-color;
 }
 
-i:hover {
-    color: darken($grey, 5%);
+.icon-heart-o,
+.icon-heart {
+    color: $text-color;
+    transition: color 0.3s;
+}
+
+.icon-heart:hover {
+    color: lighten($text-color, 20%);
+}
+
+.icon-heart-o:hover {
+    color: darken($text-color, 50%);
 }

@@ -2,7 +2,7 @@ header
     button.menu('[ngClass]'='{"hide": isSearchOpen}' '(click)'='toggleNavMenu()')
         i('[ngClass]'='isNavMenuOpen ? "icon-close" : "icon-menu"')
     div('[ngClass]' = '{"wide":isSearchOpen}')
-        a(routerLink='/workshop')
+        a(routerLink='/')
             img(src='../../../assets/images/logo.png', alt='logo')
         .search('[ngClass]'='{"wide":isSearchOpen}')
             input('#forSearch'='' placeholder='Search' '(keyup.enter)'='doSearch(forSearch.value); forSearch.value = ""')

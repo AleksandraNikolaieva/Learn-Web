@@ -14,7 +14,7 @@ export class TagComponent implements OnInit {
     ngOnInit() {
     }
 
-    private toggleActive(): void {
+    toggleActive(): void {
         this.tag.isActive = !this.tag.isActive;
     }
 }
