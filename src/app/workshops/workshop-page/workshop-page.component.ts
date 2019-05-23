@@ -31,12 +31,12 @@ export class WorkshopPageComponent implements OnInit {
         });
     }
 
-    private changeLikeHandler(to: boolean): void {
+    changeLikeHandler(to: boolean): void {
         console.log('workshop page like', to);
         // send changes to server
     }
 
-    private addComment(newComment: Comment): void {
+    addComment(newComment: Comment): void {
         this.article.comments.push(newComment);
         this.newComment = {
             author: this.loggedUser,

@@ -25,16 +25,16 @@ export class TopPaneComponent implements OnInit {
         this.getInitials();
     }
 
-    private toggleUserMenu(): void {
+    toggleUserMenu(): void {
         this.isUserMenuOpen = !this.isUserMenuOpen;
     }
 
-    private doSearch(forSearch: string): void {
+    doSearch(forSearch: string): void {
         console.log(forSearch);
         // do search
     }
 
-    private toggleNavMenu(): void {
+    toggleNavMenu(): void {
         this.isNavMenuOpen = !this.isNavMenuOpen;
         this.navMenuChange.emit(this.isNavMenuOpen);
     }

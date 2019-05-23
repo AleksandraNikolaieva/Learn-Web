@@ -14,7 +14,7 @@ export class ArticleComponent implements OnInit {
     ngOnInit() {
     }
 
-    private changeLikeHandler(to: boolean): void {
+    changeLikeHandler(to: boolean): void {
         console.log('article handler', to);
         // send changes to server
     }

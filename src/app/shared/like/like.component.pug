@@ -1,7 +1,5 @@
 span {{likesNumber}}
 button(
-        (click)='toggleLike()',
-        (mouseover)='isHover = true',
-        (mouseleave)='isHover = false'
+        (click)='toggleLike()'
     )
-    i('[ngClass]'='isActive || isHover ? "icon-heart" : "icon-heart-o"')
+    i('[ngClass]'='isActive ? "icon-heart" : "icon-heart-o"')
