@@ -44,6 +44,10 @@ export class TopPaneComponent implements OnInit {
         this.navMenuChange.emit(false);
     }
 
+    private closeSearch(): void {
+        this.isSearchOpen = false;
+    }
+
     private getInitials(): void {
         const nameArr: Array<string> = this.user.name.split(' ');
         this.initials = nameArr[0][0] + nameArr[1][0];

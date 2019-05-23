@@ -59,7 +59,8 @@ nav {
             }
 
             &.active {
-                background-color: darken($grey, 10%)
+                background-color: darken($grey, 10%);
+                box-shadow: 0px 0px 2px $text-color;
             }
 
             &:hover {

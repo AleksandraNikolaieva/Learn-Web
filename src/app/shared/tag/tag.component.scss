@@ -9,6 +9,7 @@ button {
     padding: 5px 0;
     margin: 3px 0;
     font-size: 14px;
+    transition: background-color 0.3s;
 
     &:hover {
         background-color: darken($yellow, 20%);

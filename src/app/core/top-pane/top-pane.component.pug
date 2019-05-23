@@ -5,7 +5,7 @@ header
         a(routerLink='/')
             img(src='../../../assets/images/logo.png', alt='logo')
         .search('[ngClass]'='{"wide":isSearchOpen}')
-            input('#forSearch'='' placeholder='Search' '(keyup.enter)'='doSearch(forSearch.value); forSearch.value = ""')
+            input('#forSearch'='' placeholder='Search' '(keyup.enter)'='doSearch(forSearch.value); forSearch.value = ""' '(blur)'='closeSearch()')
             button('(click)'='doSearch(forSearch.value); forSearch.value = ""')
                 i.icon-search
             button.close('*ngIf'='isSearchOpen' '(click)'='toggleSearch()') x
