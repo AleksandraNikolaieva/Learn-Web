@@ -38,7 +38,7 @@ export let articles: Array<Article> = [
         date: new Date(2017, 4, 8),
         description: 'The simplest form of the event-driven nature is the callback style of some of the popular Node.js functions — for example, fs.readFile. In this analogy, the event will be fired once (when Node is ready to call the callback) and the callback acts as the event handler. Let’s explore this basic form first.',
         img: '../assets/images/node1.jpg',
-        tags: ['node', 'java script'],
+        tags: ['node', 'javascript'],
         likes: 15,
         comments: [
             {
@@ -158,7 +158,7 @@ export let articles: Array<Article> = [
         date: new Date(2019, 4, 8),
         description: `At most companies, management must trust the developers to give technical interviews in order to assess candidate skills. If you do well as a candidate, you’ll eventually need to interview. Here’s how.`,
         img: '../assets/images/js1.png',
-        tags: ['java script', 'oop', 'algorithms'],
+        tags: ['javascript', 'oop', 'algorithms'],
         likes: 40
     }
 ];

@@ -41,7 +41,7 @@ export class WorkshopPageComponent implements OnInit {
         this.newComment = {
             author: this.loggedUser,
             text: '',
-            date: new Date()
+            date: null
         };
     }
 

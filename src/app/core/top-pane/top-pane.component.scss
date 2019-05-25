@@ -33,7 +33,7 @@ header {
     }
 
     > div {
-        @include size(400px, 50px);
+        @include size(300px, 50px);
         @include flex(row, space-between, center);
         transition: width 0.4s;
         @include mq($until: small) {
@@ -41,10 +41,11 @@ header {
         }
 
         &.wide {
-            width: 100%;
+            width: 80%;
             display: flex;
-            @include mq($from: small) {
-                width: 300px;
+            @include mq($until: small) {
+                width: 100%;
+                animation: wide 0.4s;
             }
         }
 
@@ -70,11 +71,10 @@ header {
 
             &.wide {
                 display: inline-block;
-                animation: wide 0.5s;
             }
 
             input {
-                @include size(calc(100% - 40px), 30px);
+                @include size(calc(100% - 60px), 30px);
                 padding-left: 5px;
                 border-radius: 20px;
                 outline: none;
@@ -88,12 +88,9 @@ header {
             }
 
             button.close {
-                margin-left: 0px;
+                margin-left: 20px;
                 color: $white;
                 background-color: transparent;
-                @include mq($from: small) {
-                    display: none;
-                }
             }
         }
     }
@@ -110,7 +107,7 @@ header {
         }
 
         &:hover {
-            box-shadow: 0px 0px 1px 3px $text-color;
+            box-shadow: 0px 0px 3px 3px $text-color;
         }
     }
 
@@ -156,6 +153,6 @@ header {
 }
 
 @keyframes wide {
-    from {width: 30px}
+    from {width: 60px}
     to {width: 100%}
 }

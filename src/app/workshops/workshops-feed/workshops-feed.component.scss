@@ -3,27 +3,34 @@
 @import 'sass-mq';
 
 .workshop-feed-content {
-    @include flex(column, space-between, center);
+    @include flex(row, space-around, stretch);
+    flex-wrap: wrap;
+    padding: 0 120px;
+    @include mq($until: small) {
+        padding: 0;
+    }
 }
 
 app-article {
-    @include size(60%);
-    min-width: 280px;
+    width: 31%;
     text-align: center;
-    padding: 20px 0;
-    @include mq($until: small) {
+    margin: 20px 0;
+    @include mq($until: 1170px) {
+        width: 45%;
+    }
+    @include mq($until: 900px) {
        width: 90%;
     }
     @include mq($from: huge) {
-        max-width: 1440px;
+        width: 31%
     }
 }
 
 .tag-group {
-    position: absolute;
-    top: 30px;
-    right: 7px;
-    width: 105px;
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 100px;
 
     @include mq($until: small) {
         display: none;

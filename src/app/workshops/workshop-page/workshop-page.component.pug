@@ -25,7 +25,6 @@ app-viewport
         p.tags
             span('*ngFor'='let tag of article.tags') {{tag}}
         p Comments:
-        span Add comment:
         div.holder('*ngFor'='let commentItem of article.comments, let i = index')
             app-comment([comment]='commentItem' '*ngIf'='editorNumber != i')
             div('*ngIf'='loggedUser.id == commentItem.author.id')
@@ -35,5 +34,6 @@ app-viewport
                 div('*ngIf'='editorNumber != i')
                     button((click)='openEditor(i)') edit
                     button((click)='deleteComment(i)') delete
+        span Add comment:
         app-edit-add-comment([comment]='newComment', (changeComment)='addComment($event)')
     app-auxiliary-content(auxiliary)

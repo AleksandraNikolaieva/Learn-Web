@@ -39,13 +39,13 @@ export class TopPaneComponent implements OnInit {
         this.navMenuChange.emit(this.isNavMenuOpen);
     }
 
-    private toggleSearch(): void {
-        this.isSearchOpen = !this.isSearchOpen;
-        this.navMenuChange.emit(false);
+    closeSearch(): void {
+        this.isSearchOpen = false;
     }
 
-    private closeSearch(): void {
-        this.isSearchOpen = false;
+    activateSearch() {
+        this.isSearchOpen = true;
+        this.navMenuChange.emit(false);
     }
 
     private getInitials(): void {

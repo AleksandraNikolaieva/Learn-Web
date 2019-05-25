@@ -5,11 +5,18 @@ header
         a(routerLink='/')
             img(src='../../../assets/images/logo.png', alt='logo')
         .search('[ngClass]'='{"wide":isSearchOpen}')
-            input('#forSearch'='' placeholder='Search' '(keyup.enter)'='doSearch(forSearch.value); forSearch.value = ""' '(blur)'='closeSearch()')
+            input(
+                '#forSearch'=''
+                placeholder='Search'
+                '(keyup.enter)'='doSearch(forSearch.value); forSearch.value = ""'
+                '(focus)'='activateSearch()'
+                '(blur)'='closeSearch()'
+            )
             button('(click)'='doSearch(forSearch.value); forSearch.value = ""')
                 i.icon-search
-            button.close('*ngIf'='isSearchOpen' '(click)'='toggleSearch()') x
-    button.search-icon('*ngIf'='!isSearchOpen' '(click)'='toggleSearch()')
+            button.close('*ngIf'='isSearchOpen' '(click)'='closeSearch()')
+                i.icon-close
+    button.search-icon('*ngIf'='!isSearchOpen' '(click)'='activateSearch()')
         i.icon-search
     button.user-account('[ngClass]'='{"hide":isSearchOpen}' '(click)'='toggleUserMenu()')
         span {{user.name}}

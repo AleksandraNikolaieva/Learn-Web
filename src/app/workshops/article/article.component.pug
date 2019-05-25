@@ -8,11 +8,11 @@ app-card
         .row
             span 
                 i.icon-user  {{article.author}}
-            app-like(
-                [isActive]='false',
-                [likesNumber]='article.likes',
-                (changeLike)='changeLikeHandler($event)'
-            )
             app-timestamp([date]='article.date' toFormat='day')
+        app-like(
+            [isActive]='false',
+            [likesNumber]='article.likes',
+            (changeLike)='changeLikeHandler($event)'
+        )
         p.tags
             span('*ngFor'='let tag of article.tags') {{tag}}

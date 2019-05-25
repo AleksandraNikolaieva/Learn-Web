@@ -32,7 +32,7 @@ export class WorkshopsFeedComponent implements OnInit {
             isActive: false
         },
         {
-            title: 'Java Script',
+            title: 'Javascript',
             isActive: false
         }];
     constructor() { }
