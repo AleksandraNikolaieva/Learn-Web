@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { articles } from '../workshops';
-import { Tag } from '../models';
+import { Tag, Article } from '../models';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-workshops-feed',
@@ -9,7 +9,7 @@ import { Tag } from '../models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkshopsFeedComponent implements OnInit {
-    articles = articles;
+    articles: Array<Article>;
     tags: Array<Tag> = [
         {
             title: 'CSS',
@@ -35,9 +35,13 @@ export class WorkshopsFeedComponent implements OnInit {
             title: 'Javascript',
             isActive: false
         }];
-    constructor() { }
+
+    constructor(private route: ActivatedRoute) { }
 
     ngOnInit() {
+        this.route.data.subscribe(data => {
+            this.articles = data.workshops;
+        })
     }
 
 }

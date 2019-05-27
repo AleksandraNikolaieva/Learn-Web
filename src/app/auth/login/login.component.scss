@@ -1,0 +1,47 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'sass-mq';
+
+:host {
+    width: calc(100% - #{$menu-w});
+    height: calc(100vh - #{$header-h});
+    position: absolute;
+    left: $menu-w;
+    background-image: url(../../../assets/images/loginBG.jpg);
+    background-size: cover;
+    background-position: center;
+    @include flex(row, space-around, center);
+
+    @include mq($until: small) {
+        left: 0px;
+        width: 100%;
+    }
+}
+
+form {
+    width: 30%;
+    height: 200px;
+    @include flex(column, space-around, center);
+    border-radius: 5px;
+    background-color: rgba(242,242,242,0.6);
+    box-shadow: 1px 1px 50px #000;
+    padding: 10px 0px;
+
+    input {
+        padding: 10px 5px;
+        border-radius: 5px;
+        border: none;
+        background-color: transparentize($grey, 0.3);
+        outline: none;
+        color: $white;
+        width: 80%;
+    }
+
+    input::placeholder {
+        color: $white;
+    }
+
+    label {
+        font-weight: bold;
+    }
+}

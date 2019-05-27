@@ -8,14 +8,14 @@
     height: calc(100vh - #{$header-h});
     background-image: url('../../../assets/images/404.jpg');
     background-repeat: no-repeat;
-    background-size: auto 70%;
-    background-position: bottom;
+    background-size: cover;
+    background-position: center;
     @include mq($until: small) {
         left: 0;
-        width: 100%;
     }
+}
 
-    h1 {
-        text-align: center;
-    }
+h1, h2 {
+    text-align: center;
+    color: lighten($yellow, 20%);
 }
