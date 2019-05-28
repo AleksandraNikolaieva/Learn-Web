@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Tag, Article, Category } from '../models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkshopsService } from 'src/app/services/workshops.service';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-workshops-feed',
@@ -52,7 +51,13 @@ export class WorkshopsFeedComponent implements OnInit {
             id: 8,
             title: 'algorithms',
             isActive: false
-        }];
+        },
+        {
+            id: 9,
+            title: 'design',
+            isActive: false
+        }
+    ];
     activeTags: Array<string> = [];
     categories: Array<Category> = [
         {
@@ -69,19 +74,13 @@ export class WorkshopsFeedComponent implements OnInit {
             id: 3,
             title: 'favorite',
             isActive: false
-        },
-        {
-            id: 4,
-            title: 'reset all',
-            isActive: false
         }
     ];
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private workshopsService: WorkshopsService,
-        private authService: AuthService) { }
+        private workshopsService: WorkshopsService) { }
 
     ngOnInit() {
         this.showArticles();
@@ -160,9 +159,7 @@ export class WorkshopsFeedComponent implements OnInit {
         }
     }
 
-    changeCategory(category: Category): void {
-        if (category.title === 'reset all') {
-            this.router.navigate(['/workshops/feed']);
-        }
+    resetAll(): void {
+        this.router.navigate(['/workshops/feed']);
     }
 }

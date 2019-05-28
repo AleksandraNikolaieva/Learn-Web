@@ -7,8 +7,8 @@ app-viewport
             '[routerLink]'='["/workshops/feed"]'
             '[queryParams]'='{ category: category.title}'
             'queryParamsHandling'='merge'
-            '(click)'='changeCategory(category)'
         ) {{category.title}}
+        button('(click)'='resetAll()') Reset All
     .workshop-feed-content(main)
         span('*ngIf'='!articles.length') Required articles do not exist
         app-article('*ngFor'='let articleItem of articles', [article]='articleItem')
