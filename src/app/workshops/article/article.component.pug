@@ -1,7 +1,7 @@
 app-card
-    a(header routerLink='{{article.id}}')
+    a(header routerLink='/workshops/{{article.id}}')
         h3 {{article.title}}
-    a(content routerLink='{{article.id}}')
+    a(content routerLink='/workshops/{{article.id}}')
         img(src='{{article.img}}' alt='{{article.title}}')
         p {{article.description}}
     div(footer)

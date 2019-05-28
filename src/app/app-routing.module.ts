@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './core/not-found/not-found.component';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
     {
@@ -10,7 +12,8 @@ const routes: Routes = [
     },
     {
         path: 'workshops',
-        loadChildren: './workshops/workshops.module#WorkshopsModule'
+        loadChildren: './workshops/workshops.module#WorkshopsModule',
+        canLoad: [AuthGuard]
     },
     {
         path: 'quizzes',
@@ -19,6 +22,10 @@ const routes: Routes = [
     {
         path: 'dashboard',
         loadChildren: './dashboard/dashboard.module#DashboardModule'
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     },
     {
         path: '**',

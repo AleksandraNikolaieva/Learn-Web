@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article, Comment } from '../models';
-import { articles } from '../workshops';
 import { User } from 'src/app/core/models';
+import { WorkshopsService } from '../../services/workshops.service';
 
 @Component({
     selector: 'app-workshop-page',
@@ -23,11 +23,11 @@ export class WorkshopPageComponent implements OnInit {
         date: new Date()
     };
     editorNumber: number;
-    constructor(private activateRoute: ActivatedRoute) { }
+    constructor(private activateRoute: ActivatedRoute, private workshopsService: WorkshopsService) { }
 
     ngOnInit() {
-        this.activateRoute.params.subscribe(params => {
-            this.article = articles[params.id - 1];
+        this.activateRoute.data.subscribe(data => {
+            this.article = data.workshop;
         });
     }
 
