@@ -1,5 +1,13 @@
 app-viewport
     .tag-group(main)
-        app-tag('*ngFor'='let tagItem of tags', [tag]='tagItem')
+        app-tag('*ngFor'='let tagItem of tags', [tag]='tagItem', (changeActive)='activateTag($event)')
+    .categories(main)
+        a('*ngFor'='let category of categories'
+            'routerLinkActive'='active'
+            '[routerLink]'='["/workshops/feed"]'
+            '[queryParams]'='{ category: category.title}'
+            'queryParamsHandling'='merge'
+            '(click)'='changeCategory(category)'
+        ) {{category.title}}
     .workshop-feed-content(main)
         app-article('*ngFor'='let articleItem of articles', [article]='articleItem')

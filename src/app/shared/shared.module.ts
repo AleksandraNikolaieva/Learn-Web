@@ -13,6 +13,7 @@ import { EditAddCommentComponent } from './edit-add-comment/edit-add-comment.com
 import { AuxiliaryContentComponent } from './auxiliary-content/auxiliary-content.component';
 import { ViewportComponent } from './viewport/viewport.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -27,11 +28,12 @@ import { FormsModule } from '@angular/forms';
         CommentComponent,
         LikeComponent,
         EditAddCommentComponent,
-        AuxiliaryContentComponent,
+        AuxiliaryContentComponent
     ],
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        RouterModule
     ],
     exports: [
         ViewportComponent,
@@ -45,7 +47,9 @@ import { FormsModule } from '@angular/forms';
         CommentComponent,
         LikeComponent,
         EditAddCommentComponent,
-        AuxiliaryContentComponent
+        AuxiliaryContentComponent,
+        FormsModule,
+        RouterModule
     ]
 })
 export class SharedModule { }

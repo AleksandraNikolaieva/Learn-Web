@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../workshops/models';
 import { of, Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,12 +12,13 @@ export class WorkshopsService {
         {
             id: 1,
             title: 'Learn CSS Grid in 5 Minutes',
-            author: 'Harald Borgen',
+            author: 'Sasha Nikolaieva',
             date: new Date(2017, 10, 26),
             description: 'Grid layouts are fundamental to the design of websites, and the CSS Grid module is the most powerful and easiest tool for creating it.',
             img: '../assets/images/css1.jpg',
             tags: ['css', 'design'],
             likes: 10,
+            isFavorite: true,
             comments: [
                 {
                     author: {
@@ -45,8 +47,9 @@ export class WorkshopsService {
             date: new Date(2017, 4, 8),
             description: 'The simplest form of the event-driven nature is the callback style of some of the popular Node.js functions — for example, fs.readFile. In this analogy, the event will be fired once (when Node is ready to call the callback) and the callback acts as the event handler. Let’s explore this basic form first.',
             img: '../assets/images/node1.jpg',
-            tags: ['node', 'javascript'],
+            tags: ['node.js', 'javascript'],
             likes: 15,
+            isFavorite: true,
             comments: [
                 {
                     author: {
@@ -77,6 +80,7 @@ export class WorkshopsService {
             img: '../assets/images/html1.jpg',
             tags: ['html'],
             likes: 20,
+            isFavorite: false,
             comments: [
                 {
                     author: {
@@ -107,6 +111,7 @@ export class WorkshopsService {
             img: '../assets/images/pug1.png',
             tags: ['pug'],
             likes: 30,
+            isFavorite: false,
             comments: [
                 {
                     author: {
@@ -135,8 +140,9 @@ export class WorkshopsService {
             date: new Date(2019, 0, 17),
             description: 'In this tutorial Sassy, Sass and SCSS will refer to roughly the same thing. Conceptually, there isn’t much difference. You will learn the difference as you learn more, but basically SCSS is the one most people use now. It’s just a more recent (and according to some, superior) version of the original Sass syntax.',
             img: '../assets/images/scss1.png',
-            tags: ['sass', 'design'],
+            tags: ['scss', 'design'],
             likes: 35,
+            isFavorite: false,
             comments: [
                 {
                     author: {
@@ -166,17 +172,30 @@ export class WorkshopsService {
             description: `At most companies, management must trust the developers to give technical interviews in order to assess candidate skills. If you do well as a candidate, you’ll eventually need to interview. Here’s how.`,
             img: '../assets/images/js1.png',
             tags: ['javascript', 'oop', 'algorithms'],
-            likes: 40
+            likes: 40,
+            isFavorite: true,
         }
     ];
 
-    constructor() { }
+    constructor(private authService: AuthService) { }
 
     public getArticles(): Observable<Array<Article>> {
         return of(this.articles);
     }
 
-    public getArticle(id: number): Observable<Article> {
+    public getArticleById(id: number): Observable<Article> {
         return of(this.articles.find((article) => article.id === +id));
+    }
+
+    public getArticlesByTag(tag: string): Array<Article> {
+        return this.articles.filter(article => article.tags.find(tagItem => tagItem === tag));
+    }
+
+    public getArticlesByCategory(category: string): Array<Article> {
+        if (category === 'my') {
+            return this.articles.filter(article => article.author === this.authService.getLoggedUser());
+        } else {
+            return this.articles.filter(article => article.isFavorite === true);
+        }
     }
 }

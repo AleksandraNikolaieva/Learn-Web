@@ -2,6 +2,6 @@ div('*ngIf'='isNavMenuOpen' '(click)'='closeNavMenu()')
 nav('[ngClass]'='{"slideIn":isNavMenuOpen}')
     ul
         li('*ngFor'='let item of menuItems')
-            a(routerLink='{{item.link}}' routerLinkActive="active", (click)='closeNavMenu()')
+            a('[routerLink]'='[item.link]' 'routerLinkActive'="active" '(click)'='closeNavMenu()')
                 i(class='{{item.icon}}')
                 span {{item.title}}

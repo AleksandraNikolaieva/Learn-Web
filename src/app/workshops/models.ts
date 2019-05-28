@@ -9,10 +9,12 @@ export interface Article {
     img: string;
     tags: Array<string>;
     likes: number;
+    isFavorite: boolean;
     comments?: Array<Comment>;
 }
 
 export interface Tag {
+    id: number;
     title: string;
     isActive: boolean;
 }
@@ -21,4 +23,10 @@ export interface Comment {
     author: User;
     text: string;
     date: Date;
+}
+
+export interface Category {
+    id: number;
+    title: string;
+    isActive: boolean;
 }
