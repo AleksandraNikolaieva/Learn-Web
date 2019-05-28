@@ -42,6 +42,10 @@ app-article {
     top: 80px;
     left: 90px;
     width: 100px;
+
+    @include mq($until: small) {
+        display: none;
+    }
     
     a {
         background-color: $light-grey;

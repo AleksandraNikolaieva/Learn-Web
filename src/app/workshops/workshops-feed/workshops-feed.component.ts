@@ -53,7 +53,7 @@ export class WorkshopsFeedComponent implements OnInit {
             title: 'algorithms',
             isActive: false
         }];
-    activeTags = [];
+    activeTags: Array<string> = [];
     categories: Array<Category> = [
         {
             id: 1,
@@ -69,6 +69,11 @@ export class WorkshopsFeedComponent implements OnInit {
             id: 3,
             title: 'favorite',
             isActive: false
+        },
+        {
+            id: 4,
+            title: 'reset all',
+            isActive: false
         }
     ];
 
@@ -79,36 +84,21 @@ export class WorkshopsFeedComponent implements OnInit {
         private authService: AuthService) { }
 
     ngOnInit() {
-        this.route.data.subscribe(data => {
-            this.articles = data.workshops;
-        });
-        this.getActiveTags();
+        this.showArticles();
     }
 
-    getActiveTags() {
+    showArticles(): void {
         this.route.queryParamMap.subscribe(queryParam  => {
             const tags = queryParam.get('tags');
             const category = queryParam.get('category');
             if (tags && !category) {
-                this.activeTags = tags.split(',');
-                this.activeTags.forEach(activeTitle => {
-                    for (const tag of this.tags) {
-                        if (tag.title === activeTitle) {
-                            tag.isActive = true;
-                            break;
-                        }
-                    }
-                });
+                this.markTags(tags);
                 this.filterFeedByTag();
             } else if (category && !tags) {
                 this.filterFeedByCategory(category);
             } else if (category && tags) {
-                this.filterFeedByTag();
-                if (category === 'my') {
-                    this.articles = this.articles.filter(article => article.author === this.authService.getLoggedUser());
-                } else {
-                    this.articles = this.articles.filter(article => article.isFavorite === true);
-                }
+                this.markTags(tags);
+                this.filterByBoth(category, this.activeTags);
             } else {
                 this.activeTags = [];
                 this.tags.forEach(tag => {
@@ -122,15 +112,27 @@ export class WorkshopsFeedComponent implements OnInit {
     }
 
     filterFeedByTag(): void {
-        const filteredFeed = [];
-        this.activeTags.forEach(tagTitle => {
-            filteredFeed.push(...this.workshopsService.getArticlesByTag(tagTitle));
-        });
-        this.articles = filteredFeed;
+        this.articles = this.workshopsService.getArticlesByTags(this.activeTags);
     }
 
     filterFeedByCategory(category: string): void {
         this.articles = this.workshopsService.getArticlesByCategory(category);
+    }
+
+    filterByBoth(category: string, tags: Array<string>): void {
+        this.articles = this.workshopsService.getArticlesByBoth(category, tags);
+    }
+
+    markTags(tags: string): void {
+        this.activeTags = tags.split(',');
+        this.activeTags.forEach(activeTitle => {
+            for (const tag of this.tags) {
+                if (tag.title === activeTitle) {
+                    tag.isActive = true;
+                    break;
+                }
+            }
+        });
     }
 
     activateTag(tag: Tag): void {
@@ -159,7 +161,7 @@ export class WorkshopsFeedComponent implements OnInit {
     }
 
     changeCategory(category: Category): void {
-        if (category.title === 'all') {
+        if (category.title === 'reset all') {
             this.router.navigate(['/workshops/feed']);
         }
     }

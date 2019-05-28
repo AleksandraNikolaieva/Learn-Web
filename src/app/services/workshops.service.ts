@@ -187,15 +187,28 @@ export class WorkshopsService {
         return of(this.articles.find((article) => article.id === +id));
     }
 
-    public getArticlesByTag(tag: string): Array<Article> {
-        return this.articles.filter(article => article.tags.find(tagItem => tagItem === tag));
+    public getArticlesByTags(tags: Array<string>): Array<Article> {
+        return this.articles.filter(article => article.tags.some(tag => tags.includes(tag)));
     }
 
     public getArticlesByCategory(category: string): Array<Article> {
         if (category === 'my') {
-            return this.articles.filter(article => article.author === this.authService.getLoggedUser());
-        } else {
+            return this.articles.filter(article => article.author === this.authService.getLoggedUser().name);
+        } else if (category === 'favorite') {
             return this.articles.filter(article => article.isFavorite === true);
+        } else {
+            return this.articles;
+        }
+    }
+
+    public getArticlesByBoth(category: string, tags: Array<string>): Array<Article> {
+        const res = this.getArticlesByTags(tags);
+        if (category === 'my') {
+            return res.filter(article => article.author === this.authService.getLoggedUser().name);
+        } else if (category === 'favorite') {
+            return res.filter(article => article.isFavorite === true);
+        } else {
+            return res;
         }
     }
 }

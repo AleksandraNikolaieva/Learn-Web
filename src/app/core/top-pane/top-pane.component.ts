@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { User } from '../models';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-top-pane',
@@ -8,20 +9,17 @@ import { User } from '../models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopPaneComponent implements OnInit {
-    user: User = {
-        id: 1,
-        name: 'Name Loooooooooooooooong',
-        imgSrc: '../assets/images/defUser.png'
-    };
+    user: User;
     initials: string;
     @Input() isNavMenuOpen: boolean;
     @Output() navMenuChange = new EventEmitter<boolean>();
     isUserMenuOpen = false;
     isSearchOpen = false;
 
-    constructor() { }
+    constructor(private authService: AuthService) { }
 
     ngOnInit() {
+        this.user = this.authService.getLoggedUser();
         this.getInitials();
     }
 
