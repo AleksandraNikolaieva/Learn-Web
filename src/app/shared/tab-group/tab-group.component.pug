@@ -1,6 +1,3 @@
 app-tab('*ngFor'='let tab of tabs; let i = index',
-            [title]='tab',
-            (changeSelectedTab)='selected = $event'
+            [title]='tab'
         )
-    .tabs-body('*ngIf'='tab == selected') content of {{tab}} tab
-        div('*ngFor'='let div of contents[i]') Some content

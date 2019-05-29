@@ -22,7 +22,7 @@ export class WorkshopsService {
                     author: {
                         id: 2,
                         name: 'Sasha Nikolaieva',
-                        imgSrc: ''
+                        imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
                     date: new Date(2019, 4, 20)
@@ -52,7 +52,7 @@ export class WorkshopsService {
                     author: {
                         id: 2,
                         name: 'Sasha Nikolaieva',
-                        imgSrc: ''
+                        imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
                     date: new Date(2019, 4, 20)
@@ -82,7 +82,7 @@ export class WorkshopsService {
                     author: {
                         id: 2,
                         name: 'Sasha Nikolaieva',
-                        imgSrc: ''
+                        imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
                     date: new Date(2019, 4, 20)
@@ -112,7 +112,7 @@ export class WorkshopsService {
                     author: {
                         id: 2,
                         name: 'Sasha Nikolaieva',
-                        imgSrc: ''
+                        imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
                     date: new Date(2019, 4, 20)
@@ -142,7 +142,7 @@ export class WorkshopsService {
                     author: {
                         id: 2,
                         name: 'Sasha Nikolaieva',
-                        imgSrc: ''
+                        imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
                     date: new Date(2019, 4, 20)

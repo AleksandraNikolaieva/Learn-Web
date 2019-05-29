@@ -3,7 +3,7 @@
 
 a {
     display: inline-block;
-    width: 58px;
+    width: 82px;
     padding: 5px;
     background-color: $grey;
     color: $white;
@@ -15,11 +15,7 @@ a {
         font-weight: bolder;
     }
 
-    &:active {
-        font-weight: bolder;
+    &.active {
+        font-weight: bold;
     }
-}
-
-.content {
-    @include flex(column, space-between, center);
 }
