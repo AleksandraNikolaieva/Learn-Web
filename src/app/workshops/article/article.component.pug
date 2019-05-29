@@ -10,7 +10,7 @@ app-card
                 i.icon-user  {{article.author}}
             app-timestamp([date]='article.date' toFormat='day')
         app-like(
-            [isActive]='false',
+            [isActive]='article.isFavorite',
             [likesNumber]='article.likes',
             (changeLike)='changeLikeHandler($event)'
         )

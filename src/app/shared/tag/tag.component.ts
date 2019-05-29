@@ -1,20 +1,21 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Tag } from '../models';
 
 @Component({
     selector: 'app-tag',
     templateUrl: './tag.component.pug',
     styleUrls: ['./tag.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TagComponent implements OnInit {
     @Input() tag: Tag;
+    @Output() changeActive = new EventEmitter<Tag>();
     constructor() { }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     toggleActive(): void {
         this.tag.isActive = !this.tag.isActive;
+        this.changeActive.emit(this.tag);
     }
 }

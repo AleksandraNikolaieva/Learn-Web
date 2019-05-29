@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class WorkshopsFeedResolver implements Resolve<Observable<Array<Article>>>{
+export class WorkshopsFeedResolver implements Resolve<Observable<Array<Article>>> {
 
     constructor(private workshopsService: WorkshopsService) { }
 

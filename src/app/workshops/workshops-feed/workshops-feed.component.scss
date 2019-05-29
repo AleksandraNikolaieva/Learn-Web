@@ -36,3 +36,37 @@ app-article {
         display: none;
     }
 }
+
+.categories {
+    position: fixed;
+    top: 80px;
+    left: 90px;
+    width: 100px;
+
+    @include mq($until: small) {
+        display: none;
+    }
+    
+    a, button {
+        background-color: $light-grey;
+        display: inline-block;
+        width: 100%;
+        color: $white;
+        border-radius: 5px;
+        padding: 5px 0;
+        margin: 3px 0;
+        font-size: 14px;
+        text-align: center;
+        text-transform: capitalize;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: darken($light-grey, 20%);
+        }
+        
+        &.active {
+            background-color: darken($light-grey, 20%);
+            color: $yellow;
+        }
+    }
+}

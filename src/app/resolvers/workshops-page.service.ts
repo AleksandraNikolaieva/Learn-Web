@@ -12,6 +12,6 @@ export class WorkshopsPageResolver implements Resolve<Observable<Article>> {
     constructor(private workshopsService: WorkshopsService) { }
 
     resolve(route: ActivatedRouteSnapshot, rsState: RouterStateSnapshot): Observable<Article> {
-        return this.workshopsService.getArticle(route.params.id);
+        return this.workshopsService.getArticleById(route.params.id);
     }
 }
