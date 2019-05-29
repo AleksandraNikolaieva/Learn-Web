@@ -1,2 +1,2 @@
-input(#text='' value='{{comment.text}}', '(keyup.enter)'='submit(text.value); text.value = ""')
-button((click)='submit(text.value); text.value = ""') ok
+input(#text='', [(ngModel)]='comment.text', '(keyup.enter)'='submit(); text.value = ""')
+button((click)='submit(); text.value = ""') ok
