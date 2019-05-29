@@ -5,6 +5,9 @@ import { WorkshopPageComponent } from './workshop-page/workshop-page.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { WorkshopsFeedResolver } from '../resolvers/workshops-feed.resolver';
 import { WorkshopsPageResolver } from '../resolvers/workshops-page.service';
+import { WorkshopCommentsComponent } from "./workshop-comments/workshop-comments.component";
+import { WorkshopQuizzesComponent } from "./workshop-quizzes/workshop-quizzes.component";
+import { WorkshopResourcesComponent } from "./workshop-resources/workshop-resources.component";
 
 const workshopsRoutes: Routes = [
     {
@@ -26,7 +29,32 @@ const workshopsRoutes: Routes = [
         canActivate: [AuthGuard],
         resolve: {
             workshop: WorkshopsPageResolver
-        }
+        },
+        children: [
+            {
+                path: '',
+                outlet: 'aside',
+                children: [
+                    {
+                        path: '',
+                        redirectTo: 'comments',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'comments',
+                        component: WorkshopCommentsComponent
+                    },
+                    {
+                        path: 'resources',
+                        component: WorkshopResourcesComponent
+                    },
+                    {
+                        path: 'quizzes',
+                        component: WorkshopQuizzesComponent
+                    }
+                ]
+            }
+        ]
     }
 ];
 

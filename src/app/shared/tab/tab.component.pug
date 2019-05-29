@@ -1,3 +1,1 @@
-a((click)='changeSelectedTab.emit(title)') {{title}}
-.content
-    ng-content
+a('[routerLink]'='[{outlets: {aside: title}}]' 'routerLinkActive'='active') {{title}}

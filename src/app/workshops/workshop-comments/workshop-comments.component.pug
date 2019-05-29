@@ -1,0 +1,11 @@
+div.holder('*ngFor'='let commentItem of comments, let i = index')
+    app-comment([comment]='commentItem' '*ngIf'='editorNumber != i')
+    div('*ngIf'='loggedUser.id == commentItem.author.id')
+        div('*ngIf'='editorNumber == i')
+            span Edit comment:
+            app-edit-add-comment([comment]='commentItem', (changeComment)='editComment($event, i)')
+        div('*ngIf'='editorNumber != i')
+            button((click)='openEditor(i)') edit
+            button((click)='deleteComment(i)') delete
+span Add comment:
+app-edit-add-comment([comment]='newComment', (changeComment)='addComment($event)')

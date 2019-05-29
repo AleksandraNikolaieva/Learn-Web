@@ -7,7 +7,7 @@ import { User } from '../core/models';
 export class AuthService {
     private isLogged = true;
     private loggedUser: User = {
-        id: 1,
+        id: 2,
         name: 'Sasha Nikolaieva',
         imgSrc: '../assets/images/defUser.png'
     };

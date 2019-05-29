@@ -8,7 +8,6 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter
 })
 export class TabComponent implements OnInit {
     @Input() title: string;
-    @Output() changeSelectedTab = new EventEmitter<string>();
 
     constructor() { }
 
