@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article, Comment } from '../models';
 import { User } from 'src/app/core/models';
-import { WorkshopsService } from '../../services/workshops.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-workshop-page',
@@ -10,7 +10,7 @@ import { WorkshopsService } from '../../services/workshops.service';
     styleUrls: ['./workshop-page.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WorkshopPageComponent implements OnInit {
+export class WorkshopPageComponent implements OnInit, OnDestroy {
     article: Article;
     loggedUser: User = { // get from the state
         id: 2,
@@ -24,11 +24,12 @@ export class WorkshopPageComponent implements OnInit {
     };
     editorNumber: number;
     isButtonPlus: boolean;
-    constructor(private activateRoute: ActivatedRoute, private workshopsService: WorkshopsService) { }
+    subscription: Subscription;
+    constructor(private activateRoute: ActivatedRoute) { }
 
     ngOnInit() {
         this.setAuxiliaryStatus();
-        this.activateRoute.data.subscribe(data => {
+        this.subscription = this.activateRoute.data.subscribe(data => {
             this.article = data.workshop;
         });
     }
@@ -39,6 +40,10 @@ export class WorkshopPageComponent implements OnInit {
         } else {
             this.isButtonPlus = true;
         }
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     changeLikeHandler(to: boolean): void {

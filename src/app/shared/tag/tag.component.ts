@@ -5,7 +5,7 @@ import { Tag } from '../models';
     selector: 'app-tag',
     templateUrl: './tag.component.pug',
     styleUrls: ['./tag.component.scss'],
-    // changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TagComponent implements OnInit {
     @Input() tag: Tag;
