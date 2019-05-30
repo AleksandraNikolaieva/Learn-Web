@@ -23,12 +23,22 @@ export class WorkshopPageComponent implements OnInit {
         date: new Date()
     };
     editorNumber: number;
+    isButtonPlus: boolean;
     constructor(private activateRoute: ActivatedRoute, private workshopsService: WorkshopsService) { }
 
     ngOnInit() {
+        this.setAuxiliaryStatus();
         this.activateRoute.data.subscribe(data => {
             this.article = data.workshop;
         });
+    }
+
+    setAuxiliaryStatus() {
+        if (this.activateRoute.children.length > 0) {
+            this.isButtonPlus = false;
+        } else {
+            this.isButtonPlus = true;
+        }
     }
 
     changeLikeHandler(to: boolean): void {
@@ -56,5 +66,9 @@ export class WorkshopPageComponent implements OnInit {
 
     private openEditor(index: number): void {
         this.editorNumber = index;
+    }
+
+    changeButton() {
+        this.isButtonPlus = !this.isButtonPlus;
     }
 }

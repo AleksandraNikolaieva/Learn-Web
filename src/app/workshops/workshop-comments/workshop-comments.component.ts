@@ -23,7 +23,7 @@ export class WorkshopCommentsComponent implements OnInit {
         ) { }
 
     ngOnInit() {
-        this.route.parent.params.subscribe(params => {
+        this.route.parent.parent.params.subscribe(params => {
             this.workshopsService.getArticle(params.id).subscribe(res => {
                 const article = res;
                 this.comments = article.comments;

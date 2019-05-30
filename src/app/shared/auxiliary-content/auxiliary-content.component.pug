@@ -1,7 +1,4 @@
-button('(click)'='toggleAux()' '[ngClass]'='{"slide":!isAuxOpen}')
-    i('[ngClass]'='isAuxOpen ? "icon-close" : "icon-plus"')
-.auxiliary('[ngClass]'='{"slide":!isAuxOpen}' #host='')
-    span('*ngIf'='!auxItems') Some content...
+.auxiliary
     app-tab-group
     .content
-        router-outlet(name='aside')
+        router-outlet

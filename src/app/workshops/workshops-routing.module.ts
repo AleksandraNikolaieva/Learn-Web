@@ -8,6 +8,7 @@ import { WorkshopsPageResolver } from '../resolvers/workshops-page.service';
 import { WorkshopCommentsComponent } from "./workshop-comments/workshop-comments.component";
 import { WorkshopQuizzesComponent } from "./workshop-quizzes/workshop-quizzes.component";
 import { WorkshopResourcesComponent } from "./workshop-resources/workshop-resources.component";
+import { AuxiliaryContentComponent } from '../shared/auxiliary-content/auxiliary-content.component';
 
 const workshopsRoutes: Routes = [
     {
@@ -32,7 +33,8 @@ const workshopsRoutes: Routes = [
         },
         children: [
             {
-                path: '',
+                path: 'workshop',
+                component: AuxiliaryContentComponent,
                 outlet: 'aside',
                 children: [
                     {
