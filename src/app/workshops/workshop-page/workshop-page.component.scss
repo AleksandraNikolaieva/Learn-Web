@@ -54,10 +54,10 @@
         min-height: 55px;
     }
 
-    button {
+    a { 
+        width: 25px;
         color: $grey;
         background-color: $white;
-        margin-right: 5px;
         border-radius: 5px;
         padding: 3px 5px;
         font-size: 13px;

@@ -24,9 +24,14 @@ app-viewport
             app-timestamp([date]='article.date')
         p.tags
             span('*ngFor'='let tag of article.tags') {{tag}}
-        button((click)='goBack()')
+        a(routerLink='/workshops/feed')
             i.icon-arrow-left2
-    a('*ngIf'='isButtonPlus else close' '(click)'='changeButton()' '[routerLink]'='[{outlets: {"aside": "workshop"}}]' main)
+    a(
+        '*ngIf'='isButtonPlus else close'
+        '(click)'='changeButton()'
+        '[routerLink]'='[{outlets: {"aside": "workshop"}}]'
+         main
+    )
         i.icon-plus
     ng-template(#close='')
         a('(click)'='changeButton()' 'routerLink'='./' main)
