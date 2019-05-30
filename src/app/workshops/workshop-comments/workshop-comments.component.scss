@@ -1,9 +1,14 @@
 @import 'abstracts/mixins';
 @import 'abstracts/variables';
+@import 'sass-mq';
 
 :host {
     @include flex(column, space-between, stretch);
     padding-top: 10px;
+    width: 300px;
+    @include mq($from: huge) {
+        width: 600px;
+    }
 
     app-comment {
         margin: 10px 0;

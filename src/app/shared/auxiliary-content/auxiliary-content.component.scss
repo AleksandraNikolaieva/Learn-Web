@@ -2,30 +2,31 @@
 @import 'abstracts/mixins';
 @import 'sass-mq';
 
-.auxiliary {
+:host {
     @include size($aux-w, calc(100% - 20px));
-    padding: 10px 0;
+    flex-shrink: 0;
+    padding: 10px 5px;
     overflow-y: auto;
-    transition: width 0.4s;
     background-color: darken($white, 5%);
     scrollbar-width: thin;
+    animation: slide 0.3s;
     scrollbar-color: lighten($grey, 20%) #f1f1f100;
     @include mq($until: medium) {
         display: none;
     }
     @include mq($from: huge) {
         width: 600px;
+        @include flex(column, flex-start, center);
+        animation: slideHuge 0.3s;
     }
+}
 
-    &.slide {
-        width: 0px;
-    }
-    
-    span {
-        margin-left: 10px;
-    }
+@keyframes slide {
+    from {width: 0px}
+    to {width: $aux-w}
+}
 
-    .content {
-        padding: 5px;
-    }
+@keyframes slideHuge {
+    from {width: 0px}
+    to {width: 600px}
 }
