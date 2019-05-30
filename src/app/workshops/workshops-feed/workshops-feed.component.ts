@@ -1,15 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Tag, Article, Category } from '../models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkshopsService } from 'src/app/services/workshops.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-workshops-feed',
     templateUrl: './workshops-feed.component.pug',
     styleUrls: ['./workshops-feed.component.scss'],
-    // changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WorkshopsFeedComponent implements OnInit {
+export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     articles: Array<Article>;
     tags: Array<Tag> = [
         {
@@ -76,18 +77,26 @@ export class WorkshopsFeedComponent implements OnInit {
             isActive: false
         }
     ];
+    subscriptions: Array<Subscription> = [];
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private workshopsService: WorkshopsService) { }
+        private workshopsService: WorkshopsService,
+        private cdr: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.showArticles();
+        this.getArticles();
     }
 
-    showArticles(): void {
-        this.route.queryParamMap.subscribe(queryParam  => {
+    ngOnDestroy() {
+        this.subscriptions.forEach(subscription => {
+            subscription.unsubscribe();
+        });
+    }
+
+    getArticles(): void {
+        this.subscriptions.push(this.route.queryParamMap.subscribe(queryParam  => {
             const tags = queryParam.get('tags');
             const category = queryParam.get('category');
             if (tags && !category) {
@@ -100,14 +109,17 @@ export class WorkshopsFeedComponent implements OnInit {
                 this.filterByBoth(category, this.activeTags);
             } else {
                 this.activeTags = [];
-                this.tags.forEach(tag => {
+                const newTags = JSON.parse(JSON.stringify(this.tags));
+                newTags.forEach(tag => {
                     tag.isActive = false;
                 });
-                this.route.data.subscribe(data => {
+                this.tags = newTags;
+                this.subscriptions.push(this.route.data.subscribe(data => {
                     this.articles = data.workshops;
-                });
+                }));
+                this.cdr.detectChanges();
             }
-        });
+        }));
     }
 
     filterFeedByTag(): void {
@@ -135,8 +147,6 @@ export class WorkshopsFeedComponent implements OnInit {
     }
 
     activateTag(tag: Tag): void {
-        this.tags[tag.id - 1].isActive = tag.isActive; // considering tags are hardcored and their order cant be changed
-
         if (tag.isActive) {
             this.activeTags.push(tag.title);
         } else {
