@@ -28,6 +28,10 @@ const routes: Routes = [
         component: LoginComponent
     },
     {
+        path: 'not_found',
+        component: NotFoundComponent
+    },
+    {
         path: '**',
         component: NotFoundComponent
     }
