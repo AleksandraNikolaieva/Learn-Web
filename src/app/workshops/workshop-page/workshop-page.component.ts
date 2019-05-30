@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from '../models';
 import { Subscription } from 'rxjs';
-import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-workshop-page',
@@ -16,8 +15,7 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     constructor(
         private activateRoute: ActivatedRoute,
-        private router: Router,
-        private location: Location) { }
+        private router: Router) { }
 
     ngOnInit() {
         this.setAuxiliaryStatus();
@@ -49,9 +47,5 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
 
     changeButton() {
         this.isButtonPlus = !this.isButtonPlus;
-    }
-
-    goBack() {
-        this.location.back();
     }
 }
