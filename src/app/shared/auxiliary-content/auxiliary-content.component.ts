@@ -7,14 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuxiliaryContentComponent implements OnInit {
-    isAuxOpen = true;
-    auxItems = new Array(10);
-    constructor() { }
+    constructor() {}
 
     ngOnInit() {
-    }
-
-    toggleAux(): void {
-        this.isAuxOpen = !this.isAuxOpen;
     }
 }

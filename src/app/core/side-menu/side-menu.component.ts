@@ -20,12 +20,12 @@ export class SideMenuComponent implements OnInit {
         {
             title: 'Workshops',
             icon: 'icon-graduation-cap',
-            link: '/workshops'
+            link: 'workshops'
         },
         {
             title: 'Quizzes',
             icon: 'icon-question_answer',
-            link: '/quizzes'
+            link: 'quizzes'
         }
     ];
     constructor() { }

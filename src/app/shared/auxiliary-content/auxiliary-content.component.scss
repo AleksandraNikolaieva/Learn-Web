@@ -2,26 +2,6 @@
 @import 'abstracts/mixins';
 @import 'sass-mq';
 
-button {
-    position: absolute;
-    top: 5px;
-    right: $aux-w + 15;
-    transition: right 0.4s;
-    padding: 0px;
-    @include mq($until: medium) {
-        display: none;
-    }
-
-    &.slide {
-        right: 15px;
-    }
-
-    .icon-plus,
-    .icon-close {
-        color: grey;
-    }
-}
-
 .auxiliary {
     @include size($aux-w, calc(100% - 20px));
     padding: 10px 0;

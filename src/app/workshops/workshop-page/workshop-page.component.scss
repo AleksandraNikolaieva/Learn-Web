@@ -76,3 +76,18 @@
         background-color: $grey;
     }
 }
+
+a {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
+    @include mq($until: medium) {
+        display: none;
+    }
+
+    .icon-close,
+    .icon-plus {
+        color: grey;
+    }
+}

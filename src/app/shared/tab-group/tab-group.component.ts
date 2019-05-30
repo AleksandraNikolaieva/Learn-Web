@@ -8,7 +8,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class TabGroupComponent implements OnInit {
     tabs = ['comments', 'resources', 'quizzes'];
-    selected = 'First';
 
     constructor() {}
     ngOnInit() {

@@ -36,4 +36,9 @@ app-viewport
                     button((click)='deleteComment(i)') delete
         span Add comment:
         app-edit-add-comment([comment]='newComment', (changeComment)='addComment($event)')
-    app-auxiliary-content(auxiliary)
+    a('*ngIf'='isButtonPlus else close' '(click)'='changeButton()' '[routerLink]'='[{outlets: {"aside": "workshop"}}]' main)
+        i.icon-plus
+    ng-template(#close='')
+        a('(click)'='changeButton()' 'routerLink'='./' main)
+            i.icon-close
+    router-outlet(name='aside' auxiliary)
