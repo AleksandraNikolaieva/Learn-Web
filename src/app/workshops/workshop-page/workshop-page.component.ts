@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Article, Comment } from '../models';
-import { User } from 'src/app/core/models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Article } from '../models';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,25 +11,18 @@ import { Subscription } from 'rxjs';
 })
 export class WorkshopPageComponent implements OnInit, OnDestroy {
     article: Article;
-    loggedUser: User = { // get from the state
-        id: 2,
-        name: 'Sasha Nikolaieva',
-        imgSrc: ''
-    };
-    newComment: Comment = {
-        author: this.loggedUser,
-        text: '',
-        date: new Date()
-    };
-    editorNumber: number;
     isButtonPlus: boolean;
     subscription: Subscription;
-    constructor(private activateRoute: ActivatedRoute) { }
+    constructor(private activateRoute: ActivatedRoute, private router: Router) { }
 
     ngOnInit() {
         this.setAuxiliaryStatus();
         this.subscription = this.activateRoute.data.subscribe(data => {
-            this.article = data.workshop;
+            if (data.workshop) {
+                this.article = data.workshop;
+            } else {
+                this.router.navigate(['/not_found']);
+            }
         });
     }
 
@@ -49,28 +41,6 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
     changeLikeHandler(to: boolean): void {
         console.log('workshop page like', to);
         // send changes to server
-    }
-
-    addComment(newComment: Comment): void {
-        this.article.comments.push(newComment);
-        this.newComment = {
-            author: this.loggedUser,
-            text: '',
-            date: null
-        };
-    }
-
-    private editComment(comment: Comment, index: number): void {
-        this.article.comments[index] = comment;
-        this.editorNumber = null;
-    }
-
-    private deleteComment(index: number): void {
-        this.article.comments.splice(index, 1);
-    }
-
-    private openEditor(index: number): void {
-        this.editorNumber = index;
     }
 
     changeButton() {
