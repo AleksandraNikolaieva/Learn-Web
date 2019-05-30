@@ -116,34 +116,39 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                 this.tags = newTags;
                 this.subscriptions.push(this.route.data.subscribe(data => {
                     this.articles = data.workshops;
+                    this.cdr.detectChanges();
                 }));
-                this.cdr.detectChanges();
             }
         }));
     }
 
     filterFeedByTag(): void {
         this.articles = this.workshopsService.getArticlesByTags(this.activeTags);
+        this.cdr.detectChanges();
     }
 
     filterFeedByCategory(category: string): void {
         this.articles = this.workshopsService.getArticlesByCategory(category);
+        this.cdr.detectChanges();
     }
 
     filterByBoth(category: string, tags: Array<string>): void {
         this.articles = this.workshopsService.getArticlesByBoth(category, tags);
+        this.cdr.detectChanges();
     }
 
     markTags(tags: string): void {
         this.activeTags = tags.split(',');
+        const newTags = JSON.parse(JSON.stringify(this.tags));
         this.activeTags.forEach(activeTitle => {
-            for (const tag of this.tags) {
+            for (const tag of newTags) {
                 if (tag.title === activeTitle) {
                     tag.isActive = true;
                     break;
                 }
             }
         });
+        this.tags = newTags;
     }
 
     activateTag(tag: Tag): void {
