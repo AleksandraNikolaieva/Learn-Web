@@ -52,7 +52,7 @@ export class WorkshopCommentsComponent implements OnInit {
     }
 
     addComment(newComment: Comment): void {
-        this.comments.push(newComment);
+        this.comments.unshift(newComment);
         this.newComment = {
             author: this.loggedUser,
             text: '',
