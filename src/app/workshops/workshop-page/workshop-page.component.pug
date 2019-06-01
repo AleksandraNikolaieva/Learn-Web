@@ -17,7 +17,7 @@ app-viewport
             span 
                 i.icon-user  {{article.author}}
             app-like(
-                [isActive]='false',
+                [isActive]='article.isFavorite',
                 [likesNumber]='article.likes',
                 (changeLike)='changeLikeHandler($event)'
             )
@@ -29,9 +29,7 @@ app-viewport
     a(
         '*ngIf'='isButtonPlus else close'
         '(click)'='changeButton()'
-        '[routerLink]'='[{outlets: {"aside": "workshop"}}]'
-         main
-    )
+        '[routerLink]'='[{outlets: {"aside": "workshop"}}]' main)
         i.icon-plus
     ng-template(#close='')
         a('(click)'='changeButton()' 'routerLink'='./' main)

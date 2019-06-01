@@ -29,7 +29,7 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
     }
 
     setAuxiliaryStatus() {
-        if (this.activateRoute.children.length > 0) {
+        if (this.activateRoute.children.length) {
             this.isButtonPlus = false;
         } else {
             this.isButtonPlus = true;
