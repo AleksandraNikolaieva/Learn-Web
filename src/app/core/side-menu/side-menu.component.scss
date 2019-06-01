@@ -53,7 +53,7 @@ nav {
             transition: background-color 0.3s;
             @include mq($until: small) {
                 @include flex(row, flex-start, center);
-                width: 96%;
+                width: 94%;
                 padding-left: 10px;
                 margin-left: 2px;
             }
