@@ -12,7 +12,11 @@ export class WorkshopsService {
         {
             id: 1,
             title: 'Learn CSS Grid in 5 Minutes',
-            author: 'Sasha Nikolaieva',
+            author: {
+                id: 2,
+                name: 'Sasha Nikolaieva',
+                imgSrc: '../assets/images/defUser.png'
+            },
             date: new Date(2017, 10, 26),
             description: 'Grid layouts are fundamental to the design of websites, and the CSS Grid module is the most powerful and easiest tool for creating it.',
             img: '../assets/images/css1.jpg',
@@ -43,7 +47,11 @@ export class WorkshopsService {
         {
             id: 2,
             title: 'Understanding Node.js Event-Driven Architecture',
-            author: 'Samer Buna',
+            author: {
+                id: 1,
+                name: 'Samer Buna',
+                imgSrc: '../assets/images/defUser.png'
+            },
             date: new Date(2017, 4, 8),
             description: 'The simplest form of the event-driven nature is the callback style of some of the popular Node.js functions — for example, fs.readFile. In this analogy, the event will be fired once (when Node is ready to call the callback) and the callback acts as the event handler. Let’s explore this basic form first.',
             img: '../assets/images/node1.jpg',
@@ -74,7 +82,11 @@ export class WorkshopsService {
         {
             id: 3,
             title: '15 HTML element methods you’ve potentially never heard of',
-            author: 'David Gilbertson',
+            author: {
+                id: 3,
+                name: 'David Gilbertson',
+                imgSrc: '../assets/images/defUser.png'
+            },
             date: new Date(2018, 5, 20),
             description: 'Most elements don’t have any interesting methods, so unless you actually sift through the spec for things you’ll almost never use, it’s easy to miss the little nuggets that are scattered throughout.',
             img: '../assets/images/html1.jpg',
@@ -105,7 +117,11 @@ export class WorkshopsService {
         {
             id: 4,
             title: 'Getting started with Pug template engine',
-            author: 'Antonio Regadas',
+            author: {
+                id: 4,
+                name: 'Antonio Regadas',
+                imgSrc: '../assets/images/defUser.png'
+            },
             date: new Date(2016, 11, 22),
             description: 'Clean and organize HTML, that’s what we as Front-end Developers always aim for. Well with Pug, formerly known as “Jade” (a registered trademark, and as a result a rename was needed) it’s a high performance and feature-rich templating engine that’s easy to achieve. Simply put, Pug is a clean, white space/indentation sensitive syntax for writing html.',
             img: '../assets/images/pug1.png',
@@ -136,7 +152,11 @@ export class WorkshopsService {
         {
             id: 5,
             title: 'The Complete Guide to SCSS/SASS',
-            author: 'Fatos Morina',
+            author: {
+                id: 5,
+                name: 'Fatos Morina',
+                imgSrc: '../assets/images/defUser.png'
+            },
             date: new Date(2019, 0, 17),
             description: 'In this tutorial Sassy, Sass and SCSS will refer to roughly the same thing. Conceptually, there isn’t much difference. You will learn the difference as you learn more, but basically SCSS is the one most people use now. It’s just a more recent (and according to some, superior) version of the original Sass syntax.',
             img: '../assets/images/scss1.png',
@@ -167,7 +187,11 @@ export class WorkshopsService {
         {
             id: 6,
             title: '10 Interview Questions Every JavaScript Developer Should Know',
-            author: 'Eric Elliott',
+            author: {
+                id: 6,
+                name: 'Eric Elliott',
+                imgSrc: '../assets/images/defUser.png'
+            },
             date: new Date(2019, 4, 8),
             description: `At most companies, management must trust the developers to give technical interviews in order to assess candidate skills. If you do well as a candidate, you’ll eventually need to interview. Here’s how.`,
             img: '../assets/images/js1.png',
@@ -193,7 +217,7 @@ export class WorkshopsService {
 
     public getArticlesByCategory(category: string): Array<Article> {
         if (category === 'my') {
-            return this.articles.filter(article => article.author === this.authService.getLoggedUser().name);
+            return this.articles.filter(article => article.author.id === this.authService.getLoggedUser().id);
         } else if (category === 'favorite') {
             return this.articles.filter(article => article.isFavorite === true);
         } else {
@@ -204,7 +228,7 @@ export class WorkshopsService {
     public getArticlesByBoth(category: string, tags: Array<string>): Array<Article> {
         const res = this.getArticlesByTags(tags);
         if (category === 'my') {
-            return res.filter(article => article.author === this.authService.getLoggedUser().name);
+            return res.filter(article => article.author.id === this.authService.getLoggedUser().id);
         } else if (category === 'favorite') {
             return res.filter(article => article.isFavorite === true);
         } else {

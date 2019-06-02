@@ -3,7 +3,7 @@ import { User } from '../core/models';
 export interface Article {
     id: number;
     title: string;
-    author: string;
+    author: User;
     date: Date;
     description: string;
     img: string;

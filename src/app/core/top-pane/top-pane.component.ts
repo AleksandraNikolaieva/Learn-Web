@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { User } from '../models';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -13,6 +13,7 @@ export class TopPaneComponent implements OnInit {
     initials: string;
     @Input() isNavMenuOpen: boolean;
     @Output() navMenuChange = new EventEmitter<boolean>();
+    @ViewChild('forSearch') search: ElementRef;
     isUserMenuOpen = false;
     isSearchOpen = false;
 
@@ -44,6 +45,7 @@ export class TopPaneComponent implements OnInit {
     activateSearch() {
         this.isSearchOpen = true;
         this.navMenuChange.emit(false);
+        setTimeout(() => this.search.nativeElement.focus(), 100);
     }
 
     private getInitials(): void {

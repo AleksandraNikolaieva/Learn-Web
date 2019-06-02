@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { WorkshopsPageService } from './workshops-page.service';
+import { WorkshopsPageResolver } from './workshops-page.resolver';
 
 describe('WorkshopsPageService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: WorkshopsPageService = TestBed.get(WorkshopsPageService);
+    const service: WorkshopsPageResolver = TestBed.get(WorkshopsPageResolver);
     expect(service).toBeTruthy();
   });
 });

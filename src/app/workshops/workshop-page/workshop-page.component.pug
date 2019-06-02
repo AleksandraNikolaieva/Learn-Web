@@ -1,7 +1,7 @@
 app-viewport
     .page(main #host='')
-        h2 {{article.title}}
-        img(src='{{article.img}}' alt='{{article.title}}')
+        h2 {{article?.title}}
+        img(src='{{article?.img}}' alt='{{article?.title}}')
         p 
             |Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur temporibus nemo sint molestiae maxime recusandae animi ratione, voluptatum ea quibusdam eveniet dolore mollitia atque nisi cupiditate voluptatibus et expedita perspiciatis!
             |Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quas in nostrum natus, ex eos, magni similique debitis atque aspernatur odit provident tempora perspiciatis voluptatum distinctio. Eum ea aspernatur quas.
@@ -15,15 +15,15 @@ app-viewport
             |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
         .workshop-page-info
             span 
-                i.icon-user  {{article.author}}
+                i.icon-user  {{article?.author}}
             app-like(
-                [isActive]='article.isFavorite',
-                [likesNumber]='article.likes',
+                [isActive]='article?.isFavorite',
+                [likesNumber]='article?.likes',
                 (changeLike)='changeLikeHandler($event)'
             )
-            app-timestamp([date]='article.date')
+            app-timestamp([date]='article?.date')
         p.tags
-            span('*ngFor'='let tag of article.tags') {{tag}}
+            span('*ngFor'='let tag of article?.tags') {{tag}}
         a(routerLink='/workshops/feed')
             i.icon-arrow-left2
     a(

@@ -23,7 +23,7 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
             if (data.workshop) {
                 this.article = data.workshop;
             } else {
-                this.router.navigate(['/not_found']);
+                /* this.router.navigate(['/not_found']); */
             }
         });
     }

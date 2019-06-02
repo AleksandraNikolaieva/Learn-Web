@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FeedComponent } from './feed/feed.component';
 
-const quizzesdRoutes: Routes = [
+const quizzesRoutes: Routes = [
     {
         path: '',
         component: FeedComponent
@@ -10,7 +10,7 @@ const quizzesdRoutes: Routes = [
 ];
 
 @NgModule({
-    imports: [ RouterModule.forChild(quizzesdRoutes) ],
+    imports: [ RouterModule.forChild(quizzesRoutes) ],
     exports: [ RouterModule ]
 })
 export class QuizzesRoutingModule { }

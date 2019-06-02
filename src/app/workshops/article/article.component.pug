@@ -7,7 +7,7 @@ app-card
     div(footer)
         .row
             span 
-                i.icon-user  {{article.author}}
+                i.icon-user  {{article.author.name}}
             app-timestamp([date]='article.date' toFormat='day')
         app-like(
             [isActive]='article.isFavorite',

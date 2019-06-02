@@ -44,10 +44,10 @@ nav {
         padding: 0;
 
         a {
-            @include size(95%, 76px);
+            @include size(calc(100% - 6px), 76px);
             @include flex(column, center, center);
             color: $yellow;
-            margin: 5px 0;
+            margin: 5px 2px;
             border: 1px solid $grey;
             border-radius: 5px;
             transition: background-color 0.3s;
@@ -59,13 +59,14 @@ nav {
             }
 
             &.active {
-                background-color: darken($grey, 10%);
-                box-shadow: 0px 0px 2px $text-color;
+                background-color: transparentize($yellow, 0.15);
+                color: $grey;
             }
 
             &:hover {
                 border: 1px solid $light-grey;
                 background-color: lighten($grey, 10%);
+                color: $yellow;
             }
         }
 
