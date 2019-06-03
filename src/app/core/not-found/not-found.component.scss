@@ -1,21 +1,37 @@
 @import 'abstracts/variables';
 @import 'sass-mq';
+@import 'abstracts/mixins';
 
 :host {
     position: absolute;
     left: $menu-w;
     width: calc(100% - #{$menu-w});
     height: calc(100vh - #{$header-h});
-    background-image: url('../../../assets/images/404.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-color: lighten($grey, 10%);
+    @include flex(row, center, center);
     @include mq($until: small) {
         left: 0;
     }
+
+    div {
+        display: inline-block;
+        height: 32px;
+        width: 5px;
+        background-color: white;
+        animation-name: blink;
+        animation-duration: 0.2s;
+        animation-iteration-count: 20;
+        animation-fill-mode: forwards;
+        margin-bottom: -4px;
+    }
 }
 
-h1, h2 {
+h1 {
     text-align: center;
-    color: lighten($yellow, 20%);
+    color: $yellow;
+}
+
+@keyframes blink {
+    from {opacity: 1;}
+    to {opacity: 0;}
 }
