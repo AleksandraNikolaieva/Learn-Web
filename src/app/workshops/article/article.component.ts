@@ -15,7 +15,6 @@ export class ArticleComponent implements OnInit {
     }
 
     changeLikeHandler(to: boolean): void {
-        console.log('article handler', to);
         // send changes to server
     }
 }

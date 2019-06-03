@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Article } from '../models';
 import { Subscription } from 'rxjs';
 
@@ -13,18 +13,12 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
     article: Article;
     isButtonPlus: boolean;
     subscription: Subscription;
-    constructor(
-        private activateRoute: ActivatedRoute,
-        private router: Router) { }
+    constructor(private activateRoute: ActivatedRoute) { }
 
     ngOnInit() {
         this.setAuxiliaryStatus();
         this.subscription = this.activateRoute.data.subscribe(data => {
-            if (data.workshop) {
-                this.article = data.workshop;
-            } else {
-                /* this.router.navigate(['/not_found']); */
-            }
+            this.article = data.workshop;
         });
     }
 
@@ -41,7 +35,6 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
     }
 
     changeLikeHandler(to: boolean): void {
-        console.log('workshop page like', to);
         // send changes to server
     }
 
