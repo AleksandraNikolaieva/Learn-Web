@@ -146,6 +146,78 @@ export class WorkshopsService {
                     },
                     text: 'tanks',
                     date: new Date(2019, 4, 21)
+                },
+                {
+                    author: {
+                        id: 2,
+                        name: 'Sasha Nikolaieva',
+                        imgSrc: '../assets/images/defUser.png'
+                    },
+                    text: 'nice article!',
+                    date: new Date(2019, 4, 20)
+                },
+                {
+                    author: {
+                        id: 3,
+                        name: 'Dima Brody',
+                        imgSrc: ''
+                    },
+                    text: 'tanks',
+                    date: new Date(2019, 4, 21)
+                },
+                {
+                    author: {
+                        id: 2,
+                        name: 'Sasha Nikolaieva',
+                        imgSrc: '../assets/images/defUser.png'
+                    },
+                    text: 'nice article!',
+                    date: new Date(2019, 4, 20)
+                },
+                {
+                    author: {
+                        id: 3,
+                        name: 'Dima Brody',
+                        imgSrc: ''
+                    },
+                    text: 'tanks',
+                    date: new Date(2019, 4, 21)
+                },
+                {
+                    author: {
+                        id: 2,
+                        name: 'Sasha Nikolaieva',
+                        imgSrc: '../assets/images/defUser.png'
+                    },
+                    text: 'nice article!',
+                    date: new Date(2019, 4, 20)
+                },
+                {
+                    author: {
+                        id: 3,
+                        name: 'Dima Brody',
+                        imgSrc: ''
+                    },
+                    text: 'tanks',
+                    date: new Date(2019, 4, 21)
+                },
+                {
+                    author: {
+                        id: 2,
+                        name: 'Sasha Nikolaieva',
+                        imgSrc: '../assets/images/defUser.png'
+                    },
+                    text: 'nice article!',
+                    date: new Date(2019, 4, 20)
+                },
+                {
+                    author: {
+                        id: 3,
+                        name: 'Dima Brody',
+                        imgSrc: ''
+                    },
+                    text: 'tanks',
+                    date: new Date(2019, 4, 21)
                 }
             ]
         },

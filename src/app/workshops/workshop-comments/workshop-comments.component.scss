@@ -4,19 +4,25 @@
 
 :host {
     @include flex(column, space-between, stretch);
-    padding-top: 10px;
-    width: 300px;
-    @include mq($from: huge) {
-        width: 600px;
+    width: calc(100% - 14px);
+    min-width: 276px;
+    padding: 0 7px 10px 7px;
+
+    div {
+        margin-top: -28px;
     }
 
     app-comment {
-        margin: 10px 0;
+        margin-top: 15px;
+    }
+
+    span {
+        margin-top: 10px;
     }
 
     button {
         color: $white;
-        margin-right: 5px;
+        margin-left: 5px;
         border-radius: 5px;
         padding: 3px 5px;
         font-size: 13px;

@@ -1,21 +1,24 @@
 @import 'abstracts/mixins';
 @import 'abstracts/variables';
 
-a {
+:host {
     display: inline-block;
-    width: 82px;
     padding: 5px;
     background-color: $grey;
-    color: $white;
+    margin: 0 0.5px;
     font-size: 13px;
     border-radius: 5px 5px 0px 0px;
     text-align: center;
 
-    &:hover {
-        font-weight: bolder;
+    a {
+        color: white;
+
+        &.active {
+            font-weight: bold;
+        }
     }
 
-    &.active {
-        font-weight: bold;
+    &:hover {
+        font-weight: bolder;
     }
 }

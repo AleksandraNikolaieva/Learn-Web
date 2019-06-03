@@ -4,9 +4,14 @@
 :host {
     @include flex(row, space-between, center);
     position: relative;
-    width: 280px;
-    margin-left: 10px;
+    padding-top: 10px;
+    background-color: inherit;
+    width: 100%;
     border-bottom: 3px solid black;
+
+    app-tab {
+        flex-grow: 1;
+    }
 }
 
 .tabs-body {
