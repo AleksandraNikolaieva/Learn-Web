@@ -1,3 +1,1 @@
-span('*ngIf'='toFormat == "day and time" else day') {{date | date:'yyyy-MM-dd HH:mm'}}
-ng-template(#day='')
-    span {{date | date:'yyyy-MM-dd'}}
+span {{ date | date:dateFormat}} 

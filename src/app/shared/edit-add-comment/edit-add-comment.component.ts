@@ -17,7 +17,9 @@ export class EditAddCommentComponent implements OnInit {
     }
 
     submit(): void {
-        this.comment.date = new Date();
-        this.changeComment.emit(this.comment);
+        if (this.comment.text) {
+            this.comment.date = new Date();
+            this.changeComment.emit(this.comment);
+        }
     }
 }
