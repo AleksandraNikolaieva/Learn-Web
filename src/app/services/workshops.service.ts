@@ -41,6 +41,24 @@ export class WorkshopsService {
                     },
                     text: 'tanks for share!',
                     date: new Date(2019, 4, 21)
+                },
+                {
+                    author: {
+                        id: 4,
+                        name: 'Andrey Zinner',
+                        imgSrc: ''
+                    },
+                    text: 'nothing new for me :(',
+                    date: new Date(2019, 6, 3)
+                },
+                {
+                    author: {
+                        id: 4,
+                        name: 'Yana Olshevska',
+                        imgSrc: ''
+                    },
+                    text: "finally i've got it",
+                    date: new Date(2019, 6, 4)
                 }
             ]
         },

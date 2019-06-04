@@ -111,14 +111,11 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                 this.markCategory(categoryId);
                 this.filterByBoth(category, this.activeTags);
             } else {
-                this.categories.forEach(item => {
-                    if (item.id === 1) {
-                        item.isActive = true;
-                    } else {
-                        item.isActive = false;
-                    }
+                this.categories[0].isActive = true;
+                this.activeTags = [];
+                this.tags.forEach(tag => {
+                    tag.isActive = false;
                 });
-                this.deactivateTags();
                 this.subscriptions.push(this.route.data.subscribe(data => {
                     this.articles = data.workshops;
                     this.cdr.detectChanges();
@@ -144,16 +141,14 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
 
     markTags(tags: string): void {
         this.activeTags = tags.split(',');
-        const newTags = JSON.parse(JSON.stringify(this.tags));
         this.activeTags.forEach(activeTitle => {
-            for (const tag of newTags) {
+            for (const tag of this.tags) {
                 if (tag.title === activeTitle) {
                     tag.isActive = true;
                     break;
                 }
             }
         });
-        this.tags = newTags;
     }
 
     activateTag(tag: Tag): void {
@@ -175,22 +170,9 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         }
     }
 
-    deactivateTags() {
-        this.activeTags = [];
-        const newTags = JSON.parse(JSON.stringify(this.tags));
-        newTags.forEach((tag: Tag) => {
-            tag.isActive = false;
-        });
-        this.tags = newTags;
-    }
-
     markCategory(id: number) {
         this.categories.forEach((category) => {
-            if (category.id === id) {
-                category.isActive = true;
-            } else {
-                category.isActive = false;
-            }
+            category.isActive = category.id === id ? true : false;
         });
     }
 
@@ -209,7 +191,6 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     }
 
     resetTags() {
-        this.deactivateTags();
         this.router.navigate(['/workshops/feed'], {
             queryParams: {
                 category: this.route.snapshot.queryParamMap.get('category')

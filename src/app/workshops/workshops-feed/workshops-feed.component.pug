@@ -1,6 +1,10 @@
 app-viewport
     .tag-group(main)
-        app-tag('*ngFor'='let tagItem of tags', [tag]='tagItem', (changeActive)='activateTag($event)')
+        app-tag(
+            '*ngFor'='let tagItem of tags'
+            '[tag]'='tagItem'
+            '(changeActive)'='activateTag($event)'
+            )
         button('(click)'='resetTags()')
             i.icon-close
     .categories(main)

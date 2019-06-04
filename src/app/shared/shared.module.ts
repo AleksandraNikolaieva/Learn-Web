@@ -14,7 +14,8 @@ import { AuxiliaryContentComponent } from './auxiliary-content/auxiliary-content
 import { ViewportComponent } from './viewport/viewport.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TextToColorDirective } from '../directives/text-to-color.directive';
+import { QueryParamsActiveDirective } from './directives/query-params-active.directive';
+import { TextToColorDirective } from './directives/text-to-color.directive';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { TextToColorDirective } from '../directives/text-to-color.directive';
         LikeComponent,
         EditAddCommentComponent,
         AuxiliaryContentComponent,
+        QueryParamsActiveDirective,
         TextToColorDirective
     ],
     imports: [

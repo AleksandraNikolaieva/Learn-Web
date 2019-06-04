@@ -13,13 +13,10 @@ a {
     text-align: center;
     text-transform: uppercase;
     transition: background-color 0.3s;
-
-    &:hover {
-        background-color: darken($yellow, 20%);
-    }
     
     &.active {
-        background-color: darken($yellow, 20%);
         color: $grey;
+        font-weight: bold;
+        box-shadow: inset 0px 0px 8px 2px rgba(0, 0, 0, 0.6); 
     }
 }

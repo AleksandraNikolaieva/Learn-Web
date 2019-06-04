@@ -1,1 +1,6 @@
-a('(click)'='toggleActive()' '[appTextToColor]'='tag.title') {{tag.title}}
+a(
+    '(click)'='toggleActive()'
+    '[appTextToColor]'='tag.title'
+    'appQueryParamsActive'='tags'
+    '[find]'='tag.title'
+    ) {{tag.title}}

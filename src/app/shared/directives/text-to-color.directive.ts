@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, HostBinding, HostListener } from '@angular/core';
-import { Colors } from '../shared/models';
+import { Colors } from '../models';
 
 @Directive({
     selector: '[appTextToColor]'
@@ -42,7 +42,6 @@ export class TextToColorDirective {
             }
 
             res = +(res / str.length).toFixed(2).split('.')[1];
-
             if (res < 20) {
                 this.color = this.colorMap.tiny;
             } else if ( res < 40) {
