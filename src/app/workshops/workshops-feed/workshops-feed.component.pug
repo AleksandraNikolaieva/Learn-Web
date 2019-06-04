@@ -1,14 +1,13 @@
 app-viewport
     .tag-group(main)
         app-tag('*ngFor'='let tagItem of tags', [tag]='tagItem', (changeActive)='activateTag($event)')
+        button('(click)'='resetTags()')
+            i.icon-close
     .categories(main)
         a('*ngFor'='let category of categories'
-            'routerLinkActive'='active'
-            '[routerLink]'='["/workshops/feed"]'
-            '[queryParams]'='{ category: category.title}'
-            'queryParamsHandling'='merge'
+           '[ngClass]'='{"active": category.isActive}'
+           '(click)'='activateCategory(category.id)'
         ) {{category.title}}
-        button('(click)'='resetAll()') Reset All
     .workshop-feed-content(main)
         span('*ngIf'='!articles.length') Required articles do not exist
         app-article('*ngFor'='let articleItem of articles', [article]='articleItem')

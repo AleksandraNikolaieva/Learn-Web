@@ -8,7 +8,7 @@ export class AuthService {
     private isLogged = true;
     private loggedUser: User = {
         id: 2,
-        name: 'Sasha Nikolaieva',
+        name: 'Aleksandra Nikolaieva',
         imgSrc: '../assets/images/defUser.png'
     };
 

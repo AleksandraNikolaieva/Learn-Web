@@ -8,13 +8,13 @@ import { DateFormat } from '../models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimestampComponent implements OnInit {
-    formats = new Map([
-        ['day', 'yyyy-MM-dd'],
-        ['dayTime', 'yyyy-MM-dd HH:mm'],
-        ['time', 'H:mm']
-    ]);
+    formats = {
+        day: 'yyy-MM-dd',
+        dayTime: 'yyy-MM-dd HH:mm',
+        time: 'H:mm'
+    };
     @Input() date: Date;
-    @Input() set toFormat(reqformat: DateFormat) { this.dateFormat = this.formats.get(reqformat); }
+    @Input() set toFormat(reqformat: DateFormat) { this.dateFormat = this.formats[reqformat]; }
     dateFormat: string;
 
     constructor() { }

@@ -14,7 +14,7 @@ export class WorkshopsService {
             title: 'Learn CSS Grid in 5 Minutes',
             author: {
                 id: 2,
-                name: 'Sasha Nikolaieva',
+                name: 'Aleksandra Nikolaieva',
                 imgSrc: '../assets/images/defUser.png'
             },
             date: new Date(2017, 10, 26),
@@ -27,7 +27,7 @@ export class WorkshopsService {
                 {
                     author: {
                         id: 2,
-                        name: 'Sasha Nikolaieva',
+                        name: 'Aleksandra Nikolaieva',
                         imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
@@ -62,7 +62,7 @@ export class WorkshopsService {
                 {
                     author: {
                         id: 2,
-                        name: 'Sasha Nikolaieva',
+                        name: 'Aleksandra Nikolaieva',
                         imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
@@ -97,7 +97,7 @@ export class WorkshopsService {
                 {
                     author: {
                         id: 2,
-                        name: 'Sasha Nikolaieva',
+                        name: 'Aleksandra Nikolaieva',
                         imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
@@ -132,7 +132,7 @@ export class WorkshopsService {
                 {
                     author: {
                         id: 2,
-                        name: 'Sasha Nikolaieva',
+                        name: 'Aleksandra Nikolaieva',
                         imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
@@ -150,7 +150,7 @@ export class WorkshopsService {
                 {
                     author: {
                         id: 2,
-                        name: 'Sasha Nikolaieva',
+                        name: 'Aleksandra Nikolaieva',
                         imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
@@ -168,7 +168,7 @@ export class WorkshopsService {
                 {
                     author: {
                         id: 2,
-                        name: 'Sasha Nikolaieva',
+                        name: 'Aleksandra Nikolaieva',
                         imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
@@ -186,7 +186,7 @@ export class WorkshopsService {
                 {
                     author: {
                         id: 2,
-                        name: 'Sasha Nikolaieva',
+                        name: 'Aleksandra Nikolaieva',
                         imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
@@ -204,7 +204,7 @@ export class WorkshopsService {
                 {
                     author: {
                         id: 2,
-                        name: 'Sasha Nikolaieva',
+                        name: 'Aleksandra Nikolaieva',
                         imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
@@ -239,7 +239,7 @@ export class WorkshopsService {
                 {
                     author: {
                         id: 2,
-                        name: 'Sasha Nikolaieva',
+                        name: 'Aleksandra Nikolaieva',
                         imgSrc: '../assets/images/defUser.png'
                     },
                     text: 'nice article!',
