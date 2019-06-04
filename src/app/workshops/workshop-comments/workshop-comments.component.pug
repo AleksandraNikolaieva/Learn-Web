@@ -7,5 +7,6 @@ ng-container('*ngFor'='let commentItem of comments, let i = index')
         div('*ngIf'='editorNumber != i')
             button((click)='openEditor(i)') edit
             button((click)='deleteComment(i)') delete
-span Add comment:
-app-edit-add-comment([comment]='newComment', (changeComment)='addComment($event)')
+div
+    span Add comment:
+    app-edit-add-comment([comment]='newComment', (changeComment)='addComment($event)')

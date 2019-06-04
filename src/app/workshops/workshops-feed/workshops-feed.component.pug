@@ -10,7 +10,7 @@ app-viewport
     .categories(main)
         a('*ngFor'='let category of categories'
            '[ngClass]'='{"active": category.isActive}'
-           '(click)'='activateCategory(category.id)'
+           '(click)'='activateCategory(category)'
         ) {{category.title}}
     .workshop-feed-content(main)
         span('*ngIf'='!articles.length') Required articles do not exist

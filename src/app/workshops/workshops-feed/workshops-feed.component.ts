@@ -12,6 +12,8 @@ import { Subscription } from 'rxjs';
 })
 export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     articles: Array<Article>;
+    activeTags: Array<string> = [];
+    subscriptions: Array<Subscription> = [];
     tags: Array<Tag> = [
         {
             id: 1,
@@ -59,7 +61,6 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             isActive: false
         }
     ];
-    activeTags: Array<string> = [];
     categories: Array<Category> = [
         {
             id: 1,
@@ -77,7 +78,6 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             isActive: false
         }
     ];
-    subscriptions: Array<Subscription> = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -99,19 +99,24 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         this.subscriptions.push(this.route.queryParamMap.subscribe(queryParam  => {
             const tags = queryParam.get('tags');
             const category = queryParam.get('category');
-            const categoryId = this.categories.findIndex(item => item.title === category) + 1;
+            const curCategory = this.categories.find(item => item.title === category);
             if (tags && !category) {
                 this.markTags(tags);
+                this.markCategory(1);
                 this.filterFeedByTag();
             } else if (category && !tags) {
-                this.markCategory(categoryId);
+                this.activeTags = [];
+                this.tags.forEach(tag => {
+                    tag.isActive = false;
+                });
+                this.markCategory(curCategory.id);
                 this.filterFeedByCategory(category);
             } else if (category && tags) {
                 this.markTags(tags);
-                this.markCategory(categoryId);
+                this.markCategory(curCategory.id);
                 this.filterByBoth(category, this.activeTags);
             } else {
-                this.categories[0].isActive = true;
+                this.markCategory(1);
                 this.activeTags = [];
                 this.tags.forEach(tag => {
                     tag.isActive = false;
@@ -159,12 +164,12 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         }
 
         if (this.activeTags.length) {
-            this.router.navigate(['/workshops/feed'], {
+            this.router.navigate([], {
                 queryParams: { tags: this.activeTags.join(',') },
                 queryParamsHandling: 'merge'
             });
         } else {
-            this.router.navigate(['/workshops/feed'], {
+            this.router.navigate([], {
                 queryParams: { category: this.route.snapshot.queryParamMap.get('category') }
             });
         }
@@ -176,22 +181,21 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         });
     }
 
-    activateCategory(id: number) {
-        this.markCategory(id);
-        if (id !== 1) {
-            this.router.navigate(['/workshops/feed'], {
-                queryParams: { category: this.categories[id - 1].title },
+    activateCategory(category: Category) {
+        if (category.id !== 1) {
+            this.router.navigate([], {
+                queryParams: { category: category.title },
                 queryParamsHandling: 'merge'
             });
         } else {
-            this.router.navigate(['/workshops/feed'], {
+            this.router.navigate([], {
                 queryParams: { tags: this.route.snapshot.queryParamMap.get('tags') }
             });
         }
     }
 
     resetTags() {
-        this.router.navigate(['/workshops/feed'], {
+        this.router.navigate([], {
             queryParams: {
                 category: this.route.snapshot.queryParamMap.get('category')
             }

@@ -59,6 +59,150 @@ export class WorkshopsService {
                     },
                     text: "finally i've got it",
                     date: new Date(2019, 6, 4)
+                },
+                {
+                    author: {
+                        id: 2,
+                        name: 'Aleksandra Nikolaieva',
+                        imgSrc: '../assets/images/defUser.png'
+                    },
+                    text: 'nice article!',
+                    date: new Date(2019, 4, 20)
+                },
+                {
+                    author: {
+                        id: 3,
+                        name: 'Dima Brody',
+                        imgSrc: ''
+                    },
+                    text: 'tanks for share!',
+                    date: new Date(2019, 4, 21)
+                },
+                {
+                    author: {
+                        id: 4,
+                        name: 'Andrey Zinner',
+                        imgSrc: ''
+                    },
+                    text: 'nothing new for me :(',
+                    date: new Date(2019, 6, 3)
+                },
+                {
+                    author: {
+                        id: 4,
+                        name: 'Yana Olshevska',
+                        imgSrc: ''
+                    },
+                    text: "finally i've got it",
+                    date: new Date(2019, 6, 4)
+                },
+                {
+                    author: {
+                        id: 2,
+                        name: 'Aleksandra Nikolaieva',
+                        imgSrc: '../assets/images/defUser.png'
+                    },
+                    text: 'nice article!',
+                    date: new Date(2019, 4, 20)
+                },
+                {
+                    author: {
+                        id: 3,
+                        name: 'Dima Brody',
+                        imgSrc: ''
+                    },
+                    text: 'tanks for share!',
+                    date: new Date(2019, 4, 21)
+                },
+                {
+                    author: {
+                        id: 4,
+                        name: 'Andrey Zinner',
+                        imgSrc: ''
+                    },
+                    text: 'nothing new for me :(',
+                    date: new Date(2019, 6, 3)
+                },
+                {
+                    author: {
+                        id: 4,
+                        name: 'Yana Olshevska',
+                        imgSrc: ''
+                    },
+                    text: "finally i've got it",
+                    date: new Date(2019, 6, 4)
+                },
+                {
+                    author: {
+                        id: 2,
+                        name: 'Aleksandra Nikolaieva',
+                        imgSrc: '../assets/images/defUser.png'
+                    },
+                    text: 'nice article!',
+                    date: new Date(2019, 4, 20)
+                },
+                {
+                    author: {
+                        id: 3,
+                        name: 'Dima Brody',
+                        imgSrc: ''
+                    },
+                    text: 'tanks for share!',
+                    date: new Date(2019, 4, 21)
+                },
+                {
+                    author: {
+                        id: 4,
+                        name: 'Andrey Zinner',
+                        imgSrc: ''
+                    },
+                    text: 'nothing new for me :(',
+                    date: new Date(2019, 6, 3)
+                },
+                {
+                    author: {
+                        id: 4,
+                        name: 'Yana Olshevska',
+                        imgSrc: ''
+                    },
+                    text: "finally i've got it",
+                    date: new Date(2019, 6, 4)
+                },
+                {
+                    author: {
+                        id: 2,
+                        name: 'Aleksandra Nikolaieva',
+                        imgSrc: '../assets/images/defUser.png'
+                    },
+                    text: 'nice article!',
+                    date: new Date(2019, 4, 20)
+                },
+                {
+                    author: {
+                        id: 3,
+                        name: 'Dima Brody',
+                        imgSrc: ''
+                    },
+                    text: 'tanks for share!',
+                    date: new Date(2019, 4, 21)
+                },
+                {
+                    author: {
+                        id: 4,
+                        name: 'Andrey Zinner',
+                        imgSrc: ''
+                    },
+                    text: 'nothing new for me :(',
+                    date: new Date(2019, 6, 3)
+                },
+                {
+                    author: {
+                        id: 4,
+                        name: 'Yana Olshevska',
+                        imgSrc: ''
+                    },
+                    text: "finally i've got it",
+                    date: new Date(2019, 6, 4)
                 }
             ]
         },

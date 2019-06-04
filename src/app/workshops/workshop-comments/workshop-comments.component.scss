@@ -6,7 +6,7 @@
     @include flex(column, space-between, stretch);
     width: calc(100% - 14px);
     min-width: 276px;
-    padding: 0 7px 10px 7px;
+    padding: 0 7px;
 
     div {
         margin-top: -28px;
@@ -40,5 +40,12 @@
 
     button:nth-of-type(2) {
         background-color: $grey;
+    }
+
+    div {
+        position: sticky;
+        bottom: 0px;
+        background-color: darken($white, 5%);
+        padding-bottom: 10px;
     }
 }
