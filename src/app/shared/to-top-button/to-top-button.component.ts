@@ -9,7 +9,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, Renderer2, ChangeDet
 export class ToTopButtonComponent implements OnInit, OnDestroy {
     @Input() hostElement: HTMLElement;
     isVisible = false;
-    listener: Function;
+    listener;
     constructor(
         private renderer: Renderer2,
         private cdr: ChangeDetectorRef,
@@ -17,17 +17,36 @@ export class ToTopButtonComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         const heightForVisibleButton = 20;
-        this.ngZone.runOutsideAngular(() => {
-            this.listener = this.renderer.listen(this.hostElement, 'scroll', () => {
-                if (this.hostElement.scrollTop > heightForVisibleButton) {
-                    this.isVisible = true;
-                    this.cdr.detectChanges();
-                } else {
-                    this.isVisible = false;
-                    this.cdr.detectChanges();
-                }
-            });
+        const debouncedScroll = this.debounce(() => {
+            if (this.hostElement.scrollTop > heightForVisibleButton) {
+                this.isVisible = true;
+                this.cdr.detectChanges();
+            } else {
+                this.isVisible = false;
+                this.cdr.detectChanges();
+            }
+        }, 500);
+        this.ngZone.runOutsideAngular(() => { // extra prevention from changeDetection, can be removed if all components use onPush
+            this.listener = this.renderer.listen(this.hostElement, 'scroll', debouncedScroll);
         });
+    }
+
+    debounce(func: () => void, wait: number) {
+        let timeout: NodeJS.Timer;
+        return function() {
+            const context = this;
+            const args = arguments;
+            const later = () => {
+                timeout = null;
+                func.apply(context, args);
+            };
+            const callNow = !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) {
+                func.apply(context, args);
+            }
+        };
     }
 
     goToTop(): void {
