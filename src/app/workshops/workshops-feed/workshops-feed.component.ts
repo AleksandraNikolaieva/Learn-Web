@@ -108,29 +108,30 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         this.subscriptions.push(this.route.queryParamMap.subscribe(queryParam  => {
             const tags = queryParam.get('tags');
             const category = queryParam.get('category');
-            this.subscriptions.push(this.route.data.subscribe(data => {
-                this.articles = data.workshops;
-                this.cdr.detectChanges();
-            }));
-
             if (category) {
                 const categoryId = this.categories.find(item => item.title === category).id;
                 this.markCategory(categoryId);
-                this.articles = this.wsService.getArticlesByCategory(category, this.articles);
             } else {
                 this.markCategory(1); // 'All' category always 1st in the list
             }
 
             if (tags) {
                 this.markTags(tags);
-                this.articles = this.wsService.getArticlesByTags(this.activeTags, this.articles);
             } else {
                 this.activeTags = [];
                 this.tags.forEach(tag => {
                     tag.isActive = false;
                 });
             }
-            this.cdr.detectChanges();
+            if (!category && !tags) {
+                this.subscriptions.push(this.route.data.subscribe(data => {
+                    this.articles = data.workshops;
+                    this.cdr.detectChanges();
+                }));
+            } else {
+                this.articles = this.wsService.getFilteredArticles(tags, category);
+                this.cdr.detectChanges();
+            }
         }));
     }
 
