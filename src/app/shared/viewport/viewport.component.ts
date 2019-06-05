@@ -12,5 +12,4 @@ export class ViewportComponent implements OnInit {
 
     ngOnInit() {
     }
-
 }
