@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { QueryParamsActiveDirective } from './directives/query-params-active.directive';
 import { TextToColorDirective } from './directives/text-to-color.directive';
+import { RangeDirective } from './directives/range.directive';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { TextToColorDirective } from './directives/text-to-color.directive';
         EditAddCommentComponent,
         AuxiliaryContentComponent,
         QueryParamsActiveDirective,
-        TextToColorDirective
+        TextToColorDirective,
+        RangeDirective
     ],
     imports: [
         CommonModule,
@@ -53,7 +55,10 @@ import { TextToColorDirective } from './directives/text-to-color.directive';
         EditAddCommentComponent,
         AuxiliaryContentComponent,
         FormsModule,
-        RouterModule
+        RouterModule,
+        QueryParamsActiveDirective,
+        TextToColorDirective,
+        RangeDirective
     ]
 })
 export class SharedModule { }
