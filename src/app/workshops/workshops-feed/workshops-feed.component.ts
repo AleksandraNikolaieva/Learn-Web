@@ -82,10 +82,19 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private workshopsService: WorkshopsService,
+        private wsService: WorkshopsService,
         private cdr: ChangeDetectorRef) { }
 
     ngOnInit() {
+        const storedActiveTags: string | null = sessionStorage.getItem('tags');
+        const storedCategory: string | null = sessionStorage.getItem('category');
+        if (storedActiveTags || storedCategory) {
+            const tagsString = storedActiveTags ? JSON.parse(storedActiveTags).join(',') : storedActiveTags;
+            this.router.navigate([], {
+                queryParams: { tags: tagsString, category: storedCategory},
+                queryParamsHandling: 'merge'
+            });
+        }
         this.getArticles();
     }
 
@@ -99,49 +108,30 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         this.subscriptions.push(this.route.queryParamMap.subscribe(queryParam  => {
             const tags = queryParam.get('tags');
             const category = queryParam.get('category');
-            const curCategory = this.categories.find(item => item.title === category);
-            if (tags && !category) {
-                this.markTags(tags);
-                this.markCategory(1);
-                this.filterFeedByTag();
-            } else if (category && !tags) {
-                this.activeTags = [];
-                this.tags.forEach(tag => {
-                    tag.isActive = false;
-                });
-                this.markCategory(curCategory.id);
-                this.filterFeedByCategory(category);
-            } else if (category && tags) {
-                this.markTags(tags);
-                this.markCategory(curCategory.id);
-                this.filterByBoth(category, this.activeTags);
+            this.subscriptions.push(this.route.data.subscribe(data => {
+                this.articles = data.workshops;
+                this.cdr.detectChanges();
+            }));
+
+            if (category) {
+                const categoryId = this.categories.find(item => item.title === category).id;
+                this.markCategory(categoryId);
+                this.articles = this.wsService.getArticlesByCategory(category, this.articles);
             } else {
-                this.markCategory(1);
+                this.markCategory(1); // 'All' category always 1st in the list
+            }
+
+            if (tags) {
+                this.markTags(tags);
+                this.articles = this.wsService.getArticlesByTags(this.activeTags, this.articles);
+            } else {
                 this.activeTags = [];
                 this.tags.forEach(tag => {
                     tag.isActive = false;
                 });
-                this.subscriptions.push(this.route.data.subscribe(data => {
-                    this.articles = data.workshops;
-                    this.cdr.detectChanges();
-                }));
             }
+            this.cdr.detectChanges();
         }));
-    }
-
-    filterFeedByTag(): void {
-        this.articles = this.workshopsService.getArticlesByTags(this.activeTags);
-        this.cdr.detectChanges();
-    }
-
-    filterFeedByCategory(category: string): void {
-        this.articles = this.workshopsService.getArticlesByCategory(category);
-        this.cdr.detectChanges();
-    }
-
-    filterByBoth(category: string, tags: Array<string>): void {
-        this.articles = this.workshopsService.getArticlesByBoth(category, tags);
-        this.cdr.detectChanges();
     }
 
     markTags(tags: string): void {
@@ -164,11 +154,13 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         }
 
         if (this.activeTags.length) {
+            sessionStorage.setItem('tags', JSON.stringify(this.activeTags));
             this.router.navigate([], {
                 queryParams: { tags: this.activeTags.join(',') },
                 queryParamsHandling: 'merge'
             });
         } else {
+            sessionStorage.removeItem('tags');
             this.router.navigate([], {
                 queryParams: { category: this.route.snapshot.queryParamMap.get('category') }
             });
@@ -183,11 +175,13 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
 
     activateCategory(category: Category) {
         if (category.id !== 1) {
+            sessionStorage.setItem('category', category.title);
             this.router.navigate([], {
                 queryParams: { category: category.title },
                 queryParamsHandling: 'merge'
             });
         } else {
+            sessionStorage.removeItem('category');
             this.router.navigate([], {
                 queryParams: { tags: this.route.snapshot.queryParamMap.get('tags') }
             });
@@ -195,6 +189,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     }
 
     resetTags() {
+        sessionStorage.removeItem('tags');
         this.router.navigate([], {
             queryParams: {
                 category: this.route.snapshot.queryParamMap.get('category')

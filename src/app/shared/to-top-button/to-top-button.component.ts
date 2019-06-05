@@ -10,7 +10,8 @@ export class ToTopButtonComponent implements OnInit, OnDestroy {
     @Input() hostElement: HTMLElement;
     isVisible = false;
     listener: Function;
-    constructor(private renderer: Renderer2,
+    constructor(
+        private renderer: Renderer2,
         private cdr: ChangeDetectorRef,
         private ngZone: NgZone) { }
 
