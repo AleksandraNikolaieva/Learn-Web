@@ -1,1 +1,2 @@
 app-tab('*ngFor'='let tab of tabs', [title]='tab')
+    a(header '[routerLink]'='tab' 'routerLinkActive'='active') {{tab}}

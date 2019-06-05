@@ -1,12 +1,18 @@
-import { Directive, ElementRef, Input, HostBinding, HostListener } from '@angular/core';
+import { Directive, ElementRef, Input, HostBinding, Renderer2, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Colors } from '../models';
 
 @Directive({
     selector: '[appTextToColor]'
 })
-export class TextToColorDirective {
-    initColor: string;
+export class TextToColorDirective implements OnInit, AfterViewInit, OnDestroy {
+    constructor(
+        private renderer: Renderer2,
+        private elr: ElementRef
+    ) {}
+
     persent = 60;
+    color: string;
+    higlightenColor: string;
 
     @Input() colorMap: Colors = {
         tiny: '#ffc266',
@@ -15,32 +21,17 @@ export class TextToColorDirective {
         large: '#7D6B7D',
         huge: '#A3A1A8'
     };
-    @Input() lightenOnHover: false;
+    @Input() isLightenOnHover = false;
 
     @HostBinding('style.pointer-events') pointer = 'auto';
     @HostBinding('attr.disabled') isDisabled = false;
-    @HostBinding('style.background-color') color: string;
-
-    @HostListener('mouseenter') hover() {
-        this.initColor = this.color;
-        if (this.lightenOnHover) {
-            this.color = this.changeColor(this.color, this.persent);
-        } else {
-            this.color = this.changeColor(this.color, -this.persent);
-        }
-    }
-    @HostListener('mouseleave') leave() {
-        this.color = this.initColor;
-    }
 
     @Input('appTextToColor') set str(str: string) {
         if (!this.isDisabled) {
             let res = 0;
-
             for (let i = 0; i < str.length; i++) {
                 res += str.charCodeAt(i);
             }
-
             res = +(res / str.length).toFixed(2).split('.')[1];
             if (res < 20) {
                 this.color = this.colorMap.tiny;
@@ -53,20 +44,43 @@ export class TextToColorDirective {
             } else {
                 this.color = this.colorMap.huge;
             }
+            this.setBackground(this.color);
         }
     }
     @Input('disableElement') set disable(val: boolean) {
         if (val) {
             this.isDisabled = true;
-            this.color = 'grey';
+            this.setBackground('grey');
             this.persent = 0;
             this.pointer = 'none';
         }
     }
 
-    changeColor(color: string, val: number) {
+    ngOnInit(): void {
+        this.higlightenColor = this.isLightenOnHover ? this.getHoveredColor(this.color, 60) : this.getHoveredColor(this.color, -60);
+    }
+
+    ngAfterViewInit(): void {
+        this.renderer.listen(this.elr.nativeElement, 'mouseenter', this.highlight);
+        this.renderer.listen(this.elr.nativeElement, 'mouseleave', this.removeHighlight);
+    }
+
+    ngOnDestroy(): void {
+        this.highlight();
+        this.removeHighlight();
+    }
+
+    setBackground(color: string) {
+        this.renderer.setStyle(this.elr.nativeElement, 'background-color', color);
+    }
+
+    highlight = () => { this.setBackground(this.higlightenColor); };
+
+    removeHighlight = () => { this.setBackground(this.color); };
+
+    getHoveredColor(color: string, val: number) {
         let usePound = false;
-        if (color[0] === '#'){
+        if (color[0] === '#') {
             color = color.slice(1);
             usePound = true;
         }
@@ -96,3 +110,4 @@ export class TextToColorDirective {
         return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
     }
 }
+

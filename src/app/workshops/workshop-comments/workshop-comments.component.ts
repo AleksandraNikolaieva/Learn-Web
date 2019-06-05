@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Comment } from '../models';
 import { WorkshopsService } from 'src/app/services/workshops.service';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
     selector: 'app-workshop-comments',
     templateUrl: './workshop-comments.component.pug',
-    styleUrls: ['./workshop-comments.component.scss']
+    styleUrls: ['./workshop-comments.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkshopCommentsComponent implements OnInit {
     comments: Array<Comment>;
