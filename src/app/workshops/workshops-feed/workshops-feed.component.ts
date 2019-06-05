@@ -109,7 +109,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             const tags = queryParam.get('tags');
             const category = queryParam.get('category');
             if (category) {
-                const categoryId = this.categories.find(item => item.title === category).id;
+                const categoryId = this.categories.find((item: Category) => item.title === category).id;
                 this.markCategory(categoryId);
             } else {
                 this.markCategory(1); // 'All' category always 1st in the list
@@ -119,7 +119,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                 this.markTags(tags);
             } else {
                 this.activeTags = [];
-                this.tags.forEach(tag => {
+                this.tags.forEach((tag: Tag) => {
                     tag.isActive = false;
                 });
             }
@@ -137,7 +137,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
 
     markTags(tags: string): void {
         this.activeTags = tags.split(',');
-        this.activeTags.forEach(activeTitle => {
+        this.activeTags.forEach((activeTitle: string) => {
             for (const tag of this.tags) {
                 if (tag.title === activeTitle) {
                     tag.isActive = true;
@@ -151,7 +151,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         if (tag.isActive) {
             this.activeTags.push(tag.title);
         } else {
-            this.activeTags = this.activeTags.filter(tagItem => tagItem !== tag.title);
+            this.activeTags = this.activeTags.filter((tagItem: string) => tagItem !== tag.title);
         }
 
         if (this.activeTags.length) {
