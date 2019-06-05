@@ -12,6 +12,18 @@
     app-tab {
         flex-grow: 1;
     }
+
+    a {
+        color: white;
+
+        &.active {
+            font-weight: bold;
+        }
+    }
+
+    &:hover {
+        font-weight: bolder;
+    }
 }
 
 .tabs-body {
