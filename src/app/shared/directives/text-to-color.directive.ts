@@ -1,10 +1,14 @@
-import { Directive, ElementRef, Input, HostBinding, HostListener } from '@angular/core';
+import { Directive, ElementRef, Input, HostBinding, HostListener, Renderer2, NgZone, OnInit } from '@angular/core';
 import { Colors } from '../models';
 
 @Directive({
     selector: '[appTextToColor]'
 })
-export class TextToColorDirective {
+export class TextToColorDirective implements OnInit{
+    constructor(
+        private renderer: Renderer2,
+        private elr: ElementRef,
+        private ngz: NgZone) {}
     initColor: string;
     persent = 60;
 
@@ -21,7 +25,7 @@ export class TextToColorDirective {
     @HostBinding('attr.disabled') isDisabled = false;
     @HostBinding('style.background-color') color: string;
 
-    @HostListener('mouseenter') hover() {
+    /* @HostListener('mouseenter') hover() {
         this.initColor = this.color;
         if (this.lightenOnHover) {
             this.color = this.changeColor(this.color, this.persent);
@@ -31,7 +35,7 @@ export class TextToColorDirective {
     }
     @HostListener('mouseleave') leave() {
         this.color = this.initColor;
-    }
+    } */
 
     @Input('appTextToColor') set str(str: string) {
         if (!this.isDisabled) {
@@ -66,7 +70,7 @@ export class TextToColorDirective {
 
     changeColor(color: string, val: number) {
         let usePound = false;
-        if (color[0] === '#'){
+        if (color[0] === '#') {
             color = color.slice(1);
             usePound = true;
         }
@@ -95,4 +99,25 @@ export class TextToColorDirective {
 
         return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
     }
+
+    ngOnInit(): void {
+        this.ngz.runOutsideAngular(() => {
+            this.renderer.listen(this.elr.nativeElement, 'mouseenter', () => {
+                this.initColor = this.color;
+                if (this.lightenOnHover) {
+                    this.color = this.changeColor(this.color, this.persent);
+                } else {
+                    this.color = this.changeColor(this.color, -this.persent);
+                }
+                this.renderer.setStyle(this.elr.nativeElement, 'background-color', this.color);
+            });
+        });
+        this.ngz.runOutsideAngular(() => {
+            this.renderer.listen(this.elr.nativeElement, 'mouseleave', () => {
+                this.color = this.initColor;
+                this.renderer.setStyle(this.elr.nativeElement, 'background-color', this.color);
+            });
+        });
+    }
 }
+
