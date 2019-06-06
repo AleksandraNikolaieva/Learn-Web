@@ -12,3 +12,11 @@ export interface Colors {
     large: string;
     huge: string;
 }
+
+export interface CollapseContext {
+    $implicit: string;
+    controller: {
+      collapse: () => void;
+      expand: () => void;
+    };
+}
