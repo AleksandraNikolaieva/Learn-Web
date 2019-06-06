@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, HostBinding, Renderer2, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { Colors } from '../models';
+import { Colors } from '../../models';
 
 @Directive({
     selector: '[appTextToColor]'
@@ -13,9 +13,10 @@ export class TextToColorDirective implements OnInit, AfterViewInit, OnDestroy {
     persent = 60;
     color: string;
     higlightenColor: string;
+    removers: Array<Function> = [];
 
     @Input() colorMap: Colors = {
-        tiny: '#ffc266',
+        tiny: '#FFC266',
         small: '#FF8C64',
         medium: '#FF665A',
         large: '#7D6B7D',
@@ -61,13 +62,14 @@ export class TextToColorDirective implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit(): void {
-        this.renderer.listen(this.elr.nativeElement, 'mouseenter', this.highlight);
-        this.renderer.listen(this.elr.nativeElement, 'mouseleave', this.removeHighlight);
+        this.removers.push(this.renderer.listen(this.elr.nativeElement, 'mouseenter', this.highlight));
+        this.removers.push(this.renderer.listen(this.elr.nativeElement, 'mouseleave', this.removeHighlight));
     }
 
     ngOnDestroy(): void {
-        this.highlight();
-        this.removeHighlight();
+        this.removers.forEach((item: () => void) => {
+            item();
+        });
     }
 
     setBackground(color: string) {
@@ -78,7 +80,7 @@ export class TextToColorDirective implements OnInit, AfterViewInit, OnDestroy {
 
     removeHighlight = () => { this.setBackground(this.color); };
 
-    getHoveredColor(color: string, val: number) {
+    getHoveredColor(color: string, val: number): string {
         let usePound = false;
         if (color[0] === '#') {
             color = color.slice(1);
