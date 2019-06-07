@@ -1,0 +1,27 @@
+@import 'abstracts/variables';
+
+div {
+    width: 700px;
+    background-color: transparentize($yellow, 0.5);
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+
+    button {
+        padding: 5px;
+        margin: 10px 0;
+        width: 120px;
+        background-color: $light-grey;
+        color: white;
+        border-radius: 5px;
+    }
+
+    .btn2 {
+        background-color: $yellow;
+        color: black;
+    }
+
+    .btn3 {
+        background-color: black;
+    }
+}
