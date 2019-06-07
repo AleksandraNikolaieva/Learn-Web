@@ -12,6 +12,7 @@ export class CollapsableDirective implements OnInit {
         private renderer: Renderer2,
         private animationBuilder: AnimationBuilder
     ) { }
+    // used to show in dashboard
 
     collapseAnimation: AnimationFactory;
     expandAnimation: AnimationFactory;
@@ -25,6 +26,7 @@ export class CollapsableDirective implements OnInit {
 
     @Input('appCollapsable') height: string;
     @Input('appCollapsableEnableAnimation') enableAnimation: boolean;
+    @Input('appCollapsableButton') button: TemplateRef<any>;
 
     @Input('appCollapsableState') set defState(state: 'on' | 'off') {
         if (state === 'on') {
@@ -37,10 +39,9 @@ export class CollapsableDirective implements OnInit {
     }
 
     ngOnInit() {
-        const cv = this.viewContainer.createEmbeddedView(this.templateRef, this.context);
-        console.log(cv);
-        this.element = cv.rootNodes[0].childNodes[1];
-        console.log(this.element);
+        const cv = this.viewContainer.createEmbeddedView(this.templateRef);
+        this.viewContainer.createEmbeddedView(this.button, this.context);
+        this.element = cv.rootNodes[0];
 
         this.collapseAnimation = this.animationBuilder.build([
             style({
