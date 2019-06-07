@@ -1,2 +1,29 @@
 app-viewport
     span(main) statistic works
+    div(main '*appCollapsable'='"100px" state "off" enableAnimation true; let control = control; let title = title')
+        h5 From collapsible. state: off, minHeight: 100px, animation: enable
+        p
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+        button('(click)'='control()') {{title}}
+    div(main '*appCollapsable'='"200px" state "on" enableAnimation true; let control = control; let title = title')
+        h5 From collapsible. state: on, minHeight: 200px, animation: enable
+        p
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+        button('(click)'='control()') {{title}}
+    div(main '*appCollapsable'='"100px" state "on" enableAnimation false; let control = control; let title = title')
+        h5 Collapsible. state: on, minHeight: 100px, animation: disable
+        p
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis culpa maxime earum iste labore laborum dicta debitis in enim? Rerum quae repellendus temporibus aperiam amet delectus autem maxime quasi eum?
+        button('(click)'='control()') {{title}}

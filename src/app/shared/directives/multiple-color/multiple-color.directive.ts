@@ -16,7 +16,7 @@ export class MultipleColorDirective implements AfterViewInit, OnDestroy{
 
     ngAfterViewInit(): void {
         this.removers.push(this.renderer.listen(this.elr.nativeElement, 'mouseenter', this.changeColor));
-        this.removers.push(this.renderer.listen(this.elr.nativeElement, 'mouseleave', this.backColor));
+        // this.removers.push(this.renderer.listen(this.elr.nativeElement, 'mouseleave', this.backColor));
     }
 
     ngOnDestroy(): void {
@@ -34,7 +34,7 @@ export class MultipleColorDirective implements AfterViewInit, OnDestroy{
         this.renderer.setStyle(this.elr.nativeElement, this.property, this.getColor());
     }
 
-    backColor = () => {
+    /* backColor = () => {
         this.renderer.removeStyle(this.elr.nativeElement, this.property);
-    }
+    } */
 }
