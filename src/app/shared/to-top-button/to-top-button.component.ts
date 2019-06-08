@@ -32,7 +32,7 @@ export class ToTopButtonComponent implements OnInit, OnDestroy {
     }
 
     debounce(func: () => void, wait: number) {
-        let timeout: NodeJS.Timer;
+        let timeout: any;
         return function() {
             const context = this;
             const args = arguments;

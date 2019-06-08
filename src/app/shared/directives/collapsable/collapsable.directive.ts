@@ -43,6 +43,8 @@ export class CollapsableDirective implements OnInit {
         this.viewContainer.createEmbeddedView(this.button, this.context);
         this.element = cv.rootNodes[0];
 
+        this.renderer.setStyle(this.element, 'overflow', 'hidden');
+
         this.collapseAnimation = this.animationBuilder.build([
             style({
                 'overflow-y': 'hidden',
@@ -71,7 +73,6 @@ export class CollapsableDirective implements OnInit {
 
         if (this.isCollapsed) {
             this.renderer.setStyle(this.element, 'height', this.height);
-            this.renderer.setStyle(this.element, 'overflow', 'hidden');
         }
     }
 
