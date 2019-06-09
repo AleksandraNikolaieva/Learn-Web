@@ -3,12 +3,11 @@
 @import 'sass-mq';
 
 .workshop-feed-content {
-    @include flex(column, space-around, center);
-    min-height: 84vh;
+    @include flex(column, flex-start, center);
 }
 
 app-article {
-    @include size(50%);
+    width: 50%;
     min-width: 280px;
     text-align: center;
     margin: 20px 0;
