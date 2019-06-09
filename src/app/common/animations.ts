@@ -1,13 +1,37 @@
-/* import { trigger, state, style, transition, animate, animation } from '@angular/animations';
+import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
-export const collapseExpand = [
-    trigger('collapseExpand', [
-        state('expanded', style({
-          height: '300px'
-        })),
-        state('collapsed', style({
-          height: '100px'
-        }))
+export const enterHeight = [
+    trigger('enterHeight', [
+        transition(':enter', [
+            style({
+                height: 0,
+                opacity: 0,
+                margin: 0
+            }),
+            animate(
+                '600ms cubic-bezier(0.35, 0, 0.25, 1)',
+                style({
+                    height: '*',
+                    opacity: 1,
+                    margin: '*'
+                })
+            )
+        ]),
+        transition(':leave', [
+            style({
+                height: '*',
+                opacity: 1,
+                margin: '*'
+            }),
+            animate(
+                '600ms cubic-bezier(0.35, 0, 0.25, 1)',
+                style({
+                    height: 0,
+                    opacity: 0,
+                    margin: 0
+                })
+            )
+        ])
     ]),
-    transition('expand <=> collapse', animate(250))
-]; */
+];
+

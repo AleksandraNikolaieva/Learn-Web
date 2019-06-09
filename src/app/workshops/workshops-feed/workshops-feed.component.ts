@@ -3,12 +3,14 @@ import { Tag, Article, Category } from '../models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkshopsService } from 'src/app/services/workshops.service';
 import { Subscription } from 'rxjs';
+import { enterHeight } from 'src/app/common/animations';
 
 @Component({
     selector: 'app-workshops-feed',
     templateUrl: './workshops-feed.component.pug',
     styleUrls: ['./workshops-feed.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [enterHeight]
 })
 export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     articles: Array<Article>;
