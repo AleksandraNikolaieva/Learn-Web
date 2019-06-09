@@ -15,13 +15,13 @@ app-viewport
             |Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque cum maxime quidem reprehenderit aliquam, deleniti voluptatem? Nihil sapiente fugit illo impedit explicabo, rem mollitia suscipit distinctio modi voluptates culpa ducimus.
         .workshop-page-info
             span 
-                i.icon-user  {{article?.author}}
+                i.icon-user  {{article?.author.name}}
             app-like(
                 [isActive]='article?.isFavorite',
                 [likesNumber]='article?.likes',
                 (changeLike)='changeLikeHandler($event)'
             )
-            app-timestamp([date]='article?.date')
+            app-timestamp([date]='article?.date' toFormat='day')
         p.tags
             span('*ngFor'='let tag of article?.tags') {{tag}}
         a(routerLink='/workshops/feed')
