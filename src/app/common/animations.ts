@@ -35,3 +35,19 @@ export const enterHeight = [
     ]),
 ];
 
+export const leaveWidth = [
+    trigger('leaveWidth', [
+        transition(':leave', [
+            style({
+                width: '*'
+            }),
+            animate(300,
+                style({
+                    width: 0
+                })
+            )
+        ])
+    ]
+    )
+];
+
