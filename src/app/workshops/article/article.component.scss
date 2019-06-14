@@ -29,10 +29,11 @@ p {
     width: 100%;
     height: auto;
     @include flex(row, center, center);
+    flex-wrap: wrap;
 
     span {
         padding: 0 5px;
-        margin: 0 3px;
+        margin: 3px;
         text-decoration: underline;
         font-size: 14px;
         background-color: $text-color;

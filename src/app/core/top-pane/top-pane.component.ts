@@ -1,6 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,
+        Input, Output,
+        EventEmitter, ChangeDetectionStrategy,
+        ViewChild, ElementRef,
+        ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { User } from '../models';
 import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-top-pane',
@@ -8,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
     styleUrls: ['./top-pane.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TopPaneComponent implements OnInit {
+export class TopPaneComponent implements OnInit, OnDestroy {
     user: User;
     initials: string;
     @Input() isNavMenuOpen: boolean;
@@ -16,12 +21,22 @@ export class TopPaneComponent implements OnInit {
     @ViewChild('forSearch') search: ElementRef;
     isUserMenuOpen = false;
     isSearchOpen = false;
+    subscription: Subscription;
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private cdf: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.user = this.authService.getLoggedUser();
-        this.getInitials();
+        this.subscription = this.authService.getLoggedUserObs().subscribe(res => {
+            this.user = res;
+            this.cdf.detectChanges();
+            if (res) {
+                this.getInitials();
+            }
+        });
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     toggleUserMenu(): void {
@@ -49,7 +64,13 @@ export class TopPaneComponent implements OnInit {
     }
 
     private getInitials(): void {
-        const nameArr: Array<string> = this.user.name.split(' ');
-        this.initials = nameArr[0][0] + nameArr[1][0];
+        this.initials = '';
+        if (this.user.firstName) {
+            this.initials += this.user.firstName[0];
+        }
+        if (this.user.lastName) {
+            this.initials += this.user.lastName[0];
+        }
+        this.cdf.detectChanges();
     }
 }

@@ -1,4 +1,5 @@
-img('*ngIf'='user.imgSrc; else noImage' '[src]'='user.imgSrc', alt='{{user.name}}')
-ng-template('#noImage'='')
-    div('[appTextToColor]'='user.name' '[isLightenOnHover]'='true')
-        span {{initials}}
+ng-container('*ngIf'='userToShow')
+    img('*ngIf'='userToShow.picture; else noImage' '[src]'='userToShow.picture', alt='{{userToShow.firstName}}')
+    ng-template('#noImage'='')
+        div('[appTextToColor]'='userToShow.firstName' '[isLightenOnHover]'='true')
+            span {{initials}}

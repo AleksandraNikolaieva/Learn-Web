@@ -1,32 +1,35 @@
 import { User } from '../core/models';
+import { Observable } from 'rxjs';
 
 export interface Article {
-    id: number;
-    title: string;
-    author: User;
-    date: Date;
-    description: string;
-    img: string;
+    id: string;
+    _author: string;
+    author?: Observable<string>;
     tags: Array<string>;
-    likes: number;
-    isFavorite: boolean;
-    comments?: Array<Comment>;
-}
-
-export interface Tag {
-    id: number;
     title: string;
-    isActive: boolean;
+    description: string;
+    text: string;
+    image: string;
+    createdAt: Date;
+    updatedAt: Date;
+    likes: Array<any>;
+    stars: Array<any>;
+    uni: Array<any>;
+    comments: Array<Comment>;
 }
 
 export interface Comment {
-    author: User;
+    _id: string;
+    _post: string;
+    _author: string;
+    author: Observable<User>;
     text: string;
     date: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export interface Category {
     id: number;
     title: string;
-    isActive: boolean;
 }

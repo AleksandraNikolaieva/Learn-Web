@@ -1,0 +1,30 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'sass-mq';
+
+
+:host {
+    position: absolute;
+    left: $menu-w;
+    top: $header-h;
+    width: calc(100% - #{$menu-w});
+    height: calc(100vh - #{$header-h});
+}
+
+form {
+    width: 40%;
+    margin: auto;
+    @include flex(column, space-around, center);
+
+    @include mq($until: medium) {
+        width: 50%;
+    }
+
+    @include mq($until: small) {
+        width: 80%;
+    }
+
+    input {
+        margin: 5px;
+    }
+}

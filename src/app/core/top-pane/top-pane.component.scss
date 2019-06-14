@@ -113,6 +113,7 @@ header {
 
     .user-account {
         height: 50px;
+        @include flex(row, space-between, center);
 
         &.hide {
             display: none;
@@ -122,13 +123,13 @@ header {
         }
 
         img {
-            @include size(50px);
+            @include size(50px, 50px);
             margin-left: 10px;
+            border-radius: 50%;
         }
 
-        span {
+        > span {
             display: inline-block;
-            line-height: 50px;
             max-width: 140px;
             color: $white;
             white-space: nowrap;
@@ -144,9 +145,13 @@ header {
             @include size(50px, 50px);
             background-color: $yellow;
             border-radius: 50%;
+            text-align: center;
+            font-size: 15px;
+            margin-left: 10px;
 
             span {
                 line-height: 50px;
+                color: black
             }
         }
     }

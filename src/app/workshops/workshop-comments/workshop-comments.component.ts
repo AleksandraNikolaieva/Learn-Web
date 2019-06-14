@@ -1,9 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Comment } from '../models';
 import { WorkshopsService } from 'src/app/services/workshops.service';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/core/models';
 import { AuthService } from 'src/app/services/auth.service';
+import { CommentsService } from 'src/app/services/comments.service';
+import { map } from 'rxjs/operators';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
     selector: 'app-workshop-comments',
@@ -15,49 +18,77 @@ export class WorkshopCommentsComponent implements OnInit {
     comments: Array<Comment>;
     loggedUser: User;
     editorNumber: number;
-    newComment: Comment;
+    newComment: any;
+    postId: string;
 
     constructor(
-        private workshopsService: WorkshopsService,
+        private commentsService: CommentsService,
         private route: ActivatedRoute,
-        private authService: AuthService
+        private authService: AuthService,
+        private userService: UsersService,
+        private cdr: ChangeDetectorRef
         ) { }
 
     ngOnInit() {
         this.route.parent.parent.params.subscribe(params => {
-            this.workshopsService.getArticleById(params.id).subscribe(res => {
-                const article = res;
-                this.comments = article.comments;
+            this.postId = params.id;
+            this.newComment = {
+                postId: this.postId,
+                text: ''
+            };
+            this.commentsService.getCommentsByPostId(this.postId)
+            .pipe(
+                map(commentsArr => commentsArr.map(commentItem => {
+                    commentItem.author = this.userService.getUserById(commentItem._author);
+                    return commentItem;
+                }))
+            ).subscribe(res => {
+                this.comments = res;
+                this.cdr.detectChanges();
             });
         });
 
-        this.loggedUser = this.authService.getLoggedUser();
-        this.newComment = {
-            author: this.loggedUser,
-            text: '',
-            date: new Date()
-        };
+        this.authService.getLoggedUserObs().subscribe(res => {
+            this.loggedUser = res;
+            this.cdr.detectChanges();
+        });
     }
 
-    private editComment(comment: Comment, index: number): void {
-        this.comments[index] = comment;
+    private editComment(id: string, text: string): void {
+        this.commentsService.updateComment(this.postId, id, text)
+        .subscribe(res => {
+            /* const index = this.comments.findIndex(commetItem => commetItem._id === id);
+            this.comments[index].text = text; */
+        });
         this.editorNumber = null;
     }
 
-    private deleteComment(index: number): void {
-        this.comments.splice(index, 1);
+    private deleteComment(id: string): void {
+        this.commentsService.deleteComment(this.postId, id)
+        .subscribe(res => {
+            this.comments.filter(comment => comment._id !== id);
+            this.cdr.detectChanges();
+        });
     }
 
     private openEditor(index: number): void {
         this.editorNumber = index;
     }
 
-    addComment(newComment: Comment): void {
-        this.comments.unshift(newComment);
+    addComment(text: string): void {
+        this.commentsService.createComment(this.postId, text)
+        .pipe(
+            map(comment => {
+                comment.author = this.userService.getUserById(comment._author);
+                return comment;
+            })
+        ).subscribe(res => {
+            this.comments.push(res);
+            this.cdr.detectChanges();
+        });
         this.newComment = {
-            author: this.loggedUser,
-            text: '',
-            date: null
+            postId: this.postId,
+            text: ''
         };
     }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { User } from 'src/app/core/models';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-user-pic',
@@ -8,16 +9,16 @@ import { User } from 'src/app/core/models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserPicComponent implements OnInit {
-    @Input() user: User;
+    @Input() user: Observable<User>;
     initials: string;
-    constructor() { }
+    userToShow: User;
+    constructor(private cdr: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.getInitials();
-    }
-
-    private getInitials(): void {
-        const name = this.user.name.split(' ');
-        this.initials = name[0][0] + name[1][0];
+        this.user.subscribe(user => {
+            this.userToShow = user;
+            this.initials = user.firstName[0] + user.lastName[0];
+            this.cdr.detectChanges();
+        });
     }
 }
