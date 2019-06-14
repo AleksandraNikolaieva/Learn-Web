@@ -28,7 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     if (error.error instanceof ErrorEvent) {
                         errorMessage = `Error: ${error.error.message}`;
                     } else {
-                        errorMessage = `Error Code: ${error.status}. Message: ${error.message}`;
+                        errorMessage = `Error Code: ${error.status}. Message: ${error.message}\n ${error.error.message}`;
                     }
                     if (errorMessage) {
                         alert(errorMessage);

@@ -19,7 +19,7 @@ header
     button.search-icon('*ngIf'='!isSearchOpen' '(click)'='activateSearch()')
         i.icon-search
     a.user-account('*ngIf'='user' routerLink='account' '[ngClass]'='{"hide":isSearchOpen}' '(click)'='toggleUserMenu()')
-        span {{user.firstName + ' ' + user.lastName}}
+        span('*ngIf'='user.firstName || user.lastName') {{user.firstName + ' ' + user.lastName}}
         img('*ngIf'='user.picture; else noImage' '[src]'='user.picture', alt='{{user.firstName}}')
         ng-template('#noImage'='')
             .avatar
