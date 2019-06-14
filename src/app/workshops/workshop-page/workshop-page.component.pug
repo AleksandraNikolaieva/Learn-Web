@@ -7,7 +7,7 @@ app-viewport
             span 
                 i.icon-user {{article.author | async}}
             app-like(
-                [isActive]='article.isFavorite',
+                [isActive]='article.likes',
                 [likesNumber]='article.likes.length',
                 (changeLike)='changeLikeHandler($event)'
             )

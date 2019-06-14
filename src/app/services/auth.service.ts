@@ -1,21 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../core/models';
 import { ApiService } from './api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
-import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
     private isLogged = false;
     private loggedUserSubj$ = new BehaviorSubject<User>(null);
     private token: string;
+    private subscription: Subscription;
 
     constructor(private api: ApiService) { }
 
     public isUserLogged(): boolean {
+        if (this.isTokenStored()) {
+            this.subscription = this.getCurrentUser().subscribe(res => {
+                this.loggedUserSubj$.next(res);
+            });
+        }
         return this.isLogged;
     }
 
@@ -90,7 +96,7 @@ export class AuthService {
         }
     }
 
-    public isTokenStored(): boolean {
+    private isTokenStored(): boolean {
         const token = this.getSavedToken();
         if (token) {
             this.token = token;
@@ -100,16 +106,15 @@ export class AuthService {
         return false;
     }
 
-    public getCurrentUser(): Observable<any> {
-        return this.api.getRequest('users/current')
-        .pipe(
-            tap(res => {
-                this.loggedUserSubj$.next(res);
-            })
-        );
+    private getCurrentUser(): Observable<any> {
+        return this.api.getRequest('users/current');
     }
 
     public changeLoggedUserInfo(newInfo: User): void {
         this.loggedUserSubj$.next(newInfo);
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }

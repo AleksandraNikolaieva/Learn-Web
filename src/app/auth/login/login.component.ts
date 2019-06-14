@@ -20,13 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         private router: Router) { }
 
     ngOnInit() {
-        if (this.authService.isTokenStored()) {
-            this.subscriptions.push(
-                this.authService.getCurrentUser()
-                .subscribe(res => {
-                    this.router.navigate(['/']);
-                })
-            );
+        if (this.authService.isUserLogged()) {
+            this.router.navigate(['/']);
         }
         this.loginForm = this.fb.group({
             userName: [null, [Validators.required, Validators.minLength(2)]],

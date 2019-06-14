@@ -13,5 +13,5 @@ app-viewport
            '(click)'='activateCategory(category)'
         ) {{category.title}}
     .workshop-feed-content(main)
-        span('*ngIf'='!articles.length') Required articles do not exist
+        span('*ngIf'='!articles?.length') Required articles do not exist
         app-article('*ngFor'='let articleItem of articles', '[article]'='articleItem' '[tags]'='tags')
