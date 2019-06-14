@@ -33,7 +33,11 @@ export class TagsService {
         return this.api.deleteRequest(`tags/${id}`);
     }
 
-    public getActiveTagsObs(): Observable<string> {
+    public getActiveTagsObs(): Observable<Array<string>> {
         return this.activeTags$.asObservable();
+    }
+
+    public setActiveTags(tags: Array<string>): void {
+        this.activeTags$.next(tags);
     }
 }

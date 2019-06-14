@@ -16,11 +16,9 @@ export class UsersService {
     public createUser(username: string, password: string, role?: Role): Observable<User> {
         const body = {
             username,
-            password
+            password,
+            role
         };
-        if (role) {
-            body['role'] = role;
-        }
         return this.api.postRequest('users', body);
     }
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-login',
@@ -35,17 +36,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
     }
 
-    logIn(afterSingUp = false): void {
+    logIn(): void {
         const values = this.loginForm.value;
         this.subscriptions.push(
             this.authService.logUser(values.userName, values.password)
-            .subscribe(res => {
-                if (afterSingUp) {
-                    this.router.navigate(['account']);
-                } else if (!afterSingUp) {
-                    this.router.navigate(['/']);
-                }
-            })
+            .subscribe(res => this.router.navigate(['/']))
         );
     }
 
@@ -53,9 +48,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         const values = this.loginForm.value;
         this.subscriptions.push(
             this.authService.signUp(values.userName, values.password)
-            .subscribe(res => {
-                this.logIn(true);
-            })
+            .pipe(
+                switchMap(res => this.authService.logUser(values.userName, values.password))
+            )
+            .subscribe(res => this.router.navigate(['account']))
         );
     }
 }

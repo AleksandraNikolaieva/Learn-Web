@@ -40,12 +40,10 @@ export class AuthService implements OnDestroy {
         return this.api.getRequest('users/login', undefined, headers)
         .pipe(
             tap(res => {
-                if (res) {
-                    this.token = res.token;
-                    this.loggedUserSubj$.next(res);
-                    this.isLogged = true;
-                    this.saveToken(res.token);
-                }
+                this.token = res.token;
+                this.loggedUserSubj$.next(res);
+                this.isLogged = true;
+                this.saveToken(res.token);
             })
         );
     }
