@@ -10,14 +10,19 @@ import { Observable } from 'rxjs';
 })
 export class UserPicComponent implements OnInit {
     @Input() user: Observable<User>;
-    initials: string;
+    initials = '';
     userToShow: User;
     constructor(private cdr: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.user.subscribe(user => {
             this.userToShow = user;
-            this.initials = user.firstName[0] + user.lastName[0];
+            if (user.firstName) {
+                this.initials += user.firstName[0];
+            }
+            if (user.lastName) {
+                this.initials += user.lastName[0];
+            }
             this.cdr.detectChanges();
         });
     }
