@@ -3,19 +3,16 @@
 @import 'sass-mq';
 
 :host {
-    width: calc(100% - #{$menu-w});
-    height: calc(100vh - #{$header-h});
     position: absolute;
-    left: $menu-w;
+    left: 0;
+    right: 0;
+    top: -70px;
+    bottom: 0;
+    z-index: 1;
     background-image: url(../../../assets/images/loginBG.jpg);
     background-size: cover;
     background-position: center;
     @include flex(row, space-around, center);
-
-    @include mq($until: small) {
-        left: 0px;
-        width: 100%;
-    }
 }
 
 form {

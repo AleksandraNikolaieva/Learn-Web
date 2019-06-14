@@ -18,11 +18,13 @@ const routes: Routes = [
     },
     {
         path: 'quizzes',
-        loadChildren: './quizzes/quizzes.module#QuizzesModule'
+        loadChildren: './quizzes/quizzes.module#QuizzesModule',
+        canLoad: [AuthGuard]
     },
     {
         path: 'dashboard',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
+        loadChildren: './dashboard/dashboard.module#DashboardModule',
+        canLoad: [AuthGuard]
     },
     {
         path: 'login',
