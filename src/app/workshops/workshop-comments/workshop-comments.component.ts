@@ -31,22 +31,14 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         ) { }
 
     ngOnInit() {
-        this.route.parent.parent.params
-        .pipe(
-            tap(params => this.postId = params.id),
-            switchMap(params => this.commentsService.getCommentsByPostId(params.id)
-                .pipe(
-                    map(commentsArr => commentsArr.map(commentItem => {
-                        commentItem.author$ = this.userService.getUserById(commentItem._author);
-                        return commentItem;
-                    }))
-                )
-            )
-        )
-        .subscribe(res => {
-            this.comments = res;
-            this.cdr.detectChanges();
-        });
+        this.subscriptions.push(
+            this.route.data.subscribe(res => {
+                this.comments = res.comments;
+                if (this.comments) {
+                    this.postId = this.comments[0]._post;
+                }
+            })
+        );
 
         this.subscriptions.push(
             this.authService.getLoggedUserObs().subscribe(res => {
@@ -67,8 +59,8 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
             const index = this.comments.findIndex(commetItem => commetItem._id === id);
             this.comments[index] = {...this.comments[index]};
             this.comments[index].text = text;
-            this.cdr.detectChanges();
             this.editorNumber = null;
+            this.cdr.detectChanges();
         });
     }
 

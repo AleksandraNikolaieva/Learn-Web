@@ -81,6 +81,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                         this.cdr.detectChanges();
                     });
             } else {
+                this.activeTags = [];
                 this.subscriptions.push(
                     this.route.data.subscribe(data => {
                         this.articles = data.workshops;
@@ -131,7 +132,6 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     }
 
     resetTags() {
-        this.activeTags = [];
         this.router.navigate([], {
             queryParams: {
                 category: this.route.snapshot.queryParamMap.get('category')
