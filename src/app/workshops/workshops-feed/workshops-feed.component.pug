@@ -2,16 +2,17 @@ app-viewport
     .tag-group(main)
         app-tag(
             '*ngFor'='let tagItem of tags'
-            '[tag]'='tagItem'
+            '[tagName]'='tagItem.name'
             '(changeActive)'='activateTag($event)'
             )
         button('(click)'='resetTags()')
             i.icon-close
     .categories(main)
         a('*ngFor'='let category of categories'
-           '[ngClass]'='{"active": category.isActive}'
+           '[ngClass]'='{"active": category.title === activeCategory}'
            '(click)'='activateCategory(category)'
         ) {{category.title}}
     .workshop-feed-content(main)
-        span('*ngIf'='!articles.length') Required articles do not exist
-        app-article('*ngFor'='let articleItem of articles', [article]='articleItem' '[@enterHeight]'='true')
+        span('*ngIf'='!articles?.length') Required articles do not exist
+        app-article('*ngFor'='let articleItem of articles', [article]='articleItem' '[tags]'='tags' '[@enterHeight]'='true')
+

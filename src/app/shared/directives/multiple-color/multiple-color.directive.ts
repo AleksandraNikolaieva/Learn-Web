@@ -3,7 +3,7 @@ import { Directive, Renderer2, ElementRef, Input, AfterViewInit, OnDestroy } fro
 @Directive({
     selector: '[appMultipleColor]'
 })
-export class MultipleColorDirective implements AfterViewInit, OnDestroy{
+export class MultipleColorDirective implements AfterViewInit, OnDestroy {
 
     constructor(
         private renderer: Renderer2,

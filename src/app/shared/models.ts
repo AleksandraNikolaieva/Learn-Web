@@ -1,6 +1,8 @@
 export interface Tag {
-    title: string;
-    isActive: boolean;
+    _author: string;
+    name: string;
+    seq: number;
+    createdAt: Date;
 }
 
 export type DateFormat = 'dayTime' | 'day' | 'time';
@@ -11,12 +13,4 @@ export interface Colors {
     medium: string;
     large: string;
     huge: string;
-}
-
-export interface CollapseContext {
-    $implicit: string;
-    controller: {
-      collapse: () => void;
-      expand: () => void;
-    };
 }

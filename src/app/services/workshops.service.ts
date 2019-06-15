@@ -1,57 +1,76 @@
 import { Injectable } from '@angular/core';
-import { Article, Tag } from '../workshops/models';
+import { Article } from '../workshops/models';
+import { Tag } from '../shared/models';
 import { of, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import { articlesArr } from './mockData';
+import { ApiService } from './api.service';
+import { HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class WorkshopsService {
-    articles: Array<Article> = articlesArr;
 
-    constructor(private authService: AuthService) { }
+    constructor(private apiService: ApiService) { }
 
-    public getArticles(): Observable<Array<Article>> {
-        return of(this.articles);
+    public createPost(tags: Array<number>, title: string, text: string): Observable<Article> {
+        const body = {
+            tags,
+            title,
+            text
+        };
+        return this.apiService.postRequest('posts', body);
     }
 
-    public getArticleById(id: number): Observable<Article> {
-        return of(this.articles.find((article: Article) => article.id === +id));
+    public getAllPosts(page = '1', tags?: string, authorId?: string, withComments = false): Observable<Array<Article>> {
+        const comments  = withComments ? '1' : undefined;
+        const params = {
+            page,
+            tags,
+            authorId,
+            withComments: comments
+        };
+        return this.apiService.getRequest('posts', params)
+        .pipe(
+            map(res => res.posts)
+        );
     }
 
-    public getFilteredArticles(tags?: string, category?: string): Array<Article> {
-        let res: Array<Article>;
-        if (tags) {
-            res = this.getArticlesByTags(tags.split(','));
-        }
-        if (category) {
-            res = this.getArticlesByCategory(category, res);
-        }
-        return res;
+    public getPostById(id: string): Observable<Article> {
+        return this.apiService.getRequest(`posts/${id}`);
     }
 
-    private getArticlesByTags(tags: Array<string>, searchIn?: Array<Article>): Array<Article> {
-        if (searchIn) {
-            return searchIn.filter((article: Article) => article.tags.some((tag: string)  => tags.includes(tag)));
-        }
-        return this.articles.filter((article: Article) => article.tags.some(tag => tags.includes(tag)));
+    public updetePost(
+        id: string,
+        tags: Array<number>,
+        title: string,
+        description: string,
+        text: string,
+        image: string,
+        likes: Array<any>,
+        stars: Array<any>,
+        uni: Array<any>,
+        comments: Array<Comment>
+    ): Observable<Article> {
+        const body = {
+            tags,
+            title,
+            description,
+            text,
+            image,
+            likes,
+            stars,
+            uni,
+            comments
+        };
+        return this.apiService.putRequest(`posts/${id}`, body)
+        .pipe(
+            map(res => res.post)
+        );
     }
 
-    private getArticlesByCategory(category: string, searchIn?: Array<Article>): Array<Article> {
-        let toFilter: Array<Article>;
-        if (searchIn) {
-            toFilter = searchIn;
-        } else {
-            toFilter = this.articles;
-        }
-
-        if (category === 'my') {
-            return toFilter.filter(article => article.author.id === this.authService.getLoggedUser().id);
-        } else if (category === 'favorite') {
-            return toFilter.filter(article => article.isFavorite === true);
-        } else {
-            return toFilter;
-        }
+    public deletePost(id: string): Observable<Article> {
+        return this.apiService.deleteRequest(`posts/${id}`);
     }
 }

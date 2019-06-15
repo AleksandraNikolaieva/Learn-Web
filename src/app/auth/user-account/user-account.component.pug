@@ -1,0 +1,16 @@
+form([formGroup]='infoForm', (submit)='changeInfo()')
+    h3 Change or fill information:
+    label(for='') First name:
+    input('formControlName'='firstName')
+    label(for='') Last name:
+    input('formControlName'='lastName')
+    label(for='') Picture link:
+    input('formControlName'='picture')
+    label(for='') New password:
+    input(type='password' 'formControlName'='newPassword')
+    input(type='submit' value='Submit changes')
+    input(type='button' value='Log out' '(click)'='logOut()')
+    input(type='button' value='Delete profile' '(click)'='deleteProfile()')
+
+    
+

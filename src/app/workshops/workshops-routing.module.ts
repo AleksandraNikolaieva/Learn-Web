@@ -9,6 +9,9 @@ import { WorkshopCommentsComponent } from './workshop-comments/workshop-comments
 import { WorkshopQuizzesComponent } from './workshop-quizzes/workshop-quizzes.component';
 import { WorkshopResourcesComponent } from './workshop-resources/workshop-resources.component';
 import { AuxiliaryContentComponent } from '../shared/auxiliary-content/auxiliary-content.component';
+import { TagsResolver } from '../resolvers/tags.resolver';
+import { UsersResolver } from '../resolvers/users.resolver';
+import { WorkshopCommentResolver } from '../resolvers/workshop-comment.resolver';
 
 const workshopsRoutes: Routes = [
     {
@@ -21,7 +24,8 @@ const workshopsRoutes: Routes = [
         component: WorkshopsFeedComponent,
         canActivate: [AuthGuard],
         resolve: {
-            workshops: WorkshopsFeedResolver
+            workshops: WorkshopsFeedResolver,
+            tags: TagsResolver
         }
     },
     {
@@ -29,7 +33,8 @@ const workshopsRoutes: Routes = [
         component: WorkshopPageComponent,
         canActivate: [AuthGuard],
         resolve: {
-            workshop: WorkshopsPageResolver
+            workshop: WorkshopsPageResolver,
+            tags: TagsResolver
         },
         children: [
             {
@@ -44,7 +49,10 @@ const workshopsRoutes: Routes = [
                     },
                     {
                         path: 'comments',
-                        component: WorkshopCommentsComponent
+                        component: WorkshopCommentsComponent,
+                        resolve: {
+                            comments: WorkshopCommentResolver
+                        }
                     },
                     {
                         path: 'resources',
