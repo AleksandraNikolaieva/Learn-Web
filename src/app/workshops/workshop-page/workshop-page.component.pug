@@ -22,6 +22,6 @@ app-viewport
         '[routerLink]'='[{outlets: {"aside": "workshop"}}]' main)
         i.icon-plus
     ng-template(#close='')
-        a('(click)'='changeButton()' 'routerLink'='./' main)
+        a.close('(click)'='changeButton()' 'routerLink'='./' '[@enterRightPosition]'='true' main)
             i.icon-close
     router-outlet(name='aside' auxiliary)

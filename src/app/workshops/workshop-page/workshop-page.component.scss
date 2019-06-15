@@ -78,9 +78,9 @@
 }
 
 a {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+    position: fixed;
+    top: $header-h;
+    right: 10px;
     padding: 5px;
     @include mq($until: medium) {
         display: none;
@@ -90,4 +90,11 @@ a {
     .icon-plus {
         color: grey;
     }
+}
+
+a.close {
+    right: 310px;
+    @include mq($from: huge) {
+        right: 600px;
+    };
 }

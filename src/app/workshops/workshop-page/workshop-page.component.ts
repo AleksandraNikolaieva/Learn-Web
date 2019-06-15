@@ -3,12 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Article } from '../models';
 import { Subscription } from 'rxjs';
 import { Tag } from 'src/app/shared/models';
+import { enterRightPosition } from 'src/app/common/animations';
 
 @Component({
     selector: 'app-workshop-page',
     templateUrl: './workshop-page.component.pug',
     styleUrls: ['./workshop-page.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [enterRightPosition]
 })
 export class WorkshopPageComponent implements OnInit, OnDestroy {
     article: Article;

@@ -4,7 +4,7 @@ import { Tag } from '../../shared/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkshopsService } from 'src/app/services/workshops.service';
 import { Subscription } from 'rxjs';
-import { enterHeight } from 'src/app/common/animations';
+import { enterLeaveHeight } from 'src/app/common/animations';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/core/models';
 import { map } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { UsersService } from 'src/app/services/users.service';
     templateUrl: './workshops-feed.component.pug',
     styleUrls: ['./workshops-feed.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [enterHeight]
+    animations: [enterLeaveHeight]
 })
 export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     user: User;

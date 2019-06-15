@@ -14,5 +14,5 @@ app-viewport
         ) {{category.title}}
     .workshop-feed-content(main)
         span('*ngIf'='!articles?.length') Required articles do not exist
-        app-article('*ngFor'='let articleItem of articles', [article]='articleItem' '[tags]'='tags' '[@enterHeight]'='true')
+        app-article('*ngFor'='let articleItem of articles', [article]='articleItem' '[tags]'='tags' '[@enterLeaveHeight]'='true')
 
