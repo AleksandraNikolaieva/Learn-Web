@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 export class UserAccountComponent implements OnInit, OnDestroy {
     user: User;
     infoForm: FormGroup;
-    subscriptions: Array<Subscription> = [];
+    subscription: Subscription;
     constructor(
         private authService: AuthService,
         private usersService: UsersService,
@@ -23,11 +23,10 @@ export class UserAccountComponent implements OnInit, OnDestroy {
         private fb: FormBuilder) { }
 
     ngOnInit() {
-        this.subscriptions.push(
-            this.authService.getLoggedUserObs().subscribe(res => {
-                this.user = res;
-            })
-        );
+        this.subscription = this.authService.getLoggedUserObs()
+        .subscribe(res => {
+            this.user = res;
+        });
         this.infoForm = this.fb.group({
             firstName: [this.user.firstName, Validators.minLength(2)],
             lastName: [this.user.lastName, Validators.minLength(2)],
@@ -37,35 +36,29 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscriptions.forEach(subscription => {
-            subscription.unsubscribe();
-        });
+        this.subscription.unsubscribe();
     }
 
     changeInfo(): void {
         const values = this.infoForm.value;
 
-        this.subscriptions.push(
-            this.usersService.updateUser(this.user._id, values.firstName, values.lastName, values.picture, values.newPassword)
-            .subscribe(res => {
-                if (res) {
-                    this.authService.changeLoggedUserInfo(res);
-                    alert('changed succesfully');
-                }
-            })
-        );
+        this.usersService.updateUser(this.user._id, values.firstName, values.lastName, values.picture, values.newPassword)
+        .subscribe(res => {
+            if (res) {
+                this.authService.changeLoggedUserInfo(res);
+                alert('changed succesfully');
+            }
+        });
     }
 
     deleteProfile(): void {
-        this.subscriptions.push(
-            this.usersService.deleteUserById(this.user._id).subscribe(res => {
-                if (res) {
-                    alert('Profile successfully deleted');
-                    this.logOut();
-                    this.router.navigate(['/']);
-                }
-            })
-        );
+        this.usersService.deleteUserById(this.user._id).subscribe(res => {
+            if (res) {
+                alert('Profile successfully deleted');
+                this.logOut();
+                this.router.navigate(['/']);
+            }
+        });
     }
 
     logOut(): void {

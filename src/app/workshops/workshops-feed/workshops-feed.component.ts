@@ -47,9 +47,11 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         private cdr: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.authService.getLoggedUserObs().subscribe(res => {
-            this.user = res;
-        });
+        this.subscriptions.push(
+            this.authService.getLoggedUserObs().subscribe(res => {
+                this.user = res;
+            })
+        );
         this.subscriptions.push(
             this.route.data.subscribe(data => {
                 this.tags = data.tags;
@@ -61,7 +63,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             this.activeCategory = category ? category : 'all';
             if (tags) {
                 this.activeTags = tags.split(',');
-                this.subscriptions.push(this.wsService.getAllPosts(
+                this.wsService.getAllPosts(
                     undefined,
                     this.activeTags.map(tagItem => this.tags.find(tag => tag.name === tagItem).seq).join('|'))
                     .pipe(
@@ -77,7 +79,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                         this.articles = res;
                         this.filterByCategory();
                         this.cdr.detectChanges();
-                    }));
+                    });
             } else {
                 this.subscriptions.push(
                     this.route.data.subscribe(data => {

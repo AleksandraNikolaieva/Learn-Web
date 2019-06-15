@@ -8,17 +8,16 @@ import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService implements OnDestroy {
+export class AuthService {
     private isLogged = false;
     private loggedUserSubj$ = new BehaviorSubject<User>(null);
     private token: string;
-    private subscription: Subscription;
 
     constructor(private api: ApiService) { }
 
     public isUserLogged(): boolean {
         if (this.isTokenStored()) {
-            this.subscription = this.getCurrentUser().subscribe(res => {
+            this.getCurrentUser().subscribe(res => {
                 this.loggedUserSubj$.next(res);
             });
         }
@@ -110,9 +109,5 @@ export class AuthService implements OnDestroy {
 
     public changeLoggedUserInfo(newInfo: User): void {
         this.loggedUserSubj$.next(newInfo);
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
     }
 }

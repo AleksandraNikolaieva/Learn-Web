@@ -11,9 +11,8 @@ import { switchMap } from 'rxjs/operators';
     styleUrls: ['./login.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-    subscriptions: Array<Subscription> = [];
 
     constructor(
         private fb: FormBuilder,
@@ -30,28 +29,18 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy() {
-        this.subscriptions.forEach(subscription => {
-            subscription.unsubscribe();
-        });
-    }
-
     logIn(): void {
         const values = this.loginForm.value;
-        this.subscriptions.push(
-            this.authService.logUser(values.userName, values.password)
-            .subscribe(res => this.router.navigate(['/']))
-        );
+        this.authService.logUser(values.userName, values.password)
+        .subscribe(res => this.router.navigate(['/']))
     }
 
     signUp(): void {
         const values = this.loginForm.value;
-        this.subscriptions.push(
-            this.authService.signUp(values.userName, values.password)
-            .pipe(
-                switchMap(res => this.authService.logUser(values.userName, values.password))
-            )
-            .subscribe(res => this.router.navigate(['account']))
-        );
+        this.authService.signUp(values.userName, values.password)
+        .pipe(
+            switchMap(res => this.authService.logUser(values.userName, values.password))
+        )
+        .subscribe(res => this.router.navigate(['account']))
     }
 }
