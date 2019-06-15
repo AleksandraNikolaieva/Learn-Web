@@ -7,7 +7,7 @@ app-card
     div(footer)
         .row
             span 
-                i.icon-user  {{article.author | async}}
+                i.icon-user  {{article.author$ | async}}
             app-timestamp([date]='article.createdAt' toFormat='day')
         app-like(
             [isActive]='false',

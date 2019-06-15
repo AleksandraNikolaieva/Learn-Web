@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 export interface Article {
     id: string;
     _author: string;
-    author?: Observable<string>;
+    author$?: Observable<string>;
     tags: Array<string>;
     title: string;
     description: string;
@@ -22,7 +22,7 @@ export interface Comment {
     _id: string;
     _post: string;
     _author: string;
-    author: Observable<User>;
+    author$?: Observable<User>;
     text: string;
     date: Date;
     createdAt: Date;

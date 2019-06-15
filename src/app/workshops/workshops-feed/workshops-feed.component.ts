@@ -68,7 +68,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                     this.activeTags.map(tagItem => this.tags.find(tag => tag.name === tagItem).seq).join('|'))
                     .pipe(
                         map(articles => articles.map(article => {
-                            article.author = this.userService.getUserById(article._author)
+                            article.author$ = this.userService.getUserById(article._author)
                             .pipe(
                                 map(user => `${user.firstName} ${user.lastName}`)
                             );
@@ -148,5 +148,4 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             }
         }
     }
-
 }

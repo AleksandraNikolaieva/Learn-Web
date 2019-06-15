@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/core/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentsService } from 'src/app/services/comments.service';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users.service';
 import { Subscription } from 'rxjs';
 
@@ -31,21 +31,22 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         ) { }
 
     ngOnInit() {
-        this.subscriptions.push(
-            this.route.parent.parent.params.subscribe(params => {
-                this.postId = params.id;
-                this.commentsService.getCommentsByPostId(this.postId)
+        this.route.parent.parent.params
+        .pipe(
+            tap(params => this.postId = params.id),
+            switchMap(params => this.commentsService.getCommentsByPostId(params.id)
                 .pipe(
                     map(commentsArr => commentsArr.map(commentItem => {
-                        commentItem.author = this.userService.getUserById(commentItem._author);
+                        commentItem.author$ = this.userService.getUserById(commentItem._author);
                         return commentItem;
                     }))
-                ).subscribe(res => {
-                    this.comments = res;
-                    this.cdr.detectChanges();
-                });
-            })
-        );
+                )
+            )
+        )
+        .subscribe(res => {
+            this.comments = res;
+            this.cdr.detectChanges();
+        });
 
         this.subscriptions.push(
             this.authService.getLoggedUserObs().subscribe(res => {
@@ -67,8 +68,8 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
             this.comments[index] = {...this.comments[index]};
             this.comments[index].text = text;
             this.cdr.detectChanges();
+            this.editorNumber = null;
         });
-        this.editorNumber = null;
     }
 
     private deleteComment(id: string): void {
@@ -87,7 +88,7 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         this.commentsService.createComment(this.postId, text)
         .pipe(
             map(comment => {
-                comment.author = this.userService.getUserById(comment._author);
+                comment.author$ = this.userService.getUserById(comment._author);
                 return comment;
             })
         ).subscribe(res => {

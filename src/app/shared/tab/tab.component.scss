@@ -9,4 +9,8 @@
     font-size: 13px;
     border-radius: 5px 5px 0px 0px;
     text-align: center;
+
+    &:hover {
+        font-weight: bolder;
+    }
 }

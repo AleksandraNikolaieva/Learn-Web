@@ -17,7 +17,7 @@ export class WorkshopsFeedResolver implements Resolve<Observable<Array<Article>>
         return this.workshopsService.getAllPosts()
         .pipe(
             map(articles => articles.map(article => {
-                article.author = this.userService.getUserById(article._author)
+                article.author$ = this.userService.getUserById(article._author)
                 .pipe(
                     map(user => `${user.firstName} ${user.lastName}`)
                 );

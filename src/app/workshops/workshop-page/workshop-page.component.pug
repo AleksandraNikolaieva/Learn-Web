@@ -5,7 +5,7 @@ app-viewport
         p {{article.text}}
         .workshop-page-info
             span 
-                i.icon-user  {{article.author | async}}
+                i.icon-user  {{article.author$ | async}}
             app-like(
                 [isActive]='article.likes',
                 [likesNumber]='article.likes.length',
