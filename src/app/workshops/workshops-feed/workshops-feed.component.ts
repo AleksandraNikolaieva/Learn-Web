@@ -3,12 +3,14 @@ import { Article, Category } from '../models';
 import { Tag } from '../../shared/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkshopsService } from 'src/app/services/workshops.service';
-import { Subscription } from 'rxjs';
+import { Subscription, combineLatest, Observable, forkJoin, merge, zip } from 'rxjs';
 import { enterLeaveHeight } from 'src/app/common/animations';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/core/models';
-import { map } from 'rxjs/operators';
+import { map, tap, switchMap, skip, first, pairwise } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users.service';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { TagsService } from 'src/app/services/tags.service';
 
 @Component({
     selector: 'app-workshops-feed',
@@ -18,7 +20,6 @@ import { UsersService } from 'src/app/services/users.service';
     animations: [enterLeaveHeight]
 })
 export class WorkshopsFeedComponent implements OnInit, OnDestroy {
-    user: User;
     articles: Array<Article>;
     activeTags: Array<string> = [];
     activeCategory: string;
@@ -45,28 +46,39 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         private wsService: WorkshopsService,
         private authService: AuthService,
         private userService: UsersService,
+        private categoriesService: CategoriesService,
+        private tagsService: TagsService,
         private cdr: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.subscriptions.push(
-            this.authService.getLoggedUserObs().subscribe(res => {
-                this.user = res;
-            })
-        );
         this.subscriptions.push(
             this.route.data.subscribe(data => {
                 this.tags = data.tags;
             })
         );
-        this.subscriptions.push(this.route.queryParamMap.subscribe(queryParam  => {
-            const tags = queryParam.get('tags');
-            const category = queryParam.get('category');
-            this.activeCategory = category ? category : 'all';
-            if (tags) {
-                this.activeTags = tags.split(',');
-                this.wsService.getAllPosts(
-                    undefined,
-                    this.activeTags.map(tagItem => this.tags.find(tag => tag.name === tagItem).seq).join('|'))
+        this.getFeedState()
+        .pipe(
+            first()
+        ).subscribe(res => {
+            if (res.every(item => item !== null)) {
+                const category = res[0];
+                const tags = res[1];
+                this.navigate(category, tags);
+            }
+        });
+        this.route.queryParamMap.pipe(
+            switchMap(queryParam => {
+                const category = queryParam.get('category');
+                this.activeCategory = category ? category : 'all';
+                this.categoriesService.setActiveCategory(this.activeCategory);
+                const tags = queryParam.get('tags');
+                if (tags) {
+                    this.activeTags = tags.split(',');
+                    this.tagsService.setActiveTags(this.activeTags);
+                    return this.wsService.getAllPosts(
+                        undefined,
+                        this.activeTags.map(tagItem => this.tags.find(tag => tag.name === tagItem).seq).join('|')
+                    )
                     .pipe(
                         map(articles => articles.map(article => {
                             article.author$ = this.userService.getUserById(article._author)
@@ -75,23 +87,20 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                             );
                             return article;
                         }))
-                    )
-                    .subscribe(res => {
-                        this.articles = res;
-                        this.filterByCategory();
-                        this.cdr.detectChanges();
-                    });
-            } else {
-                this.activeTags = [];
-                this.subscriptions.push(
-                    this.route.data.subscribe(data => {
-                        this.articles = data.workshops;
-                        this.filterByCategory();
-                        this.cdr.detectChanges();
-                    })
-                );
-            }
-        }));
+                    );
+                } else {
+                    this.activeTags = [];
+                    this.tagsService.setActiveTags(this.activeTags);
+                    return this.route.data;
+                }
+            })
+        )
+        .subscribe(res => {
+            this.articles = res.workshops ? res.workshops : res;
+            this.articles = this.categoriesService.filterByCategory(this.activeCategory, this.articles);
+            this.wsService.setStoredWS(this.articles);
+            this.cdr.detectChanges();
+        });
     }
 
     ngOnDestroy() {
@@ -107,6 +116,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                 queryParamsHandling: 'merge'
             });
         } else {
+            this.categoriesService.setActiveCategory('all');
             this.router.navigate([], {
                 queryParams: { tags: this.route.snapshot.queryParamMap.get('tags') }
             });
@@ -140,13 +150,19 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         });
     }
 
-    filterByCategory() {
-        if (this.activeCategory) {
-            if (this.activeCategory === 'my') {
-                this.articles = this.articles.filter(article => article._author === this.user._id);
-            } else if (this.activeCategory === 'favorite') {
-                this.articles = this.articles.filter(article => article.likes.some(userId => userId === this.user._id));
+    getFeedState(): Observable<Array<any>> {
+        const category$ = this.categoriesService.getActiveCategory();
+        const tags$ = this.tagsService.getActiveTagsObs();
+        const workshops$ = this.wsService.getStoredWs();
+        return zip(category$, tags$, workshops$)
+    }
+
+    navigate(category: string, tags: Array<string>) {
+        this.router.navigate([], {
+            queryParams: {
+                category: category === 'all' ? undefined : category,
+                tags: tags.length ? tags.join(',') : undefined
             }
-        }
+        });
     }
 }

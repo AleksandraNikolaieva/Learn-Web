@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 })
 export class TagsService {
 
-    private activeTags$ = new BehaviorSubject(null);
+    private activeTags$: BehaviorSubject<Array<string>> = new BehaviorSubject(null);
 
     constructor(private api: ApiService) { }
 
