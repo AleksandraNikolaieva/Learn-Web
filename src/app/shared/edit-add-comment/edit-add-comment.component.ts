@@ -8,7 +8,7 @@ import { Comment } from 'src/app/workshops/models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditAddCommentComponent implements OnInit {
-    @Input() comment: Comment;
+    @Input() commentText: string;
     @Output() changeComment = new EventEmitter<string>();
 
     constructor() { }
@@ -17,8 +17,8 @@ export class EditAddCommentComponent implements OnInit {
     }
 
     submit(): void {
-        if (this.comment.text) {
-            this.changeComment.emit(this.comment.text);
+        if (this.commentText) {
+            this.changeComment.emit(this.commentText);
         }
     }
 }

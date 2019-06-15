@@ -18,7 +18,7 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
     comments: Array<Comment>;
     loggedUser: User;
     editorNumber: number;
-    newComment: any;
+    newComment = '';
     postId: string;
     subscriptions: Array<Subscription> = [];
 
@@ -34,10 +34,6 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         this.subscriptions.push(
             this.route.parent.parent.params.subscribe(params => {
                 this.postId = params.id;
-                this.newComment = {
-                    postId: this.postId,
-                    text: ''
-                };
                 this.commentsService.getCommentsByPostId(this.postId)
                 .pipe(
                     map(commentsArr => commentsArr.map(commentItem => {
@@ -54,7 +50,6 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         this.subscriptions.push(
             this.authService.getLoggedUserObs().subscribe(res => {
                 this.loggedUser = res;
-                this.cdr.detectChanges();
             })
         );
     }
@@ -68,16 +63,18 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
     private editComment(id: string, text: string): void {
         this.commentsService.updateComment(this.postId, id, text)
         .subscribe(res => {
-            /* const index = this.comments.findIndex(commetItem => commetItem._id === id);
-            this.comments[index].text = text; */
-        })
+            const index = this.comments.findIndex(commetItem => commetItem._id === id);
+            this.comments[index] = {...this.comments[index]};
+            this.comments[index].text = text;
+            this.cdr.detectChanges();
+        });
         this.editorNumber = null;
     }
 
     private deleteComment(id: string): void {
         this.commentsService.deleteComment(this.postId, id)
         .subscribe(res => {
-            this.comments.filter(comment => comment._id !== id);
+            this.comments = this.comments.filter(comment => comment._id !== id);
             this.cdr.detectChanges();
         });
     }
@@ -96,10 +93,6 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         ).subscribe(res => {
             this.comments.push(res);
             this.cdr.detectChanges();
-        })
-        this.newComment = {
-            postId: this.postId,
-            text: ''
-        };
+        });
     }
 }
