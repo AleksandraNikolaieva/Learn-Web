@@ -8,7 +8,6 @@
     overflow-y: auto;
     background-color: darken($white, 5%);
     scrollbar-width: thin;
-    //animation: slide 0.3s;
     position: relative;
     scrollbar-color: lighten($grey, 20%) #f1f1f100;
     @include mq($until: medium) {
@@ -17,7 +16,6 @@
     @include mq($from: huge) {
         width: 600px;
         @include flex(column, flex-start, center);
-        //animation: slideHuge 0.3s;
     }
 
     app-tab-group {
@@ -25,13 +23,3 @@
         top: 0px;
     }
 }
-
-/* @keyframes slide {
-    from {width: 0px}
-    to {width: $aux-w}
-}
-
-@keyframes slideHuge {
-    from {width: 0px}
-    to {width: 600px}
-} */

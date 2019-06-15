@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../workshops/models';
 import { Tag } from '../shared/models';
-import { of, Observable } from 'rxjs';
+import { of, Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth.service';
 import { ApiService } from './api.service';
 import { HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { thisTypeAnnotation } from 'babel-types';
 
 @Injectable({
     providedIn: 'root'
 })
 export class WorkshopsService {
+
+    private storedWS$: BehaviorSubject<Array<Article>> = new BehaviorSubject(null);
 
     constructor(private apiService: ApiService) { }
 
@@ -72,5 +75,13 @@ export class WorkshopsService {
 
     public deletePost(id: string): Observable<Article> {
         return this.apiService.deleteRequest(`posts/${id}`);
+    }
+
+    public getStoredWs(): Observable<Array<Article>> {
+        return this.storedWS$.asObservable();
+    }
+
+    public setStoredWS(workshops: Array<Article>): void {
+        this.storedWS$.next(workshops);
     }
 }

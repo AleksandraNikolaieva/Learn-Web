@@ -84,7 +84,7 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
                 return comment;
             })
         ).subscribe(res => {
-            this.comments.push(res);
+            this.comments.unshift(res);
             this.cdr.detectChanges();
         });
     }
