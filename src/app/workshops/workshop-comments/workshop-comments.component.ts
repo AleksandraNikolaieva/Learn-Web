@@ -34,11 +34,11 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         this.subscriptions.push(
             this.route.data.subscribe(res => {
                 this.comments = res.comments;
-                if (this.comments) {
-                    this.postId = this.comments[0]._post;
-                }
             })
         );
+        this.route.parent.parent.params.subscribe(res => {
+            this.postId = res.id;
+        });
 
         this.subscriptions.push(
             this.authService.getLoggedUserObs().subscribe(res => {
@@ -77,6 +77,7 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
     }
 
     addComment(text: string): void {
+        console.log(this.postId);
         this.commentsService.createComment(this.postId, text)
         .pipe(
             map(comment => {
