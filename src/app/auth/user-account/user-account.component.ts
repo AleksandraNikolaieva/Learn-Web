@@ -23,15 +23,18 @@ export class UserAccountComponent implements OnInit, OnDestroy {
         private fb: FormBuilder) { }
 
     ngOnInit() {
+        this.infoForm = this.fb.group({
+            firstName: ['', Validators.minLength(2)],
+            lastName: ['', Validators.minLength(2)],
+            picture: [''],
+            newPassword: [null, Validators.minLength(6)]
+        });
         this.subscription = this.authService.getLoggedUserObs()
         .subscribe(res => {
-            this.user = res;
-        });
-        this.infoForm = this.fb.group({
-            firstName: [this.user.firstName, Validators.minLength(2)],
-            lastName: [this.user.lastName, Validators.minLength(2)],
-            picture: [this.user.picture],
-            newPassword: [null, Validators.minLength(6)]
+            if (res) {
+                this.user = res;
+                this.infoForm.patchValue(res);
+            }
         });
     }
 
