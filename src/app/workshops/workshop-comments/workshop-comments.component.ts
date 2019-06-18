@@ -77,7 +77,6 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
     }
 
     addComment(text: string): void {
-        console.log(this.postId);
         this.commentsService.createComment(this.postId, text)
         .pipe(
             map(comment => {
