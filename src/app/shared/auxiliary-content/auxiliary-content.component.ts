@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, HostBinding, Input } from '@angular/core';
 import { enterLeaveWidth } from 'src/app/common/animations';
 
 @Component({
@@ -10,6 +10,7 @@ import { enterLeaveWidth } from 'src/app/common/animations';
 })
 export class AuxiliaryContentComponent implements OnInit {
     @HostBinding('@enterLeaveWidth') animate = true;
+    @Input() tabs = ['comments', 'resources', 'quizzes'];
 
     constructor() {}
 

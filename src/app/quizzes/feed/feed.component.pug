@@ -6,4 +6,12 @@ app-viewport
         | index: {{i}}
         br
         | number: {{number}}
-    app-auxiliary-content(auxiliary)
+    a(  main
+        '*ngIf'='isButtonPlus else close'
+        '(click)'='changeButton()'
+    )
+        i.icon-plus
+    ng-template(#close='' main)
+        a.close('(click)'='changeButton()' '[@enterRightPosition]'='true' main)
+            i.icon-close
+    app-auxiliary-content(auxiliary [tabs]='[]' '*ngIf'='!isButtonPlus')
