@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -15,21 +15,32 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class DropdownComponent implements OnInit, ControlValueAccessor {
 
+    @Input() options: Array<string>;
+    @Input() label = 'Make your choice';
+    value: string;
+    test = undefined;
+
     constructor() { }
+
+    private propagateChange = (value: string) => {};
+    private propagateTouched = ($event: FocusEvent) => {};
 
     ngOnInit() {
     }
 
-    writeValue() {
-
+    writeValue(value: string): void {
+        this.value = value;
     }
 
-    registerOnChange() {
-
+    registerOnChange(fn: any): void {
+        this.propagateChange = fn;
     }
 
-    registerOnTouched() {
-        
+    registerOnTouched(fn: any): void {
+        this.propagateTouched = fn;
     }
 
+    onChange(value: string): void {
+        this.propagateChange(value);
+    }
 }

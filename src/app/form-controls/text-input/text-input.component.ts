@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, Input } from '@angular/core';
+import { Component, OnInit, forwardRef, Input, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -15,29 +15,45 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormControl, Vali
 })
 export class TextInputComponent implements OnInit, ControlValueAccessor {
 
-    @Input() value = '';
+    disabled = false;
+    value = '';
+
     @Input() label = '';
     @Input() id = '';
     @Input() placeholder = '';
-    @Input() required: boolean;
-    @Input() minLength = 2;
-    @Input() maxlength = 255;
-    @Input() pattern: string;
 
-    constructor() { }
+    @ViewChild('input') input: ElementRef;
+
+    constructor(private renderer: Renderer2) { }
+
+    private propagateChange = (value: string) => {};
+    private propagateTouched = ($event: FocusEvent) => {};
 
     ngOnInit() {
     }
 
-    writeValue() {
-
+    writeValue(value: string): void {
+        this.value = value;
     }
 
-    registerOnChange() {
-
+    registerOnChange(fn: any): void {
+        this.propagateChange = fn;
     }
 
-    registerOnTouched() {
+    registerOnTouched(fn: any): void {
+        this.propagateTouched = fn;
+    }
 
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        this.renderer.setProperty(this.input.nativeElement, 'disabled', isDisabled);
+    }
+
+    onChange(value: string): void {
+        this.propagateChange(value);
+    }
+
+    onBlur($event: FocusEvent): void {
+        this.propagateTouched($event);
     }
 }

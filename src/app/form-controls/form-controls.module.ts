@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TextInputComponent } from './text-input/text-input.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -11,7 +12,13 @@ import { DropdownComponent } from './dropdown/dropdown.component';
         DropdownComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        FormsModule
+    ],
+    exports: [
+        TextInputComponent,
+        CheckboxComponent,
+        DropdownComponent
     ]
 })
 export class FormControlsModule { }

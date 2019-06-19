@@ -28,4 +28,26 @@
             margin-left: calc(100% - 28px);
         }
     }
+
+    a {
+        position: fixed;
+        top: $header-h;
+        right: 10px;
+        padding: 5px;
+        @include mq($until: medium) {
+            display: none;
+        }
+    
+        .icon-close,
+        .icon-plus {
+            color: grey;
+        }
+    }
+    
+    a.close {
+        right: 310px;
+        @include mq($from: huge) {
+            right: 600px;
+        };
+    }
 }

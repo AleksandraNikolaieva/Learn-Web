@@ -1,0 +1,25 @@
+@import 'abstracts/variables';
+
+:host {
+    display: block;
+}
+
+input {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: transparentize($grey, 0.3);
+    outline: none;
+    color: $white;
+    width: calc(100% - 10px);
+    margin: 5px 0;
+}
+
+input::placeholder {
+    color: #bfbfbf;
+}
+
+input:-webkit-autofill {
+    transition: background-color 5000s;
+    -webkit-text-fill-color: white;
+}
