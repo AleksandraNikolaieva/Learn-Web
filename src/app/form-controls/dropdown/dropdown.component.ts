@@ -28,7 +28,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
     ngOnInit() {
     }
 
-    writeValue(value: string) {
+    writeValue(value: string): void {
         this.value = value;
     }
 
@@ -40,7 +40,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
         this.propagateTouched = fn;
     }
 
-    onChange(value: string) {
+    onChange(value: string): void {
         this.propagateChange(value);
     }
 }

@@ -21,9 +21,6 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     @Input() label = '';
     @Input() id = '';
     @Input() placeholder = '';
-    @Input() minLength = 2;
-    @Input() maxlength = 255;
-    @Input() pattern: string;
 
     @ViewChild('input') input: ElementRef;
 
@@ -52,11 +49,11 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
         this.renderer.setProperty(this.input.nativeElement, 'disabled', isDisabled);
     }
 
-    onChange(value: string) {
+    onChange(value: string): void {
         this.propagateChange(value);
     }
 
-    onBlur($event) {
+    onBlur($event: FocusEvent): void {
         this.propagateTouched($event);
     }
 }

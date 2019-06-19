@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-feed',
@@ -9,10 +8,10 @@ import { ActivatedRoute } from '@angular/router';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedComponent implements OnInit {
-    isButtonPlus = true;
+
     testForm: FormGroup;
 
-    constructor(private fb: FormBuilder, private route: ActivatedRoute) { }
+    constructor(private fb: FormBuilder) { }
 
     ngOnInit() {
         this.testForm = this.fb.group({
