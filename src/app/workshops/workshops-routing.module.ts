@@ -40,6 +40,7 @@ const workshopsRoutes: Routes = [
             {
                 path: 'workshop',
                 component: AuxiliaryContentComponent,
+                data: { tabs: ['comments', 'resources', 'quizzes']},
                 outlet: 'aside',
                 children: [
                     {

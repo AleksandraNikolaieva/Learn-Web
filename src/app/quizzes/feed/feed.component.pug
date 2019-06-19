@@ -1,4 +1,4 @@
-app-viewport
+app-viewport('link'='constructor')
     p(main) Quizzes works
     div(main '*appRange'='[20, 30]; let i = index; let number = number') 
         | From range directive
@@ -6,4 +6,17 @@ app-viewport
         | index: {{i}}
         br
         | number: {{number}}
-    app-auxiliary-content(auxiliary)
+        form('[formGroup]'='testForm' '(submit)'='submit()')
+            app-text-input(
+                formControlName='name'
+                label='testlabel',
+                id='1',
+                placeholder='testplace'
+            )
+            app-checkbox(label='checktest' formControlName='check')
+            app-dropdown(
+                'label'='your choice'
+                '[options]'='["v1", "v2", "v3", "v4"]'
+                'formControlName'='select')
+            input(type='submit')
+    router-outlet(name='aside' auxiliary)

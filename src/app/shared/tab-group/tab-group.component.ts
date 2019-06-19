@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
     selector: 'app-tab-group',
@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabGroupComponent implements OnInit {
-    tabs = ['comments', 'resources', 'quizzes'];
+    @Input() tabs: Array<string>;
 
     constructor() {}
     ngOnInit() {

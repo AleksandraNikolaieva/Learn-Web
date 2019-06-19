@@ -1,8 +1,31 @@
 @import 'abstracts/variables';
+@import 'sass-mq';
 
 div {
     width: 50%;
     height: 300px;
     background-color: transparentize($yellow, 0.5);
     margin: 10px auto;
+}
+
+a {
+    position: fixed;
+    top: $header-h;
+    right: 10px;
+    padding: 5px;
+    @include mq($until: medium) {
+        display: none;
+    }
+
+    .icon-close,
+    .icon-plus {
+        color: grey;
+    }
+}
+
+a.close {
+    right: 310px;
+    @include mq($from: huge) {
+        right: 600px;
+    };
 }
