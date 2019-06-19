@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, CheckboxControlValueAccessor, ControlValueAccessor } from '@angular/forms';
 
 @Component({
@@ -15,20 +15,29 @@ import { NG_VALUE_ACCESSOR, CheckboxControlValueAccessor, ControlValueAccessor }
 })
 export class CheckboxComponent implements OnInit, ControlValueAccessor {
 
+    @Input() checked = false;
+    @Input() label = '';
+
     constructor() { }
+    private propagateChange = (value: boolean) => {};
+    private propagateTouched = ($event: FocusEvent) => {};
 
     ngOnInit() {
     }
 
-    writeValue() {
-
+    writeValue(value: boolean) {
+        this.checked = value;
     }
 
-    registerOnChange() {
-
+    registerOnChange(fn: any): void {
+        this.propagateChange = fn;
     }
 
-    registerOnTouched() {
+    registerOnTouched(fn: any) {
+        this.propagateTouched = fn;
+    }
 
+    onChange(value: boolean) {
+        this.propagateChange(value);
     }
 }

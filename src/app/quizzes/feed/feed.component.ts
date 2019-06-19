@@ -1,22 +1,29 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { enterRightPosition } from 'src/app/common/animations';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-feed',
     templateUrl: './feed.component.pug',
     styleUrls: ['./feed.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [enterRightPosition]
 })
 export class FeedComponent implements OnInit {
     isButtonPlus = true;
+    testForm: FormGroup;
 
-    constructor() { }
+    constructor(private fb: FormBuilder, private route: ActivatedRoute) { }
 
     ngOnInit() {
+        this.testForm = this.fb.group({
+            name: ['', Validators.required],
+            check: [true],
+            select: ['v1']
+        });
     }
 
-    changeButton() {
-        this.isButtonPlus = !this.isButtonPlus;
+    submit() {
+        const values = this.testForm.value;
+        console.log(values.name, values.check, values.select);
     }
 }

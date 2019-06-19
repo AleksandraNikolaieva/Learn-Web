@@ -1,4 +1,4 @@
-app-viewport
+app-viewport('link'='workshop')
     .page(main #host='')
         h2 {{article.title}}
         img(src='{{article.image}}' alt='{{article.title}}')
@@ -16,12 +16,4 @@ app-viewport
             span('*ngFor'='let tag of tags') {{tag}}
         a(routerLink='/workshops/feed')
             i.icon-arrow-left2
-    a(
-        '*ngIf'='isButtonPlus else close'
-        '(click)'='changeButton()'
-        '[routerLink]'='[{outlets: {"aside": "workshop"}}]' main)
-        i.icon-plus
-    ng-template(#close='')
-        a.close('(click)'='changeButton()' 'routerLink'='./' '[@enterRightPosition]'='true' main)
-            i.icon-close
     router-outlet(name='aside' auxiliary)

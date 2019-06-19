@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, HostBinding, Input } from '@angular/core';
 import { enterLeaveWidth } from 'src/app/common/animations';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-auxiliary-content',
@@ -10,10 +11,13 @@ import { enterLeaveWidth } from 'src/app/common/animations';
 })
 export class AuxiliaryContentComponent implements OnInit {
     @HostBinding('@enterLeaveWidth') animate = true;
-    @Input() tabs = ['comments', 'resources', 'quizzes'];
+    tabs: Array<string>;
 
-    constructor() {}
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
+        this.route.data.subscribe(res => {
+            this.tabs = res.tabs;
+        });
     }
 }
