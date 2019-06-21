@@ -26,7 +26,7 @@ export class WorkshopsService {
         return this.apiService.postRequest('posts', body);
     }
 
-    public getAllPosts(page = '1', tags?: string, authorId?: string, withComments = false): Observable<Array<Article>> {
+    public getAllPosts(page = '0', tags?: string, authorId?: string, withComments = false): Observable<Array<Article>> {
         const comments  = withComments ? '1' : undefined;
         const params = {
             page,

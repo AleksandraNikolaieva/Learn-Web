@@ -2,6 +2,6 @@ select(
     '[(ngModel)]'='value'
     '(ngModelChange)'='onChange(value)'
 )
-    option(value="undefined" disabled selected hidden) {{label}}
+    option(value='' disabled selected hidden) {{placeholder}}
     option('*ngFor'='let option of options' '[value]'='option') {{option}}
 

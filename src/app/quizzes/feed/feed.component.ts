@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { quizzes } from '../data';
+import { FieldConfig } from 'src/app/dynamic-forms/models';
 
 @Component({
     selector: 'app-feed',
@@ -9,20 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class FeedComponent implements OnInit {
 
-    testForm: FormGroup;
-
-    constructor(private fb: FormBuilder) { }
-
-    ngOnInit() {
-        this.testForm = this.fb.group({
-            name: ['', Validators.required],
-            check: [true],
-            select: ['v1']
-        });
-    }
-
-    submit() {
-        const values = this.testForm.value;
-        console.log(values.name, values.check, values.select);
-    }
+    constructor() {}
+    
+    ngOnInit() {}
 }

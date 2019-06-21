@@ -5,6 +5,7 @@ import { QuizzesRoutingModule } from './quizzes-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormControlsModule } from '../form-controls/form-controls.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DynamicFormsModule } from '../dynamic-forms/dynamic-forms.module';
 
 @NgModule({
     declarations: [FeedComponent],
@@ -13,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         QuizzesRoutingModule,
         SharedModule,
         FormControlsModule,
+        DynamicFormsModule,
         ReactiveFormsModule
     ]
 })
