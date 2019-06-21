@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class DropdownComponent implements OnInit, ControlValueAccessor {
 
     @Input() options: Array<string>;
-    @Input() label = 'Make your choice';
+    @Input() placeholder = 'Make your choice';
     value: string;
     test = undefined;
 
@@ -26,6 +26,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
     private propagateTouched = ($event: FocusEvent) => {};
 
     ngOnInit() {
+        console.log(this.placeholder);
     }
 
     writeValue(value: string): void {
