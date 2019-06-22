@@ -154,7 +154,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         const category$ = this.categoriesService.getActiveCategory();
         const tags$ = this.tagsService.getActiveTagsObs();
         const workshops$ = this.wsService.getStoredWs();
-        return zip(category$, tags$, workshops$)
+        return zip(category$, tags$, workshops$);
     }
 
     navigate(category: string, tags: Array<string>) {

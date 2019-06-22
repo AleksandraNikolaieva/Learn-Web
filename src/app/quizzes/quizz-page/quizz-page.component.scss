@@ -1,4 +1,11 @@
+@import 'sass-mq';
+@import 'abstracts/variables';
+
 div {
     width: 50%;
     margin: auto;
+
+    @include mq($until: small) {
+        width: 90%;
+    }
 }

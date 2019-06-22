@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     logIn(): void {
         const values = this.loginForm.value;
         this.authService.logUser(values.userName, values.password)
-        .subscribe(res => this.router.navigate(['/']))
+        .subscribe(res => this.router.navigate(['/']));
     }
 
     signUp(): void {
@@ -41,6 +41,6 @@ export class LoginComponent implements OnInit {
         .pipe(
             switchMap(res => this.authService.logUser(values.userName, values.password))
         )
-        .subscribe(res => this.router.navigate(['account']))
+        .subscribe(res => this.router.navigate(['account']));
     }
 }
