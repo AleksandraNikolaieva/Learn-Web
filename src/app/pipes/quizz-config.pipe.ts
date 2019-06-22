@@ -17,7 +17,7 @@ export class QuizzConfigPipe implements PipeTransform {
                 question.answerVariants.forEach(variant => variants.push(variant.answer));
             }
             config.push({
-                name: `question${index}`,
+                name: `answer${index}`,
                 label: question.question,
                 type: question.questionType === 'input' ? 'input' : 'select',
                 placeholder: 'your answer',
