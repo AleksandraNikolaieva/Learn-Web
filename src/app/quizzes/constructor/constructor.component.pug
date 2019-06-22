@@ -1,5 +1,5 @@
 form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
-    app-text-input(formControlName='name' 'label'='Quizz name:', '[id]'='quizzName' 'placeholder'='Start typing...')
+    app-text-input(formControlName='name' 'label'='Quizz name:', 'id'='quizzName' 'placeholder'='Start typing...')
     fieldset('*ngFor'='let question of quizzForm.controls.questions?.controls; let questionIndex = index')
         app-text-input('[formControl]'='question.controls["question"]' 'label'='Question {{questionIndex + 1}}:', '[id]'='quizz' 'placeholder'='question name')
         app-dropdown('[formControl]'='question.controls["questionType"]' '[options]'='["input", "select"]' 'placeholder'='answer type')

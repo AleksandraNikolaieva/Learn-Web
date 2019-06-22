@@ -15,4 +15,5 @@ export interface FieldConfig {
     validations?: ValidatorFn[];
     disabled?: boolean;
     value?: any;
+    id?: string;
 }
