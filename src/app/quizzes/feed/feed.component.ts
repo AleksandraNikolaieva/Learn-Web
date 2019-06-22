@@ -6,6 +6,9 @@ import { Quizz } from '../models';
 import { User } from 'src/app/core/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
+import { QuizzesService } from 'src/app/services/quizzes.service';
+import { UsersService } from 'src/app/services/users.service';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-feed',
@@ -20,12 +23,21 @@ export class FeedComponent implements OnInit, OnDestroy {
 
     constructor(
         private authService: AuthService,
+        private quizzesService: QuizzesService,
+        private usersService: UsersService,
         private cdr: ChangeDetectorRef) {}
 
     ngOnInit() {
         this.subscription = this.authService.getLoggedUserObs().subscribe(res => {
             this.loggedUser = res;
             this.cdr.detectChanges();
+        });
+        this.quizzes = this.quizzesService.getMockQuizzes();
+        this.quizzes.forEach(quizz => {
+            quizz.authorName = this.usersService.getUserById(quizz.author)
+            .pipe(
+                map(user => `${user.firstName} ${user.lastName}`)
+            );
         });
     }
 
@@ -34,7 +46,6 @@ export class FeedComponent implements OnInit, OnDestroy {
     }
 
     deleteQuizz(id: number) {
-        console.log('index', id);
         this.quizzes.splice(id, 1);
     }
 }

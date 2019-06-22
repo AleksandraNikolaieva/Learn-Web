@@ -3,11 +3,13 @@ import { ApiService } from './api.service';
 import { Question, Quizz } from '../quizzes/models';
 import { Observable } from 'rxjs';
 import { Article } from '../workshops/models';
+import { quizzes } from '../quizzes/data';
 
 @Injectable({
     providedIn: 'root'
 })
 export class QuizzesService {
+    quizzes = quizzes;
 
     constructor(private api: ApiService) { }
 
@@ -87,5 +89,13 @@ export class QuizzesService {
 
     validateQuizz(id: string, testAnswers: {formData: Array<string>}): Observable<{message: string, result: Array<boolean>}> {
         return this.api.postRequest(`quizzes/validate/${id}`, testAnswers);
+    }
+
+    addMockQuizz(data) {
+        this.quizzes.push(data);
+    }
+
+    getMockQuizzes() {
+        return this.quizzes;
     }
 }

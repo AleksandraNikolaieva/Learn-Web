@@ -1,4 +1,4 @@
-import { FormGroup, ValidatorFn } from '@angular/forms';
+import { FormGroup, Validator, ValidatorFn } from '@angular/forms';
 
 export interface Field {
     group: FormGroup;

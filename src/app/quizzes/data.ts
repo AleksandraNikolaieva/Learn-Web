@@ -92,7 +92,7 @@ export let quizzes: Array<Quizz> = [
         ]
     },
     {
-        name: 'Final exam3',
+        name: 'Final',
         author: '5d02b67d1169ca285e4aa13a',
         date: new Date(),
         questions: [

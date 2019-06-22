@@ -10,8 +10,14 @@ app-card {
     margin: 10px;
 }
 
-span {
-    max-width: 200px;
+span, h3 {
+    width: 200px;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
+    margin: 5px 0;
+}
+
+button {
+    display: block;
 }
