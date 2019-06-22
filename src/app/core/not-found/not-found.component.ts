@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone, AfterViewInit, OnDestroy } from '@angular/core';
 
 @Component({
     selector: 'app-not-found',
@@ -6,8 +6,9 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone, 
     styleUrls: ['./not-found.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotFoundComponent implements OnInit, AfterViewInit {
+export class NotFoundComponent implements OnInit, AfterViewInit, OnDestroy {
     error = '';
+    interval: any;
 
     constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) { }
 
@@ -18,14 +19,18 @@ export class NotFoundComponent implements OnInit, AfterViewInit {
         const toShow = '404, page not found.';
         let i = 0;
         this.ngZone.runOutsideAngular(() => {
-            const interval = setInterval(() => {
+            this.interval = setInterval(() => {
                 this.error += toShow[i];
                 this.cdr.detectChanges();
                 i++;
                 if (i === toShow.length) {
-                    clearInterval(interval);
+                    clearInterval(this.interval);
                 }
             }, 200);
         });
+    }
+
+    ngOnDestroy(): void {
+        clearInterval(this.interval);
     }
 }

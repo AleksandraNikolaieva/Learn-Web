@@ -1,0 +1,23 @@
+@import 'abstracts/mixins';
+
+:host {
+    width: 100%;
+}
+
+app-card {
+    @include flex(row, space-between, center);
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+span, h3 {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 5px 0;
+}
+
+button {
+    display: block;
+}

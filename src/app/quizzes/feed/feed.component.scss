@@ -1,11 +1,11 @@
 @import 'abstracts/variables';
+@import 'abstracts/mixins';
 @import 'sass-mq';
 
 div {
-    width: 50%;
-    height: 300px;
-    background-color: transparentize($yellow, 0.5);
-    margin: 10px auto;
+    @include flex(column, space-around, center);
+    width: 80%;
+    margin: auto;
 }
 
 a {

@@ -10,10 +10,9 @@ import { FormGroup } from '@angular/forms';
 export class FormButtonComponent implements OnInit, Field {
     group: FormGroup;
     config: FieldConfig;
-    
+
     constructor() { }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
 }

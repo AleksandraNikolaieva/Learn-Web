@@ -1,0 +1,24 @@
+form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
+    app-text-input(formControlName='name' 'label'='Quizz name:', '[id]'='quizzName' 'placeholder'='Start typing...')
+    fieldset('*ngFor'='let question of quizzForm.controls.questions?.controls; let questionIndex = index')
+        app-text-input('[formControl]'='question.controls["question"]' 'label'='Question {{questionIndex + 1}}:', '[id]'='quizz' 'placeholder'='question name')
+        app-dropdown('[formControl]'='question.controls["questionType"]' '[options]'='["input", "select"]' 'placeholder'='answer type')
+        ng-container('*ngIf'='question.controls["questionType"].value === "input"')
+            app-text-input(
+                '*ngIf'='question.controls["questionType"].value === "input"'
+                'label'='correct answer: '
+                '[formControl]'='question.controls["correctAnswer"]'
+            )
+        ng-container('*ngIf'='question.controls["questionType"].value === "select"')
+            hr
+            ng-container('*ngFor'='let variant of question.controls.answerVariants.controls; let variantIndex = index')
+                app-checkbox('[formControl]'='variant.controls["isCorrect"]' 'label'='is correct')
+                app-text-input('[formControl]'='variant.controls["answer"]' 'placeholder'='variant {{variantIndex + 1}}')
+                button(class='delete variant' type='button' '(click)'='deleteAnswerVariant(questionIndex, variantIndex)')
+                    i.icon-remove
+            button(type='button' '(click)'='addAnswerVariant(questionIndex)') Add answer variant
+        button(class='delete question' type='button' '(click)'='deleteQuestion(questionIndex)')
+            i.icon-remove
+    button(type='button' '(click)'='addQuestion()') Add question
+    br
+    button('type'='submit') Submit

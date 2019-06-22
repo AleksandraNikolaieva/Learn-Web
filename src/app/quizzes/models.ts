@@ -1,6 +1,11 @@
+import { Observable } from 'rxjs';
+
 export interface Quizz {
     name: string;
     questions: Array<Question>;
+    author: string;
+    authorName?: Observable<string>;
+    date: Date;
 }
 
 export interface Question {

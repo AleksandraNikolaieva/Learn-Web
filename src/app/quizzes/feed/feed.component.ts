@@ -1,7 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { quizzes } from '../data';
 import { FieldConfig } from 'src/app/dynamic-forms/models';
+import { Quizz } from '../models';
+import { User } from 'src/app/core/models';
+import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
+import { QuizzesService } from 'src/app/services/quizzes.service';
+import { UsersService } from 'src/app/services/users.service';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-feed',
@@ -9,9 +16,36 @@ import { FieldConfig } from 'src/app/dynamic-forms/models';
     styleUrls: ['./feed.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, OnDestroy {
+    quizzes: Array<Quizz> = quizzes;
+    loggedUser: User;
+    subscription: Subscription;
 
-    constructor() {}
-    
-    ngOnInit() {}
+    constructor(
+        private authService: AuthService,
+        private quizzesService: QuizzesService,
+        private usersService: UsersService,
+        private cdr: ChangeDetectorRef) {}
+
+    ngOnInit() {
+        this.subscription = this.authService.getLoggedUserObs().subscribe(res => {
+            this.loggedUser = res;
+            this.cdr.detectChanges();
+        });
+        this.quizzes = this.quizzesService.getMockQuizzes();
+        this.quizzes.forEach(quizz => {
+            quizz.authorName = this.usersService.getUserById(quizz.author)
+            .pipe(
+                map(user => `${user.firstName} ${user.lastName}`)
+            );
+        });
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+
+    deleteQuizz(id: number) {
+        this.quizzes.splice(id, 1);
+    }
 }

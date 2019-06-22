@@ -1,0 +1,11 @@
+@import 'abstracts/variables';
+
+button {
+    display: block;
+    width: 100px;
+    height: 30px;
+    margin: 10px auto;
+    color: white;
+    background-color: $grey;
+    border-radius: 5px;
+}
