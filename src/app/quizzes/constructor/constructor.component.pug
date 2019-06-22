@@ -1,0 +1,19 @@
+form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
+    app-text-input(formControlName='quizzName' 'label'='Quizz name:', '[id]'='quizzName')
+    fieldset('*ngFor'='let question of quizzForm.controls.questions?.controls; let i = index')
+        app-text-input('[formControl]'='question.controls["questionName"]' '[label]'='"Question:"', '[id]'='quizz' 'placeholder'='question name')
+        app-dropdown('[formControl]'='question.controls["questionType"]' '[options]'='["input", "select"]' 'placeholder'='answer type')
+        div('*ngIf'='question.controls["questionType"].value === "input"')
+            app-text-input(
+                '*ngIf'='question.controls["questionType"].value === "input"'
+                'label'='correct answer: '
+                '[formControl]'='question.controls["correctAnswer"]'
+            )
+        div('*ngIf'='question.controls["questionType"].value === "select"')
+            div('*ngFor'='let variant of question.controls.answerVariants.controls')
+                app-checkbox('[formControl]'='variant.controls["isCorrect"]' 'label'='is correct')
+                app-text-input('[formControl]'='variant.controls["answer"]' 'placeholder'=`variant`)
+            button(type='button' '(click)'='addAnswerVariant(i)') Add answer variant
+    button(type='button' '(click)'='addQuestion()') Add question
+    br
+    button('type'='submit') Submit

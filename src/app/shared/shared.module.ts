@@ -12,13 +12,14 @@ import { LikeComponent } from './like/like.component';
 import { EditAddCommentComponent } from './edit-add-comment/edit-add-comment.component';
 import { AuxiliaryContentComponent } from './auxiliary-content/auxiliary-content.component';
 import { ViewportComponent } from './viewport/viewport.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { QueryParamsActiveDirective } from './directives/query-params-active/query-params-active.directive';
 import { TextToColorDirective } from './directives/text-to-color/text-to-color.directive';
 import { RangeDirective } from './directives/range/range.directive';
 import { CollapsableDirective } from './directives/collapsable/collapsable.directive';
 import { MultipleColorDirective } from './directives/multiple-color/multiple-color.directive';
+import { QuizzConfigPipe } from '../pipes/quizz-config.pipe';
 
 @NgModule({
     declarations: [
@@ -34,11 +35,14 @@ import { MultipleColorDirective } from './directives/multiple-color/multiple-col
         LikeComponent,
         EditAddCommentComponent,
         AuxiliaryContentComponent,
+
         QueryParamsActiveDirective,
         TextToColorDirective,
         RangeDirective,
         CollapsableDirective,
-        MultipleColorDirective
+        MultipleColorDirective,
+
+        QuizzConfigPipe
     ],
     imports: [
         CommonModule,
@@ -46,6 +50,10 @@ import { MultipleColorDirective } from './directives/multiple-color/multiple-col
         RouterModule
     ],
     exports: [
+        FormsModule,
+        RouterModule,
+        ReactiveFormsModule,
+
         ViewportComponent,
         CardComponent,
         TagComponent,
@@ -58,13 +66,14 @@ import { MultipleColorDirective } from './directives/multiple-color/multiple-col
         LikeComponent,
         EditAddCommentComponent,
         AuxiliaryContentComponent,
-        FormsModule,
-        RouterModule,
+
         QueryParamsActiveDirective,
         TextToColorDirective,
         RangeDirective,
         CollapsableDirective,
-        MultipleColorDirective
+        MultipleColorDirective,
+
+        QuizzConfigPipe
     ]
 })
 export class SharedModule { }

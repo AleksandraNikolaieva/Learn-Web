@@ -1,0 +1,26 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+button {
+    width: 70%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: $grey;
+    color: white;
+    margin: 5px;
+}
+
+button[type=submit] {
+    background-color: $yellow;
+    color: $grey;
+}
+
+form {
+    margin: 5px;
+    @include flex(column, space-between, center);
+}
+
+fieldset {
+    margin: 5px;
+    border-radius: 5px;
+}

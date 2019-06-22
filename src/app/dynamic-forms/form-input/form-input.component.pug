@@ -2,5 +2,5 @@ div('[formGroup]'='group')
     app-text-input(
         '[formControlName]'='config.name'
         '[id]'='config.id'
-        '[placeholder]'='config.placeholder'
+        '[placeholder]'='config.placeholder ? config.placeholder : ""'
     )

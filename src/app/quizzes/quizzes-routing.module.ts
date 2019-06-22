@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FeedComponent } from './feed/feed.component';
 import { AuxiliaryContentComponent } from '../shared/auxiliary-content/auxiliary-content.component';
+import { QuizzPageComponent } from './quizz-page/quizz-page.component';
+import { ConstructorComponent } from './constructor/constructor.component';
 
 const quizzesRoutes: Routes = [
     {
@@ -15,9 +17,19 @@ const quizzesRoutes: Routes = [
             {
                 path: 'constructor',
                 outlet: 'aside',
-                component: AuxiliaryContentComponent
+                component: AuxiliaryContentComponent,
+                children: [
+                    {
+                        path: '',
+                        component: ConstructorComponent
+                    }
+                ]
             }
         ]
+    },
+    {
+        path: ':id',
+        component: QuizzPageComponent
     }
 ];
 

@@ -1,6 +1,8 @@
 export interface Quizz {
     name: string;
     questions: Array<Question>;
+    author: string;
+    date: Date;
 }
 
 export interface Question {

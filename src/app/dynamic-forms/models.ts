@@ -1,4 +1,4 @@
-import { FormGroup, Validator } from '@angular/forms';
+import { FormGroup, ValidatorFn } from '@angular/forms';
 
 export interface Field {
     group: FormGroup;
@@ -7,10 +7,12 @@ export interface Field {
 
 export interface FieldConfig {
     label?: string;
-    name?: string;
+    name: string;
     type: 'select' | 'input' | 'button' | 'checkbox';
     inputType?: string;
     placeholder?: string;
-    options: Array<string>;
-    validations?: Validator[];
+    options?: Array<string>;
+    validations?: ValidatorFn[];
+    disabled?: boolean;
+    value?: any;
 }
