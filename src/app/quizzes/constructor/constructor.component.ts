@@ -57,7 +57,6 @@ export class ConstructorComponent implements OnInit {
     }
 
     deleteAnswerVariant(indexQuestion: number, indexVariant: number): void {
-        console.log(indexVariant);
         const question = (this.quizzForm.get('questions') as FormArray).at(indexQuestion);
         (question.get('answerVariants') as FormArray).removeAt(indexVariant);
     }

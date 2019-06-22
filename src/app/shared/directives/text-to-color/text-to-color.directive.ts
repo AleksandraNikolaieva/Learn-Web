@@ -1,5 +1,6 @@
 import { Directive, ElementRef, Input, HostBinding, Renderer2, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Colors } from '../../models';
+import { Listener } from 'selenium-webdriver';
 
 @Directive({
     selector: '[appTextToColor]'
@@ -13,7 +14,7 @@ export class TextToColorDirective implements OnInit, AfterViewInit, OnDestroy {
     persent = 60;
     color: string;
     higlightenColor: string;
-    removers: Array<Function> = [];
+    removers: Array<Listener> = [];
 
     @Input() colorMap: Colors = {
         tiny: '#FFC266',
