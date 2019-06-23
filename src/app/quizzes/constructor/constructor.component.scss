@@ -27,6 +27,16 @@ button[type=submit] {
     }
 }
 
+button:disabled {
+    background-color: transparentize(grey, 0.5);
+    color: transparentize(white, 0.5);
+    cursor: not-allowed;
+
+    &:hover {
+        background-color: transparentize(grey, 0.5);
+    }
+}
+
 form {
     margin: 5px;
     @include flex(column, space-between, center);
@@ -45,11 +55,14 @@ hr {
 button.delete {
     background-color: transparent;
     color: $grey;
-    float: right;
+    display: block;
+    @include size(20px, 20px);
+    margin: 0 auto;
 }
 
 button.delete.variant {
-    margin-top: -35px;
+    float: right;
+    margin-top: -29px;
     margin-right: -12px;
     width: auto;
 }

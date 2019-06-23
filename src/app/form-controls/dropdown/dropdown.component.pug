@@ -1,7 +1,9 @@
+label('*ngIf'='label' '[for]'='id') {{label}}
 select(
+    '[id]'='id'
     '[(ngModel)]'='value'
     '(ngModelChange)'='onChange(value)'
 )
-    option('[ngValue]'='null' disabled selected hidden) {{placeholder}}
+    option('value'='' disabled selected hidden) {{placeholder}}
     option('*ngFor'='let option of options' '[ngValue]'='option') {{option}}
 
