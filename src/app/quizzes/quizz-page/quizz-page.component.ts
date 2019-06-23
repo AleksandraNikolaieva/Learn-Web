@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Quizz } from '../models';
 import { ActivatedRoute } from '@angular/router';
 import { quizzes } from '../data';
@@ -6,7 +6,8 @@ import { quizzes } from '../data';
 @Component({
     selector: 'app-quizz-page',
     templateUrl: './quizz-page.component.pug',
-    styleUrls: ['./quizz-page.component.scss']
+    styleUrls: ['./quizz-page.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizzPageComponent implements OnInit {
     quizz: Quizz;

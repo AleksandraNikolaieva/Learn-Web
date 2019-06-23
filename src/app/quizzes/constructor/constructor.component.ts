@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
 import { FieldConfig } from 'src/app/dynamic-forms/models';
 import { QuizzesService } from 'src/app/services/quizzes.service';
@@ -7,7 +7,8 @@ import { QuestionVariant } from '../models';
 @Component({
     selector: 'app-constructor',
     templateUrl: './constructor.component.pug',
-    styleUrls: ['./constructor.component.scss']
+    styleUrls: ['./constructor.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConstructorComponent implements OnInit {
     quizzForm: FormGroup;
@@ -29,7 +30,8 @@ export class ConstructorComponent implements OnInit {
         res.author = '5d02b67d1169ca285e4aa13a'; // for mock quizz
         res.date = new Date();                   // for mock quizz
         this.quizzService.addMockQuizz(res);
-
+        this.quizzForm.reset();
+        this.quizzForm.setControl('questions', this.fb.array([], this.arrLengthValidation(1)));
     }
 
     addQuestion(): void {
@@ -69,7 +71,7 @@ export class ConstructorComponent implements OnInit {
                 return null;
             }
             return {
-                isLengthValid: false
+                arrLength: true
             };
         };
     }
@@ -87,7 +89,7 @@ export class ConstructorComponent implements OnInit {
                 return null;
             }
             return {
-                isChoosed: false
+                answerChoice: true
             };
         };
     }
