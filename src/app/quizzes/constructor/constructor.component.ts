@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
 import { FieldConfig } from 'src/app/dynamic-forms/models';
 import { QuizzesService } from 'src/app/services/quizzes.service';
+import { QuestionVariant } from '../models';
 
 @Component({
     selector: 'app-constructor',
@@ -44,7 +45,7 @@ export class ConstructorComponent implements OnInit {
     addAnswerVariant(index: number): void {
         const question = ((this.quizzForm.get('questions') as FormArray).at(index) as FormGroup);
         question.removeControl('correctAnswer');
-        question.addControl('answerVariants', this.fb.array([], this.arrLengthValidation(2)));
+        question.addControl('answerVariants', this.fb.array([], [this.arrLengthValidation(2), this.isCorrectAnswerChoosed()]));
         (question.get('answerVariants') as FormArray).push(
             this.fb.group({
                 answer: [null, Validators.required],
@@ -69,6 +70,24 @@ export class ConstructorComponent implements OnInit {
             }
             return {
                 isLengthValid: false
+            };
+        };
+    }
+
+    private isCorrectAnswerChoosed(): ValidatorFn {
+        return (arr: FormArray): { [key: string]: boolean } => {
+            let markedAnswers = 0;
+            arr.value.forEach((variant: QuestionVariant) => {
+                if (variant.isCorrect) {
+                    markedAnswers++;
+                }
+            });
+
+            if (markedAnswers > 0) {
+                return null;
+            }
+            return {
+                isChoosed: false
             };
         };
     }

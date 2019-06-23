@@ -15,7 +15,7 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
         app-dropdown(
             '[formControl]'='question.controls["questionType"]'
             '[options]'='["input", "select"]'
-            '[label]'='"Question type"'
+            '[label]'='"Question type:"'
             '[id]'='"Question" + questionIndex + "type"'
         )
         ng-container('*ngIf'='question.controls["questionType"].value === "input"')
