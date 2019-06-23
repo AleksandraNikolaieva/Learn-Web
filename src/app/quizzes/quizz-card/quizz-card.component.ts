@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Quizz } from '../models';
 import { User } from 'src/app/core/models';
 
 @Component({
     selector: 'app-quizz-card',
     templateUrl: './quizz-card.component.pug',
-    styleUrls: ['./quizz-card.component.scss']
+    styleUrls: ['./quizz-card.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizzCardComponent implements OnInit {
     @Input() quizz: Quizz;
