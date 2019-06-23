@@ -30,7 +30,6 @@ button[type=submit] {
 button:disabled {
     background-color: transparentize(grey, 0.5);
     color: transparentize(white, 0.5);
-    cursor: not-allowed;
 
     &:hover {
         background-color: transparentize(grey, 0.5);

@@ -1,10 +1,11 @@
-import { Component, OnInit, forwardRef, Input } from '@angular/core';
+import { Component, OnInit, forwardRef, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, CheckboxControlValueAccessor, ControlValueAccessor } from '@angular/forms';
 
 @Component({
     selector: 'app-checkbox',
     templateUrl: './checkbox.component.pug',
     styleUrls: ['./checkbox.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-dynamic-form',
     templateUrl: './dynamic-form.component.pug',
-    styleUrls: ['./dynamic-form.component.scss']
+    styleUrls: ['./dynamic-form.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicFormComponent implements OnInit {
 
