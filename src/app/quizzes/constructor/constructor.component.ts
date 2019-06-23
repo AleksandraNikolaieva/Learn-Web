@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
 import { FieldConfig } from 'src/app/dynamic-forms/models';
 import { QuizzesService } from 'src/app/services/quizzes.service';
 
@@ -18,7 +18,7 @@ export class ConstructorComponent implements OnInit {
     ngOnInit(): void {
         this.quizzForm = this.fb.group({
             name: [null, [Validators.required, Validators.minLength(2)]],
-            questions: new FormArray([])
+            questions: this.fb.array([], this.arrLengthValidation(1))
         });
     }
 
@@ -33,21 +33,22 @@ export class ConstructorComponent implements OnInit {
 
     addQuestion(): void {
         (this.quizzForm.get('questions') as FormArray).push(
-            new FormGroup({
-                question: new FormControl(null),
-                questionType: new FormControl(null),
-                correctAnswer: new FormControl(null),
-                answerVariants: new FormArray([])
+            this.fb.group({
+                question: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
+                questionType: ['input', Validators.required],
+                correctAnswer: [null, Validators.required]
             })
         );
     }
 
     addAnswerVariant(index: number): void {
-        const question = (this.quizzForm.get('questions') as FormArray).at(index);
+        const question = ((this.quizzForm.get('questions') as FormArray).at(index) as FormGroup);
+        question.removeControl('correctAnswer');
+        question.addControl('answerVariants', this.fb.array([], this.arrLengthValidation(2)));
         (question.get('answerVariants') as FormArray).push(
-            new FormGroup({
-                answer: new FormControl(null),
-                isCorrect: new FormControl(false)
+            this.fb.group({
+                answer: [null, Validators.required],
+                isCorrect: [false]
             })
         );
     }
@@ -59,5 +60,16 @@ export class ConstructorComponent implements OnInit {
     deleteAnswerVariant(indexQuestion: number, indexVariant: number): void {
         const question = (this.quizzForm.get('questions') as FormArray).at(indexQuestion);
         (question.get('answerVariants') as FormArray).removeAt(indexVariant);
+    }
+
+    private arrLengthValidation(min: number): ValidatorFn {
+        return (arr: FormArray): { [key: string]: boolean } => {
+            if (arr.length >= min) {
+                return null;
+            }
+            return {
+                isLengthValid: false
+            };
+        };
     }
 }

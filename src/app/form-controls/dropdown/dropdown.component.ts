@@ -17,6 +17,8 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
     @Input() options: Array<string>;
     @Input() placeholder = 'Make your choice';
+    @Input() label = '';
+    @Input() id = '';
     value: string;
     test = undefined;
 
@@ -25,9 +27,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
     private propagateChange = (value: string) => {};
     private propagateTouched = ($event: FocusEvent) => {};
 
-    ngOnInit() {
-        console.log(this.placeholder);
-    }
+    ngOnInit() {}
 
     writeValue(value: string): void {
         this.value = value;
