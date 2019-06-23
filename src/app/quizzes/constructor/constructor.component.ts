@@ -71,7 +71,7 @@ export class ConstructorComponent implements OnInit {
                 return null;
             }
             return {
-                isLengthValid: false
+                arrLength: true
             };
         };
     }
@@ -89,7 +89,7 @@ export class ConstructorComponent implements OnInit {
                 return null;
             }
             return {
-                isChoosed: false
+                answerChoice: true
             };
         };
     }
