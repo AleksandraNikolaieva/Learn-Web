@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-dynamic-form',
@@ -32,7 +32,8 @@ export class DynamicFormComponent implements OnInit {
                         {
                             value: control.initialValue || '',
                             disabled: control.disabled
-                        }
+                        },
+                        [Validators.required]
                     )
                 );
             }
@@ -43,6 +44,10 @@ export class DynamicFormComponent implements OnInit {
     onSubmit(form: FormGroup) {
         if (form.valid) {
             this.submitted.emit(form.value);
+        } else {
+            Object.values(form.controls).forEach(control => {
+                control.markAsTouched();
+            });
         }
     }
 
