@@ -2,4 +2,5 @@ form('[formGroup]'='form' '(submit)'='onSubmit(form)' novalidate='', autocomplet
     ng-container('*ngFor'='let field of config; let i = index')
         label('*ngIf'='field.label') {{i + 1}}. {{field.label}}
         ng-container(appDynamicField '[config]'='field' '[group]'='form')
+        app-error-message('[field]'='form.get(field.name)')
     button(type='submit') Submit
