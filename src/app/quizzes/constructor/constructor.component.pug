@@ -5,6 +5,7 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
         '[id]'='"quizzName"'
         'placeholder'='Start typing...'
     )
+    app-error-message('[field]'='quizzForm.get("name")')
     fieldset('*ngFor'='let question of quizzForm.get("questions")["controls"]; let questionIndex = index')
         app-text-input(
             '[formControl]'='question.controls["question"]'
@@ -12,6 +13,7 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
             '[id]'='"question" + questionIndex'
             'placeholder'='question'
         )
+        app-error-message('[field]'='question.get("question")')
         app-dropdown(
             '[formControl]'='question.controls["questionType"]'
             '[options]'='["input", "select"]'
@@ -25,6 +27,7 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
                 '[id]'='"correctAnswer"  + questionIndex'
                 '[formControl]'='question.controls["correctAnswer"]'
             )
+            app-error-message('[field]'='question.get("correctAnswer")')
         ng-container('*ngIf'='question.controls["questionType"].value === "select"')
             hr
             ng-container('*ngFor'='let variant of question.controls.answerVariants?.controls; let variantIndex = index')
@@ -36,6 +39,7 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
                     '[formControl]'='variant.controls["answer"]'
                     'placeholder'='variant {{variantIndex + 1}}'
                 )
+                app-error-message('[field]'='variant.get("answer")')
                 button(
                     'class'='delete variant'
                     'type'='button'
@@ -46,6 +50,7 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
                 'type'='button'
                 '(click)'='addAnswerVariant(questionIndex)'
             ) Add answer variant
+            app-error-message('[field]'='question.get("answerVariants")')
         button(
             'class'='delete question'
             'type'='button'
@@ -53,5 +58,6 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
         )
             i.icon-remove
     button(type='button' '(click)'='addQuestion()') Add question
+    app-error-message('[field]'='quizzForm.get("questions")')
     br
-    button('type'='submit', '[disabled]'='quizzForm.invalid && quizzForm.touched') Submit
+    button('type'='submit') Submit
