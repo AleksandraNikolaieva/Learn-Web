@@ -32,7 +32,7 @@ export class ErrorMessageComponent implements OnInit {
             this.errorsConfig.maxlength = `Maximum length is ${this.field.errors.maxlength.requiredLength}`;
         }
         if (this.field.errors.hasOwnProperty('arrLength')) {
-            this.errorsConfig.arrLength = `Should be at least ${this.field.errors.arrLength.minLength} item`;
+            this.errorsConfig.arrLength = `Should be at least ${this.field.errors.arrLength.minLength} items`;
         }
         if (this.field.errors) {
             Object.keys(this.field.errors).forEach(errType => {
