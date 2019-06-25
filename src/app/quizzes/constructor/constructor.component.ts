@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
 import { FieldConfig } from 'src/app/dynamic-forms/models';
 import { QuizzesService } from 'src/app/services/quizzes.service';
@@ -15,7 +15,8 @@ export class ConstructorComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private quizzService: QuizzesService) { }
+        private quizzService: QuizzesService,
+        private cdr: ChangeDetectorRef) { }
 
     ngOnInit(): void {
         this.quizzForm = this.fb.group({
@@ -25,6 +26,10 @@ export class ConstructorComponent implements OnInit {
     }
 
     onSubmit(): void {
+        if (this.quizzForm.invalid) {
+            this.showErrors(this.quizzForm);
+            return;
+        }
         const res = this.quizzForm.value;
         console.log(res);
         res.author = '5d02b67d1169ca285e4aa13a'; // for mock quizz
@@ -32,6 +37,18 @@ export class ConstructorComponent implements OnInit {
         this.quizzService.addMockQuizz(res);
         this.quizzForm.reset();
         this.quizzForm.setControl('questions', this.fb.array([], this.arrLengthValidation(1)));
+    }
+
+    showErrors(formgroup: FormGroup) {
+        Object.values(formgroup.controls).forEach(control => {
+            control.markAsTouched();
+
+            if (control instanceof FormArray) {
+                (control.controls as Array<FormGroup>).forEach(controlItem => {
+                    this.showErrors(controlItem);
+                });
+            }
+        });
     }
 
     addQuestion(): void {
@@ -66,12 +83,12 @@ export class ConstructorComponent implements OnInit {
     }
 
     private arrLengthValidation(min: number): ValidatorFn {
-        return (arr: FormArray): { [key: string]: boolean } => {
+        return (arr: FormArray): { [key: string]: {minLength: number, actualLength: number} } => {
             if (arr.length >= min) {
                 return null;
             }
             return {
-                arrLength: true
+                arrLength: {minLength: min, actualLength: arr.length}
             };
         };
     }
