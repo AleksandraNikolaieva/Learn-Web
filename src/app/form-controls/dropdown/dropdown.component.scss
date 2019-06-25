@@ -3,6 +3,12 @@
 :host  {
     display: block;
 
+    span {
+        font-size: 12px;
+        font-family: $titillium;
+        font-weight: normal;
+    }
+
     select {
         width: 100%;
         padding: 5px;
@@ -12,6 +18,12 @@
         outline: none;
         color: #bfbfbf;
         margin: 5px 0;
+        height: auto;
+        overflow: auto;
+
+        option {
+            padding: 5px 0;
+        }
 
         &:focus{
             box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.8)
