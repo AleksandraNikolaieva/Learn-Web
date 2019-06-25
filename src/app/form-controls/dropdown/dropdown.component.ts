@@ -20,8 +20,8 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
     @Input() placeholder = 'Make your choice';
     @Input() label = '';
     @Input() id = '';
+    @Input() isMultiple = true;
     value: string;
-    test = undefined;
 
     constructor() { }
 

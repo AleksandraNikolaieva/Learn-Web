@@ -1,8 +1,10 @@
 label('*ngIf'='label' '[for]'='id') {{label}}
+span('*ngIf'='isMultiple') (Hold down the Ctrl/Command button to select multiple options)
 select(
     '[id]'='id'
     '[(ngModel)]'='value'
     '(ngModelChange)'='onChange(value)'
+    '[multiple]'='isMultiple'
 )
     option('value'='' disabled selected hidden) {{placeholder}}
     option('*ngFor'='let option of options' '[ngValue]'='option') {{option}}
