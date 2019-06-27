@@ -7,6 +7,10 @@ import { CommentsService } from 'src/app/services/comments.service';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users.service';
 import { Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/store/reducers';
+import { selectAuthData } from 'src/app/auth/store/auth.selectors';
+import { AuthData } from 'src/app/auth/models';
 
 @Component({
     selector: 'app-workshop-comments',
@@ -27,8 +31,9 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private authService: AuthService,
         private userService: UsersService,
-        private cdr: ChangeDetectorRef
-        ) { }
+        private cdr: ChangeDetectorRef,
+        private store: Store<AppState>
+    ) { }
 
     ngOnInit() {
         this.subscriptions.push(
@@ -41,8 +46,11 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         });
 
         this.subscriptions.push(
-            this.authService.getLoggedUserObs().subscribe(res => {
-                this.loggedUser = res;
+            this.store.pipe(
+                select(selectAuthData)
+            )
+            .subscribe((authData: AuthData) => {
+                this.loggedUser = authData;
             })
         );
     }

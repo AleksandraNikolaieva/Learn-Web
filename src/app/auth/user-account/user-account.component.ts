@@ -3,8 +3,12 @@ import { AuthService } from 'src/app/services/auth.service';
 import { User, Role } from 'src/app/core/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/store/reducers';
+import { SignedOut, ChangeAuthData } from '../store/auth.actions';
+import { selectAuthData } from '../store/auth.selectors';
+import { AuthData } from '../models';
 
 @Component({
     selector: 'app-user-account',
@@ -18,8 +22,8 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     constructor(
         private authService: AuthService,
+        private store: Store<AppState>,
         private usersService: UsersService,
-        private router: Router,
         private fb: FormBuilder) { }
 
     ngOnInit() {
@@ -29,11 +33,14 @@ export class UserAccountComponent implements OnInit, OnDestroy {
             picture: [''],
             newPassword: [null, Validators.minLength(6)]
         });
-        this.subscription = this.authService.getLoggedUserObs()
-        .subscribe(res => {
-            if (res) {
-                this.user = res;
-                this.infoForm.patchValue(res);
+
+        this.subscription = this.store.pipe(
+            select(selectAuthData)
+        )
+        .subscribe((authData: AuthData) => {
+            this.user = authData;
+            if (authData) {
+                this.infoForm.patchValue(authData);
             }
         });
     }
@@ -46,9 +53,9 @@ export class UserAccountComponent implements OnInit, OnDestroy {
         const values = this.infoForm.value;
 
         this.usersService.updateUser(this.user._id, values.firstName, values.lastName, values.picture, values.newPassword)
-        .subscribe(res => {
-            if (res) {
-                this.authService.changeLoggedUserInfo(res);
+        .subscribe(newInfo => {
+            if (newInfo) {
+                this.store.dispatch(new ChangeAuthData({newInfo}));
                 alert('changed succesfully');
             }
         });
@@ -59,13 +66,11 @@ export class UserAccountComponent implements OnInit, OnDestroy {
             if (res) {
                 alert('Profile successfully deleted');
                 this.logOut();
-                this.router.navigate(['/']);
             }
         });
     }
 
     logOut(): void {
-        this.authService.logOut();
-        this.router.navigate(['/']);
+        this.store.dispatch(new SignedOut());
     }
 }

@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../workshops/models';
-import { Tag } from '../shared/models';
-import { of, Observable, BehaviorSubject } from 'rxjs';
-import { AuthService } from './auth.service';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { ApiService } from './api.service';
-import { HttpParams } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
-import { thisTypeAnnotation } from 'babel-types';
 
 @Injectable({
     providedIn: 'root'

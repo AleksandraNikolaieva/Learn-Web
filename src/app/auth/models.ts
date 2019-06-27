@@ -1,10 +1,9 @@
-export interface MenuItem {
-    title: string;
-    icon: string;
-    link: string;
+export interface Credentials {
+    username: string;
+    password: string;
 }
 
-export interface User {
+export interface AuthData {
     _id: string;
     username: string;
     role: string;
@@ -15,6 +14,5 @@ export interface User {
     updatedAt: string;
     lastLogin: string;
     posts: Array<string>;
+    token?: string;
 }
-
-export type Role = 'admin' | 'student' | 'guest';
