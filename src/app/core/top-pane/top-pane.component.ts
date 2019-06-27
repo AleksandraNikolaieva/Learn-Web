@@ -6,6 +6,10 @@ import { Component, OnInit,
 import { User } from '../models';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
+import { AppState } from 'src/app/store/reducers';
+import { Store, select } from '@ngrx/store';
+import { selectAuthData } from 'src/app/auth/store/auth.selectors';
+import { AuthData } from 'src/app/auth/models';
 
 @Component({
     selector: 'app-top-pane',
@@ -23,13 +27,18 @@ export class TopPaneComponent implements OnInit, OnDestroy {
     isSearchOpen = false;
     subscription: Subscription;
 
-    constructor(private authService: AuthService, private cdf: ChangeDetectorRef) { }
+    constructor(
+        private authService: AuthService,
+        private cdf: ChangeDetectorRef,
+        private store: Store<AppState>) { }
 
     ngOnInit() {
-        this.subscription = this.authService.getLoggedUserObs().subscribe(res => {
-            this.user = res;
-            this.cdf.detectChanges();
-            if (res) {
+        this.subscription = this.store.pipe(
+            select(selectAuthData)
+        )
+        .subscribe((authData: AuthData) => {
+            this.user = authData;
+            if (authData) {
                 this.getInitials();
             }
         });

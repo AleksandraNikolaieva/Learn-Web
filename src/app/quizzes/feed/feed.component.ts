@@ -9,6 +9,10 @@ import { Subscription } from 'rxjs';
 import { QuizzesService } from 'src/app/services/quizzes.service';
 import { UsersService } from 'src/app/services/users.service';
 import { map } from 'rxjs/operators';
+import { AppState } from 'src/app/store/reducers';
+import { Store, select } from '@ngrx/store';
+import { selectAuthData } from 'src/app/auth/store/auth.selectors';
+import { AuthData } from 'src/app/auth/models';
 
 @Component({
     selector: 'app-feed',
@@ -25,13 +29,20 @@ export class FeedComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private quizzesService: QuizzesService,
         private usersService: UsersService,
-        private cdr: ChangeDetectorRef) {}
+        private cdr: ChangeDetectorRef,
+        private store: Store<AppState>) {}
 
     ngOnInit() {
-        this.subscription = this.authService.getLoggedUserObs().subscribe(res => {
+        this.subscription = this.store.pipe(
+            select(selectAuthData)
+        )
+        .subscribe((authData: AuthData) => {
+            this.loggedUser = authData;
+        });
+        /* this.subscription = this.authService.getLoggedUserObs().subscribe(res => {
             this.loggedUser = res;
             this.cdr.detectChanges();
-        });
+        }); */
         this.quizzes = this.quizzesService.getMockQuizzes();
         this.quizzes.forEach(quizz => {
             quizz.authorName = this.usersService.getUserById(quizz.author)

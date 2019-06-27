@@ -3,7 +3,11 @@ import { UsersService } from './users.service';
 import { Article } from '../workshops/models';
 import { User } from '../core/models';
 import { AuthService } from './auth.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { AppState } from '../store/reducers';
+import { Store, select } from '@ngrx/store';
+import { selectAuthData } from '../auth/store/auth.selectors';
+import { AuthData } from '../auth/models';
 
 @Injectable({
     providedIn: 'root'
@@ -11,10 +15,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class CategoriesService {
     private user: User;
     private activeCategory$: BehaviorSubject<string> = new BehaviorSubject(null);
+    private subscription: Subscription;
 
-    constructor(private authService: AuthService) {
-        this.authService.getLoggedUserObs().subscribe(res => {
-            this.user = res;
+    constructor(
+        private authService: AuthService,
+        private store: Store<AppState>
+    ) {
+        this.subscription = this.store.pipe(
+            select(selectAuthData)
+        ).subscribe((authData: AuthData) => {
+            this.user = authData;
         });
     }
 

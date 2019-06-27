@@ -10,6 +10,8 @@ import { QuizzPageComponent } from './quizz-page/quizz-page.component';
 import { QuizzConfigPipe } from '../pipes/quizz-config.pipe';
 import { QuizzCardComponent } from './quizz-card/quizz-card.component';
 import { ConstructorComponent } from './constructor/constructor.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
     declarations: [
