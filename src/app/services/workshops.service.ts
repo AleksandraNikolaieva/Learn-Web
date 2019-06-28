@@ -13,7 +13,7 @@ export class WorkshopsService {
 
     constructor(private apiService: ApiService) { }
 
-    public createPost(tags: Array<number>, title: string, text: string): Observable<Article> {
+    createPost(tags: Array<number>, title: string, text: string): Observable<Article> {
         const body = {
             tags,
             title,
@@ -22,7 +22,7 @@ export class WorkshopsService {
         return this.apiService.postRequest('posts', body);
     }
 
-    public getAllPosts(page = '0', tags?: string, authorId?: string, withComments = false): Observable<Array<Article>> {
+    getAllPosts(page = '0', tags?: string, authorId?: string, withComments = false): Observable<Array<Article>> {
         const comments  = withComments ? '1' : undefined;
         const params = {
             page,
@@ -36,11 +36,11 @@ export class WorkshopsService {
         );
     }
 
-    public getPostById(id: string): Observable<Article> {
+    getPostById(id: string): Observable<Article> {
         return this.apiService.getRequest(`posts/${id}`);
     }
 
-    public updetePost(
+    updetePost(
         id: string,
         tags: Array<number>,
         title: string,
@@ -69,15 +69,15 @@ export class WorkshopsService {
         );
     }
 
-    public deletePost(id: string): Observable<Article> {
+    deletePost(id: string): Observable<Article> {
         return this.apiService.deleteRequest(`posts/${id}`);
     }
 
-    public getStoredWs(): Observable<Array<Article>> {
+    getStoredWs(): Observable<Array<Article>> {
         return this.storedWS$.asObservable();
     }
 
-    public setStoredWS(workshops: Array<Article>): void {
+    setStoredWS(workshops: Array<Article>): void {
         this.storedWS$.next(workshops);
     }
 }

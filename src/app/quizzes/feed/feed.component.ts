@@ -39,10 +39,7 @@ export class FeedComponent implements OnInit, OnDestroy {
         .subscribe((authData: AuthData) => {
             this.loggedUser = authData;
         });
-        /* this.subscription = this.authService.getLoggedUserObs().subscribe(res => {
-            this.loggedUser = res;
-            this.cdr.detectChanges();
-        }); */
+
         this.quizzes = this.quizzesService.getMockQuizzes();
         this.quizzes.forEach(quizz => {
             quizz.authorName = this.usersService.getUserById(quizz.author)

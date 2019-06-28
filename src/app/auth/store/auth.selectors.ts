@@ -4,17 +4,17 @@ import { AuthData } from '../models';
 
 export const selectAuthState = createFeatureSelector<AuthState>('auth');
 
-/* export const selectAuthenticated  = createSelector(
+export const selectAuthenticated  = createSelector(
     selectAuthState,
     (state: AuthState) => state.isLogged
-); */
+);
 
 export const selectAuthData = createSelector(
     selectAuthState,
     (state: AuthState) => state.authData
 );
 
-/* export const selectAuthenticationToken = createSelector(
+export const selectAuthenticationToken = createSelector(
     selectAuthData,
     (authData: AuthData | null) => authData ? authData.token : null
-); */
+);

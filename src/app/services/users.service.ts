@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { User, Role } from '../core/models';
+import { User, Role, UserParams } from '../core/models';
 import { tap, map } from 'rxjs/operators';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class UsersService {
     constructor(private api: ApiService) {
     }
 
-    public createUser(username: string, password: string, role?: Role): Observable<User> {
+    createUser(username: string, password: string, role?: Role): Observable<User> {
         const body = {
             username,
             password,
@@ -21,34 +21,22 @@ export class UsersService {
         return this.api.postRequest('users', body);
     }
 
-    public getAllUsers(): Observable<Array<User>> {
+    getAllUsers(): Observable<Array<User>> {
         return this.api.getRequest('users');
     }
 
-    public getUserById(id: string): Observable<User> {
+    getUserById(id: string): Observable<User> {
         return this.api.getRequest(`users/${id}`);
     }
 
-    public updateUser(
-        id: string,
-        firstName?: string,
-        lastName?: string,
-        picture?: string,
-        newPassword?: string
-    ): Observable<User> {
-        const body = {
-            firstName,
-            lastName,
-            picture,
-            newPassword
-        };
-        return this.api.putRequest(`users/${id}`, body)
+    updateUser(id: string, newInfo: UserParams): Observable<User> {
+        return this.api.putRequest(`users/${id}`, newInfo)
         .pipe(
             map(res => res.user)
         );
     }
 
-    public deleteUserById(id: string) {
+    deleteUserById(id: string) {
         return this.api.deleteRequest(`users/${id}`);
     }
 }

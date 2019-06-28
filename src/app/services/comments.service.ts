@@ -12,7 +12,7 @@ export class CommentsService {
 
     constructor(private api: ApiService) { }
 
-    public createComment(post: string, text: string): Observable<Comment> {
+    createComment(post: string, text: string): Observable<Comment> {
         const body = {
             post,
             text
@@ -24,11 +24,11 @@ export class CommentsService {
 
     }
 
-    public getCommentsByPostId(id: string): Observable<Array<Comment>> {
+    getCommentsByPostId(id: string): Observable<Array<Comment>> {
         return this.api.getRequest(`comments/${id}`);
     }
 
-    public updateComment(postId: string, commentId: string, text: string): Observable<Comment> {
+    updateComment(postId: string, commentId: string, text: string): Observable<Comment> {
         const body = {
             text
         };
@@ -38,7 +38,7 @@ export class CommentsService {
         );
     }
 
-    public deleteComment(postId: string, commentId: string): Observable<any> {
+    deleteComment(postId: string, commentId: string): Observable<any> {
         return this.api.deleteRequest(`comments/${postId}/${commentId}`);
     }
 }

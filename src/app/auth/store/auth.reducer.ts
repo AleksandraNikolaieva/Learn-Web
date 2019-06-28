@@ -1,10 +1,9 @@
-import { Action } from '@ngrx/store';
 import { AuthActions, AuthActionTypes } from './auth.actions';
 import { AuthData } from '../models';
 
 export interface AuthState {
     isLogged: boolean;
-    authData: AuthData | null;
+    authData: Partial<AuthData> | null;
 }
 
 export const initialState: AuthState = {
@@ -28,11 +27,10 @@ export function authReducer(state = initialState, action: AuthActions): AuthStat
                 isLogged: false,
                 authData: null
             };
-        case AuthActionTypes.ChangeLoggedUserInfo:
+        case AuthActionTypes.UserInfoUpdated:
             return {
                 ...state,
-                isLogged: true,
-                authData: action.payload.newInfo
+                authData: {...state.authData, ...action.payload.updatedInfo}
             };
         default:
             return state;
