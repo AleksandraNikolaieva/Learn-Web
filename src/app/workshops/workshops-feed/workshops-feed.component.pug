@@ -1,7 +1,7 @@
 app-viewport
     .tag-group(main)
         app-tag(
-            '*ngFor'='let tagItem of tags'
+            '*ngFor'='let tagItem of tags$ | async'
             '[tagName]'='tagItem.name'
             '(changeActive)'='activateTag($event)'
             )
@@ -13,6 +13,6 @@ app-viewport
            '(click)'='activateCategory(category)'
         ) {{category.title}}
     .workshop-feed-content(main)
-        span('*ngIf'='!articles?.length') Required articles do not exist
-        app-article('*ngFor'='let articleItem of articles', [article]='articleItem' '[tags]'='tags' '[@enterLeaveHeight]'='true')
+        span('*ngIf'='!(articles$ | async)?.length') Required articles do not exist
+        app-article('*ngFor'='let articleItem of articles$ | async', [article]='articleItem' '[tags]'='tagsEntities$ | async' '[@enterLeaveHeight]'='true')
 

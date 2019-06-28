@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Article, Category } from '../models';
+import { Article, Category, WorkshopsParams } from '../models';
 import { Tag } from '../../shared/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkshopsService } from 'src/app/services/workshops.service';
@@ -10,6 +10,13 @@ import { map, switchMap, first } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { TagsService } from 'src/app/services/tags.service';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/store/reducers';
+import { selectWorkshops } from '../store/workshops.selectors';
+import { WorkshopsRequested } from '../store/workshops.actions';
+import { TagsRequested } from 'src/app/store/tags/tags.actions';
+import { selectAllTags, selectEntitiesTags } from 'src/app/store/tags/tags.selectors';
+import { Dictionary } from '@ngrx/entity';
 
 @Component({
     selector: 'app-workshops-feed',
@@ -19,11 +26,15 @@ import { TagsService } from 'src/app/services/tags.service';
     animations: [enterLeaveHeight]
 })
 export class WorkshopsFeedComponent implements OnInit, OnDestroy {
-    articles: Array<Article>;
+    articles$: Observable<Array<Article>>;
+    tags$: Observable<Array<Tag>>;
+    tagsEntities$: Observable<Dictionary<Tag>>;
+
     activeTags: Array<string> = [];
     activeCategory: string;
+
     subscriptions: Array<Subscription> = [];
-    tags: Array<Tag>;
+
     categories: Array<Category> = [
         {
             id: 1,
@@ -47,15 +58,18 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         private userService: UsersService,
         private categoriesService: CategoriesService,
         private tagsService: TagsService,
-        private cdr: ChangeDetectorRef) { }
+        private cdr: ChangeDetectorRef,
+        private store: Store<AppState>) { }
 
     ngOnInit() {
-        this.subscriptions.push(
-            this.route.data.subscribe(data => {
-                this.tags = data.tags;
-            })
-        );
-        this.getFeedState()
+        this.store.dispatch(new WorkshopsRequested({params: new WorkshopsParams()}));
+        this.store.dispatch(new TagsRequested());
+
+        this.articles$ = this.store.pipe(select(selectWorkshops));
+        this.tags$ = this.store.pipe(select(selectAllTags));
+        this.tagsEntities$ = this.store.pipe(select(selectEntitiesTags));
+
+        /*this.getFeedState()
         .pipe(
             first()
         ).subscribe(res => {
@@ -99,7 +113,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             this.articles = this.categoriesService.filterByCategory(this.activeCategory, this.articles);
             this.wsService.setStoredWS(this.articles);
             this.cdr.detectChanges();
-        });
+        }); */
     }
 
     ngOnDestroy() {
@@ -149,19 +163,19 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         });
     }
 
-    getFeedState(): Observable<Array<any>> {
+    /* getFeedState(): Observable<Array<any>> {
         const category$ = this.categoriesService.getActiveCategory();
         const tags$ = this.tagsService.getActiveTagsObs();
         const workshops$ = this.wsService.getStoredWs();
         return zip(category$, tags$, workshops$);
-    }
+    } */
 
-    navigate(category: string, tags: Array<string>) {
+    /* navigate(category: string, tags: Array<string>) {
         this.router.navigate([], {
             queryParams: {
                 category: category === 'all' ? undefined : category,
                 tags: tags.length ? tags.join(',') : undefined
             }
         });
-    }
+    } */
 }

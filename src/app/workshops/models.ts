@@ -5,7 +5,7 @@ export interface Article {
     id: string;
     _author: string;
     author$?: Observable<string>;
-    tags: Array<string>;
+    tags: Array<number>;
     title: string;
     description: string;
     text: string;
@@ -33,3 +33,14 @@ export interface Category {
     id: number;
     title: string;
 }
+
+export class WorkshopsParams {
+    constructor(
+        public page = '0',
+        public tags?: string,
+        public authorId?: string,
+        public withComments?: string
+    ) {}
+}
+
+

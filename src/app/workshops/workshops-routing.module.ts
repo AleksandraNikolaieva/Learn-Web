@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { WorkshopsFeedComponent } from './workshops-feed/workshops-feed.component';
 import { WorkshopPageComponent } from './workshop-page/workshop-page.component';
 import { AuthGuard } from '../guards/auth.guard';
-import { WorkshopsFeedResolver } from '../resolvers/workshops-feed.resolver';
 import { WorkshopsPageResolver } from '../resolvers/workshops-page.resolver';
 import { WorkshopCommentsComponent } from './workshop-comments/workshop-comments.component';
 import { WorkshopQuizzesComponent } from './workshop-quizzes/workshop-quizzes.component';
@@ -23,19 +22,19 @@ const workshopsRoutes: Routes = [
         path: 'feed',
         component: WorkshopsFeedComponent,
         canActivate: [AuthGuard],
-        resolve: {
+        /* resolve: {
             workshops: WorkshopsFeedResolver,
             tags: TagsResolver
-        }
+        } */
     },
     {
         path: ':id',
         component: WorkshopPageComponent,
         canActivate: [AuthGuard],
-        resolve: {
+        /* resolve: {
             workshop: WorkshopsPageResolver,
             tags: TagsResolver
-        },
+        }, */
         children: [
             {
                 path: 'workshop',
@@ -51,9 +50,9 @@ const workshopsRoutes: Routes = [
                     {
                         path: 'comments',
                         component: WorkshopCommentsComponent,
-                        resolve: {
+                        /* resolve: {
                             comments: WorkshopCommentResolver
-                        }
+                        } */
                     },
                     {
                         path: 'resources',

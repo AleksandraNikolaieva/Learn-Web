@@ -7,7 +7,7 @@ app-card
     div(footer)
         .row
             span 
-                i.icon-user  {{article.author$ | async}}
+                i.icon-user  {{article._author}}
             app-timestamp([date]='article.createdAt' toFormat='day')
         app-like(
             [isActive]='false',
@@ -15,4 +15,4 @@ app-card
             (changeLike)='changeLikeHandler($event)'
         )
         p.tags
-            span('*ngFor'='let tag of articleTags') {{tag}}
+            span('*ngFor'='let tag of article.tags | tagsMap : tags') {{tag?.name}}
