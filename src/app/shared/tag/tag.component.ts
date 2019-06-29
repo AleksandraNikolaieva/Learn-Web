@@ -8,13 +8,13 @@ import { Tag } from '../models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TagComponent implements OnInit {
-    @Input() tagName: string;
+    @Input() tag: Tag;
     @Output() changeActive = new EventEmitter<string>();
     constructor() { }
 
     ngOnInit() {}
 
     toggleActive(): void {
-        this.changeActive.emit(this.tagName);
+        this.changeActive.emit(this.tag.seq.toString());
     }
 }

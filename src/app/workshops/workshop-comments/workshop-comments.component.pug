@@ -1,4 +1,4 @@
-ng-container('*ngFor'='let commentItem of comments, let i = index')
+ng-container('*ngFor'='let commentItem of comments; let i = index; trackBy: trackByFunction')
     app-comment([comment]='commentItem' '*ngIf'='editorNumber != i')
     ng-container('*ngIf'='loggedUser?._id == commentItem._author')
         ng-container('*ngIf'='editorNumber == i')

@@ -22,7 +22,7 @@ export class ApiService {
         let httpParams = new HttpParams();
 
         for (const item in params) {
-            if (params.hasOwnProperty(item) && params[item] !== undefined) {
+            if (params.hasOwnProperty(item) && params[item] !== undefined && params[item] !== null) {
                 httpParams = httpParams.append(item, params[item]);
             }
         }

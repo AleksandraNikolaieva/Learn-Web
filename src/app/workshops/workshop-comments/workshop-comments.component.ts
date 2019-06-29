@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CommentsService } from 'src/app/services/comments.service';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
 import { selectAuthData } from 'src/app/auth/store/auth.selectors';
@@ -36,21 +36,24 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.subscriptions.push(
-            this.route.data.subscribe(res => {
-                this.comments = res.comments;
-            })
-        );
-        this.route.parent.parent.params.subscribe(res => {
-            this.postId = res.id;
+        this.postId = this.route.snapshot.parent.parent.params.id;
+
+        this.commentsService.getCommentsByPostId(this.postId)
+        .pipe(
+            map(commentsArr => commentsArr.map(commentItem => {
+                commentItem.author$ = this.userService.getUserById(commentItem._author);
+                return commentItem;
+            }))
+        )
+        .subscribe((comments: Comment[]) => {
+            this.comments = comments;
+            this.cdr.detectChanges();
         });
 
         this.subscriptions.push(
-            this.store.pipe(
-                select(selectAuthData)
-            )
-            .subscribe((authData: AuthData) => {
-                this.loggedUser = authData;
+            this.store.pipe(select(selectAuthData))
+            .subscribe((user: AuthData) => {
+                this.loggedUser = user;
             })
         );
     }
@@ -95,5 +98,12 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
             this.comments.push(res);
             this.cdr.detectChanges();
         });
+    }
+
+    trackByFunction(index: number, item: Comment) {
+        if (!item) {
+            return null;
+        }
+        return item._id;
     }
 }

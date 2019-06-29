@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Article } from '../models';
 import { Tag } from 'src/app/shared/models';
+import { Dictionary } from '@ngrx/entity';
+import { User } from 'src/app/core/models';
 
 @Component({
     selector: 'app-article',
@@ -10,11 +12,12 @@ import { Tag } from 'src/app/shared/models';
 })
 export class ArticleComponent implements OnInit {
     @Input() article: Article;
-    @Input() tags: Array<Tag>;
+    @Input() tagsMap: Dictionary<Tag>;
+    @Input() usersMap: Dictionary<User>;
+
     constructor() { }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     changeLikeHandler(to: boolean): void {
         // send changes to server

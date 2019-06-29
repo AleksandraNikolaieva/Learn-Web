@@ -14,6 +14,8 @@ import { workshopsReducer } from './store/workshops.reducer';
 import { WorkshopsEffects } from './store/workshops.effects';
 import { tagsReducer } from '../store/tags/tags.reducer';
 import { TagsEffects } from '../store/tags/tags.effects';
+import { usersReducer } from '../store/users/users.reducer';
+import { UsersEffects } from '../store/users/users.effects';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import { TagsEffects } from '../store/tags/tags.effects';
         StoreModule.forFeature('workshops', workshopsReducer),
         EffectsModule.forFeature([WorkshopsEffects]),
         StoreModule.forFeature('tags', tagsReducer),
-        EffectsModule.forFeature([TagsEffects])
+        EffectsModule.forFeature([TagsEffects]),
+        StoreModule.forFeature('users', usersReducer),
+        EffectsModule.forFeature([UsersEffects])
     ]
 })
 export class WorkshopsModule { }

@@ -5,6 +5,8 @@ export enum TagsActionTypes {
     TagsRequested = '[Tags] Tags Requested',
     TagsReceived = '[Tags] Tags Received',
     TagsRequestFalled = '[Tags] Tags Request Falled',
+
+    TagsActivated = '[Tags] Tags Activated'
 }
 
 export class TagsRequested implements Action {
@@ -23,4 +25,14 @@ export class TagsRequestFalled implements Action {
     constructor(public payload: {error: any}) {}
 }
 
-export type TagsActions = TagsRequested | TagsReceived | TagsRequestFalled;
+export class TagsActivated implements Action {
+    readonly type = TagsActionTypes.TagsActivated;
+
+    constructor(public payload: {tags: string}) {}
+}
+
+export type TagsActions =
+    TagsRequested |
+    TagsReceived |
+    TagsRequestFalled |
+    TagsActivated;

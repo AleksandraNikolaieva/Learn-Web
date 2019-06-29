@@ -82,8 +82,4 @@ export class TopPaneComponent implements OnInit, OnDestroy {
         }
         this.cdf.detectChanges();
     }
-
-    ngDoCheck(): void {
-        console.log('app checked');
-    }
 }

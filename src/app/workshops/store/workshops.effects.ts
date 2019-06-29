@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { WorkshopsService } from 'src/app/services/workshops.service';
-import { WorkshopsRequested, WorkshopsActionTypes, WorkshopsReceived, WorkshopsRequestFalled } from './workshops.actions';
+import { WorkshopsRequested, WorkshopsActionTypes, WorkshopsReceived, WorkshopsRequestFalled, WorkshopPageRequested, WorkshopPageReceived } from './workshops.actions';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { WorkshopsParams, Article } from '../models';
 import { of } from 'rxjs';
@@ -27,6 +27,24 @@ export class WorkshopsEffects {
                     return new WorkshopsReceived({workshops});
                 }),
                 catchError(error => {
+                    return of(new WorkshopsRequestFalled({error}));
+                })
+            );
+        })
+    );
+
+    @Effect()
+    $workshopPageRequested = this.actions$
+    .pipe(
+        ofType<WorkshopPageRequested>(WorkshopsActionTypes.WorkshopPageRequested),
+        map((action: WorkshopPageRequested) => action.payload),
+        exhaustMap(({pageId}: {pageId: string}) => {
+            return this.workshopsService.getPostById(pageId)
+            .pipe(
+                map((workshop: Article) => {
+                    return new WorkshopPageReceived({workshop});
+                }),
+                catchError((error: any) => {
                     return of(new WorkshopsRequestFalled({error}));
                 })
             );

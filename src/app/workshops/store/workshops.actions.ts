@@ -6,13 +6,11 @@ export enum WorkshopsActionTypes {
     WorkshopsReceived = '[Workshops] Workshops Successfully Loaded',
     WorkshopsRequestFalled = '[Workshops] Workshops Loading Falled',
 
-/*     TagsRequested = '[Workshops] Tags Requested',
-    TagsReceived = '[Workshops] Tags Received Successfully',
-    TagsRequestFalled = '[Workshops] Tags Request Falled',
+    CategoryActivated = '[Workshops] Category Activated',
 
-    UsersRequested = '[Workshops] Users Requested',
-    UserReceived = '[Workshops] Users Received Successfully',
-    UserRequestFalled = '[Workshops] Users Request Falled', */
+    WorkshopPageRequested = '[Workshops] Workshop Page Requested',
+    WorkshopPageReceived = '[Workshops] Workshop Page Received',
+    WorkshopPageRequestFalled = '[Workshops] Workshop Page Request Falled'
 }
 
 export class WorkshopsRequested implements Action {
@@ -33,7 +31,35 @@ export class WorkshopsRequestFalled implements Action {
     constructor(public payload: {error: any}) {}
 }
 
+export class CategoryActivated implements Action {
+    readonly type = WorkshopsActionTypes.CategoryActivated;
+
+    constructor(public payload: {category: string}) {}
+}
+
+export class WorkshopPageRequested implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopPageRequested;
+
+    constructor(public payload: {pageId: string}) {}
+}
+
+export class WorkshopPageReceived implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopPageReceived;
+
+    constructor(public payload: {workshop: Article}) {}
+}
+
+export class WorkshopPageRequestFalled implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopPageRequestFalled;
+
+    constructor(public payload: {error: any}) {}
+}
+
 export type WorkshopsActions =
     WorkshopsRequested |
     WorkshopsReceived |
-    WorkshopsRequestFalled;
+    WorkshopsRequestFalled |
+    CategoryActivated |
+    WorkshopPageRequested |
+    WorkshopPageReceived |
+    WorkshopPageRequestFalled;

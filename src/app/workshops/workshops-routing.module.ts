@@ -21,20 +21,12 @@ const workshopsRoutes: Routes = [
     {
         path: 'feed',
         component: WorkshopsFeedComponent,
-        canActivate: [AuthGuard],
-        /* resolve: {
-            workshops: WorkshopsFeedResolver,
-            tags: TagsResolver
-        } */
+        canActivate: [AuthGuard]
     },
     {
         path: ':id',
         component: WorkshopPageComponent,
         canActivate: [AuthGuard],
-        /* resolve: {
-            workshop: WorkshopsPageResolver,
-            tags: TagsResolver
-        }, */
         children: [
             {
                 path: 'workshop',
@@ -49,10 +41,7 @@ const workshopsRoutes: Routes = [
                     },
                     {
                         path: 'comments',
-                        component: WorkshopCommentsComponent,
-                        /* resolve: {
-                            comments: WorkshopCommentResolver
-                        } */
+                        component: WorkshopCommentsComponent
                     },
                     {
                         path: 'resources',
