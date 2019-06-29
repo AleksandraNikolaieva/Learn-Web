@@ -1,8 +1,8 @@
 app-viewport('link'='constructor')
     div(main)
-        app-quizz-card('*ngFor'='let quizz of quizzes; let i = index'
+        app-quizz-card('*ngFor'='let quizz of quizzes$ | async; let i = index'
         '[quizz]'='quizz'
         '[id]'='i'
-        '[loggedUser]'='loggedUser'
+        '[loggedUser]'='loggedUser$ | async'
         '(deleted)'='deleteQuizz($event)')
     router-outlet(name='aside' auxiliary)

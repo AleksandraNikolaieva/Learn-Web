@@ -11,7 +11,7 @@ export const selectAuthenticated  = createSelector(
 
 export const selectAuthData = createSelector(
     selectAuthState,
-    (state: AuthState) => state.authData
+    (state: AuthState) => state.authData as AuthData
 );
 
 export const selectAuthenticationToken = createSelector(

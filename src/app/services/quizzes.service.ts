@@ -3,13 +3,12 @@ import { ApiService } from './api.service';
 import { Question, Quizz } from '../quizzes/models';
 import { Observable } from 'rxjs';
 import { Article } from '../workshops/models';
-import { quizzes } from '../quizzes/data';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class QuizzesService {
-    quizzes = quizzes;
 
     constructor(private api: ApiService) { }
 
@@ -24,7 +23,10 @@ export class QuizzesService {
             posts,
             questions
         };
-        return this.api.postRequest('quizzes', body);
+        return this.api.postRequest('quizzes', body)
+        .pipe(
+            map(res => res.quiz[0])
+        );
     }
 
     getQuizzesWithParams(
@@ -52,7 +54,10 @@ export class QuizzesService {
     }
 
     getQuizzById(id: string): Observable<Quizz> {
-        return this.api.getRequest(`quizzes/${id}`);
+        return this.api.getRequest(`quizzes/${id}`)
+        .pipe(
+            map(res => res[0])
+        );
     }
 
     getAllMyQuizzes(): Observable<Array<Quizz>> {
@@ -60,7 +65,10 @@ export class QuizzesService {
     }
 
     getAllQuizzes(): Observable<Array<Quizz>> {
-        return this.api.getRequest('quizzes/all');
+        return this.api.getRequest('quizzes/all')
+        .pipe(
+            map(res => res.quizzes)
+        );
     }
 
     getLinkedPost(id: string): Observable<Article> {
@@ -89,13 +97,5 @@ export class QuizzesService {
 
     validateQuizz(id: string, testAnswers: {formData: Array<string>}): Observable<{message: string, result: Array<boolean>}> {
         return this.api.postRequest(`quizzes/validate/${id}`, testAnswers);
-    }
-
-    addMockQuizz(data) {
-        this.quizzes.push(data);
-    }
-
-    getMockQuizzes() {
-        return this.quizzes;
     }
 }

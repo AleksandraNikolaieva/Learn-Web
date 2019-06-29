@@ -11,6 +11,11 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
 import { selectAuthData } from 'src/app/auth/store/auth.selectors';
 import { AuthData } from 'src/app/auth/models';
+import { CommentsReceived, CommentsRequested } from 'src/app/store/comments/comments.actions';
+import { selectCurrentComments } from 'src/app/store/comments/comments.selectors';
+import { UsersRequested } from 'src/app/store/users/users.actions';
+import { selectAllUsers, selectUsersEntities } from 'src/app/store/users/users.selectors';
+import { Dictionary } from '@ngrx/entity';
 
 @Component({
     selector: 'app-workshop-comments',
@@ -19,8 +24,8 @@ import { AuthData } from 'src/app/auth/models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkshopCommentsComponent implements OnInit, OnDestroy {
-    comments: Array<Comment>;
-    loggedUser: User;
+    comments$: Observable<Array<Comment>>;
+    loggedUser$: Observable<User>;
     editorNumber: number;
     newComment = '';
     postId: string;
@@ -38,24 +43,11 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.postId = this.route.snapshot.parent.parent.params.id;
 
-        this.commentsService.getCommentsByPostId(this.postId)
-        .pipe(
-            map(commentsArr => commentsArr.map(commentItem => {
-                commentItem.author$ = this.userService.getUserById(commentItem._author);
-                return commentItem;
-            }))
-        )
-        .subscribe((comments: Comment[]) => {
-            this.comments = comments;
-            this.cdr.detectChanges();
-        });
+        this.store.dispatch(new CommentsRequested({workshopId: this.postId}));
+        this.store.dispatch(new UsersRequested());
 
-        this.subscriptions.push(
-            this.store.pipe(select(selectAuthData))
-            .subscribe((user: AuthData) => {
-                this.loggedUser = user;
-            })
-        );
+        this.comments$ = this.store.select(selectCurrentComments);
+        this.loggedUser$ = this.store.select(selectAuthData);
     }
 
     ngOnDestroy(): void {
@@ -64,7 +56,7 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         });
     }
 
-    private editComment(id: string, text: string): void {
+    /* private editComment(id: string, text: string): void {
         this.commentsService.updateComment(this.postId, id, text)
         .subscribe(res => {
             const index = this.comments.findIndex(commetItem => commetItem._id === id);
@@ -73,21 +65,21 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
             this.editorNumber = null;
             this.cdr.detectChanges();
         });
-    }
+    } */
 
-    private deleteComment(id: string): void {
+    /* private deleteComment(id: string): void {
         this.commentsService.deleteComment(this.postId, id)
         .subscribe(res => {
             this.comments = this.comments.filter(comment => comment._id !== id);
             this.cdr.detectChanges();
         });
-    }
+    } */
 
     private openEditor(index: number): void {
         this.editorNumber = index;
     }
 
-    addComment(text: string): void {
+    /* addComment(text: string): void {
         this.commentsService.createComment(this.postId, text)
         .pipe(
             map(comment => {
@@ -98,7 +90,7 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
             this.comments.push(res);
             this.cdr.detectChanges();
         });
-    }
+    } */
 
     trackByFunction(index: number, item: Comment) {
         if (!item) {

@@ -1,5 +1,5 @@
 app-card
-    a(header routerLink='../{{id + 1}}')
+    a(header routerLink='../{{quizz.id}}')
         h3 {{quizz.name}}
     span(content) {{quizz.authorName | async}}
     ng-container(footer)

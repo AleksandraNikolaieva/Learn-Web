@@ -1,18 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { quizzes } from '../data';
-import { FieldConfig } from 'src/app/dynamic-forms/models';
 import { Quizz } from '../models';
 import { User } from 'src/app/core/models';
 import { AuthService } from 'src/app/services/auth.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { QuizzesService } from 'src/app/services/quizzes.service';
 import { UsersService } from 'src/app/services/users.service';
-import { map } from 'rxjs/operators';
 import { AppState } from 'src/app/store/reducers';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { selectAuthData } from 'src/app/auth/store/auth.selectors';
-import { AuthData } from 'src/app/auth/models';
+import { AllQuizzesRequested } from '../store/quizzes.actions';
+import { selectAllQuizzes } from '../store/quizzes.selectors';
 
 @Component({
     selector: 'app-feed',
@@ -20,9 +17,9 @@ import { AuthData } from 'src/app/auth/models';
     styleUrls: ['./feed.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedComponent implements OnInit, OnDestroy {
-    quizzes: Array<Quizz> = quizzes;
-    loggedUser: User;
+export class FeedComponent implements OnInit {
+    quizzes$: Observable<Array<Quizz>>;
+    loggedUser$: Observable<User>;
     subscription: Subscription;
 
     constructor(
@@ -33,27 +30,30 @@ export class FeedComponent implements OnInit, OnDestroy {
         private store: Store<AppState>) {}
 
     ngOnInit() {
-        this.subscription = this.store.pipe(
+        this.loggedUser$ = this.store.select(selectAuthData);
+
+        this.store.dispatch(new AllQuizzesRequested());
+
+        this.quizzes$ = this.store.select(selectAllQuizzes);
+
+        //this.quizzes$ = this.store.select(select)
+        /* this.subscription = this.store.pipe(
             select(selectAuthData)
         )
         .subscribe((authData: AuthData) => {
             this.loggedUser = authData;
-        });
+        }); */
 
-        this.quizzes = this.quizzesService.getMockQuizzes();
+        /* this.quizzes = this.quizzesService.getMockQuizzes();
         this.quizzes.forEach(quizz => {
             quizz.authorName = this.usersService.getUserById(quizz.author)
             .pipe(
                 map(user => `${user.firstName} ${user.lastName}`)
             );
-        });
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
+        }); */
     }
 
     deleteQuizz(id: number) {
-        this.quizzes.splice(id, 1);
+        
     }
 }

@@ -16,7 +16,11 @@ export enum CommentsActionTypes {
 
     CommetEditRequested = '[Comments] Tried To Edit Comment',
     CommentEdited = '[Comments] Comment Edited',
-    CommentEditRequestFalled = '[Comments] Comment Edit Request Falled'
+    CommentEditRequestFalled = '[Comments] Comment Edit Request Falled',
+
+    CommetModifyRequested = '[Comments] Tried To Modify Comment',
+    CommentModified = '[Comments] Comment Modified',
+    CommentModifyRequestFalled = '[Comments] Comment Modify Request Falled'
 }
 
 export class CommentsRequested implements Action {
@@ -46,7 +50,7 @@ export class CommentAddRequested implements Action {
 export class CommentAdded implements Action {
     readonly type = CommentsActionTypes.CommentAdded;
 
-    constructor(public payload: {com: Comment}) { }
+    constructor(public payload: {comment: Comment}) {}
 }
 
 export class CommentAddRequestFalled implements Action {

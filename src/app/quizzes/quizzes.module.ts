@@ -12,6 +12,8 @@ import { QuizzCardComponent } from './quizz-card/quizz-card.component';
 import { ConstructorComponent } from './constructor/constructor.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { QuizzesEffects } from './store/quizzes.effects';
+import { quizzesReducer } from './store/quizzes.reducer';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,10 @@ import { EffectsModule } from '@ngrx/effects';
         QuizzesRoutingModule,
         SharedModule,
         FormControlsModule,
-        DynamicFormsModule
+        DynamicFormsModule,
+
+        StoreModule.forFeature('quizzes', quizzesReducer),
+        EffectsModule.forFeature([QuizzesEffects]),
     ]
 })
 export class QuizzesModule { }
