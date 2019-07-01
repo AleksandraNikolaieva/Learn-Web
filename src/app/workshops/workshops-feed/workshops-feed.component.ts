@@ -74,6 +74,9 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
 
         this.checkStore();
 
+        this.store.dispatch(new TagsRequested());
+        this.store.dispatch(new UsersRequested());
+
         this.articles$ = this.store.pipe(select(selectWorkshops));
 
         this.tags$ = this.store.pipe(select(selectAllTags));
@@ -120,9 +123,6 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                     queryParams: { tags: tagsParam, category: categoryParam}
                 });
             } else {
-                this.store.dispatch(new TagsRequested());
-                this.store.dispatch(new UsersRequested());
-
                 const qp = this.route.snapshot.queryParams;
 
                 let tagsToStore: string;

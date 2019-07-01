@@ -12,8 +12,12 @@ export function commentsReducer(state = initialState, action: CommentsActions): 
     switch (action.type) {
         case CommentsActionTypes.CommentsReceived:
             return adapter.addAll(action.payload.comments, state);
-        /* case CommentsActionTypes.CommentAdded:
-            return adapter.addOne(action.payload.comment, state); */
+        case CommentsActionTypes.CommentAdded:
+            return adapter.addOne(action.payload.comment, state);
+        case CommentsActionTypes.CommentDeleted:
+            return adapter.removeOne(action.payload.id, state);
+        case CommentsActionTypes.CommentModified:
+            return adapter.updateOne(action.payload.comment, state);
         default:
             return state;
     }

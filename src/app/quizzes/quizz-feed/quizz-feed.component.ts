@@ -13,11 +13,11 @@ import { selectAllQuizzes } from '../store/quizzes.selectors';
 
 @Component({
     selector: 'app-feed',
-    templateUrl: './feed.component.pug',
-    styleUrls: ['./feed.component.scss'],
+    templateUrl: './quizz-feed.component.pug',
+    styleUrls: ['./quizz-feed.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedComponent implements OnInit {
+export class QuizzFeedComponent implements OnInit {
     quizzes$: Observable<Array<Quizz>>;
     loggedUser$: Observable<User>;
     subscription: Subscription;

@@ -1,5 +1,5 @@
 ng-container('*ngFor'='let commentItem of comments$ | async; let i = index; trackBy: trackByFunction')
-    app-comment('[comment]'='commentItem' '*ngIf'='editorNumber != i')
+    app-comment('*ngIf'='editorNumber != i' '[comment]'='commentItem' '[usersMap]'='usersMap$ | async')
     ng-container('*ngIf'='(loggedUser$ | async)?._id === commentItem._author')
         ng-container('*ngIf'='editorNumber == i')
             span Edit comment:

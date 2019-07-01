@@ -1,4 +1,4 @@
-div 
-    app-user-pic('[user]'='comment.author$')
+div
+    app-user-pic('*ngIf'='usersMap[comment._author] as user' '[user]'='user')
     p {{comment.text}}
 app-timestamp([date]='comment.updatedAt' toFormat='dayTime')

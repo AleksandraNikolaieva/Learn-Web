@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Comment } from 'src/app/workshops/models';
+import { Update } from '@ngrx/entity';
 
 export enum CommentsActionTypes {
     CommentsRequested = '[Comments] Comments Requested',
@@ -11,12 +12,8 @@ export enum CommentsActionTypes {
     CommentAddRequestFalled = '[Comments] Comment Add Request Falled',
 
     CommentDeleteRequested = '[Comments] Tried To Delete Comment',
-    CommentDeleted = '[Comments] Comment Added',
+    CommentDeleted = '[Comments] Comment Deleted',
     CommentDeleteRequestFalled = '[Comments] Comment Delete Request Falled',
-
-    CommetEditRequested = '[Comments] Tried To Edit Comment',
-    CommentEdited = '[Comments] Comment Edited',
-    CommentEditRequestFalled = '[Comments] Comment Edit Request Falled',
 
     CommetModifyRequested = '[Comments] Tried To Modify Comment',
     CommentModified = '[Comments] Comment Modified',
@@ -68,13 +65,31 @@ export class CommentDeleteRequested implements Action {
 export class CommentDeleted implements Action {
     readonly type = CommentsActionTypes.CommentDeleted;
 
-    constructor(public payload: { comment: Comment }) { }
+    constructor(public payload: { id: string }) { }
 }
 
 export class CommentDeleteRequestFalled implements Action {
     readonly type = CommentsActionTypes.CommentDeleteRequestFalled;
 
     constructor(public payload: { error: any }) { }
+}
+
+export class CommetModifyRequested implements Action {
+    readonly type = CommentsActionTypes.CommetModifyRequested;
+
+    constructor(public payload: { postId: string, commentId: string, text: string }) {}
+}
+
+export class CommentModified implements Action {
+    readonly type = CommentsActionTypes.CommentModified;
+
+    constructor(public payload: { comment: Update<Comment> }) {}
+}
+
+export class CommentModifyRequestFalled implements Action {
+    readonly type = CommentsActionTypes.CommentModifyRequestFalled;
+
+    constructor(public payload: { error: any }) {}
 }
 
 export type CommentsActions =
@@ -86,4 +101,7 @@ export type CommentsActions =
     CommentAddRequestFalled |
     CommentDeleteRequested |
     CommentDeleted |
-    CommentDeleteRequestFalled;
+    CommentDeleteRequestFalled |
+    CommetModifyRequested |
+    CommentModified |
+    CommentModifyRequestFalled;
