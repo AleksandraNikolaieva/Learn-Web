@@ -9,7 +9,7 @@ app-viewport('link'='workshop')
                     i.icon-user  {{article.author$ | async}}
                 app-like(
                     [isActive]='article.likes',
-                    [likesNumber]='article.likes.length',
+                    [likesNumber]='article.reactionsCounts.likes',
                     (changeLike)='changeLikeHandler($event)'
                 )
                 app-timestamp([date]='article.createdAt' toFormat='day')

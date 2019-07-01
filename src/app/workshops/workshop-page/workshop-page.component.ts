@@ -35,7 +35,7 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
         .pipe(
             map((article: Article) => {
                 if (article) {
-                    article.author$ = this.userService.getUserById(article._author)
+                    article.author$ = this.userService.getUserById(article.author)
                     .pipe(
                         map(user => `${user.firstName} ${user.lastName}`)
                     );

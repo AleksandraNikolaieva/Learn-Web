@@ -13,12 +13,13 @@ app-viewport
            '(click)'='activateCategory(category)'
         ) {{category.title}}
     .workshop-feed-content(main)
-        span('*ngIf'='!(articles$ | async)?.length') Required articles do not exist
-        app-article(
-            '*ngFor'='let articleItem of articles$ | async; trackBy: trackByFunction'
-            '[article]'='articleItem'
-            '[tagsMap]'='tagsEntities$ | async'
-            '[usersMap]'='usersEntities$ | async'
-            '[@enterLeaveHeight]'='true'
-        )
+        span('*ngIf'='!articles.length') Required articles do not exist
+        ng-container('*ngIf'='tagsEntities$ && usersEntities$')
+            app-article(
+                '*ngFor'='let articleItem of articles; trackBy: trackByFunction'
+                '[article]'='articleItem'
+                '[tagsMap]'='tagsEntities$ | async'
+                '[usersMap]'='usersEntities$ | async'
+                '[@enterLeaveHeight]'='true'
+            )
 

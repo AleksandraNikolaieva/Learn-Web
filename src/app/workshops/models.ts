@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 export interface Article {
     id: string;
-    _author: string;
+    author: string;
     author$?: Observable<string>;
     tags: Array<number>;
     title: string;
@@ -12,7 +12,8 @@ export interface Article {
     image: string;
     createdAt: Date;
     updatedAt: Date;
-    likes: Array<any>;
+    reactionsCounts: ReactionsCounts;
+    reactionsAutors?: ReactionsAutors;
     stars: Array<any>;
     uni: Array<any>;
     comments: Array<Comment>;
@@ -34,13 +35,25 @@ export interface Category {
     title: string;
 }
 
-export class WorkshopsParams {
+export class WorkshopsFeedParams {
+    withComments = '1';
     constructor(
         public page = '0',
         public tags?: string,
-        public authorId?: string,
-        public withComments?: string
+        public authorId?: string
     ) {}
+}
+
+export interface ReactionsCounts {
+    likes: number;
+    stars: number;
+    uni: number;
+}
+
+export interface ReactionsAutors {
+    likes: Array<string>;
+    stars: Array<string>;
+    uni: Array<string>;
 }
 
 

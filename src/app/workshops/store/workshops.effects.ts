@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { WorkshopsService } from 'src/app/services/workshops.service';
-import { WorkshopsRequested, WorkshopsActionTypes, WorkshopsReceived, WorkshopsRequestFalled, WorkshopPageRequested, WorkshopPageReceived } from './workshops.actions';
-import { map, exhaustMap, catchError } from 'rxjs/operators';
-import { WorkshopsParams, Article } from '../models';
+import { WorkshopsRequested,
+        WorkshopsActionTypes,
+        WorkshopsReceived,
+        WorkshopsRequestFalled,
+        WorkshopPageRequested,
+        WorkshopPageReceived} from './workshops.actions';
+import { map, exhaustMap, catchError, distinctUntilKeyChanged } from 'rxjs/operators';
+import { WorkshopsFeedParams, Article } from '../models';
 import { of } from 'rxjs';
 
 
@@ -20,7 +25,10 @@ export class WorkshopsEffects {
     .pipe(
         ofType<WorkshopsRequested>(WorkshopsActionTypes.WorkshopsRequested),
         map((action: WorkshopsRequested) => action.payload),
-        exhaustMap(({params}: {params: WorkshopsParams}) => {
+        distinctUntilKeyChanged('params', (x: WorkshopsFeedParams, y: WorkshopsFeedParams) => {
+            return x.page === y.page && x.tags === y.tags && x.authorId === y.authorId;
+        }),
+        exhaustMap(({params}: {params: WorkshopsFeedParams}) => {
             return this.workshopsService.getAllPosts(params)
             .pipe(
                 map((workshops: Article[]) => {

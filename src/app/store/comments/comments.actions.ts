@@ -68,7 +68,7 @@ export class CommentDeleteRequested implements Action {
 export class CommentDeleted implements Action {
     readonly type = CommentsActionTypes.CommentDeleted;
 
-    constructor(public payload: { commentId: string }) { }
+    constructor(public payload: { comment: Comment }) { }
 }
 
 export class CommentDeleteRequestFalled implements Action {

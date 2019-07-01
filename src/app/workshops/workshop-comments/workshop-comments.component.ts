@@ -79,6 +79,10 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         this.editorNumber = index;
     }
 
+    addComment(text: string): void {
+        
+    }
+
     /* addComment(text: string): void {
         this.commentsService.createComment(this.postId, text)
         .pipe(

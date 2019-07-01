@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Article, WorkshopsParams } from '../workshops/models';
+import { Article, WorkshopsFeedParams } from '../workshops/models';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { ApiService } from './api.service';
 import { map, tap } from 'rxjs/operators';
@@ -22,7 +22,7 @@ export class WorkshopsService {
         return this.apiService.postRequest('posts', body);
     }
 
-    getAllPosts(params: WorkshopsParams): Observable<Array<Article>> {
+    getAllPosts(params: WorkshopsFeedParams): Observable<Array<Article>> {
         return this.apiService.getRequest('posts', params)
         .pipe(
             map(res => res.posts)

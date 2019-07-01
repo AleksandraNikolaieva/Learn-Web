@@ -8,21 +8,15 @@ export function selectTagSeq(a: Tag): number {
 
 export const adapter: EntityAdapter<Tag> = createEntityAdapter<Tag>({selectId: selectTagSeq});
 
-export interface TagsState extends EntityState<Tag> {
-    activeTags: string | null;
-}
+export interface TagsState extends EntityState<Tag> {}
 
-export const initialState: TagsState = adapter.getInitialState({
-    activeTags: null
-});
+export const initialState: TagsState = adapter.getInitialState({});
 
 export function tagsReducer(state = initialState, action: TagsActions): TagsState {
     switch (action.type) {
 
         case TagsActionTypes.TagsReceived:
             return adapter.addAll(action.payload.tags, state);
-        case TagsActionTypes.TagsActivated:
-            return {...state, activeTags : action.payload.tags};
         default:
             return state;
     }

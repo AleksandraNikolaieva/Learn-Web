@@ -2,21 +2,31 @@ import { createFeatureSelector, createSelector} from '@ngrx/store';
 import { WorkshopsState } from './workshops.reducer';
 import * as fromWorkshops from './workshops.reducer';
 
-export const selectWorkshopsSate = createFeatureSelector<fromWorkshops.WorkshopsState>('workshops');
+export const selectWorkshopsState = createFeatureSelector<fromWorkshops.WorkshopsState>('workshops');
 
 export const selectWorkshops = createSelector(
-    selectWorkshopsSate,
+    selectWorkshopsState,
     fromWorkshops.selectAll
 );
 
 export const selectActiveCategory = createSelector(
-    selectWorkshopsSate,
+    selectWorkshopsState,
     (state: WorkshopsState) => state.activeCategory
 );
 
 export const selectWorkshopPage = createSelector(
-    selectWorkshopsSate,
+    selectWorkshopsState,
     (state: WorkshopsState) => state.page
+);
+
+export const selectWorshopsLoadedMark = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.isLoaded
+);
+
+export const selectActiveTags = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.activeTags
 );
 
 

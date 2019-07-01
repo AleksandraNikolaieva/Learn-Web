@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Article, WorkshopsParams } from '../models';
+import { Article, WorkshopsFeedParams } from '../models';
 
 export enum WorkshopsActionTypes {
     WorkshopsRequested = '[Workshops] Workshops Requested',
@@ -7,6 +7,8 @@ export enum WorkshopsActionTypes {
     WorkshopsRequestFalled = '[Workshops] Workshops Loading Falled',
 
     CategoryActivated = '[Workshops] Category Activated',
+
+    TagsActivated = '[Tags] Tags Activated',
 
     WorkshopPageRequested = '[Workshops] Workshop Page Requested',
     WorkshopPageReceived = '[Workshops] Workshop Page Received',
@@ -16,7 +18,7 @@ export enum WorkshopsActionTypes {
 export class WorkshopsRequested implements Action {
     readonly type = WorkshopsActionTypes.WorkshopsRequested;
 
-    constructor(public payload: {params: WorkshopsParams}) {}
+    constructor(public payload: {params: WorkshopsFeedParams}) {}
 }
 
 export class WorkshopsReceived implements Action {
@@ -55,11 +57,18 @@ export class WorkshopPageRequestFalled implements Action {
     constructor(public payload: {error: any}) {}
 }
 
+export class TagsActivated implements Action {
+    readonly type = WorkshopsActionTypes.TagsActivated;
+
+    constructor(public payload: {tags: string}) {}
+}
+
 export type WorkshopsActions =
     WorkshopsRequested |
     WorkshopsReceived |
     WorkshopsRequestFalled |
     CategoryActivated |
+    TagsActivated |
     WorkshopPageRequested |
     WorkshopPageReceived |
     WorkshopPageRequestFalled;

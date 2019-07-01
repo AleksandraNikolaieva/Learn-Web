@@ -7,7 +7,7 @@ import { Tag } from '../shared/models';
 })
 export class TagsMapPipe implements PipeTransform {
 
-    transform(articleTags: Array<number>, tagsMap?: Dictionary<Tag>): any {
+    transform(articleTags: Array<number>, tagsMap?: Dictionary<Tag>): Array<Tag> {
         return articleTags.map((id: number) => tagsMap[id]);
     }
 

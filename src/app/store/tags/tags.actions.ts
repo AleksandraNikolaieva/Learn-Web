@@ -4,9 +4,7 @@ import { Tag } from 'src/app/shared/models';
 export enum TagsActionTypes {
     TagsRequested = '[Tags] Tags Requested',
     TagsReceived = '[Tags] Tags Received',
-    TagsRequestFalled = '[Tags] Tags Request Falled',
-
-    TagsActivated = '[Tags] Tags Activated'
+    TagsRequestFalled = '[Tags] Tags Request Falled'
 }
 
 export class TagsRequested implements Action {
@@ -25,14 +23,7 @@ export class TagsRequestFalled implements Action {
     constructor(public payload: {error: any}) {}
 }
 
-export class TagsActivated implements Action {
-    readonly type = TagsActionTypes.TagsActivated;
-
-    constructor(public payload: {tags: string}) {}
-}
-
 export type TagsActions =
     TagsRequested |
     TagsReceived |
-    TagsRequestFalled |
-    TagsActivated;
+    TagsRequestFalled;

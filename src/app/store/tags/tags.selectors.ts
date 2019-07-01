@@ -14,8 +14,3 @@ export const selectTagsEntities = createSelector(
     fromTags.selectEntities
 );
 
-export const selectActiveTags = createSelector(
-    selectTagsSate,
-    (state: TagsState) => state.activeTags
-);
-
