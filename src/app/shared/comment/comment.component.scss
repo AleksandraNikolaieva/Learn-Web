@@ -7,9 +7,8 @@ div {
 
 p {
     color: $text-color;
-    padding: 0px 5px;
+    padding-left: 15px;
     word-wrap: break-word;
-    text-align: center;
     flex-grow: 1;
     max-width: calc(100% - 35px);
     font-size: 14px;

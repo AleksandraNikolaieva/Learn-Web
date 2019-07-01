@@ -6,13 +6,13 @@ app-card
         p {{article.description}}
     div(footer)
         .row
-            span 
-                i.icon-user  {{article.author$ | async}}
+            span('*ngIf'='usersMap')
+                i.icon-user  {{usersMap[article.author]?.firstName + ' ' + usersMap[article.author]?.lastName}}
             app-timestamp([date]='article.createdAt' toFormat='day')
         app-like(
             [isActive]='false',
-            [likesNumber]='article.likes.length',
+            [likesNumber]='article.reactionsCounts.likes',
             (changeLike)='changeLikeHandler($event)'
         )
         p.tags
-            span('*ngFor'='let tag of articleTags') {{tag}}
+            span('*ngFor'='let tag of (article.tags | tagsMap : tagsMap)') {{tag?.name}}

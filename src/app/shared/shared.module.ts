@@ -20,6 +20,7 @@ import { RangeDirective } from './directives/range/range.directive';
 import { CollapsableDirective } from './directives/collapsable/collapsable.directive';
 import { MultipleColorDirective } from './directives/multiple-color/multiple-color.directive';
 import { QuizzConfigPipe } from '../pipes/quizz-config.pipe';
+import { TagsMapPipe } from '../pipes/tags-map.pipe';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { QuizzConfigPipe } from '../pipes/quizz-config.pipe';
         CollapsableDirective,
         MultipleColorDirective,
 
-        QuizzConfigPipe
+        QuizzConfigPipe,
+        TagsMapPipe
     ],
     imports: [
         CommonModule,
@@ -73,7 +75,8 @@ import { QuizzConfigPipe } from '../pipes/quizz-config.pipe';
         CollapsableDirective,
         MultipleColorDirective,
 
-        QuizzConfigPipe
+        QuizzConfigPipe,
+        TagsMapPipe
     ]
 })
 export class SharedModule { }

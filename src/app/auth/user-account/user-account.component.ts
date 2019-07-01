@@ -6,7 +6,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
-import { SignedOut, ChangeAuthData } from '../store/auth.actions';
+import { SignedOut, SignedIn, ChangeUserInfoRequested } from '../store/auth.actions';
 import { selectAuthData } from '../store/auth.selectors';
 import { AuthData } from '../models';
 
@@ -20,28 +20,33 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     user: User;
     infoForm: FormGroup;
     subscription: Subscription;
+
     constructor(
         private authService: AuthService,
         private store: Store<AppState>,
         private usersService: UsersService,
-        private fb: FormBuilder) { }
+        private fb: FormBuilder
+    ) { }
 
     ngOnInit() {
+        this.formInit();
+
+        this.subscription = this.store.pipe(
+            select(selectAuthData)
+        ).subscribe((authData: AuthData) => {
+            this.user = authData;
+            if (authData) {
+                this.infoForm.patchValue(authData);
+            }
+        });
+    }
+
+    formInit() {
         this.infoForm = this.fb.group({
             firstName: ['', Validators.minLength(2)],
             lastName: ['', Validators.minLength(2)],
             picture: [''],
             newPassword: [null, Validators.minLength(6)]
-        });
-
-        this.subscription = this.store.pipe(
-            select(selectAuthData)
-        )
-        .subscribe((authData: AuthData) => {
-            this.user = authData;
-            if (authData) {
-                this.infoForm.patchValue(authData);
-            }
         });
     }
 
@@ -50,15 +55,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     }
 
     changeInfo(): void {
-        const values = this.infoForm.value;
-
-        this.usersService.updateUser(this.user._id, values.firstName, values.lastName, values.picture, values.newPassword)
-        .subscribe(newInfo => {
-            if (newInfo) {
-                this.store.dispatch(new ChangeAuthData({newInfo}));
-                alert('changed succesfully');
-            }
-        });
+        this.store.dispatch(new ChangeUserInfoRequested({id: this.user._id, newInfo: this.infoForm.value}));
     }
 
     deleteProfile(): void {

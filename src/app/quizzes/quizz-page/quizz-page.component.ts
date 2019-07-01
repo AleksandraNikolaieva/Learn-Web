@@ -1,7 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Quizz } from '../models';
 import { ActivatedRoute } from '@angular/router';
-import { quizzes } from '../data';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/reducers';
+import { QuizzPageRequested } from '../store/quizzes.actions';
+import { Observable } from 'rxjs';
+import { selectPageQuizz } from '../store/quizzes.selectors';
 
 @Component({
     selector: 'app-quizz-page',
@@ -10,14 +14,17 @@ import { quizzes } from '../data';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizzPageComponent implements OnInit {
-    quizz: Quizz;
+    quizz$: Observable<Quizz>;
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(
+        private route: ActivatedRoute,
+        private store: Store<AppState>
+    ) { }
 
     ngOnInit() {
-        this.route.params.subscribe(data => {
-            this.quizz = quizzes[data.id - 1];
-        });
+        this.store.dispatch(new QuizzPageRequested({quizzId: this.route.snapshot.params.id}));
+
+        this.quizz$ = this.store.select(selectPageQuizz);
     }
 
     onSubmit(formValue: any) {

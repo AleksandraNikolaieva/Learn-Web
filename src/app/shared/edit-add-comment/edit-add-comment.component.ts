@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { Comment } from 'src/app/workshops/models';
 
 @Component({
     selector: 'app-edit-add-comment',

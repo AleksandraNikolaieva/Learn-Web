@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl, AbstractCon
 import { FieldConfig } from 'src/app/dynamic-forms/models';
 import { QuizzesService } from 'src/app/services/quizzes.service';
 import { QuestionVariant } from '../models';
+import { AppState } from 'src/app/store/reducers';
+import { Store } from '@ngrx/store';
+import { QuizzAddRequested } from '../store/quizzes.actions';
 
 @Component({
     selector: 'app-constructor',
@@ -16,7 +19,9 @@ export class ConstructorComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private quizzService: QuizzesService,
-        private cdr: ChangeDetectorRef) { }
+        private cdr: ChangeDetectorRef,
+        private store: Store<AppState>
+    ) { }
 
     ngOnInit(): void {
         this.quizzForm = this.fb.group({
@@ -32,9 +37,7 @@ export class ConstructorComponent implements OnInit {
         }
         const res = this.quizzForm.value;
         console.log(res);
-        res.author = '5d02b67d1169ca285e4aa13a'; // for mock quizz
-        res.date = new Date();                   // for mock quizz
-        this.quizzService.addMockQuizz(res);
+        this.store.dispatch(new QuizzAddRequested({quizz: res}));               // for mock quizz
         this.quizzForm.reset();
         this.quizzForm.setControl('questions', this.fb.array([], this.arrLengthValidation(1)));
     }

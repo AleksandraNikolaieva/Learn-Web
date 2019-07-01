@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { User } from 'src/app/core/models';
 import { Observable, Subscription } from 'rxjs';
+import { Dictionary } from '@ngrx/entity';
 
 @Component({
     selector: 'app-user-pic',
@@ -10,6 +11,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class UserPicComponent implements OnInit, OnDestroy {
     @Input() user: Observable<User>;
+
     initials = '';
     userToShow: User;
     subscription: Subscription;

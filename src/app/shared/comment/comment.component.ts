@@ -9,6 +9,7 @@ import { Comment } from 'src/app/workshops/models';
 })
 export class CommentComponent implements OnInit {
     @Input() comment: Comment;
+
     constructor() { }
 
     ngOnInit() {

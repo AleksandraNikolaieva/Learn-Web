@@ -1,6 +1,6 @@
-ng-container('*ngFor'='let commentItem of comments, let i = index')
-    app-comment([comment]='commentItem' '*ngIf'='editorNumber != i')
-    ng-container('*ngIf'='loggedUser?.id == commentItem._author')
+ng-container('*ngFor'='let commentItem of comments$ | async; let i = index; trackBy: trackByFunction')
+    app-comment('[comment]'='commentItem' '*ngIf'='editorNumber != i')
+    ng-container('*ngIf'='(loggedUser$ | async)?._id === commentItem._author')
         ng-container('*ngIf'='editorNumber == i')
             span Edit comment:
             app-edit-add-comment([commentText]='commentItem.text', (changeComment)='editComment(commentItem.id, $event)')

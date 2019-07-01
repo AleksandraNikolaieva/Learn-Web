@@ -14,5 +14,5 @@ export interface AuthData {
     updatedAt: string;
     lastLogin: string;
     posts: Array<string>;
-    token?: string;
+    token: string;
 }

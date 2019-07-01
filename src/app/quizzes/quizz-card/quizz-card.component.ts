@@ -10,7 +10,6 @@ import { User } from 'src/app/core/models';
 })
 export class QuizzCardComponent implements OnInit {
     @Input() quizz: Quizz;
-    @Input() id: number;
     @Input() loggedUser: User;
     @Output() deleted: EventEmitter<number> = new EventEmitter();
 

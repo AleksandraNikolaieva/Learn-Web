@@ -17,4 +17,11 @@ export interface User {
     posts: Array<string>;
 }
 
+export interface UserParams {
+    firstName: string;
+    lastName: string;
+    picture: string;
+    password: string;
+}
+
 export type Role = 'admin' | 'student' | 'guest';

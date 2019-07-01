@@ -1,19 +1,20 @@
 app-viewport('link'='workshop')
-    .page(main #host='')
-        h2 {{article.title}}
-        img(src='{{article.image}}' alt='{{article.title}}')
-        p {{article.text}}
-        .workshop-page-info
-            span 
-                i.icon-user  {{article.author$ | async}}
-            app-like(
-                [isActive]='article.likes',
-                [likesNumber]='article.likes.length',
-                (changeLike)='changeLikeHandler($event)'
-            )
-            app-timestamp([date]='article.createdAt' toFormat='day')
-        p.tags
-            span('*ngFor'='let tag of tags') {{tag}}
-        a(routerLink='/workshops/feed')
-            i.icon-arrow-left2
+    ng-container(main '*ngIf'='article')
+        .page(#host='')
+            h2 {{article.title}}
+            img(src='{{article.image}}' alt='{{article.title}}')
+            p {{article.text}}
+            .workshop-page-info
+                span 
+                    i.icon-user  {{article.author$ | async}}
+                app-like(
+                    [isActive]='article.likes',
+                    [likesNumber]='article.reactionsCounts.likes',
+                    (changeLike)='changeLikeHandler($event)'
+                )
+                app-timestamp([date]='article.createdAt' toFormat='day')
+            p.tags
+                span('*ngFor'='let tag of tags') {{tag}}
+            a(routerLink='/workshops/feed')
+                i.icon-arrow-left2
     router-outlet(name='aside' auxiliary)

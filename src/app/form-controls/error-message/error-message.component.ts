@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
     selector: 'app-error-message',
     templateUrl: './error-message.component.pug',
     styleUrls: ['./error-message.component.scss'],
-    //changeDetection: ChangeDetectionStrategy.OnPush
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ErrorMessageComponent implements OnInit {
 

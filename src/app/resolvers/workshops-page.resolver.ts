@@ -22,7 +22,7 @@ export class WorkshopsPageResolver implements Resolve<Observable<Article>> {
                 }
             }),
             map(article => {
-                article.author$ = this.userService.getUserById(article._author)
+                article.author$ = this.userService.getUserById(article.author)
                 .pipe(
                     map(user => `${user.firstName} ${user.lastName}`)
                 );

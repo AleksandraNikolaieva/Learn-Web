@@ -1,7 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from '../models';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/reducers';
+import { WorkshopPageRequested } from '../store/workshops.actions';
+import { selectWorkshopPage } from '../store/workshops.selectors';
+import { UsersService } from 'src/app/services/users.service';
+import { tap, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-workshop-page',
@@ -14,17 +20,36 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
     tags: Array<string>;
     isButtonPlus: boolean;
     subscription: Subscription;
-    constructor(private activateRoute: ActivatedRoute) { }
+
+    constructor(
+        private activateRoute: ActivatedRoute,
+        private store: Store<AppState>,
+        private userService: UsersService,
+        private cdr: ChangeDetectorRef
+    ) { }
 
     ngOnInit() {
-        this.subscription = this.activateRoute.data.subscribe(data => {
-            this.article = data.workshop;
-            const tags = data.tags;
-            this.tags = this.article.tags.map(tagId => tags.find(tag => tag.seq === +tagId).name);
+        this.store.dispatch(new WorkshopPageRequested({pageId: this.activateRoute.snapshot.params.id}));
+
+        this.subscription = this.store.select(selectWorkshopPage)
+        .pipe(
+            map((article: Article) => {
+                if (article) {
+                    article.author$ = this.userService.getUserById(article.author)
+                    .pipe(
+                        map(user => `${user.firstName} ${user.lastName}`)
+                    );
+                    return article;
+                }
+            })
+        )
+        .subscribe((article: Article) => {
+            this.article = article;
+            this.cdr.detectChanges();
         });
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
 

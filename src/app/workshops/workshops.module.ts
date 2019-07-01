@@ -8,6 +8,16 @@ import { SharedModule } from '../shared/shared.module';
 import { WorkshopResourcesComponent } from './workshop-resources/workshop-resources.component';
 import { WorkshopQuizzesComponent } from './workshop-quizzes/workshop-quizzes.component';
 import { WorkshopCommentsComponent } from './workshop-comments/workshop-comments.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { workshopsReducer } from './store/workshops.reducer';
+import { WorkshopsEffects } from './store/workshops.effects';
+import { tagsReducer } from '../store/tags/tags.reducer';
+import { TagsEffects } from '../store/tags/tags.effects';
+import { usersReducer } from '../store/users/users.reducer';
+import { UsersEffects } from '../store/users/users.effects';
+import { commentsReducer } from '../store/comments/comments.reducer';
+import { CommentsEffects } from '../store/comments/comments.effects';
 
 @NgModule({
     declarations: [
@@ -21,7 +31,16 @@ import { WorkshopCommentsComponent } from './workshop-comments/workshop-comments
     imports: [
         CommonModule,
         WorkshopsRoutingModule,
-        SharedModule
+        SharedModule,
+
+        StoreModule.forFeature('workshops', workshopsReducer),
+        EffectsModule.forFeature([WorkshopsEffects]),
+        StoreModule.forFeature('tags', tagsReducer),
+        EffectsModule.forFeature([TagsEffects]),
+        StoreModule.forFeature('users', usersReducer),
+        EffectsModule.forFeature([UsersEffects]),
+        StoreModule.forFeature('comments', commentsReducer),
+        EffectsModule.forFeature([CommentsEffects])
     ]
 })
 export class WorkshopsModule { }

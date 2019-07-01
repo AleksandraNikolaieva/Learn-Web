@@ -22,7 +22,7 @@ export class ApiService {
         let httpParams = new HttpParams();
 
         for (const item in params) {
-            if (params.hasOwnProperty(item) && params[item] !== undefined) {
+            if (params.hasOwnProperty(item) && params[item] !== undefined && params[item] !== null) {
                 httpParams = httpParams.append(item, params[item]);
             }
         }
@@ -40,19 +40,19 @@ export class ApiService {
         return `${this.api}/${url}`;
     }
 
-    public postRequest(url: string, body: any, params?: object, headers?: HttpHeaders): Observable<any> {
+    postRequest(url: string, body: any, params?: object, headers?: HttpHeaders): Observable<any> {
         return this.httpClient.post(this.getEndpoint(url), body, this.prepareOptions(params, headers));
     }
 
-    public getRequest(url: string, params?: object, headers?: HttpHeaders): Observable<any> {
+    getRequest(url: string, params?: object, headers?: HttpHeaders): Observable<any> {
         return this.httpClient.get(this.getEndpoint(url), this.prepareOptions(params, headers));
     }
 
-    public putRequest(url: string, body: any, params?: object, headers?: HttpHeaders): Observable<any> {
+    putRequest(url: string, body: any, params?: object, headers?: HttpHeaders): Observable<any> {
         return this.httpClient.put(this.getEndpoint(url), body, this.prepareOptions(params, headers));
     }
 
-    public deleteRequest(url: string, params?: object, headers?: HttpHeaders): Observable<any> {
+    deleteRequest(url: string, params?: object, headers?: HttpHeaders): Observable<any> {
         return this.httpClient.delete(this.getEndpoint(url), this.prepareOptions(params, headers));
     }
 }
