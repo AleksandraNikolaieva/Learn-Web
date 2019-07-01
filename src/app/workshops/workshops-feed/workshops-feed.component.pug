@@ -12,14 +12,13 @@ app-viewport
            '[ngClass]'='{"active": category.title === activeCategory}'
            '(click)'='activateCategory(category)'
         ) {{category.title}}
-    .workshop-feed-content(main)
+    .workshop-feed-content(main '*ngIf'='articles$ | async as articles')
         span('*ngIf'='!articles.length') Required articles do not exist
-        ng-container('*ngIf'='tagsEntities$ && usersEntities$')
-            app-article(
-                '*ngFor'='let articleItem of articles; trackBy: trackByFunction'
-                '[article]'='articleItem'
-                '[tagsMap]'='tagsEntities$ | async'
-                '[usersMap]'='usersEntities$ | async'
-                '[@enterLeaveHeight]'='true'
-            )
+        app-article(
+            '*ngFor'='let articleItem of articles; trackBy: trackByFunction'
+            '[article]'='articleItem'
+            '[tagsMap]'='tagsEntities$ | async'
+            '[usersMap]'='usersEntities$ | async'
+            '[@enterLeaveHeight]'='true'
+        )
 

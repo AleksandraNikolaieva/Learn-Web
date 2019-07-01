@@ -37,7 +37,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
     animations: [enterLeaveHeight]
 })
 export class WorkshopsFeedComponent implements OnInit, OnDestroy {
-    articles: Array<Article>;
+    articles$: Observable<Array<Article>>;
     tags$: Observable<Array<Tag>>;
     tagsEntities$: Observable<Dictionary<Tag>>;
     usersEntities$: Observable<Dictionary<User>>;
@@ -74,19 +74,12 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
 
         this.checkStore();
 
-        this.subscriptions.push(
-            this.store.pipe(select(selectWorkshops))
-            .subscribe((workshops: Array<Article>) => {
-                this.articles = workshops;
-                this.cdr.detectChanges();
-            })
-        );
+        this.articles$ = this.store.pipe(select(selectWorkshops));
 
         this.tags$ = this.store.pipe(select(selectAllTags));
         this.tagsEntities$ = this.store.pipe(select(selectTagsEntities));
 
         this.usersEntities$ = this.store.pipe(select(selectUsersEntities));
-        this.cdr.detectChanges();
 
         this.subscriptions.push(
             this.route.queryParamMap
