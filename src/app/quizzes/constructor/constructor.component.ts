@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
-import { FieldConfig } from 'src/app/dynamic-forms/models';
+import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn } from '@angular/forms';
 import { QuizzesService } from 'src/app/services/quizzes.service';
 import { QuestionVariant } from '../models';
 import { AppState } from 'src/app/store/reducers';
@@ -18,8 +17,6 @@ export class ConstructorComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private quizzService: QuizzesService,
-        private cdr: ChangeDetectorRef,
         private store: Store<AppState>
     ) { }
 
@@ -37,7 +34,7 @@ export class ConstructorComponent implements OnInit {
         }
         const res = this.quizzForm.value;
         console.log(res);
-        this.store.dispatch(new QuizzAddRequested({quizz: res}));               // for mock quizz
+        this.store.dispatch(new QuizzAddRequested({quizz: res}));
         this.quizzForm.reset();
         this.quizzForm.setControl('questions', this.fb.array([], this.arrLengthValidation(1)));
     }

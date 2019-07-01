@@ -9,29 +9,20 @@ import { Dictionary } from '@ngrx/entity';
     styleUrls: ['./user-pic.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserPicComponent implements OnInit, OnDestroy {
-    @Input() user: Observable<User>;
-
+export class UserPicComponent implements OnInit {
+    @Input() user: User;
     initials = '';
-    userToShow: User;
-    subscription: Subscription;
+
 
     constructor(private cdr: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.subscription = this.user.subscribe(user => {
-            this.userToShow = user;
-            if (user.firstName) {
-                this.initials += user.firstName[0];
-            }
-            if (user.lastName) {
-                this.initials += user.lastName[0];
-            }
-            this.cdr.detectChanges();
-        });
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
+        if (this.user.firstName) {
+            this.initials += this.user.firstName[0];
+        }
+        if (this.user.lastName) {
+            this.initials += this.user.lastName[0];
+        }
+        this.cdr.detectChanges();
     }
 }

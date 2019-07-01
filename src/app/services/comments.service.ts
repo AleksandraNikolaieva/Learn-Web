@@ -39,6 +39,9 @@ export class CommentsService {
     }
 
     deleteComment(postId: string, commentId: string): Observable<any> {
-        return this.api.deleteRequest(`comments/${postId}/${commentId}`);
+        return this.api.deleteRequest(`comments/${postId}/${commentId}`)
+        .pipe(
+            map((response: {commId: string, message: string, postid: string}) => response.commId)
+        );
     }
 }

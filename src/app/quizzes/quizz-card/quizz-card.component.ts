@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Quizz } from '../models';
 import { User } from 'src/app/core/models';
+import { Dictionary } from '@ngrx/entity';
 
 @Component({
     selector: 'app-quizz-card',
@@ -11,14 +12,14 @@ import { User } from 'src/app/core/models';
 export class QuizzCardComponent implements OnInit {
     @Input() quizz: Quizz;
     @Input() loggedUser: User;
-    @Output() deleted: EventEmitter<number> = new EventEmitter();
+    @Input() usersMap: Dictionary<User>;
+    @Output() deleted: EventEmitter<string> = new EventEmitter();
 
     constructor() { }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
-    delete(id: number) {
+    delete(id: string) {
         this.deleted.emit(id);
     }
 }

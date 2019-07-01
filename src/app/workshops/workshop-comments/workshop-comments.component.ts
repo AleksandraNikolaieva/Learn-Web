@@ -1,20 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Comment } from '../models';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/core/models';
-import { AuthService } from 'src/app/services/auth.service';
-import { CommentsService } from 'src/app/services/comments.service';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { UsersService } from 'src/app/services/users.service';
 import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
 import { selectAuthData } from 'src/app/auth/store/auth.selectors';
-import { AuthData } from 'src/app/auth/models';
-import { CommentsReceived, CommentsRequested } from 'src/app/store/comments/comments.actions';
+import { CommentsRequested, CommentAddRequested, CommentDeleteRequested, CommetModifyRequested } from 'src/app/store/comments/comments.actions';
 import { selectCurrentComments } from 'src/app/store/comments/comments.selectors';
 import { UsersRequested } from 'src/app/store/users/users.actions';
-import { selectAllUsers, selectUsersEntities } from 'src/app/store/users/users.selectors';
+import { selectUsersEntities } from 'src/app/store/users/users.selectors';
 import { Dictionary } from '@ngrx/entity';
 
 @Component({
@@ -30,13 +25,10 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
     newComment = '';
     postId: string;
     subscriptions: Array<Subscription> = [];
+    usersMap$: Observable<Dictionary<User>>;
 
     constructor(
-        private commentsService: CommentsService,
         private route: ActivatedRoute,
-        private authService: AuthService,
-        private userService: UsersService,
-        private cdr: ChangeDetectorRef,
         private store: Store<AppState>
     ) { }
 
@@ -48,6 +40,7 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
 
         this.comments$ = this.store.select(selectCurrentComments);
         this.loggedUser$ = this.store.select(selectAuthData);
+        this.usersMap$ = this.store.select(selectUsersEntities);
     }
 
     ngOnDestroy(): void {
@@ -56,45 +49,23 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         });
     }
 
-    /* private editComment(id: string, text: string): void {
-        this.commentsService.updateComment(this.postId, id, text)
-        .subscribe(res => {
-            const index = this.comments.findIndex(commetItem => commetItem._id === id);
-            this.comments[index] = {...this.comments[index]};
-            this.comments[index].text = text;
-            this.editorNumber = null;
-            this.cdr.detectChanges();
-        });
-    } */
-
-    /* private deleteComment(id: string): void {
-        this.commentsService.deleteComment(this.postId, id)
-        .subscribe(res => {
-            this.comments = this.comments.filter(comment => comment._id !== id);
-            this.cdr.detectChanges();
-        });
-    } */
-
     private openEditor(index: number): void {
         this.editorNumber = index;
     }
 
-    addComment(text: string): void {
-        
+    editComment(id: string, text: string): void {
+        this.store.dispatch(new CommetModifyRequested({postId: this.postId, commentId: id, text}));
+        this.editorNumber = null;
     }
 
-    /* addComment(text: string): void {
-        this.commentsService.createComment(this.postId, text)
-        .pipe(
-            map(comment => {
-                comment.author$ = this.userService.getUserById(comment._author);
-                return comment;
-            })
-        ).subscribe(res => {
-            this.comments.push(res);
-            this.cdr.detectChanges();
-        });
-    } */
+
+    addComment(text: string): void {
+        this.store.dispatch(new CommentAddRequested({text, postId: this.postId}));
+    }
+
+    deleteComment(id: string): void {
+        this.store.dispatch(new CommentDeleteRequested({postId: this.postId, commentId: id}));
+    }
 
     trackByFunction(index: number, item: Comment) {
         if (!item) {

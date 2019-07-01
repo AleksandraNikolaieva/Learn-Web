@@ -1,8 +1,11 @@
 app-card
     a(header routerLink='../{{quizz.id}}')
         h3 {{quizz.name}}
-    span(content) {{quizz.authorName | async}}
+    div.user(content '*ngIf'='usersMap[quizz.author] as author')
+        app-user-pic('[user]'='author')
+        span {{author?.firstName + ' ' + author?.lastName}}
     ng-container(footer)
-        app-timestamp('toFormat'='day', [date]='quizz.date')
-        button('*ngIf'='loggedUser?._id === quizz.author' '(click)'='delete(id)')
-            i.icon-remove
+        app-timestamp('toFormat'='day', [date]='quizz.updatedAt')
+        div.button-space
+            button('*ngIf'='loggedUser?._id === quizz.author' '(click)'='delete(quizz.id)')
+                i.icon-remove

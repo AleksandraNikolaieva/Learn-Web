@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     constructor(
         private fb: FormBuilder,
         private store: Store<AppState>,
-        private authService: AuthService,
         private router: Router
     ) { }
 

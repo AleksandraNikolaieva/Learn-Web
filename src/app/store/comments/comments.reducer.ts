@@ -2,7 +2,13 @@ import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 import { Comment } from 'src/app/workshops/models';
 import { CommentsActions, CommentsActionTypes } from './comments.actions';
 
-export const adapter: EntityAdapter<Comment> = createEntityAdapter<Comment>();
+export function sortByDate(a: Comment, b: Comment): number {
+    return a.updatedAt < b.updatedAt ? 1 : -1;
+}
+
+export const adapter: EntityAdapter<Comment> = createEntityAdapter<Comment>({
+    sortComparer: sortByDate
+});
 
 export interface CommentsState extends EntityState<Comment> {}
 
@@ -12,8 +18,12 @@ export function commentsReducer(state = initialState, action: CommentsActions): 
     switch (action.type) {
         case CommentsActionTypes.CommentsReceived:
             return adapter.addAll(action.payload.comments, state);
-        /* case CommentsActionTypes.CommentAdded:
-            return adapter.addOne(action.payload.comment, state); */
+        case CommentsActionTypes.CommentAdded:
+            return adapter.addOne(action.payload.comment, state);
+        case CommentsActionTypes.CommentDeleted:
+            return adapter.removeOne(action.payload.id, state);
+        case CommentsActionTypes.CommentModified:
+            return adapter.updateOne(action.payload.comment, state);
         default:
             return state;
     }
