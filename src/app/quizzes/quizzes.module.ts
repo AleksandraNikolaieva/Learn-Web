@@ -12,6 +12,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { QuizzesEffects } from './store/quizzes.effects';
 import { quizzesReducer } from './store/quizzes.reducer';
+import { usersReducer } from '../store/users/users.reducer';
+import { UsersEffects } from '../store/users/users.effects';
 
 @NgModule({
     declarations: [
@@ -29,6 +31,8 @@ import { quizzesReducer } from './store/quizzes.reducer';
 
         StoreModule.forFeature('quizzes', quizzesReducer),
         EffectsModule.forFeature([QuizzesEffects]),
+        StoreModule.forFeature('users', usersReducer),
+        EffectsModule.forFeature([UsersEffects]),
     ]
 })
 export class QuizzesModule { }

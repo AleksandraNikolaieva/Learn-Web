@@ -65,7 +65,7 @@ export const enterRightPosition = [
         style({
             right: '10px'
         }),
-        animate('300ms 210ms',
+        animate('300ms',
             style({
                 right: '*'
             }))

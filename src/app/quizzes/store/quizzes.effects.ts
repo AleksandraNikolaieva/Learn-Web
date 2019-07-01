@@ -11,7 +11,10 @@ import {
         QuizzPageRequestFalled,
         QuizzAddRequested,
         QuizzAdded,
-        QuizzAddRequestFalled
+        QuizzAddRequestFalled,
+        QuizzDeleteRequested,
+        QuizzDeleted,
+        QuizzDeleteRequestFalled
     } from './quizzes.actions';
 import { exhaustMap, map, catchError } from 'rxjs/operators';
 import { Quizz } from '../models';
@@ -24,8 +27,7 @@ export class QuizzesEffects {
 
     constructor(
         private actions$: Actions,
-        private quizzesService: QuizzesService,
-        private usersService: UsersService
+        private quizzesService: QuizzesService
     ) { }
 
     @Effect()
@@ -35,15 +37,7 @@ export class QuizzesEffects {
         exhaustMap(() => {
             return this.quizzesService.getAllQuizzes()
             .pipe(
-                map((quizzesArr: Quizz[]) => {
-                    const quizzes = quizzesArr.map((quizz: Quizz) => {
-                        return {...quizz, authorName: this.usersService.getUserById(quizz.author)
-                        .pipe(
-                            map((author: User) => {
-                                return `${author.firstName} ${author.lastName}`;
-                            })
-                        )};
-                    });
+                map((quizzes: Quizz[]) => {
                     return new AllQuizzesReceived({quizzes});
                 }),
                 catchError((error: any) => {
@@ -80,13 +74,30 @@ export class QuizzesEffects {
             return this.quizzesService.createQuizz(quizzMock.name, ['5d164945aed59b49b6ef0578'], quizzMock.questions)
             .pipe(
                 map((quizz: Quizz) => {
-                    console.log('created', quizz);
                     return new QuizzAdded({quizz});
                 }),
                 catchError(error => {
                     return of(new QuizzAddRequestFalled({error}));
                 })
             )
+        })
+    );
+
+    @Effect()
+    $quizzDeleteRequested = this.actions$
+    .pipe(
+        ofType<QuizzDeleteRequested>(QuizzesActionTypes.QuizzDeleteRequested),
+        map((action: QuizzDeleteRequested) => action.payload.quizzId),
+        exhaustMap((id: string) => {
+            return this.quizzesService.deleteQuizz(id)
+            .pipe(
+                map((quizz: Quizz) => {
+                    return new QuizzDeleted({quizzId: quizz.id});
+                }),
+                catchError((error: any) => {
+                    return of(new QuizzDeleteRequestFalled({error}));
+                })
+            );
         })
     );
 }

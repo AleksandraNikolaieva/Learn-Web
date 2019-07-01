@@ -1,23 +1,48 @@
 @import 'abstracts/mixins';
+@import 'abstracts/variables';
+@import 'sass-mq';
 
 :host {
-    width: 100%;
+    width: 90%;
+
+    @include mq($until: small) {
+        width: 100%;
+    }
 }
 
 app-card {
     @include flex(row, space-between, center);
     flex-wrap: wrap;
     margin: 10px;
+
+    @include mq($until: small) {
+        flex-direction: column;
+    }
+}
+app-timestamp {
+    width: 87px;
 }
 
 span, h3 {
-    width: 200px;
+    width: 175px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     margin: 5px 0;
+
+    @include mq($until: small) {
+        text-align: center;
+    }
 }
 
-button {
-    display: block;
+app-user-pic {
+    margin-right: 10px;
+}
+
+div.user {
+    @include flex(row, space-between, center);
+}
+
+.button-space {
+    width: 15px;
 }

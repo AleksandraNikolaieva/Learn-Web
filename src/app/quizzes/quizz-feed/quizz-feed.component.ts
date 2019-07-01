@@ -1,15 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Quizz } from '../models';
 import { User } from 'src/app/core/models';
-import { AuthService } from 'src/app/services/auth.service';
-import { Subscription, Observable } from 'rxjs';
-import { QuizzesService } from 'src/app/services/quizzes.service';
-import { UsersService } from 'src/app/services/users.service';
+import { Observable } from 'rxjs';
 import { AppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
 import { selectAuthData } from 'src/app/auth/store/auth.selectors';
-import { AllQuizzesRequested } from '../store/quizzes.actions';
+import { AllQuizzesRequested, QuizzDeleteRequested } from '../store/quizzes.actions';
 import { selectAllQuizzes } from '../store/quizzes.selectors';
+import { UsersRequested } from 'src/app/store/users/users.actions';
+import { selectUsersEntities } from 'src/app/store/users/users.selectors';
+import { Dictionary } from '@ngrx/entity';
 
 @Component({
     selector: 'app-feed',
@@ -20,40 +20,23 @@ import { selectAllQuizzes } from '../store/quizzes.selectors';
 export class QuizzFeedComponent implements OnInit {
     quizzes$: Observable<Array<Quizz>>;
     loggedUser$: Observable<User>;
-    subscription: Subscription;
+    usersMap$: Observable<Dictionary<User>>;
 
-    constructor(
-        private authService: AuthService,
-        private quizzesService: QuizzesService,
-        private usersService: UsersService,
-        private cdr: ChangeDetectorRef,
-        private store: Store<AppState>) {}
+    constructor(private store: Store<AppState>) {}
 
     ngOnInit() {
         this.loggedUser$ = this.store.select(selectAuthData);
 
         this.store.dispatch(new AllQuizzesRequested());
+        this.store.dispatch(new UsersRequested());
 
         this.quizzes$ = this.store.select(selectAllQuizzes);
+        this.usersMap$ = this.store.select(selectUsersEntities);
 
-        //this.quizzes$ = this.store.select(select)
-        /* this.subscription = this.store.pipe(
-            select(selectAuthData)
-        )
-        .subscribe((authData: AuthData) => {
-            this.loggedUser = authData;
-        }); */
-
-        /* this.quizzes = this.quizzesService.getMockQuizzes();
-        this.quizzes.forEach(quizz => {
-            quizz.authorName = this.usersService.getUserById(quizz.author)
-            .pipe(
-                map(user => `${user.firstName} ${user.lastName}`)
-            );
-        }); */
+        this.quizzes$.subscribe(res => console.log(res));
     }
 
-    deleteQuizz(id: number) {
-        
+    deleteQuizz(id: string) {
+        this.store.dispatch(new QuizzDeleteRequested({quizzId: id}));
     }
 }

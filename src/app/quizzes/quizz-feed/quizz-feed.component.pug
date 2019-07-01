@@ -4,5 +4,6 @@ app-viewport('link'='constructor')
         '[quizz]'='quizz'
         '[id]'='i'
         '[loggedUser]'='loggedUser$ | async'
+        '[usersMap]' = 'usersMap$ | async'
         '(deleted)'='deleteQuizz($event)')
     router-outlet(name='aside' auxiliary)

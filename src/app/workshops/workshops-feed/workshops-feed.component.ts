@@ -27,7 +27,6 @@ import { UsersRequested } from 'src/app/store/users/users.actions';
 import { selectUsersEntities } from 'src/app/store/users/users.selectors';
 import { WorkshopsState } from '../store/workshops.reducer';
 import { selectAuthData } from 'src/app/auth/store/auth.selectors';
-import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
     selector: 'app-workshops-feed',
@@ -77,12 +76,12 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         this.store.dispatch(new TagsRequested());
         this.store.dispatch(new UsersRequested());
 
-        this.articles$ = this.store.pipe(select(selectWorkshops));
+        this.articles$ = this.store.select(selectWorkshops);
 
-        this.tags$ = this.store.pipe(select(selectAllTags));
-        this.tagsEntities$ = this.store.pipe(select(selectTagsEntities));
+        this.tags$ = this.store.select(selectAllTags);
+        this.tagsEntities$ = this.store.select(selectTagsEntities);
 
-        this.usersEntities$ = this.store.pipe(select(selectUsersEntities));
+        this.usersEntities$ = this.store.select(selectUsersEntities);
 
         this.subscriptions.push(
             this.route.queryParamMap

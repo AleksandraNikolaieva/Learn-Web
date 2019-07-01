@@ -2,11 +2,13 @@ import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 import { Quizz } from '../models';
 import { QuizzesActions, QuizzesActionTypes } from './quizzes.actions';
 
-/* export function selectQuizzId(item: Quizz): string {
-    return item.id;
-} */
+export function sortByDate(a: Quizz, b: Quizz): number {
+    return a.updatedAt < b.updatedAt ? 1 : -1;
+}
 
-export const adapter: EntityAdapter<Quizz> = createEntityAdapter<Quizz>();
+export const adapter: EntityAdapter<Quizz> = createEntityAdapter<Quizz>({
+    sortComparer: sortByDate
+});
 
 export interface QuizzesState extends EntityState<Quizz> {
     currentQuizzPage: Quizz | null;
@@ -25,6 +27,8 @@ export function quizzesReducer(state = initialState, action: QuizzesActions): Qu
             return {...state, currentQuizzPage: action.payload.quizz};
         case QuizzesActionTypes.QuizzAdded:
             return adapter.addOne(action.payload.quizz, state);
+        case QuizzesActionTypes.QuizzDeleted:
+            return adapter.removeOne(action.payload.quizzId, state);
         default:
             return state;
     }
