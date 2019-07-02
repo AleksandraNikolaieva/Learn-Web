@@ -11,6 +11,7 @@ import { selectCurrentComments } from 'src/app/store/comments/comments.selectors
 import { UsersRequested } from 'src/app/store/users/users.actions';
 import { selectUsersEntities } from 'src/app/store/users/users.selectors';
 import { Dictionary } from '@ngrx/entity';
+import { skip } from 'rxjs/operators';
 
 @Component({
     selector: 'app-workshop-comments',
@@ -38,7 +39,7 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         this.store.dispatch(new CommentsRequested({workshopId: this.postId}));
         this.store.dispatch(new UsersRequested());
 
-        this.comments$ = this.store.select(selectCurrentComments);
+        this.comments$ = this.store.select(selectCurrentComments).pipe(skip(1));
         this.loggedUser$ = this.store.select(selectAuthData);
         this.usersMap$ = this.store.select(selectUsersEntities);
     }
