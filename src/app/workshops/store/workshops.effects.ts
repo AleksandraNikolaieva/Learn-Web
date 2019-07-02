@@ -10,6 +10,7 @@ import { WorkshopsRequested,
 import { map, exhaustMap, catchError, distinctUntilKeyChanged } from 'rxjs/operators';
 import { WorkshopsFeedParams, Article } from '../models';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -17,7 +18,8 @@ export class WorkshopsEffects {
 
     constructor(
         private actions$: Actions,
-        private workshopsService: WorkshopsService
+        private workshopsService: WorkshopsService,
+        private router: Router
     ) { }
 
     @Effect()
@@ -53,6 +55,7 @@ export class WorkshopsEffects {
                     return new WorkshopPageReceived({workshop});
                 }),
                 catchError((error: any) => {
+                    this.router.navigateByUrl('/not_found');
                     return of(new WorkshopsRequestFalled({error}));
                 })
             );

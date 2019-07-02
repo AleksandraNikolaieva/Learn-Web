@@ -13,7 +13,7 @@ import { enterLeaveHeight } from 'src/app/common/animations';
 import { take, skip } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
-import { selectWorkshops, selectWorkshopsState } from '../store/workshops.selectors';
+import { selectWorkshops, selectWorkshopsState, selectWorshopsLoadedMark } from '../store/workshops.selectors';
 import {
         WorkshopsRequested,
         CategoryActivated,
@@ -41,6 +41,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     tagsEntities$: Observable<Dictionary<Tag>>;
     usersEntities$: Observable<Dictionary<User>>;
     loggedUser: User;
+    isLoaded: Observable<boolean>;
 
     activeTags: Array<string> = [];
     activeCategory: string;
@@ -66,15 +67,19 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private store: Store<AppState>,
-        private cdr: ChangeDetectorRef) { }
+        private cdr: ChangeDetectorRef
+    ) {}
 
     ngOnInit() {
-        this.getLoggedUser();
+        this.isLoaded = this.store.select(selectWorshopsLoadedMark);
 
+        this.getLoggedUser();
         this.checkStore();
+
 
         this.store.dispatch(new TagsRequested());
         this.store.dispatch(new UsersRequested());
+
 
         this.articles$ = this.store.select(selectWorkshops);
 
@@ -145,6 +150,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     }
 
     onQPChanges(qp: any) {
+        console.log('test');
         const category = qp.get('category');
         const newCategory = category ? category : 'all';
         if (this.activeCategory !== newCategory) {
