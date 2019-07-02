@@ -7,7 +7,7 @@ import { AppState } from 'src/app/store/reducers';
 import { WorkshopPageRequested } from '../store/workshops.actions';
 import { selectWorkshopPage } from '../store/workshops.selectors';
 import { UsersService } from 'src/app/services/users.service';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, skip } from 'rxjs/operators';
 
 @Component({
     selector: 'app-workshop-page',
@@ -33,6 +33,7 @@ export class WorkshopPageComponent implements OnInit, OnDestroy {
 
         this.subscription = this.store.select(selectWorkshopPage)
         .pipe(
+            skip(1),
             map((article: Article) => {
                 if (article) {
                     article.author$ = this.userService.getUserById(article.author)
