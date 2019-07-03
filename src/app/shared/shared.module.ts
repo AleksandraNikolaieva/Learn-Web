@@ -21,6 +21,7 @@ import { CollapsableDirective } from './directives/collapsable/collapsable.direc
 import { MultipleColorDirective } from './directives/multiple-color/multiple-color.directive';
 import { QuizzConfigPipe } from '../pipes/quizz-config.pipe';
 import { TagsMapPipe } from '../pipes/tags-map.pipe';
+import { GoBackButtonComponent } from './go-back-button/go-back-button.component';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { TagsMapPipe } from '../pipes/tags-map.pipe';
         LikeComponent,
         EditAddCommentComponent,
         AuxiliaryContentComponent,
+        GoBackButtonComponent,
 
         QueryParamsActiveDirective,
         TextToColorDirective,
@@ -68,6 +70,7 @@ import { TagsMapPipe } from '../pipes/tags-map.pipe';
         LikeComponent,
         EditAddCommentComponent,
         AuxiliaryContentComponent,
+        GoBackButtonComponent,
 
         QueryParamsActiveDirective,
         TextToColorDirective,
