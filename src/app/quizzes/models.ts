@@ -5,7 +5,7 @@ export interface Quizz {
     id: string;
     name: string;
     questions: Array<Question>;
-    _author: string;
+    author: string;
     authorName?: Observable<string>;
     status: 'draft' | 'published';
     posts: Array<string>;
