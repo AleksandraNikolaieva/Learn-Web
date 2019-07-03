@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
-import { Quizz } from '../models';
+import { Quizz, QuizzData } from '../models';
+import { Update } from '@ngrx/entity';
 
 export enum QuizzesActionTypes {
     AllQuizzesRequested = '[Quizzes] All Quizzess Requested',
@@ -21,6 +22,10 @@ export enum QuizzesActionTypes {
     QuizzModifyRequested = '[Quizz] Quizz Requested To Modify',
     QuizzModified = '[Quizz] Quizz Modify',
     QuizzModifeRequestFalled = '[Quizz] Quizz Request To Modify Falled',
+
+    QuizzCheckRequested = '[Quizz] Quizz Requested To Check',
+    QuizzChecked = '[Quizz] Quizz Checked',
+    QuizzCheckFalled = '[Quizz] Quizz Check Request Falled'
 }
 
 export class AllQuizzesRequested implements Action {
@@ -93,6 +98,23 @@ export class QuizzDeleteRequestFalled implements Action {
     constructor(public payload: {error: any}) {}
 }
 
+export class QuizzModifyRequested implements Action {
+    readonly type = QuizzesActionTypes.QuizzModifyRequested;
+
+    constructor(public payload: {id: string, newQuizz: QuizzData}) {}
+}
+
+export class QuizzModified implements Action {
+    readonly type = QuizzesActionTypes.QuizzModified;
+
+    constructor(public payload: {quizz: Update<Quizz>}) {}
+}
+
+export class QuizzModifeRequestFalled implements Action {
+    readonly type = QuizzesActionTypes.QuizzModifeRequestFalled;
+
+    constructor(public payload: {error: any}) {}
+}
 
 export type QuizzesActions =
     AllQuizzesRequested |
@@ -104,6 +126,9 @@ export type QuizzesActions =
     QuizzAddRequested |
     QuizzAdded |
     QuizzAddRequestFalled |
+    QuizzModifyRequested |
+    QuizzModified |
+    QuizzModifeRequestFalled |
     QuizzDeleteRequested |
     QuizzDeleted |
     QuizzDeleteRequestFalled;

@@ -14,13 +14,14 @@ import {
         QuizzAddRequestFalled,
         QuizzDeleteRequested,
         QuizzDeleted,
-        QuizzDeleteRequestFalled
+        QuizzDeleteRequestFalled,
+        QuizzModifyRequested,
+        QuizzModified,
+        QuizzModifeRequestFalled
     } from './quizzes.actions';
 import { exhaustMap, map, catchError } from 'rxjs/operators';
-import { Quizz } from '../models';
+import { Quizz, QuizzData } from '../models';
 import { of } from 'rxjs';
-import { UsersService } from 'src/app/services/users.service';
-import { User } from 'src/app/core/models';
 
 @Injectable()
 export class QuizzesEffects {
@@ -43,7 +44,7 @@ export class QuizzesEffects {
                 catchError((error: any) => {
                     return of(new AllQuizzesRequestFalled({error}));
                 })
-            )
+            );
         })
     );
 
@@ -70,8 +71,8 @@ export class QuizzesEffects {
     .pipe(
         ofType<QuizzAddRequested>(QuizzesActionTypes.QuizzAddRequested),
         map((action: QuizzAddRequested) => action.payload.quizz),
-        exhaustMap((quizzMock: Quizz) => {
-            return this.quizzesService.createQuizz(quizzMock.name, ['5d164945aed59b49b6ef0578'], quizzMock.questions)
+        exhaustMap((quizzData: QuizzData) => {
+            return this.quizzesService.createQuizz(quizzData)
             .pipe(
                 map((quizz: Quizz) => {
                     return new QuizzAdded({quizz});
@@ -79,7 +80,7 @@ export class QuizzesEffects {
                 catchError(error => {
                     return of(new QuizzAddRequestFalled({error}));
                 })
-            )
+            );
         })
     );
 
@@ -96,6 +97,24 @@ export class QuizzesEffects {
                 }),
                 catchError((error: any) => {
                     return of(new QuizzDeleteRequestFalled({error}));
+                })
+            );
+        })
+    );
+
+    @Effect()
+    $quizzModifyRequested = this.actions$
+    .pipe(
+        ofType<QuizzModifyRequested>(QuizzesActionTypes.QuizzModifyRequested),
+        map((action: QuizzModifyRequested) => action.payload),
+        exhaustMap(({id, newQuizz}: {id: string, newQuizz: QuizzData}) => {
+            return this.quizzesService.updeteQuizz(id, newQuizz)
+            .pipe(
+                map((quizz: Quizz) => {
+                    return new QuizzModified({quizz: {id: quizz.id, changes: quizz}});
+                }),
+                catchError((error : any) => {
+                    return of(new QuizzModifeRequestFalled({error}));
                 })
             );
         })

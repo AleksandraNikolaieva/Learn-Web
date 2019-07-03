@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
 import { selectAuthData } from 'src/app/auth/store/auth.selectors';
-import { AllQuizzesRequested, QuizzDeleteRequested } from '../store/quizzes.actions';
+import { AllQuizzesRequested, QuizzDeleteRequested, QuizzModifyRequested } from '../store/quizzes.actions';
 import { selectAllQuizzes } from '../store/quizzes.selectors';
 import { UsersRequested } from 'src/app/store/users/users.actions';
 import { selectUsersEntities } from 'src/app/store/users/users.selectors';
@@ -32,8 +32,6 @@ export class QuizzFeedComponent implements OnInit {
 
         this.quizzes$ = this.store.select(selectAllQuizzes);
         this.usersMap$ = this.store.select(selectUsersEntities);
-
-        this.quizzes$.subscribe(res => console.log(res));
     }
 
     deleteQuizz(id: string) {
