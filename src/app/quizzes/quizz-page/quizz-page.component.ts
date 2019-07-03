@@ -6,6 +6,7 @@ import { AppState } from 'src/app/store/reducers';
 import { QuizzPageRequested } from '../store/quizzes.actions';
 import { Observable } from 'rxjs';
 import { selectPageQuizz } from '../store/quizzes.selectors';
+import { QuizzesService } from 'src/app/services/quizzes.service';
 
 @Component({
     selector: 'app-quizz-page',
@@ -15,19 +16,36 @@ import { selectPageQuizz } from '../store/quizzes.selectors';
 })
 export class QuizzPageComponent implements OnInit {
     quizz$: Observable<Quizz>;
+    id: string;
 
     constructor(
         private route: ActivatedRoute,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private quizzService: QuizzesService
     ) { }
 
     ngOnInit() {
-        this.store.dispatch(new QuizzPageRequested({quizzId: this.route.snapshot.params.id}));
+        this.id = this.route.snapshot.params.id;
+        this.store.dispatch(new QuizzPageRequested({quizzId: this.id}));
 
         this.quizz$ = this.store.select(selectPageQuizz);
     }
 
     onSubmit(formValue: any) {
-        console.log(formValue);
+        let toSend = [];
+        for (const key in formValue) {
+            if (formValue.hasOwnProperty(key)) {
+                if (!Array.isArray(formValue[key])) {
+                    toSend.push(formValue[key]);
+                } else {
+                    toSend.push(formValue[key][0]);
+                }
+            }
+        }
+        this.quizzService.validateQuizz(this.id, {formData: toSend})
+        .subscribe(res => {
+            let rightAnswers = res.results.filter(item => item === true).length;
+            alert(`${res.message} \n${rightAnswers} of ${res.results.length} answers is right`);
+        });
     }
 }

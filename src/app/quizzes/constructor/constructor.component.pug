@@ -6,6 +6,16 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
         'placeholder'='Start typing...'
     )
     app-error-message('[field]'='quizzForm.get("name")')
+    app-dropdown(
+        'formControlName'='posts'
+        '[options]'='workshops$ | async'
+        '[label]'='"Select related workshops: "'
+        '[id]'='"posts"'
+        '[isMultiple]'='true'
+        'toShow'='title'
+        'toGet'='id'
+    )
+    app-error-message('[field]'='quizzForm.get("posts")')
     fieldset('*ngFor'='let question of quizzForm.get("questions")["controls"]; let questionIndex = index')
         app-text-input(
             '[formControl]'='question.controls["question"]'

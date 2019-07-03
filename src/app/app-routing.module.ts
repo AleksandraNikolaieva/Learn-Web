@@ -22,11 +22,6 @@ const routes: Routes = [
         canLoad: [AuthGuard]
     },
     {
-        path: 'dashboard',
-        loadChildren: './dashboard/dashboard.module#DashboardModule',
-        canLoad: [AuthGuard]
-    },
-    {
         path: 'login',
         component: LoginComponent
     },

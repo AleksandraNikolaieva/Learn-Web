@@ -1,10 +1,14 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, FormControl } from '@angular/forms';
 import { QuizzesService } from 'src/app/services/quizzes.service';
 import { QuestionVariant } from '../models';
 import { AppState } from 'src/app/store/reducers';
 import { Store } from '@ngrx/store';
 import { QuizzAddRequested } from '../store/quizzes.actions';
+import { Article, WorkshopsFeedParams } from 'src/app/workshops/models';
+import { WorkshopsRequested } from 'src/app/workshops/store/workshops.actions';
+import { Observable } from 'rxjs';
+import { selectWorkshops } from 'src/app/workshops/store/workshops.selectors';
 
 @Component({
     selector: 'app-constructor',
@@ -14,6 +18,7 @@ import { QuizzAddRequested } from '../store/quizzes.actions';
 })
 export class ConstructorComponent implements OnInit {
     quizzForm: FormGroup;
+    workshops$: Observable<Array<Article>>;
 
     constructor(
         private fb: FormBuilder,
@@ -21,8 +26,12 @@ export class ConstructorComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.store.dispatch(new WorkshopsRequested({params: new WorkshopsFeedParams()}));
+        this.workshops$ = this.store.select(selectWorkshops);
+
         this.quizzForm = this.fb.group({
             name: [null, [Validators.required, Validators.minLength(2)]],
+            posts: [null, Validators.required],
             questions: this.fb.array([], this.arrLengthValidation(1))
         });
     }
@@ -36,6 +45,7 @@ export class ConstructorComponent implements OnInit {
         console.log(res);
         this.store.dispatch(new QuizzAddRequested({quizz: res}));
         this.quizzForm.reset();
+        this.quizzForm.setControl('posts', new FormControl(null, Validators.required));
         this.quizzForm.setControl('questions', this.fb.array([], this.arrLengthValidation(1)));
     }
 

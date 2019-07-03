@@ -3,14 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { WorkshopsFeedComponent } from './workshops-feed/workshops-feed.component';
 import { WorkshopPageComponent } from './workshop-page/workshop-page.component';
 import { AuthGuard } from '../guards/auth.guard';
-import { WorkshopsPageResolver } from '../resolvers/workshops-page.resolver';
 import { WorkshopCommentsComponent } from './workshop-comments/workshop-comments.component';
 import { WorkshopQuizzesComponent } from './workshop-quizzes/workshop-quizzes.component';
 import { WorkshopResourcesComponent } from './workshop-resources/workshop-resources.component';
 import { AuxiliaryContentComponent } from '../shared/auxiliary-content/auxiliary-content.component';
-import { TagsResolver } from '../resolvers/tags.resolver';
-import { UsersResolver } from '../resolvers/users.resolver';
-import { WorkshopCommentResolver } from '../resolvers/workshop-comment.resolver';
 
 const workshopsRoutes: Routes = [
     {

@@ -14,6 +14,7 @@ export class QuizzCardComponent implements OnInit {
     @Input() loggedUser: User;
     @Input() usersMap: Dictionary<User>;
     @Output() deleted: EventEmitter<string> = new EventEmitter();
+    @Output() edited: EventEmitter<string> = new EventEmitter();
 
     constructor() { }
 
@@ -21,5 +22,9 @@ export class QuizzCardComponent implements OnInit {
 
     delete(id: string) {
         this.deleted.emit(id);
+    }
+
+    edit(id: string) {
+        this.edited.emit(id);
     }
 }
