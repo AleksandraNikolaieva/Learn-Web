@@ -9,7 +9,7 @@ export class RangeDirective {
         private templateRef: TemplateRef<any>,
         private viewContainer: ViewContainerRef
     ) { }
-    // used to show is Quizzes
+
     @Input('appRange') set range(range: Array<number> | number) {
         let from;
         let to;
