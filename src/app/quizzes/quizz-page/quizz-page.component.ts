@@ -7,6 +7,7 @@ import { QuizzPageRequested } from '../store/quizzes.actions';
 import { Observable } from 'rxjs';
 import { selectPageQuizz } from '../store/quizzes.selectors';
 import { QuizzesService } from 'src/app/services/quizzes.service';
+import { skip } from 'rxjs/operators';
 
 @Component({
     selector: 'app-quizz-page',
@@ -28,7 +29,7 @@ export class QuizzPageComponent implements OnInit {
         this.id = this.route.snapshot.params.id;
         this.store.dispatch(new QuizzPageRequested({quizzId: this.id}));
 
-        this.quizz$ = this.store.select(selectPageQuizz);
+        this.quizz$ = this.store.select(selectPageQuizz).pipe(skip(1));
     }
 
     onSubmit(formValue: any) {
