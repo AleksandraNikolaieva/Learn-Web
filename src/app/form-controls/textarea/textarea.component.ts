@@ -15,7 +15,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 })
 export class TextareaComponent implements OnInit, ControlValueAccessor {
     @Input() id = '';
-    @Input() placeholder = '';
+    @Input() placeholder = 'Type here';
     @Input() label = '';
     @Input() cols = 20;
     @Input() rows = 5;

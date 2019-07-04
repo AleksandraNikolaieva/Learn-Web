@@ -12,8 +12,8 @@ button {
     top: 50vh;
 
     @include mq($until: small) {
-        left: 5px;
-        top: 18vh;
+        left: 0px;
+        //top: 18vh;
     }
 
     i {
