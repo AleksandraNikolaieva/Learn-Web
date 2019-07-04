@@ -1,0 +1,28 @@
+app-viewport
+    div(main)
+        app-go-back-button('link'='/workshops/feed')
+        form('[formGroup]'='workshopForm' '(submit)'='onSubmit()' autocomplete='off')
+            h3 {{title}}
+            app-textarea('formControlName'='title' 'label'='Title:' 'rows'='3')
+            app-error-message('[field]'='workshopForm.get("title")')
+            app-textarea('formControlName'='image' 'label'='Image link:' 'rows'='3')
+            app-error-message('[field]'='workshopForm.get("image")')
+            app-textarea(
+                'formControlName'='description'
+                'label'='Short description:'
+                'placeholder'='Workshop description'
+                'rows'='3'
+            )
+            app-error-message('[field]'='workshopForm.get("description")')
+            app-textarea('label'='Text:' 'placeholder'='Main text' 'formControlName'='text')
+            app-error-message('[field]'='workshopForm.get("text")')
+            app-dropdown(
+                'formControlName'='tags'
+                '[options]'='tags$ | async'
+                'label'='Select tags:'
+                'toShow'='name'
+                'toGet'='seq'
+                'size'='4'
+            )
+            button Submit
+

@@ -1,24 +1,36 @@
 app-viewport
-    .tag-group(main)
-        app-tag(
-            '*ngFor'='let tagItem of tags$ | async'
-            '[tag]'='tagItem'
-            '(changeActive)'='activateTag($event)'
-            )
-        button('(click)'='resetTags()')
-            i.icon-close
-    .categories(main)
-        a('*ngFor'='let category of categories'
-           '[ngClass]'='{"active": category.title === activeCategory}'
-           '(click)'='activateCategory(category)'
-        ) {{category.title}}
-    .workshop-feed-content(main '*ngIf'='articles$ | async as articles')
-        span('*ngIf'='!articles.length') Required articles do not exist
-        app-article(
-            '*ngFor'='let articleItem of articles; trackBy: trackByFunction'
-            '[article]'='articleItem'
-            '[tagsMap]'='tagsEntities$ | async'
-            '[usersMap]'='usersEntities$ | async'
-            '[@enterLeaveHeight]'='true'
-        )
+    ng-container(main)
+        .tag-group
+            app-tag(
+                '*ngFor'='let tagItem of tags$ | async'
+                '[tag]'='tagItem'
+                '(changeActive)'='activateTag($event)'
+                )
+            button('(click)'='resetTags()')
+                i.icon-close
+        .categories
+            a('*ngFor'='let category of categories'
+            '[ngClass]'='{"active": category.title === activeCategory}'
+            '(click)'='activateCategory(category)'
+            ) {{category.title}}
+        .workshop-feed-content
+            app-ws-top-pane
+            span(main '*ngIf'='!(isLoaded | async)') Loading . . . 
+            ng-container('*ngIf'='articles$ | async as articles')
+                span('*ngIf'='!articles.length && isLoaded | async') Required articles do not exist
+                app-article(
+                    '*ngFor'='let articleItem of articles; trackBy: trackByFunction'
+                    '[article]'='articleItem'
+                    '[tagsMap]'='tagsEntities$ | async'
+                    '[usersMap]'='usersEntities$ | async'
+                    '[@enterLeaveHeight]'='true'
+                    '(deleted)'='deleteWorshop($event)'
+                    '[loggedUser]'='loggedUser'
+                )
+            div.pagination('*ngIf'='(isLoaded | async)')
+                button(
+                    '*ngFor'='let page of pages; let i = index'
+                    '(click)'='changePage(i + 1)'
+                    '[ngClass]'='{active: currentPage == i}'
+                ) {{i + 1}}
 

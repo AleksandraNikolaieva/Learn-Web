@@ -12,7 +12,6 @@ export class CollapsableDirective implements OnInit {
         private renderer: Renderer2,
         private animationBuilder: AnimationBuilder
     ) { }
-    // used to show in dashboard
 
     collapseAnimation: AnimationFactory;
     expandAnimation: AnimationFactory;

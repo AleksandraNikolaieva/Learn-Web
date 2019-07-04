@@ -3,7 +3,7 @@ import { Comment } from 'src/app/workshops/models';
 import { CommentsActions, CommentsActionTypes } from './comments.actions';
 
 export function sortByDate(a: Comment, b: Comment): number {
-    return a.updatedAt < b.updatedAt ? 1 : -1;
+    return a.createdAt < b.createdAt ? 1 : -1;
 }
 
 export const adapter: EntityAdapter<Comment> = createEntityAdapter<Comment>({

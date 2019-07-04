@@ -53,48 +53,4 @@
     .holder {
         min-height: 55px;
     }
-
-    a { 
-        width: 25px;
-        color: $grey;
-        background-color: $white;
-        border-radius: 5px;
-        padding: 3px 5px;
-        font-size: 13px;
-        position: fixed;
-        transition: background-color 0.3s;
-        left: $menu-w + 5px;
-        top: 50vh;
-
-        i {
-            font-size: 17px;
-        }
-
-        &:hover {
-            background-color: $grey;
-            color: $white;
-        }
-    }
-}
-
-a {
-    position: fixed;
-    top: $header-h;
-    right: 10px;
-    padding: 5px;
-    @include mq($until: medium) {
-        display: none;
-    }
-
-    .icon-close,
-    .icon-plus {
-        color: grey;
-    }
-}
-
-a.close {
-    right: 310px;
-    @include mq($from: huge) {
-        right: 600px;
-    };
 }

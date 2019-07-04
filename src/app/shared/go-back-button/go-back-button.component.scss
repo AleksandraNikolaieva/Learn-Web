@@ -1,0 +1,27 @@
+@import 'abstracts/variables';
+@import 'sass-mq';
+
+button {
+    color: $grey;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 3px 5px;
+    transition: background-color 0.3s;
+    position: fixed;
+    left: $menu-w + 5px;
+    top: 50vh;
+
+    @include mq($until: small) {
+        left: 0px;
+        //top: 18vh;
+    }
+
+    i {
+        font-size: 17px;
+    }
+
+    &:hover {
+        background-color: $grey;
+        color: $white;
+    }
+}

@@ -4,6 +4,22 @@
 
 .workshop-feed-content {
     @include flex(column, flex-start, center);
+
+    .pagination {
+        width: 100%;
+        text-align: center;
+    }
+
+    button {
+        width: auto;
+        padding: 3px;
+        margin: 0 5px;
+
+        &.active {
+            background-color: $grey;
+            color: yellow;
+        }
+    }
 }
 
 app-article {
@@ -21,7 +37,7 @@ app-article {
 
 .tag-group {
     position: fixed;
-    top: 80px;
+    top: 130px;
     right: 20px;
     width: 140px;
 
@@ -32,7 +48,7 @@ app-article {
 
 .categories {
     position: fixed;
-    top: 80px;
+    top: 130px;
     left: 90px;
     width: 140px;
 

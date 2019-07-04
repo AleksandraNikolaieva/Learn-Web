@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatisticComponent } from './statistic.component';
+import { WsFormComponent } from './ws-form.component';
 
-describe('StatisticComponent', () => {
-    let component: StatisticComponent;
-    let fixture: ComponentFixture<StatisticComponent>;
+describe('WsFormComponent', () => {
+    let component: WsFormComponent;
+    let fixture: ComponentFixture<WsFormComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [StatisticComponent]
+            declarations: [WsFormComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(StatisticComponent);
+        fixture = TestBed.createComponent(WsFormComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

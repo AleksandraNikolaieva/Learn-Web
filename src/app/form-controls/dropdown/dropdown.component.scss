@@ -2,6 +2,11 @@
 
 :host  {
     display: block;
+    width: 100%;
+
+    label {
+        display: block;
+    }
 
     span {
         font-size: 12px;
@@ -23,6 +28,9 @@
 
         option {
             padding: 5px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         &:focus{

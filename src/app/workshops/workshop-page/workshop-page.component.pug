@@ -15,6 +15,5 @@ app-viewport('link'='workshop')
                 app-timestamp([date]='article.createdAt' toFormat='day')
             p.tags
                 span('*ngFor'='let tag of tags') {{tag}}
-            a(routerLink='/workshops/feed')
-                i.icon-arrow-left2
+            app-go-back-button
     router-outlet(name='aside' auxiliary)

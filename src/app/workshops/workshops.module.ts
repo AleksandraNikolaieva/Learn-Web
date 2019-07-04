@@ -18,6 +18,9 @@ import { usersReducer } from '../store/users/users.reducer';
 import { UsersEffects } from '../store/users/users.effects';
 import { commentsReducer } from '../store/comments/comments.reducer';
 import { CommentsEffects } from '../store/comments/comments.effects';
+import { WsTopPaneComponent } from './ws-top-pane/ws-top-pane.component';
+import { WsFormComponent } from './ws-form/ws-form.component';
+import { FormControlsModule } from '../form-controls/form-controls.module';
 
 @NgModule({
     declarations: [
@@ -26,12 +29,15 @@ import { CommentsEffects } from '../store/comments/comments.effects';
         ArticleComponent,
         WorkshopResourcesComponent,
         WorkshopQuizzesComponent,
-        WorkshopCommentsComponent
+        WorkshopCommentsComponent,
+        WsTopPaneComponent,
+        WsFormComponent
     ],
     imports: [
         CommonModule,
         WorkshopsRoutingModule,
         SharedModule,
+        FormControlsModule,
 
         StoreModule.forFeature('workshops', workshopsReducer),
         EffectsModule.forFeature([WorkshopsEffects]),

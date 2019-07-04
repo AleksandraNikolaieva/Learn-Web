@@ -22,7 +22,6 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     subscription: Subscription;
 
     constructor(
-        private authService: AuthService,
         private store: Store<AppState>,
         private usersService: UsersService,
         private fb: FormBuilder

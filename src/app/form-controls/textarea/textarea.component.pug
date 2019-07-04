@@ -1,0 +1,10 @@
+label('*ngIf'='label', '[for]'='id') {{label}}
+textarea(
+    '[cols]'='cols'
+    '[rows]'='rows'
+    '[id]'='id'
+    '[placeholder]'='placeholder'
+    '[(ngModel)]'='value'
+    '(ngModelChange)'='onChange(value)'
+    '(blur)'='onBlur($event)' 
+)

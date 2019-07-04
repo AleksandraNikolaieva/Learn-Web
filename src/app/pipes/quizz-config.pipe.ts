@@ -13,17 +13,19 @@ export class QuizzConfigPipe implements PipeTransform {
 
         questions.forEach(question => {
             const variants = [];
-            if (question.answerVariants) {
-                question.answerVariants.forEach(variant => variants.push(variant.answer));
+            if (question) {
+                if (question.answerVariants) {
+                    question.answerVariants.forEach(variant => variants.push(variant.answer));
+                }
+                config.push({
+                    name: `answer${index}`,
+                    label: question.question,
+                    type: question.questionType === 'input' ? 'input' : 'select',
+                    placeholder: 'your answer',
+                    options: variants
+                });
+                index++;
             }
-            config.push({
-                name: `answer${index}`,
-                label: question.question,
-                type: question.questionType === 'input' ? 'input' : 'select',
-                placeholder: 'your answer',
-                options: variants
-            });
-            index++;
         });
         return config;
     }

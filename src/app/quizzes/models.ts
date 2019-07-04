@@ -2,16 +2,30 @@ import { Observable } from 'rxjs';
 import { User } from '../core/models';
 
 export interface Quizz {
-    id?: string;
+    id: string;
     name: string;
     questions: Array<Question>;
     author: string;
     authorName?: Observable<string>;
-    date?: Date;
-    createdAt?: string;
-    posts?: Array<string>;
-    status: string;
+    status: 'draft' | 'published';
+    posts: Array<string>;
+    createdAt: string;
     updatedAt?: string;
+}
+
+export interface QuizzData {
+    name: string;
+    questions: Array<Question>;
+    posts: Array<string>;
+    status: 'draft' | 'published';
+}
+
+export interface QuizzesParams {
+    page?: number;
+    name?: string;
+    authorId?: string;
+    postId?: string;
+    status?: 'published' | 'draft';
 }
 
 export interface Question {

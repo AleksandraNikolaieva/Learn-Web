@@ -3,7 +3,7 @@ import { Quizz } from '../models';
 import { QuizzesActions, QuizzesActionTypes } from './quizzes.actions';
 
 export function sortByDate(a: Quizz, b: Quizz): number {
-    return a.updatedAt < b.updatedAt ? 1 : -1;
+    return a.createdAt < b.createdAt ? 1 : -1;
 }
 
 export const adapter: EntityAdapter<Quizz> = createEntityAdapter<Quizz>({
@@ -27,6 +27,8 @@ export function quizzesReducer(state = initialState, action: QuizzesActions): Qu
             return {...state, currentQuizzPage: action.payload.quizz};
         case QuizzesActionTypes.QuizzAdded:
             return adapter.addOne(action.payload.quizz, state);
+        case QuizzesActionTypes.QuizzModified:
+            return adapter.updateOne(action.payload.quizz, state);
         case QuizzesActionTypes.QuizzDeleted:
             return adapter.removeOne(action.payload.quizzId, state);
         default:

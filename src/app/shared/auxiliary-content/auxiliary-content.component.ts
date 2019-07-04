@@ -16,8 +16,6 @@ export class AuxiliaryContentComponent implements OnInit {
     constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
-        this.route.data.subscribe(res => {
-            this.tabs = res.tabs;
-        });
+        this.tabs = this.route.snapshot.data.tabs;
     }
 }

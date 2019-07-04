@@ -1,31 +1,30 @@
-$path: 'assets/icons/icomoon';
+$path: "assets/icons/icomoon";
 
 @font-face {
-    font-family: 'icomoon';
-    src: url('#{$path}.eot?ecvev6');
-    src: url('#{$path}.eot?ecvev6#iefix') format('embedded-opentype'),
-        url('#{$path}.ttf?ecvev6') format('truetype'),
-        url('#{$path}.woff?ecvev6') format('woff'),
-        url('#{$path}.svg?ecvev6#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "icomoon";
+  src: url("#{$path}.eot?ecvev6");
+  src: url("#{$path}.eot?ecvev6#iefix") format("embedded-opentype"), url("#{$path}.ttf?ecvev6") format("truetype"),
+    url("#{$path}.woff?ecvev6") format("woff"), url("#{$path}.svg?ecvev6#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
-  
-[class^="icon-"], [class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-  
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "icomoon" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .icon-user:before {
     content: "\e903";
 }
@@ -34,6 +33,9 @@ $path: 'assets/icons/icomoon';
 }
 .icon-stats-dots:before {
     content: "\e99b";
+}
+.icon-arrow-left2:before {
+    content: "\ea40";
 }
 .icon-question_answer:before {
     content: "\e900";
@@ -56,8 +58,11 @@ $path: 'assets/icons/icomoon';
 .icon-times:before {
     content: "\f00d";
 }
+.icon-pencil:before {
+    content: "\f040";
+}
 .icon-chevron-circle-up:before {
-    content: "\f139";
+  content: "\f139";
 }
 .icon-graduation-cap:before {
     content: "\f19d";
@@ -65,12 +70,12 @@ $path: 'assets/icons/icomoon';
 .icon-mortar-board:before {
     content: "\f19d";
 }
+.icon-trash:before {
+    content: "\f1f8";
+}
 .icon-heart-o:before {
     content: "\e901";
 }
 .icon-heart:before {
     content: "\e902";
-}
-.icon-arrow-left2:before {
-    content: "\ea40";
 }

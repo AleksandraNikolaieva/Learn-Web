@@ -21,6 +21,10 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
     @Input() label = '';
     @Input() id = '';
     @Input() isMultiple = true;
+    @Input() toShow = '';
+    @Input() toGet = '';
+    @Input() size = 4;
+
     value: string;
 
     constructor() { }
