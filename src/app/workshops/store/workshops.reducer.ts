@@ -13,6 +13,7 @@ export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
 export interface WorkshopsState extends EntityState<Article> {
     activeCategory: string;
     activeTags: string;
+    activePage: number;
     page: Article | null;
     isLoaded: boolean;
 }
@@ -20,6 +21,7 @@ export interface WorkshopsState extends EntityState<Article> {
 export const initialState: WorkshopsState = adapter.getInitialState({
     activeCategory: 'all',
     activeTags: null,
+    activePage: 0,
     page: null,
     isLoaded: false
 });
@@ -41,6 +43,8 @@ export function workshopsReducer(state = initialState, action: WorkshopsActions)
             return adapter.removeOne(action.payload.id, state);
         case WorkshopsActionTypes.WorkshopEdited:
             return adapter.updateOne(action.payload.workshop, state);
+        case WorkshopsActionTypes.PageActivated:
+            return {...state, activePage: action.payload.pageNumber};
         default:
             return state;
     }

@@ -19,7 +19,8 @@ import {
         WorkshopsRequested,
         CategoryActivated,
         TagsActivated,
-        WorkshopDeleteRequested
+        WorkshopDeleteRequested,
+        PageActivated
 } from '../store/workshops.actions';
 import { TagsRequested } from 'src/app/store/tags/tags.actions';
 import { selectAllTags, selectTagsEntities } from 'src/app/store/tags/tags.selectors';
@@ -44,7 +45,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     usersEntities$: Observable<Dictionary<User>>;
     loggedUser: User;
     isLoaded: Observable<boolean>;
-    currPage: number;
+    currentPage: number;
     pagesNum  = 3; // mock number as we don't know how many articles all together in the database
     pages =  new Array(this.pagesNum);
 
@@ -123,12 +124,13 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
             if (wsState.isLoaded) {
                 this.activeCategory = wsState.activeCategory;
                 this.activeTags = wsState.activeTags ? wsState.activeTags.split('|') : [];
+                this.currentPage = wsState.activePage;
 
                 const categoryParam = this.activeCategory !== 'all' ? this.activeCategory : undefined;
                 const tagsParam = this.activeTags.length ? this.activeTags.join(',') : undefined;
 
                 this.router.navigate([], {
-                    queryParams: { tags: tagsParam, category: categoryParam}
+                    queryParams: { tags: tagsParam, category: categoryParam, page: this.currentPage + 1}
                 });
             } else {
                 const qp = this.route.snapshot.queryParams;
@@ -148,9 +150,9 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
                 }
                 const authorParam = this.activeCategory === 'my' ? this.loggedUser._id : undefined;
                 const pageNum = qp.page;
-                this.currPage = pageNum ? pageNum - 1 : 0;
+                this.currentPage = pageNum ? pageNum - 1 : 0;
 
-                this.store.dispatch(new WorkshopsRequested({params: new WorkshopsFeedParams(this.currPage, tagsToStore, authorParam)}));
+                this.store.dispatch(new WorkshopsRequested({params: new WorkshopsFeedParams(this.currentPage, tagsToStore, authorParam)}));
             }
         });
     }
@@ -159,7 +161,8 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
         const category = qp.get('category');
         const newCategory = category ? category : 'all';
         const pageNum = qp.get('page');
-        this.currPage = pageNum ? pageNum - 1 : 0;
+        this.currentPage = pageNum ? pageNum - 1 : 0;
+        this.store.dispatch(new PageActivated({pageNumber: this.currentPage}));
 
         if (this.activeCategory !== newCategory) {
             this.activeCategory = newCategory;
@@ -174,7 +177,7 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
 
         const authorParam = this.activeCategory === 'my' ? this.loggedUser._id : undefined;
 
-        this.store.dispatch(new WorkshopsRequested({params: new WorkshopsFeedParams(this.currPage, tagsParam, authorParam)}));
+        this.store.dispatch(new WorkshopsRequested({params: new WorkshopsFeedParams(this.currentPage, tagsParam, authorParam)}));
     }
 
     activateCategory(category: Category) {

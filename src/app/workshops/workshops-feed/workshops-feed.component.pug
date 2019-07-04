@@ -31,6 +31,6 @@ app-viewport
                 button(
                     '*ngFor'='let page of pages; let i = index'
                     '(click)'='changePage(i + 1)'
-                    '[ngClass]'='{active: currPage == i}'
+                    '[ngClass]'='{active: currentPage == i}'
                 ) {{i + 1}}
 

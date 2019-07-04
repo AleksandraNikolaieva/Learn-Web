@@ -9,7 +9,9 @@ export enum WorkshopsActionTypes {
 
     CategoryActivated = '[Workshops] Category Activated',
 
-    TagsActivated = '[Tags] Tags Activated',
+    TagsActivated = '[Workshops] Tags Activated',
+
+    PageActivated = '[Workshops] Page Activated',
 
     WorkshopPageRequested = '[Workshops] Workshop Page Requested',
     WorkshopPageReceived = '[Workshops] Workshop Page Received',
@@ -130,6 +132,12 @@ export class WorkshopDeleteFalled implements Action {
     constructor(public payload: {error: any}) {}
 }
 
+export class PageActivated implements Action {
+    readonly type = WorkshopsActionTypes.PageActivated;
+
+    constructor(public payload: {pageNumber: number}) {}
+}
+
 export type WorkshopsActions =
     WorkshopsRequested |
     WorkshopsReceived |
@@ -147,4 +155,5 @@ export type WorkshopsActions =
     WorkshopEditFalled |
     WorkshopDeleteRequested |
     WorkshopDeleted |
-    WorkshopDeleteFalled;
+    WorkshopDeleteFalled |
+    PageActivated;
