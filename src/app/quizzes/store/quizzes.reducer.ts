@@ -3,7 +3,7 @@ import { Quizz } from '../models';
 import { QuizzesActions, QuizzesActionTypes } from './quizzes.actions';
 
 export function sortByDate(a: Quizz, b: Quizz): number {
-    return a.updatedAt < b.updatedAt ? 1 : -1;
+    return a.createdAt < b.createdAt ? 1 : -1;
 }
 
 export const adapter: EntityAdapter<Quizz> = createEntityAdapter<Quizz>({

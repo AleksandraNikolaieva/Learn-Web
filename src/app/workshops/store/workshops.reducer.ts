@@ -3,7 +3,7 @@ import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 import { Article } from '../models';
 
 export function sortByDate(a: Article, b: Article): number {
-    return a.updatedAt < b.updatedAt ? 1 : -1;
+    return a.createdAt < b.createdAt ? 1 : -1;
 }
 
 export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
