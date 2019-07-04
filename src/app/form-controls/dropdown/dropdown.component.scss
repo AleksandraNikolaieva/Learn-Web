@@ -2,6 +2,11 @@
 
 :host  {
     display: block;
+    width: 100%;
+
+    label {
+        display: block;
+    }
 
     span {
         font-size: 12px;

@@ -20,7 +20,10 @@ export class QuizzesService {
     }
 
     getQuizzesWithParams(params: QuizzesParams): Observable<Array<Quizz>> {
-        return this.api.getRequest('quizzes', params);
+        return this.api.getRequest('quizzes', params)
+        .pipe(
+            map(res => res.quizzes)
+        );
     }
 
     getQuizzById(id: string): Observable<Quizz> {

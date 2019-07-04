@@ -20,7 +20,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
 
     @Input() label = '';
     @Input() id = '';
-    @Input() placeholder = '';
+    @Input() placeholder = 'Type here...';
     @Input() inputType = 'text';
 
     @ViewChild('input') input: ElementRef;

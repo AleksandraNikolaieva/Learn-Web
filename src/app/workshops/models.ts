@@ -19,6 +19,14 @@ export interface Article {
     comments: Array<Comment>;
 }
 
+export class WorkshopData {
+    title: string;
+    tags: Array<string>;
+    text: string;
+    imageLink?: string;
+    description?: string;
+}
+
 export interface Comment {
     _id: string;
     _post: string;
@@ -36,9 +44,9 @@ export interface Category {
 }
 
 export class WorkshopsFeedParams {
-    withComments = '1';
+    withComments = '0';
     constructor(
-        public page = '0',
+        public page?: number,
         public tags?: string,
         public authorId?: string
     ) {}

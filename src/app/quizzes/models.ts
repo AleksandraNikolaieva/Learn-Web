@@ -21,11 +21,11 @@ export interface QuizzData {
 }
 
 export interface QuizzesParams {
-    page: number;
-    name: string;
-    authorId: string;
-    postId: string;
-    status: 'published' | 'draft';
+    page?: number;
+    name?: string;
+    authorId?: string;
+    postId?: string;
+    status?: 'published' | 'draft';
 }
 
 export interface Question {

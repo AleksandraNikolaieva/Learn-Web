@@ -4,10 +4,17 @@ main(#host='')
         a(
             '*ngIf'='isButtonPlus else close'
             '(click)'='changeButton()'
-            '[routerLink]'='[{outlets: {"aside": link}}]' main)
+            '[routerLink]'='[{outlets: {"aside": link}}]'
+            main
+        )
             i.icon-plus
         ng-template(#close='')
-            a.close('(click)'='changeButton()' 'routerLink'='./' '[@enterRightPosition]'='true' main)
+            a.close(
+                '(click)'='changeButton()'
+                'routerLink'='./'
+                '[@enterRightPosition]'='true'
+                main
+            )
                 i.icon-close
     app-to-top-button([hostElement]='host')
 ng-content(select='[auxiliary]')

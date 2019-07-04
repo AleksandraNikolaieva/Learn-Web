@@ -7,6 +7,7 @@ import { WorkshopCommentsComponent } from './workshop-comments/workshop-comments
 import { WorkshopQuizzesComponent } from './workshop-quizzes/workshop-quizzes.component';
 import { WorkshopResourcesComponent } from './workshop-resources/workshop-resources.component';
 import { AuxiliaryContentComponent } from '../shared/auxiliary-content/auxiliary-content.component';
+import { WsFormComponent } from './ws-form/ws-form.component';
 
 const workshopsRoutes: Routes = [
     {
@@ -20,6 +21,18 @@ const workshopsRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'create',
+        component: WsFormComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'New workshop:', action: 'add'}
+    },
+    {
+        path: ':id/edit',
+        component: WsFormComponent,
+        canActivate: [AuthGuard],
+        data: {title: 'Edit workshop', action: 'edit'}
+    },
+    {
         path: ':id',
         component: WorkshopPageComponent,
         canActivate: [AuthGuard],
@@ -27,7 +40,7 @@ const workshopsRoutes: Routes = [
             {
                 path: 'workshop',
                 component: AuxiliaryContentComponent,
-                data: { tabs: ['comments', 'resources', 'quizzes']},
+                data: { tabs: ['comments', 'quizzes']},
                 outlet: 'aside',
                 children: [
                     {

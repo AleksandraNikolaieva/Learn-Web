@@ -5,13 +5,15 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { FormsModule } from '@angular/forms';
 import { ErrorMessageComponent } from './error-message/error-message.component';
+import { TextareaComponent } from './textarea/textarea.component';
 
 @NgModule({
     declarations: [
         TextInputComponent,
         CheckboxComponent,
         DropdownComponent,
-        ErrorMessageComponent
+        ErrorMessageComponent,
+        TextareaComponent
     ],
     imports: [
         CommonModule,
@@ -21,7 +23,8 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
         TextInputComponent,
         CheckboxComponent,
         DropdownComponent,
-        ErrorMessageComponent
+        ErrorMessageComponent,
+        TextareaComponent
     ]
 })
 export class FormControlsModule { }

@@ -8,7 +8,7 @@ app-card
         .row
             span('*ngIf'='usersMap')
                 i.icon-user  {{usersMap[article.author]?.firstName + ' ' + usersMap[article.author]?.lastName}}
-            app-timestamp([date]='article.createdAt' toFormat='day')
+            app-timestamp([date]='article.updatedAt' toFormat='day')
         app-like(
             [isActive]='false',
             [likesNumber]='article.reactionsCounts.likes',
@@ -16,3 +16,8 @@ app-card
         )
         p.tags
             span('*ngFor'='let tag of (article.tags | tagsMap : tagsMap)') {{tag?.name}}
+        ng-container('*ngIf'='article.author === loggedUser.id || loggedUser.role === "admin"')
+            button('(click)'='deleteArticle(article.id)')
+                i.icon-trash
+            a('routerLink'='/workshops/{{article.id}}/edit')
+                i.icon-pencil

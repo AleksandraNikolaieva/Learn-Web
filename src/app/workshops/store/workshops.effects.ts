@@ -6,10 +6,19 @@ import { WorkshopsRequested,
         WorkshopsReceived,
         WorkshopsRequestFalled,
         WorkshopPageRequested,
-        WorkshopPageReceived} from './workshops.actions';
+        WorkshopPageReceived,
+        WorkshopDeleteRequested,
+        WorkshopDeleted,
+        WorkshopDeleteFalled,
+        WorkshopAddRequested,
+        WorkhsopAdded,
+        WorkshopAddFalled,
+        WorkshopEditRequested,
+        WorkshopEdited,
+        WorkshopEditFalled} from './workshops.actions';
 import { map, exhaustMap, catchError, distinctUntilKeyChanged } from 'rxjs/operators';
-import { WorkshopsFeedParams, Article } from '../models';
-import { of } from 'rxjs';
+import { WorkshopsFeedParams, Article, WorkshopData } from '../models';
+import { of, pipe } from 'rxjs';
 import { Router } from '@angular/router';
 
 
@@ -57,6 +66,62 @@ export class WorkshopsEffects {
                 catchError((error: any) => {
                     this.router.navigateByUrl('/not_found');
                     return of(new WorkshopsRequestFalled({error}));
+                })
+            );
+        })
+    );
+
+    @Effect()
+    $workshopAddRequested = this.actions$
+    .pipe(
+        ofType<WorkshopAddRequested>(WorkshopsActionTypes.WorkshopAddRequested),
+        map((action: WorkshopAddRequested) => action.payload.workshopData),
+        exhaustMap((workshopData: WorkshopData) => {
+            return this.workshopsService.createPost(workshopData)
+            .pipe(
+                map((workshop: Article) => {
+                    this.router.navigateByUrl(`workshops/${workshop.id}`);
+                    return new WorkhsopAdded({workshop});
+                }),
+                catchError((error: any) => {
+                    return of(new WorkshopAddFalled({error}));
+                })
+            );
+        })
+    );
+
+    @Effect()
+    $workshopEditRequested = this.actions$
+    .pipe(
+        ofType<WorkshopEditRequested>(WorkshopsActionTypes.WorkshopEditRequested),
+        map((action: WorkshopEditRequested) => action.payload),
+        exhaustMap(({id, workshopData}: {id: string, workshopData: WorkshopData}) => {
+            return this.workshopsService.updetePost(id, workshopData)
+            .pipe(
+                map((workshop: Article) => {
+                    this.router.navigateByUrl(`workshops/${workshop.id}`);
+                    return new WorkshopEdited({workshop: {id: workshop.id, changes: workshop}});
+                }),
+                catchError((error: any) => {
+                    return of(new WorkshopEditFalled({error}));
+                })
+            );
+        })
+    );
+
+    @Effect()
+    $workshopDeleteRequested = this.actions$
+    .pipe(
+        ofType<WorkshopDeleteRequested>(WorkshopsActionTypes.WorkshopDeleteRequested),
+        map((action: WorkshopDeleteRequested) => action.payload.id),
+        exhaustMap((id: string) => {
+            return this.workshopsService.deletePost(id)
+            .pipe(
+                map((workshop: Article) => {
+                    return new WorkshopDeleted({id});
+                }),
+                catchError((error: any) => {
+                    return of(new WorkshopDeleteFalled({error}));
                 })
             );
         })

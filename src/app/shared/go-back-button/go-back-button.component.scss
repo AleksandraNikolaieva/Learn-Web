@@ -1,8 +1,7 @@
 @import 'abstracts/variables';
 @import 'sass-mq';
-a { 
-    width: 25px;
-    height: 17px;
+
+button {
     color: $grey;
     background-color: transparent;
     border-radius: 5px;
@@ -18,7 +17,7 @@ a {
     }
 
     i {
-        font-size: 17 px;
+        font-size: 17px;
     }
 
     &:hover {

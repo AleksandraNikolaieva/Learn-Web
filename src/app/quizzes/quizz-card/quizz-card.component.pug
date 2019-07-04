@@ -8,4 +8,4 @@ app-card
         app-timestamp('toFormat'='day', [date]='quizz.updatedAt')
         div.button-space
             button('*ngIf'='loggedUser?._id === quizz.author' '(click)'='delete(quizz.id)')
-                i.icon-remove
+                i.icon-trash

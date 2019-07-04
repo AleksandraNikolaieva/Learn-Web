@@ -1,2 +1,5 @@
-p workshop-quizzes works!
+div('*ngFor'='let quizz of quizzes$ | async')
+    a(routerLink='/quizzes/{{quizz.id}}')
+        h3 {{quizz.name}}
+    app-timestamp('toFormat'='day', [date]='quizz.updatedAt')
 

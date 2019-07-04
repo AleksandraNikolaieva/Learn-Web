@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Article, WorkshopsFeedParams } from '../workshops/models';
+import { Article, WorkshopsFeedParams, WorkshopData } from '../workshops/models';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { ApiService } from './api.service';
 import { map, tap } from 'rxjs/operators';
@@ -13,13 +13,11 @@ export class WorkshopsService {
 
     constructor(private apiService: ApiService) { }
 
-    createPost(tags: Array<number>, title: string, text: string): Observable<Article> {
-        const body = {
-            tags,
-            title,
-            text
-        };
-        return this.apiService.postRequest('posts', body);
+    createPost(workshopData: WorkshopData): Observable<Article> {
+        return this.apiService.postRequest('posts', workshopData)
+        .pipe(
+            map(res => res.post)
+        );
     }
 
     getAllPosts(params: WorkshopsFeedParams): Observable<Array<Article>> {
@@ -33,30 +31,8 @@ export class WorkshopsService {
         return this.apiService.getRequest(`posts/${id}`);
     }
 
-    updetePost(
-        id: string,
-        tags: Array<number>,
-        title: string,
-        description: string,
-        text: string,
-        image: string,
-        likes: Array<any>,
-        stars: Array<any>,
-        uni: Array<any>,
-        comments: Array<Comment>
-    ): Observable<Article> {
-        const body = {
-            tags,
-            title,
-            description,
-            text,
-            image,
-            likes,
-            stars,
-            uni,
-            comments
-        };
-        return this.apiService.putRequest(`posts/${id}`, body)
+    updetePost(id: string, workshopData: WorkshopData): Observable<Article> {
+        return this.apiService.putRequest(`posts/${id}`, workshopData)
         .pipe(
             map(res => res.post)
         );

@@ -1,16 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-go-back-button',
     templateUrl: './go-back-button.component.pug',
-    styleUrls: ['./go-back-button.component.scss']
+    styleUrls: ['./go-back-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GoBackButtonComponent implements OnInit {
-    @Input() link: string;
-    
-    constructor() { }
+
+    constructor(
+        private location: Location
+    ) { }
 
     ngOnInit() {
     }
 
+    goBack() {
+        this.location.back();
+    }
 }
