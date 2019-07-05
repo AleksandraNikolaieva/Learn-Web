@@ -4,7 +4,7 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 import { TopPaneComponent } from './top-pane/top-pane.component';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { PopUpComponent } from './pop-up/pop-up.component';
+import { ConfirmPopupComponent } from './pop-up/confirm-popup.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 
@@ -13,7 +13,7 @@ import { PortalModule } from '@angular/cdk/portal';
         SideMenuComponent,
         TopPaneComponent,
         NotFoundComponent,
-        PopUpComponent
+        ConfirmPopupComponent
     ],
     imports: [
         CommonModule,
@@ -26,6 +26,6 @@ import { PortalModule } from '@angular/cdk/portal';
         SideMenuComponent,
         NotFoundComponent
     ],
-    entryComponents: [PopUpComponent]
+    entryComponents: [ConfirmPopupComponent]
 })
 export class CoreModule { }

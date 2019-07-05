@@ -1,5 +1,5 @@
 import { Subject, Observable } from 'rxjs';
-import { PopUpComponent } from './pop-up.component';
+import { ConfirmPopupComponent } from './confirm-popup.component';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { map, filter, take } from 'rxjs/operators';
 import { ESCAPE, ENTER } from '@angular/cdk/keycodes';
@@ -8,7 +8,7 @@ export class PopupOverlayRef {
     private _beforeClose = new Subject<void>();
     private _afterClosed = new Subject<void>();
 
-    componentInstance: PopUpComponent;
+    componentInstance: ConfirmPopupComponent;
 
     get overlayRef(): OverlayRef {
         return this._overlayRef;

@@ -3,7 +3,7 @@ import { Article } from '../models';
 import { Tag } from 'src/app/shared/models';
 import { Dictionary } from '@ngrx/entity';
 import { User } from 'src/app/core/models';
-import { PopupService } from 'src/app/services/popup.service';
+import { ConfirmPopupService } from 'src/app/core/pop-up/confirm-popup.service';
 
 @Component({
     selector: 'app-article',
@@ -18,7 +18,7 @@ export class ArticleComponent implements OnInit {
     @Input() loggedUser: User;
     @Output() deleted: EventEmitter<string> = new EventEmitter();
 
-    constructor(private popupService: PopupService) { }
+    constructor(private popupService: ConfirmPopupService) { }
 
     ngOnInit() {}
 
