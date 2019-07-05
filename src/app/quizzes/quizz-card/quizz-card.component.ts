@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { Quizz } from '../models';
 import { User } from 'src/app/core/models';
 import { Dictionary } from '@ngrx/entity';
-import { PopupService } from 'src/app/services/popup.service';
+import { ConfirmPopupService } from 'src/app/core/pop-up/confirm-popup.service';
 
 @Component({
     selector: 'app-quizz-card',
@@ -17,7 +17,7 @@ export class QuizzCardComponent implements OnInit {
     @Output() deleted: EventEmitter<string> = new EventEmitter();
     @Output() edited: EventEmitter<string> = new EventEmitter();
 
-    constructor(private popupService: PopupService) { }
+    constructor(private popupService: ConfirmPopupService) { }
 
     ngOnInit() {}
 

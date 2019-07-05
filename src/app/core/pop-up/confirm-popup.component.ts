@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter, Inject, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { PopupOverlayRef } from './popupOverlayRef';
-import { PopupData } from 'src/app/services/popup.service';
-import { CONFIRM_POPUP_DATA } from './pop-up.token';
+import { PopupData } from 'src/app/core/pop-up/confirm-popup.service';
+import { CONFIRM_POPUP_DATA } from './confirm-popup.token';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ESCAPE, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'app-pop-up',
-    templateUrl: './pop-up.component.pug',
-    styleUrls: ['./pop-up.component.scss'],
+    templateUrl: './confirm-popup.component.pug',
+    styleUrls: ['./confirm-popup.component.scss'],
     animations: [
         trigger('confirmPopup', [
             state(
@@ -41,7 +41,8 @@ import { ESCAPE, ENTER } from '@angular/cdk/keycodes';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PopUpComponent implements OnInit, OnDestroy {
+
+export class ConfirmPopupComponent implements OnInit, OnDestroy {
     animationState: 'void' | 'enter' | 'leave' = 'enter';
     animationStateChanged = new EventEmitter<AnimationEvent>();
     subscription: Subscription;

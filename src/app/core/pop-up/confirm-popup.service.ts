@@ -1,11 +1,11 @@
 import { Injectable, InjectionToken, Injector, ComponentRef } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
-import { PopUpComponent } from '../core/pop-up/pop-up.component';
+import { ConfirmPopupComponent } from './confirm-popup.component';
 import { Observable } from 'rxjs';
 import { take, filter } from 'rxjs/operators';
-import { PopupOverlayRef } from '../core/pop-up/popupOverlayRef';
-import { CONFIRM_POPUP_DATA } from '../core/pop-up/pop-up.token';
+import { PopupOverlayRef } from './popupOverlayRef';
+import { CONFIRM_POPUP_DATA } from './confirm-popup.token';
 
 export interface PopupData {
     title: string | null;
@@ -39,7 +39,7 @@ const DEFAULT_CONFIRM_POPUP_CONFIG: PopupConfig = {
 @Injectable({
     providedIn: 'root'
 })
-export class PopupService {
+export class ConfirmPopupService {
 
     constructor(private injector: Injector, private overlay: Overlay) { }
 
@@ -89,8 +89,8 @@ export class PopupService {
         confirmPopupRef: PopupOverlayRef
     ) {
         const injector = this.createPopupInjector(config, confirmPopupRef);
-        const containerPortal = new ComponentPortal(PopUpComponent, null, injector);
-        const containerRef: ComponentRef<PopUpComponent> = overlayRef.attach(containerPortal);
+        const containerPortal = new ComponentPortal(ConfirmPopupComponent, null, injector);
+        const containerRef: ComponentRef<ConfirmPopupComponent> = overlayRef.attach(containerPortal);
 
         containerRef.changeDetectorRef.detectChanges();
 
