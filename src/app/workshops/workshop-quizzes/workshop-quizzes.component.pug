@@ -1,5 +1,7 @@
-div('*ngFor'='let quizz of quizzes$ | async')
-    a(routerLink='/quizzes/{{quizz.id}}')
-        h3 {{quizz.name}}
-    app-timestamp('toFormat'='day', [date]='quizz.updatedAt')
+ng-container('*ngIf'='quizzes$ | async  as quizzes')
+    span('*ngIf'='!quizzes.length') Related quizzes do not exist
+    div('*ngFor'='let quizz of quizzes')
+        a(routerLink='/quizzes/{{quizz.id}}')
+            h3 {{quizz.name}}
+        app-timestamp('toFormat'='day', [date]='quizz.updatedAt')
 
