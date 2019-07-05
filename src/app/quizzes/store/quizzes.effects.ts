@@ -5,19 +5,19 @@ import {
         AllQuizzesRequested,
         QuizzesActionTypes,
         AllQuizzesReceived,
-        AllQuizzesRequestFalled,
+        AllQuizzesRequestFailed,
         QuizzPageRequested,
         QuizzPageReceived,
-        QuizzPageRequestFalled,
+        QuizzPageRequestFailed,
         QuizzAddRequested,
         QuizzAdded,
-        QuizzAddRequestFalled,
+        QuizzAddRequestFailed,
         QuizzDeleteRequested,
         QuizzDeleted,
-        QuizzDeleteRequestFalled,
+        QuizzDeleteRequestFailed,
         QuizzModifyRequested,
         QuizzModified,
-        QuizzModifeRequestFalled
+        QuizzModifeRequestFailed
     } from './quizzes.actions';
 import { exhaustMap, map, catchError } from 'rxjs/operators';
 import { Quizz, QuizzData } from '../models';
@@ -42,7 +42,7 @@ export class QuizzesEffects {
                     return new AllQuizzesReceived({quizzes});
                 }),
                 catchError((error: any) => {
-                    return of(new AllQuizzesRequestFalled({error}));
+                    return of(new AllQuizzesRequestFailed({error}));
                 })
             );
         })
@@ -60,7 +60,7 @@ export class QuizzesEffects {
                     return new QuizzPageReceived({quizz});
                 }),
                 catchError((error: any) => {
-                    return of(new QuizzPageRequestFalled({error}));
+                    return of(new QuizzPageRequestFailed({error}));
                 })
             );
         })
@@ -78,7 +78,7 @@ export class QuizzesEffects {
                     return new QuizzAdded({quizz});
                 }),
                 catchError(error => {
-                    return of(new QuizzAddRequestFalled({error}));
+                    return of(new QuizzAddRequestFailed({error}));
                 })
             );
         })
@@ -96,7 +96,7 @@ export class QuizzesEffects {
                     return new QuizzDeleted({quizzId: quizz.id});
                 }),
                 catchError((error: any) => {
-                    return of(new QuizzDeleteRequestFalled({error}));
+                    return of(new QuizzDeleteRequestFailed({error}));
                 })
             );
         })
@@ -114,7 +114,7 @@ export class QuizzesEffects {
                     return new QuizzModified({quizz: {id: quizz.id, changes: quizz}});
                 }),
                 catchError((error : any) => {
-                    return of(new QuizzModifeRequestFalled({error}));
+                    return of(new QuizzModifeRequestFailed({error}));
                 })
             );
         })

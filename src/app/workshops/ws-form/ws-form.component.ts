@@ -59,12 +59,13 @@ export class WsFormComponent implements OnInit {
     }
 
     onSubmit() {
+        console.log(this.workshopForm.value);
         if (this.workshopForm.invalid) {
             Object.values(this.workshopForm.controls).forEach(control => {
                 control.markAsTouched();
             });
         } else {
-            if (this.action === 'add') {
+            /* if (this.action === 'add') {
                 this.store.dispatch(new WorkshopAddRequested({workshopData: this.workshopForm.value}));
             } else {
                 this.store.dispatch(new WorkshopEditRequested(
@@ -73,8 +74,7 @@ export class WsFormComponent implements OnInit {
                         workshopData: this.workshopForm.value
                     }
                 ));
-            }
+            } */
         }
     }
-
 }

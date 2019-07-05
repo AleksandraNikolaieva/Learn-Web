@@ -5,7 +5,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     selector: 'app-dropdown',
     templateUrl: './dropdown.component.pug',
     styleUrls: ['./dropdown.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

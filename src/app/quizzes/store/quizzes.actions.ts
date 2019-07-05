@@ -5,27 +5,27 @@ import { Update } from '@ngrx/entity';
 export enum QuizzesActionTypes {
     AllQuizzesRequested = '[Quizzes] All Quizzess Requested',
     AllQuizzesReceived = '[Quizzes] All Quizzess Received',
-    AllQuizzesRequestFalled = '[Quizzes] All Quizzess Request Falled',
+    AllQuizzesRequestFailed = '[Quizzes] All Quizzess Request Failed',
 
     QuizzPageRequested = '[Quizzes] Quizz Page Requested',
     QuizzPageReceived = '[Quizzes] Quizz Page Received',
-    QuizzPageRequestFalled = '[Quizzes] Quizz Page Request Falled',
+    QuizzPageRequestFailed = '[Quizzes] Quizz Page Request Failed',
 
     QuizzAddRequested = '[Quizz] Quizz Requested To Add',
     QuizzAdded = '[Quizz] Quizz Added',
-    QuizzAddRequestFalled = '[Quizz] Quizz Request To Add Falled',
+    QuizzAddRequestFailed = '[Quizz] Quizz Request To Add Failed',
 
     QuizzDeleteRequested = '[Quizz] Quizz Requested To Delete',
     QuizzDeleted = '[Quizz] Quizz Deleted',
-    QuizzDeleteRequestFalled = '[Quizz] Quizz Request To Delete Falled',
+    QuizzDeleteRequestFailed = '[Quizz] Quizz Request To Delete Failed',
 
     QuizzModifyRequested = '[Quizz] Quizz Requested To Modify',
     QuizzModified = '[Quizz] Quizz Modify',
-    QuizzModifeRequestFalled = '[Quizz] Quizz Request To Modify Falled',
+    QuizzModifeRequestFailed = '[Quizz] Quizz Request To Modify Failed',
 
     QuizzCheckRequested = '[Quizz] Quizz Requested To Check',
     QuizzChecked = '[Quizz] Quizz Checked',
-    QuizzCheckFalled = '[Quizz] Quizz Check Request Falled'
+    QuizzCheckFailed = '[Quizz] Quizz Check Request Failed'
 }
 
 export class AllQuizzesRequested implements Action {
@@ -38,8 +38,8 @@ export class AllQuizzesReceived implements Action {
     constructor(public payload: {quizzes: Quizz[]}) {}
 }
 
-export class AllQuizzesRequestFalled implements Action {
-    readonly type = QuizzesActionTypes.AllQuizzesRequestFalled;
+export class AllQuizzesRequestFailed implements Action {
+    readonly type = QuizzesActionTypes.AllQuizzesRequestFailed;
 
     constructor(public payload: {error: any}) {}
 }
@@ -56,8 +56,8 @@ export class QuizzPageReceived implements Action {
     constructor(public payload: {quizz: Quizz}) {}
 }
 
-export class QuizzPageRequestFalled implements Action {
-    readonly type = QuizzesActionTypes.QuizzPageRequestFalled;
+export class QuizzPageRequestFailed implements Action {
+    readonly type = QuizzesActionTypes.QuizzPageRequestFailed;
 
     constructor(public payload: {error: any}) {}
 }
@@ -74,8 +74,8 @@ export class QuizzAdded implements Action {
     constructor(public payload: {quizz: Quizz}) {}
 }
 
-export class QuizzAddRequestFalled implements Action {
-    readonly type = QuizzesActionTypes.QuizzAddRequestFalled;
+export class QuizzAddRequestFailed implements Action {
+    readonly type = QuizzesActionTypes.QuizzAddRequestFailed;
 
     constructor(public payload: {error: any}) {}
 }
@@ -92,8 +92,8 @@ export class QuizzDeleted implements Action {
     constructor(public payload: {quizzId: string}) {}
 }
 
-export class QuizzDeleteRequestFalled implements Action {
-    readonly type = QuizzesActionTypes.QuizzDeleteRequestFalled;
+export class QuizzDeleteRequestFailed implements Action {
+    readonly type = QuizzesActionTypes.QuizzDeleteRequestFailed;
 
     constructor(public payload: {error: any}) {}
 }
@@ -110,8 +110,8 @@ export class QuizzModified implements Action {
     constructor(public payload: {quizz: Update<Quizz>}) {}
 }
 
-export class QuizzModifeRequestFalled implements Action {
-    readonly type = QuizzesActionTypes.QuizzModifeRequestFalled;
+export class QuizzModifeRequestFailed implements Action {
+    readonly type = QuizzesActionTypes.QuizzModifeRequestFailed;
 
     constructor(public payload: {error: any}) {}
 }
@@ -119,16 +119,16 @@ export class QuizzModifeRequestFalled implements Action {
 export type QuizzesActions =
     AllQuizzesRequested |
     AllQuizzesReceived |
-    AllQuizzesRequestFalled |
+    AllQuizzesRequestFailed |
     QuizzPageRequested |
     QuizzPageReceived |
-    QuizzPageRequestFalled |
+    QuizzPageRequestFailed |
     QuizzAddRequested |
     QuizzAdded |
-    QuizzAddRequestFalled |
+    QuizzAddRequestFailed |
     QuizzModifyRequested |
     QuizzModified |
-    QuizzModifeRequestFalled |
+    QuizzModifeRequestFailed |
     QuizzDeleteRequested |
     QuizzDeleted |
-    QuizzDeleteRequestFalled;
+    QuizzDeleteRequestFailed;

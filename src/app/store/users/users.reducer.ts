@@ -12,7 +12,6 @@ export function usersReducer(state = initialState, action: UsersActions): UsersS
     switch (action.type) {
         case UsersActionTypes.UsersReceived:
             return adapter.addAll(action.payload.users, state);
-
         default:
             return state;
     }

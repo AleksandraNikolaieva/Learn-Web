@@ -5,19 +5,19 @@ import { Update } from '@ngrx/entity';
 export enum CommentsActionTypes {
     CommentsRequested = '[Comments] Comments Requested',
     CommentsReceived = '[Comments] Comments Received',
-    CommentsRequestFalled = 'Comments] Comments Request Falled',
+    CommentsRequestFailed = 'Comments] Comments Request Failed',
 
     CommentAddRequested = '[Comments] Tried To Add Comment',
     CommentAdded = '[Comments] Comment Added',
-    CommentAddRequestFalled = '[Comments] Comment Add Request Falled',
+    CommentAddRequestFailed = '[Comments] Comment Add Request Failed',
 
     CommentDeleteRequested = '[Comments] Tried To Delete Comment',
     CommentDeleted = '[Comments] Comment Deleted',
-    CommentDeleteRequestFalled = '[Comments] Comment Delete Request Falled',
+    CommentDeleteRequestFailed = '[Comments] Comment Delete Request Failed',
 
     CommetModifyRequested = '[Comments] Tried To Modify Comment',
     CommentModified = '[Comments] Comment Modified',
-    CommentModifyRequestFalled = '[Comments] Comment Modify Request Falled'
+    CommentModifyRequestFailed = '[Comments] Comment Modify Request Failed'
 }
 
 export class CommentsRequested implements Action {
@@ -32,8 +32,8 @@ export class CommentsReceived implements Action {
     constructor(public payload: { comments: Comment[] }) { }
 }
 
-export class CommentsRequestFalled implements Action {
-    readonly type = CommentsActionTypes.CommentsRequestFalled;
+export class CommentsRequestFailed implements Action {
+    readonly type = CommentsActionTypes.CommentsRequestFailed;
 
     constructor(public payload: { error: any }) { }
 }
@@ -50,8 +50,8 @@ export class CommentAdded implements Action {
     constructor(public payload: {comment: Comment}) {}
 }
 
-export class CommentAddRequestFalled implements Action {
-    readonly type = CommentsActionTypes.CommentAddRequestFalled;
+export class CommentAddRequestFailed implements Action {
+    readonly type = CommentsActionTypes.CommentAddRequestFailed;
 
     constructor(public payload: { error: any }) { }
 }
@@ -68,8 +68,8 @@ export class CommentDeleted implements Action {
     constructor(public payload: { id: string }) { }
 }
 
-export class CommentDeleteRequestFalled implements Action {
-    readonly type = CommentsActionTypes.CommentDeleteRequestFalled;
+export class CommentDeleteRequestFailed implements Action {
+    readonly type = CommentsActionTypes.CommentDeleteRequestFailed;
 
     constructor(public payload: { error: any }) { }
 }
@@ -86,8 +86,8 @@ export class CommentModified implements Action {
     constructor(public payload: { comment: Update<Comment> }) {}
 }
 
-export class CommentModifyRequestFalled implements Action {
-    readonly type = CommentsActionTypes.CommentModifyRequestFalled;
+export class CommentModifyRequestFailed implements Action {
+    readonly type = CommentsActionTypes.CommentModifyRequestFailed;
 
     constructor(public payload: { error: any }) {}
 }
@@ -95,13 +95,13 @@ export class CommentModifyRequestFalled implements Action {
 export type CommentsActions =
     CommentsRequested |
     CommentsReceived |
-    CommentsRequestFalled |
+    CommentsRequestFailed |
     CommentAddRequested |
     CommentAdded |
-    CommentAddRequestFalled |
+    CommentAddRequestFailed |
     CommentDeleteRequested |
     CommentDeleted |
-    CommentDeleteRequestFalled |
+    CommentDeleteRequestFailed |
     CommetModifyRequested |
     CommentModified |
-    CommentModifyRequestFalled;
+    CommentModifyRequestFailed;
