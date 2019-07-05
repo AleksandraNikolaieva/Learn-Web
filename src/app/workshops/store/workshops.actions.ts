@@ -5,7 +5,7 @@ import { Update } from '@ngrx/entity';
 export enum WorkshopsActionTypes {
     WorkshopsRequested = '[Workshops] Workshops Requested',
     WorkshopsReceived = '[Workshops] Workshops Successfully Loaded',
-    WorkshopsRequestFalled = '[Workshops] Workshops Loading Falled',
+    WorkshopsRequestFailed = '[Workshops] Workshops Loading Failed',
 
     CategoryActivated = '[Workshops] Category Activated',
 
@@ -15,19 +15,19 @@ export enum WorkshopsActionTypes {
 
     WorkshopPageRequested = '[Workshops] Workshop Page Requested',
     WorkshopPageReceived = '[Workshops] Workshop Page Received',
-    WorkshopPageRequestFalled = '[Workshops] Workshop Page Request Falled',
+    WorkshopPageRequestFailed = '[Workshops] Workshop Page Request Failed',
 
     WorkshopAddRequested = '[Workshops] Workshop Add Requested',
     WorkhsopAdded = '[Workshops] Workshop Added ',
-    WorkshopAddFalled = '[Workshops] Workshop Add Requested Falled',
+    WorkshopAddFailed = '[Workshops] Workshop Add Requested Failed',
 
     WorkshopDeleteRequested = '[Workshops] Workshop Delete Requested',
     WorkshopDeleted = '[Workshops] Workshop Deleted',
-    WorkshopDeleteFalled = '[Workshops] Workshop Deleted Falled',
+    WorkshopDeleteFailed = '[Workshops] Workshop Deleted Failed',
 
     WorkshopEditRequested = '[Workshops] Workshop Edit Requested',
     WorkshopEdited = '[Workshops] Workshop Edited',
-    WorkshopEditFalled = '[Workshops] Workshop Edit Request Falled'
+    WorkshopEditFailed = '[Workshops] Workshop Edit Request Failed'
 }
 
 export class WorkshopsRequested implements Action {
@@ -42,8 +42,8 @@ export class WorkshopsReceived implements Action {
     constructor(public payload: {workshops: Article[]}) {}
 }
 
-export class WorkshopsRequestFalled implements Action {
-    readonly type = WorkshopsActionTypes.WorkshopsRequestFalled;
+export class WorkshopsRequestFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopsRequestFailed;
 
     constructor(public payload: {error: any}) {}
 }
@@ -66,8 +66,8 @@ export class WorkshopPageReceived implements Action {
     constructor(public payload: {workshop: Article}) {}
 }
 
-export class WorkshopPageRequestFalled implements Action {
-    readonly type = WorkshopsActionTypes.WorkshopPageRequestFalled;
+export class WorkshopPageRequestFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopPageRequestFailed;
 
     constructor(public payload: {error: any}) {}
 }
@@ -90,8 +90,8 @@ export class WorkhsopAdded implements Action {
     constructor(public payload: {workshop: Article}) {}
 }
 
-export class WorkshopAddFalled implements Action {
-    readonly type = WorkshopsActionTypes.WorkshopAddFalled;
+export class WorkshopAddFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopAddFailed;
 
     constructor(public payload: {error: any}) {}
 }
@@ -108,8 +108,8 @@ export class WorkshopEdited implements Action {
     constructor(public payload: {workshop: Update<Article>}) {}
 }
 
-export class WorkshopEditFalled implements Action {
-    readonly type = WorkshopsActionTypes.WorkshopEditFalled;
+export class WorkshopEditFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopEditFailed;
 
     constructor(public payload: {error: any}) {}
 }
@@ -126,8 +126,8 @@ export class WorkshopDeleted implements Action {
     constructor(public payload: {id: string}) {}
 }
 
-export class WorkshopDeleteFalled implements Action {
-    readonly type = WorkshopsActionTypes.WorkshopDeleteFalled;
+export class WorkshopDeleteFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopDeleteFailed;
 
     constructor(public payload: {error: any}) {}
 }
@@ -141,19 +141,19 @@ export class PageActivated implements Action {
 export type WorkshopsActions =
     WorkshopsRequested |
     WorkshopsReceived |
-    WorkshopsRequestFalled |
+    WorkshopsRequestFailed |
     CategoryActivated |
     TagsActivated |
     WorkshopPageRequested |
     WorkshopPageReceived |
-    WorkshopPageRequestFalled |
+    WorkshopPageRequestFailed |
     WorkshopAddRequested |
     WorkhsopAdded |
-    WorkshopAddFalled |
+    WorkshopAddFailed |
     WorkshopEditRequested |
     WorkshopEdited |
-    WorkshopEditFalled |
+    WorkshopEditFailed |
     WorkshopDeleteRequested |
     WorkshopDeleted |
-    WorkshopDeleteFalled |
+    WorkshopDeleteFailed |
     PageActivated;

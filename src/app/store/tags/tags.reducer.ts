@@ -17,6 +17,8 @@ export function tagsReducer(state = initialState, action: TagsActions): TagsStat
 
         case TagsActionTypes.TagsReceived:
             return adapter.addAll(action.payload.tags, state);
+        case TagsActionTypes.TagAdded:
+            return adapter.addOne(action.payload.tag, state);
         default:
             return state;
     }

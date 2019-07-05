@@ -4,7 +4,7 @@ import { User } from 'src/app/core/models';
 export enum UsersActionTypes {
     UsersRequested = '[Users] Users Requested',
     UsersReceived = '[Users]  Users Received',
-    UsersRequestFalled = '[Users] Users Request Falled'
+    UsersRequestFailed = '[Users] Users Request Failed'
 }
 
 export class UsersRequested implements Action {
@@ -17,10 +17,10 @@ export class UsersReceived implements Action {
     constructor(public payload: {users: User[]}) {}
 }
 
-export class UsersRequestFalled implements Action {
-    readonly type = UsersActionTypes.UsersRequestFalled;
+export class UsersRequestFailed implements Action {
+    readonly type = UsersActionTypes.UsersRequestFailed;
 
     constructor(public payload: {error: any}) {}
 }
 
-export type UsersActions = UsersRequested | UsersReceived | UsersRequestFalled;
+export type UsersActions = UsersRequested | UsersReceived | UsersRequestFailed;

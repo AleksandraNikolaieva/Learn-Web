@@ -5,16 +5,16 @@ import {
         CommentsRequested,
         CommentsActionTypes,
         CommentsReceived,
-        CommentsRequestFalled,
-        CommentAddRequestFalled,
+        CommentsRequestFailed,
+        CommentAddRequestFailed,
         CommentAddRequested,
         CommentAdded,
         CommentDeleteRequested,
         CommentDeleted,
-        CommentDeleteRequestFalled,
+        CommentDeleteRequestFailed,
         CommetModifyRequested,
         CommentModified,
-        CommentModifyRequestFalled
+        CommentModifyRequestFailed
 } from './comments.actions';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { Comment } from 'src/app/workshops/models';
@@ -42,7 +42,7 @@ export class CommentsEffects {
                     return new CommentsReceived({comments});
                 }),
                 catchError((error: any) => {
-                    return of(new CommentsRequestFalled({error}));
+                    return of(new CommentsRequestFailed({error}));
                 })
             );
         })
@@ -60,7 +60,7 @@ export class CommentsEffects {
                     return new CommentAdded({comment});
                 }),
                 catchError((error: any) => {
-                    return of(new CommentAddRequestFalled({error}));
+                    return of(new CommentAddRequestFailed({error}));
                 })
             );
         })
@@ -78,7 +78,7 @@ export class CommentsEffects {
                     return new CommentDeleted({id});
                 }),
                 catchError((error: any) => {
-                    return of(new CommentDeleteRequestFalled({error}));
+                    return of(new CommentDeleteRequestFailed({error}));
                 })
             );
         })
@@ -96,7 +96,7 @@ export class CommentsEffects {
                     return new CommentModified({comment: {id: comment._id, changes: comment}});
                 }),
                 catchError((error: any) => {
-                    return of(new CommentModifyRequestFalled({error}));
+                    return of(new CommentModifyRequestFailed({error}));
                 })
             );
         })

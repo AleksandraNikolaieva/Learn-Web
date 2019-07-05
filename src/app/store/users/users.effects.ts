@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { UsersService } from 'src/app/services/users.service';
-import { UsersRequested, UsersActionTypes, UsersReceived, UsersRequestFalled } from './users.actions';
+import { UsersRequested, UsersActionTypes, UsersReceived, UsersRequestFailed } from './users.actions';
 import { exhaustMap, map, catchError } from 'rxjs/operators';
 import { User } from 'src/app/core/models';
 import { of } from 'rxjs';
@@ -25,7 +25,7 @@ export class UsersEffects {
                     return new UsersReceived({users});
                 }),
                 catchError(error => {
-                    return of(new UsersRequestFalled({error}));
+                    return of(new UsersRequestFailed({error}));
                 })
             );
         })

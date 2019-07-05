@@ -4,18 +4,18 @@ import { WorkshopsService } from 'src/app/services/workshops.service';
 import { WorkshopsRequested,
         WorkshopsActionTypes,
         WorkshopsReceived,
-        WorkshopsRequestFalled,
+        WorkshopsRequestFailed,
         WorkshopPageRequested,
         WorkshopPageReceived,
         WorkshopDeleteRequested,
         WorkshopDeleted,
-        WorkshopDeleteFalled,
+        WorkshopDeleteFailed,
         WorkshopAddRequested,
         WorkhsopAdded,
-        WorkshopAddFalled,
+        WorkshopAddFailed,
         WorkshopEditRequested,
         WorkshopEdited,
-        WorkshopEditFalled} from './workshops.actions';
+        WorkshopEditFailed} from './workshops.actions';
 import { map, exhaustMap, catchError, distinctUntilKeyChanged } from 'rxjs/operators';
 import { WorkshopsFeedParams, Article, WorkshopData } from '../models';
 import { of, pipe } from 'rxjs';
@@ -46,7 +46,7 @@ export class WorkshopsEffects {
                     return new WorkshopsReceived({workshops});
                 }),
                 catchError(error => {
-                    return of(new WorkshopsRequestFalled({error}));
+                    return of(new WorkshopsRequestFailed({error}));
                 })
             );
         })
@@ -65,7 +65,7 @@ export class WorkshopsEffects {
                 }),
                 catchError((error: any) => {
                     this.router.navigateByUrl('/not_found');
-                    return of(new WorkshopsRequestFalled({error}));
+                    return of(new WorkshopsRequestFailed({error}));
                 })
             );
         })
@@ -84,7 +84,7 @@ export class WorkshopsEffects {
                     return new WorkhsopAdded({workshop});
                 }),
                 catchError((error: any) => {
-                    return of(new WorkshopAddFalled({error}));
+                    return of(new WorkshopAddFailed({error}));
                 })
             );
         })
@@ -103,7 +103,7 @@ export class WorkshopsEffects {
                     return new WorkshopEdited({workshop: {id: workshop.id, changes: workshop}});
                 }),
                 catchError((error: any) => {
-                    return of(new WorkshopEditFalled({error}));
+                    return of(new WorkshopEditFailed({error}));
                 })
             );
         })
@@ -121,7 +121,7 @@ export class WorkshopsEffects {
                     return new WorkshopDeleted({id});
                 }),
                 catchError((error: any) => {
-                    return of(new WorkshopDeleteFalled({error}));
+                    return of(new WorkshopDeleteFailed({error}));
                 })
             );
         })

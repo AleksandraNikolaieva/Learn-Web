@@ -74,7 +74,7 @@ export class ConstructorComponent implements OnInit {
     addAnswerVariant(index: number): void {
         const question = ((this.quizzForm.get('questions') as FormArray).at(index) as FormGroup);
         question.removeControl('correctAnswer');
-        question.addControl('answerVariants', this.fb.array([], [this.arrLengthValidation(2), this.isCorrectAnswerChoosed()]));
+        question.addControl('answerVariants', this.fb.array([], [this.arrLengthValidation(2), this.isCorrectAnswerSelected()]));
         (question.get('answerVariants') as FormArray).push(
             this.fb.group({
                 answer: [null, Validators.required],
@@ -103,7 +103,7 @@ export class ConstructorComponent implements OnInit {
         };
     }
 
-    private isCorrectAnswerChoosed(): ValidatorFn {
+    private isCorrectAnswerSelected(): ValidatorFn {
         return (arr: FormArray): { [key: string]: boolean } => {
             let markedAnswers = 0;
             arr.value.forEach((variant: QuestionVariant) => {
