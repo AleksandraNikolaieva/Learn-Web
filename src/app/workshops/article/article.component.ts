@@ -3,6 +3,7 @@ import { Article } from '../models';
 import { Tag } from 'src/app/shared/models';
 import { Dictionary } from '@ngrx/entity';
 import { User } from 'src/app/core/models';
+import { PopupService } from 'src/app/services/popup.service';
 
 @Component({
     selector: 'app-article',
@@ -17,7 +18,7 @@ export class ArticleComponent implements OnInit {
     @Input() loggedUser: User;
     @Output() deleted: EventEmitter<string> = new EventEmitter();
 
-    constructor() { }
+    constructor(private popupService: PopupService) { }
 
     ngOnInit() {}
 
@@ -26,6 +27,13 @@ export class ArticleComponent implements OnInit {
     }
 
     deleteArticle(id: string) {
-        this.deleted.emit(id);
+        this.popupService
+        .confirm({
+            title: 'Delete workshop',
+            message: 'Are you sure that you want to delete this workshop?'
+        })
+        .subscribe((confirmed: boolean) => {
+            this.deleted.emit(id);
+        });
     }
 }

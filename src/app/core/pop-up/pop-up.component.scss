@@ -1,0 +1,68 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'sass-mq';
+
+.container {
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fffff0;
+    position: relative;
+
+    @include mq($until: small) {
+        width: 250px;
+    }
+}
+
+button.close {
+    width: auto;
+    position: absolute;
+    padding: 0;
+    box-shadow: none;
+    top: 5px;
+    right: 5px;
+}
+
+h3, p {
+    text-align: center;
+    margin: 10px 0;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+p {
+    margin: 30px 0;
+    font-size: 17px;
+}
+
+.controls {
+    width: 100%;
+    @include flex(row, space-around, center);
+}
+
+button {
+    padding: 10px 5px;
+    width: 45%;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px 2px $grey;
+    transition: 0.3s;
+
+    &:hover {
+        box-shadow: none;
+    }
+}
+
+button.cancel {
+    background-color: $grey;
+    color: white;
+}
+
+button.confirm {
+    background-color: $yellow;
+    color: $grey;
+}

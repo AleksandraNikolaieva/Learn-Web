@@ -113,7 +113,7 @@ export class QuizzesEffects {
                 map((quizz: Quizz) => {
                     return new QuizzModified({quizz: {id: quizz.id, changes: quizz}});
                 }),
-                catchError((error : any) => {
+                catchError((error: any) => {
                     return of(new QuizzModifeRequestFailed({error}));
                 })
             );

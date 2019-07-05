@@ -6,7 +6,12 @@ import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
 import { selectAuthData } from 'src/app/auth/store/auth.selectors';
-import { CommentsRequested, CommentAddRequested, CommentDeleteRequested, CommetModifyRequested } from 'src/app/store/comments/comments.actions';
+import {
+        CommentsRequested,
+        CommentAddRequested,
+        CommentDeleteRequested,
+        CommetModifyRequested
+    } from 'src/app/store/comments/comments.actions';
 import { selectCurrentComments } from 'src/app/store/comments/comments.selectors';
 import { UsersRequested } from 'src/app/store/users/users.actions';
 import { selectUsersEntities } from 'src/app/store/users/users.selectors';

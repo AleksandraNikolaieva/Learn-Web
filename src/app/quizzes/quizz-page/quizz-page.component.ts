@@ -33,7 +33,7 @@ export class QuizzPageComponent implements OnInit {
     }
 
     onSubmit(formValue: any) {
-        let toSend = [];
+        const toSend = [];
         for (const key in formValue) {
             if (formValue.hasOwnProperty(key)) {
                 if (!Array.isArray(formValue[key])) {
@@ -45,7 +45,7 @@ export class QuizzPageComponent implements OnInit {
         }
         this.quizzService.validateQuizz(this.id, {formData: toSend})
         .subscribe(res => {
-            let rightAnswers = res.results.filter(item => item === true).length;
+            const rightAnswers = res.results.filter(item => item === true).length;
             alert(`${res.message} \n${rightAnswers} of ${res.results.length} answers is right`);
         });
     }
