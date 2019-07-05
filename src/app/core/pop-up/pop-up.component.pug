@@ -1,0 +1,12 @@
+.container(
+    '[@confirmPopup]'='animationState'
+    '(@confirmPopup.start)'='onAnimationStart($event)'
+    '(@confirmPopup.done)'='onAnimationDone($event)'
+)
+    button.close('(click)'='cancel()')
+        i.icon-close
+    h3 {{data?.title}}
+    p {{data?.message}}
+    .controls
+        button.cancel('*ngIf'='data?.cancelButton' '(click)'='cancel()') {{data?.cancelButton}}
+        button.confirm('*ngIf'='data?.confirmationButton' '(click)'='confirm()') {{data?.confirmationButton}}

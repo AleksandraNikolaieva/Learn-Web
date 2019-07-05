@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { Quizz } from '../models';
 import { User } from 'src/app/core/models';
 import { Dictionary } from '@ngrx/entity';
+import { PopupService } from 'src/app/services/popup.service';
 
 @Component({
     selector: 'app-quizz-card',
@@ -16,12 +17,19 @@ export class QuizzCardComponent implements OnInit {
     @Output() deleted: EventEmitter<string> = new EventEmitter();
     @Output() edited: EventEmitter<string> = new EventEmitter();
 
-    constructor() { }
+    constructor(private popupService: PopupService) { }
 
     ngOnInit() {}
 
     delete(id: string) {
-        this.deleted.emit(id);
+        this.popupService
+        .confirm({
+            title: 'Delete quizz',
+            message: 'Are you sure that you want to delete this quizz?'
+        })
+        .subscribe((confirmed: boolean) => {
+            this.deleted.emit(id);
+        });
     }
 
     edit(id: string) {
