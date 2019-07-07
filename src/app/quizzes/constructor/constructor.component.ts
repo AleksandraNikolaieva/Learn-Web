@@ -43,10 +43,10 @@ export class ConstructorComponent implements OnInit {
         }
         const res = this.quizzForm.value;
         console.log(res);
-        this.store.dispatch(new QuizzAddRequested({quizz: res}));
+        /* this.store.dispatch(new QuizzAddRequested({quizz: res}));
         this.quizzForm.reset();
         this.quizzForm.setControl('posts', new FormControl(null, Validators.required));
-        this.quizzForm.setControl('questions', this.fb.array([], this.arrLengthValidation(1)));
+        this.quizzForm.setControl('questions', this.fb.array([], this.arrLengthValidation(1))); */
     }
 
     showErrors(formgroup: FormGroup) {

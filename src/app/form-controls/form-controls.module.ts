@@ -6,6 +6,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { FormsModule } from '@angular/forms';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { TextareaComponent } from './textarea/textarea.component';
+import { MultiSelectComponent } from './multi-select/multi-select.component';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { TextareaComponent } from './textarea/textarea.component';
         CheckboxComponent,
         DropdownComponent,
         ErrorMessageComponent,
-        TextareaComponent
+        TextareaComponent,
+        MultiSelectComponent
     ],
     imports: [
         CommonModule,

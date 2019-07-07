@@ -11,7 +11,6 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
         '[options]'='workshops$ | async'
         '[label]'='"Select related workshops: "'
         '[id]'='"posts"'
-        '[isMultiple]'='true'
         'toShow'='title'
         'toGet'='id'
     )
@@ -29,9 +28,8 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
             '[options]'='["input", "select"]'
             '[label]'='"Question type:"'
             '[id]'='"Question" + questionIndex + "type"'
-            '[isMultiple]'='false'
         )
-        ng-container('*ngIf'='question.controls["questionType"].value[0] === "input" || question.controls["questionType"].value === "input"')
+        ng-container('*ngIf'='question.controls["questionType"].value === "input" || question.controls["questionType"].value === "input"')
             app-text-input(
                 '[inputType]'='"number"'
                 'label'='Correct answer: '
@@ -39,7 +37,7 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
                 '[formControl]'='question.controls["correctAnswer"]'
             )
             app-error-message('[field]'='question.get("correctAnswer")')
-        ng-container('*ngIf'='question.controls["questionType"].value[0] === "select"')
+        ng-container('*ngIf'='question.controls["questionType"].value === "select"')
             hr
             ng-container('*ngFor'='let variant of question.controls.answerVariants?.controls; let variantIndex = index')
                 app-checkbox(
