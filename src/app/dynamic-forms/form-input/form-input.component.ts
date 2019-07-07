@@ -14,7 +14,6 @@ export class FormInputComponent implements OnInit, Field {
 
     constructor() { }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
 }

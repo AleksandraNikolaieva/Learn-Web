@@ -40,6 +40,7 @@ export class TagsEffects {
             return this.tagsService.createTag(tagName)
             .pipe(
                 map((tag: Tag) => {
+                    console.log(tag);
                     return new TagAdded({tag});
                 }),
                 catchError((error: any) => {

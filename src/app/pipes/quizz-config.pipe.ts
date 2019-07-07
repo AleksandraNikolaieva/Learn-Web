@@ -21,6 +21,7 @@ export class QuizzConfigPipe implements PipeTransform {
                     name: `answer${index}`,
                     label: question.question,
                     type: question.questionType === 'input' ? 'input' : 'select',
+                    inputType: question.questionType === 'input' ? 'number' : undefined,
                     placeholder: 'your answer',
                     options: variants
                 });

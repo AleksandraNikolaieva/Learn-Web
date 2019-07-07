@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Tag } from '../shared/models';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -26,7 +26,10 @@ export class TagsService {
     }
 
     createTag(name: string): Observable<Tag> {
-        return this.api.postRequest('tags', {name});
+        return this.api.postRequest('tags', {name})
+        .pipe(
+            map(res => res.tag[0])
+        );
     }
 
     deleteTagById(id: string): Observable<any> {

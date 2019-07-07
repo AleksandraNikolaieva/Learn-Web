@@ -10,4 +10,3 @@ select(
         option('*ngFor'='let option of options' '[ngValue]'='option') {{option}}
     ng-template(#forObject='')
         option('*ngFor'='let option of options' '[ngValue]'='option[toGet]' '[label]'='option[toShow] | lowercase')
-

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Tag } from 'src/app/shared/models';
 import { AppState } from 'src/app/store/reducers';
 import { Store, select } from '@ngrx/store';
-import { TagsRequested } from 'src/app/store/tags/tags.actions';
+import { TagsRequested, TagAddRequested } from 'src/app/store/tags/tags.actions';
 import { selectAllTags } from 'src/app/store/tags/tags.selectors';
 import { WorkshopAddRequested, WorkshopPageRequested, WorkshopEditRequested } from '../store/workshops.actions';
 import { ActivatedRoute } from '@angular/router';
@@ -76,5 +76,9 @@ export class WsFormComponent implements OnInit {
                 ));
             } */
         }
+    }
+
+    addNewTag(tagName: string): void {
+        this.store.dispatch(new TagAddRequested({tagName}));
     }
 }

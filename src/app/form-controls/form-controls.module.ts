@@ -26,7 +26,8 @@ import { MultiSelectComponent } from './multi-select/multi-select.component';
         CheckboxComponent,
         DropdownComponent,
         ErrorMessageComponent,
-        TextareaComponent
+        TextareaComponent,
+        MultiSelectComponent
     ]
 })
 export class FormControlsModule { }
