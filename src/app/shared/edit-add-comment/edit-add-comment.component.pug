@@ -1,2 +1,2 @@
-input(#text='', [(ngModel)]='commentText', '(keyup.enter)'='submit(); text.value = ""')
+textarea(rows='3' #text='', [(ngModel)]='commentText', '(keyup.enter)'='submit(); text.value = ""')
 button((click)='submit(); text.value = ""') ok

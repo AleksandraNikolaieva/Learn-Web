@@ -64,7 +64,6 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
         this.editorNumber = null;
     }
 
-
     addComment(text: string): void {
         this.store.dispatch(new CommentAddRequested({text, postId: this.postId}));
     }

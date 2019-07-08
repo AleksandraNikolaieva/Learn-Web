@@ -24,7 +24,61 @@ form {
         width: 80%;
     }
 
+    h3 {
+        font-size: 24px;
+    }
+
     input {
-        margin: 5px;
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        background-color: transparentize($grey, 0.3);
+        outline: none;
+        color: $white;
+        width: calc(100% - 10px);
+        margin: 10px 0;
+    
+        &:focus{
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.8)
+        }
+    }
+
+    input[type=submit] {
+        background-color: $yellow;
+        color: $grey;
+        padding: 10px 0;
+        cursor: pointer;
+        transition: 0.3s;
+        font-weight: bold;
+
+        &:hover {
+            background-color: lighten($yellow, 10);
+        }
+    }
+
+    input[type=button] {
+        background-color: $grey;
+        color: $yellow;
+        padding: 10px 0;
+        cursor: pointer;
+        transition: 0.3s;
+        font-weight: bold;
+
+        &:hover {
+            background-color: lighten($grey, 20);
+        }
+    }
+
+    input[type=submit], input[type=button] {
+        width: 45%;
+    }
+
+    .buttons {
+        width: 100%;
+        @include flex(row, space-between, center);
+
+        input {
+            width: 45%;
+        }
     }
 }
