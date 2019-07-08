@@ -5,7 +5,6 @@ import { WorkshopsFeedComponent } from './workshops-feed/workshops-feed.componen
 import { ArticleComponent } from './article/article.component';
 import { WorkshopsRoutingModule } from './workshops-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { WorkshopResourcesComponent } from './workshop-resources/workshop-resources.component';
 import { WorkshopQuizzesComponent } from './workshop-quizzes/workshop-quizzes.component';
 import { WorkshopCommentsComponent } from './workshop-comments/workshop-comments.component';
 import { StoreModule } from '@ngrx/store';
@@ -27,7 +26,6 @@ import { FormControlsModule } from '../form-controls/form-controls.module';
         WorkshopPageComponent,
         WorkshopsFeedComponent,
         ArticleComponent,
-        WorkshopResourcesComponent,
         WorkshopQuizzesComponent,
         WorkshopCommentsComponent,
         WsTopPaneComponent,

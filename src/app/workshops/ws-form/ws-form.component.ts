@@ -38,8 +38,8 @@ export class WsFormComponent implements OnInit {
         this.workshopForm = this.fb.group({
             title: [null, [Validators.required, Validators.minLength(10)]],
             image: [null, Validators.required],
-            description: [null, [Validators.required]],
-            text: [null, [Validators.required]],
+            description: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(300)]],
+            text: [null, [Validators.required, Validators.minLength(50)]],
             tags: [null, Validators.required]
         });
 
