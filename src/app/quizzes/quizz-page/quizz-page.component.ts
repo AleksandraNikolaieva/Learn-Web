@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { selectPageQuizz } from '../store/quizzes.selectors';
 import { QuizzesService } from 'src/app/services/quizzes.service';
 import { skip } from 'rxjs/operators';
+import { ToastService } from 'src/app/core/toast-message/toast.service';
 
 @Component({
     selector: 'app-quizz-page',
@@ -22,7 +23,8 @@ export class QuizzPageComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private store: Store<AppState>,
-        private quizzService: QuizzesService
+        private quizzService: QuizzesService,
+        private toast: ToastService
     ) { }
 
     ngOnInit() {
@@ -46,7 +48,9 @@ export class QuizzPageComponent implements OnInit {
         this.quizzService.validateQuizz(this.id, {formData: toSend})
         .subscribe(res => {
             const rightAnswers = res.results.filter(item => item === true).length;
-            alert(`${res.message} \n${rightAnswers} of ${res.results.length} answers is right`);
+            this.toast.show({type: 'success', text: `${res.message}
+            
+            ${rightAnswers} of ${res.results.length} answers is right`});
         });
     }
 }

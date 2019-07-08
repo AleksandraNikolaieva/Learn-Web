@@ -20,6 +20,7 @@ import { Credentials, AuthData } from '../models';
 import { of } from 'rxjs';
 import { UserParams, User } from 'src/app/core/models';
 import { UsersService } from 'src/app/services/users.service';
+import { ToastService } from 'src/app/core/toast-message/toast.service';
 
 @Injectable()
 export class AuthEffects {
@@ -28,7 +29,8 @@ export class AuthEffects {
         private actions$: Actions,
         private router: Router,
         private authService: AuthService,
-        private userService: UsersService
+        private userService: UsersService,
+        private toast: ToastService
     ) { }
 
     @Effect()
@@ -106,9 +108,11 @@ export class AuthEffects {
             return this.userService.updateUser(id, newInfo)
             .pipe(
                 map((updatedInfo: AuthData) => {
+                    this.toast.show({type: 'info', text: 'Profile updeted'});
                     return new UserInfoUpdated({updatedInfo});
                 }),
                 catchError(error => {
+                    this.toast.show({type: 'error', text: 'Something gone wrong'});
                     return of(new ChangeUserInfoFalled({error}));
                 })
             );

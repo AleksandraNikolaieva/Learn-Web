@@ -16,16 +16,16 @@ import { Observable, Subscription } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiSelectComponent implements OnInit, ControlValueAccessor, OnDestroy {
-    @Input() options$: Observable<Array<object>>;
+    @Input() options$: Observable<Array<any>>;
     @Input() placeholder = 'Make your choice';
     @Input() label = '';
     @Input() id = '';
     @Input() toShow = '';
     @Input() toGet = '';
 
-    value: string;
-    options: Array<object>;
-    entities: Map<string, object>;
+    value: Array<string> = null;
+    options: Array<any>;
+    entities: Map<string, any>;
     selectedArray: Array<string> = [];
     subscription: Subscription;
 
@@ -37,7 +37,10 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor, OnDes
     ngOnInit(): void {
         this.subscription = this.options$.subscribe(res => {
             this.options = res;
-            this.entities = new Map(this.options.map(i => [i[this.toGet], i]));
+            this.entities = new Map(this.options.map((i): [string, any] => [i[this.toGet], i]));
+            if (this.selectedArray.length) {
+                this.options = this.options.filter(option => !this.selectedArray.some(item => item === option.seq));
+            }
             this.cdr.detectChanges();
         });
     }
@@ -46,8 +49,13 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor, OnDes
         this.subscription.unsubscribe();
     }
 
-    writeValue(value: string): void {
-        this.value = value;
+    writeValue(value: Array<string> | null): void {
+        if (value) {
+            this.value = value;
+            this.selectedArray = value;
+            this.options = this.options.filter(option => !this.selectedArray.some(item => item === option.seq));
+            this.cdr.detectChanges();
+        }
     }
 
     registerOnChange(fn: any): void {

@@ -59,7 +59,6 @@ export class WsFormComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.workshopForm.value);
         if (this.workshopForm.invalid) {
             Object.values(this.workshopForm.controls).forEach(control => {
                 control.markAsTouched();
