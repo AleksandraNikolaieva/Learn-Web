@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Tag } from 'src/app/shared/models';
 import { AppState } from 'src/app/store/reducers';
 import { Store, select } from '@ngrx/store';
-import { TagsRequested } from 'src/app/store/tags/tags.actions';
+import { TagsRequested, TagAddRequested } from 'src/app/store/tags/tags.actions';
 import { selectAllTags } from 'src/app/store/tags/tags.selectors';
 import { WorkshopAddRequested, WorkshopPageRequested, WorkshopEditRequested } from '../store/workshops.actions';
 import { ActivatedRoute } from '@angular/router';
@@ -38,8 +38,8 @@ export class WsFormComponent implements OnInit {
         this.workshopForm = this.fb.group({
             title: [null, [Validators.required, Validators.minLength(10)]],
             image: [null, Validators.required],
-            description: [null, [Validators.required]],
-            text: [null, [Validators.required]],
+            description: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(300)]],
+            text: [null, [Validators.required, Validators.minLength(50)]],
             tags: [null, Validators.required]
         });
 
@@ -59,13 +59,12 @@ export class WsFormComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.workshopForm.value);
         if (this.workshopForm.invalid) {
             Object.values(this.workshopForm.controls).forEach(control => {
                 control.markAsTouched();
             });
         } else {
-            /* if (this.action === 'add') {
+            if (this.action === 'add') {
                 this.store.dispatch(new WorkshopAddRequested({workshopData: this.workshopForm.value}));
             } else {
                 this.store.dispatch(new WorkshopEditRequested(
@@ -74,7 +73,11 @@ export class WsFormComponent implements OnInit {
                         workshopData: this.workshopForm.value
                     }
                 ));
-            } */
+            }
         }
+    }
+
+    addNewTag(tagName: string): void {
+        this.store.dispatch(new TagAddRequested({tagName}));
     }
 }

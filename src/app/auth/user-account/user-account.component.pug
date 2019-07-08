@@ -9,8 +9,9 @@ form([formGroup]='infoForm', (submit)='changeInfo()')
     label(for='') New password:
     input(type='password' 'formControlName'='newPassword')
     input(type='submit' value='Submit changes')
-    input(type='button' value='Log out' '(click)'='logOut()')
-    input(type='button' value='Delete profile' '(click)'='deleteProfile()')
+    .buttons
+        input(type='button' value='Log out' '(click)'='logOut()')
+        input(type='button' value='Delete profile' '(click)'='deleteProfile()')
 
     
 

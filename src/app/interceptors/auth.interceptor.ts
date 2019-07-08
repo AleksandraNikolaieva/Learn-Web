@@ -6,12 +6,16 @@ import { Injectable } from '@angular/core';
 import { AppState } from '../store/reducers';
 import { Store, select } from '@ngrx/store';
 import { selectAuthenticationToken } from '../auth/store/auth.selectors';
+import { ToastService } from '../core/toast-message/toast.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private authService: AuthService, private store: Store<AppState>) {}
+    constructor(
+        private authService: AuthService,
+        private store: Store<AppState>,
+        private toast: ToastService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return this.store.pipe(
@@ -35,10 +39,11 @@ export class AuthInterceptor implements HttpInterceptor {
                         if (error.error instanceof ErrorEvent) {
                             errorMessage = `Error: ${error.error.message}`;
                         } else {
-                            errorMessage = `Error Code: ${error.status}. Message: ${error.error.message}`;
+                            errorMessage = `Error Code: ${error.status}.
+                            Message: ${error.error.message}`;
                         }
                         if (errorMessage) {
-                            alert(errorMessage);
+                            this.toast.show({type: 'error', text: errorMessage});
                         }
                         return throwError(errorMessage);
                     })

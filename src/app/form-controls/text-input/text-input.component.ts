@@ -30,8 +30,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     private propagateChange = (value: string) => {};
     private propagateTouched = ($event: FocusEvent) => {};
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     writeValue(value: string): void {
         this.value = value;

@@ -1,0 +1,64 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+:host  {
+    display: block;
+    width: 100%;
+
+    label {
+        display: block;
+    }
+
+    span {
+        font-size: 16px;
+        font-family: $titillium;
+        font-weight: normal;
+    }
+
+    select {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        background-color: transparentize($grey, 0.3);
+        outline: none;
+        color: #bfbfbf;
+        margin: 5px 0;
+        height: auto;
+        overflow: auto;
+
+        option {
+            padding: 5px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 290px;
+        }
+
+        &:focus{
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.8)
+        }
+    }
+
+    .selected {
+        @include flex(row, flex-start, center);
+        flex-wrap: wrap;
+
+        button {
+            background-color: $grey;
+            transition: background-color 0.3s;
+            color: $white;
+            font-weight: bold;
+            font-size: 15px;
+            padding: 7px;
+            margin: 3px;
+            border-radius: 5px;
+        
+            &:hover {
+                background-color: $light-grey;
+                color: $grey;
+            }
+        }
+    }
+
+}

@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './store/auth.reducer';
 import { AuthEffects } from './store/auth.effects';
+import { FormControlsModule } from '../form-controls/form-controls.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AuthEffects } from './store/auth.effects';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormControlsModule,
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forFeature([AuthEffects])
   ]

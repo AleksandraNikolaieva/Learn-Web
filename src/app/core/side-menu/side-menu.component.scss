@@ -61,7 +61,6 @@ nav {
             &.active {
                 background-color: transparentize($yellow, 0.15);
                 color: $grey;
-                pointer-events: none;
             }
 
             &:hover {

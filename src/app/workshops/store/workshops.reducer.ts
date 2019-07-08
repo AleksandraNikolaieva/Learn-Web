@@ -16,6 +16,7 @@ export interface WorkshopsState extends EntityState<Article> {
     activePage: number;
     page: Article | null;
     isLoaded: boolean;
+    totalWorkshops: number | null;
 }
 
 export const initialState: WorkshopsState = adapter.getInitialState({
@@ -23,14 +24,15 @@ export const initialState: WorkshopsState = adapter.getInitialState({
     activeTags: null,
     activePage: 0,
     page: null,
-    isLoaded: false
+    isLoaded: false,
+    totalWorkshops: null
 });
 
 export function workshopsReducer(state = initialState, action: WorkshopsActions): WorkshopsState {
     switch (action.type) {
 
         case WorkshopsActionTypes.WorkshopsReceived:
-            return adapter.addAll(action.payload.workshops, {...state, isLoaded: true});
+            return adapter.addAll(action.payload.workshops, {...state, isLoaded: true, totalWorkshops: action.payload.total});
         case WorkshopsActionTypes.CategoryActivated:
             return {...state, activeCategory: action.payload.category};
         case WorkshopsActionTypes.TagsActivated:

@@ -1,12 +1,13 @@
+.editor
+    span Add comment:
+    app-edit-add-comment([commentText]='newComment', (changeComment)='addComment($event)')
+.comments()
 ng-container('*ngFor'='let commentItem of comments$ | async; let i = index; trackBy: trackByFunction')
     app-comment('*ngIf'='editorNumber != i' '[comment]'='commentItem' '[usersMap]'='usersMap$ | async')
     ng-container('*ngIf'='(loggedUser$ | async)?._id === commentItem._author')
         ng-container('*ngIf'='editorNumber == i')
             span Edit comment:
             app-edit-add-comment([commentText]='commentItem.text', (changeComment)='editComment(commentItem.id, $event)')
-        div('*ngIf'='editorNumber != i')
+        div.buttons('*ngIf'='editorNumber != i')
             button((click)='openEditor(i)') edit
             button((click)='deleteComment(commentItem.id)') delete
-.editor
-    span Add comment:
-    app-edit-add-comment([commentText]='newComment', (changeComment)='addComment($event)')

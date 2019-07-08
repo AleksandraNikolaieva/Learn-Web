@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { TopPaneComponent } from './top-pane/top-pane.component';
@@ -7,13 +7,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ConfirmPopupComponent } from './pop-up/confirm-popup.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
+import { ToastMessageComponent } from './toast-message/toast-message.component';
+import { defaultToastConfig, TOAST_CONFIG_TOKEN } from './toast-message/toast-token';
 
 @NgModule({
     declarations: [
         SideMenuComponent,
         TopPaneComponent,
         NotFoundComponent,
-        ConfirmPopupComponent
+        ConfirmPopupComponent,
+        ToastMessageComponent
     ],
     imports: [
         CommonModule,
@@ -26,6 +29,18 @@ import { PortalModule } from '@angular/cdk/portal';
         SideMenuComponent,
         NotFoundComponent
     ],
-    entryComponents: [ConfirmPopupComponent]
+    entryComponents: [ConfirmPopupComponent, ToastMessageComponent]
 })
-export class CoreModule { }
+export class CoreModule {
+    public static forRoot(configToast = defaultToastConfig): ModuleWithProviders {
+        return {
+            ngModule: CoreModule,
+            providers: [
+                {
+                    provide: TOAST_CONFIG_TOKEN,
+                    useValue: { ...defaultToastConfig, ...configToast }
+                }
+            ],
+        };
+    }
+}

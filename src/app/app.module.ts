@@ -25,7 +25,7 @@ import { AppEffects } from './store/effects/app.effects';
         BrowserAnimationsModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        CoreModule,
+        CoreModule.forRoot(),
         AuthModule,
         HttpClientModule,
         StoreModule.forRoot(reducers, { metaReducers }),

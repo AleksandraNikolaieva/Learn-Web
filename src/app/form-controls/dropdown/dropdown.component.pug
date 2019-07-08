@@ -1,10 +1,8 @@
 label('*ngIf'='label' '[for]'='id') {{label}}
-span('*ngIf'='isMultiple') (Hold down the Ctrl/Command button to select multiple options)
 select(
     '[id]'='id'
     '[(ngModel)]'='value'
     '(ngModelChange)'='onChange(value)'
-    '[multiple]'='isMultiple'
     '[size]'='size'
 )
     option('value'='' disabled selected hidden) {{placeholder}}
@@ -12,4 +10,3 @@ select(
         option('*ngFor'='let option of options' '[ngValue]'='option') {{option}}
     ng-template(#forObject='')
         option('*ngFor'='let option of options' '[ngValue]'='option[toGet]' '[label]'='option[toShow] | lowercase')
-

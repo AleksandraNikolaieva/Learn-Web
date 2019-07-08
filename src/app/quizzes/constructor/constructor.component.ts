@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, FormControl } from '@angular/forms';
 import { QuizzesService } from 'src/app/services/quizzes.service';
 import { QuestionVariant } from '../models';
@@ -7,8 +7,9 @@ import { Store } from '@ngrx/store';
 import { QuizzAddRequested } from '../store/quizzes.actions';
 import { Article, WorkshopsFeedParams } from 'src/app/workshops/models';
 import { WorkshopsRequested } from 'src/app/workshops/store/workshops.actions';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { selectWorkshops } from 'src/app/workshops/store/workshops.selectors';
+import { selectAuthData } from 'src/app/auth/store/auth.selectors';
 
 @Component({
     selector: 'app-constructor',
@@ -16,9 +17,10 @@ import { selectWorkshops } from 'src/app/workshops/store/workshops.selectors';
     styleUrls: ['./constructor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConstructorComponent implements OnInit {
+export class ConstructorComponent implements OnInit, OnDestroy {
     quizzForm: FormGroup;
     workshops$: Observable<Array<Article>>;
+    subscription: Subscription;
 
     constructor(
         private fb: FormBuilder,
@@ -26,7 +28,11 @@ export class ConstructorComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.store.dispatch(new WorkshopsRequested({params: new WorkshopsFeedParams()}));
+        this.subscription = this.store.select(selectAuthData).subscribe(res => {
+            if (res._id) {
+                this.store.dispatch(new WorkshopsRequested({params: new WorkshopsFeedParams(undefined, undefined, res._id)}));
+            }
+        });
         this.workshops$ = this.store.select(selectWorkshops);
 
         this.quizzForm = this.fb.group({
@@ -36,13 +42,16 @@ export class ConstructorComponent implements OnInit {
         });
     }
 
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
     onSubmit(): void {
         if (this.quizzForm.invalid) {
             this.showErrors(this.quizzForm);
             return;
         }
         const res = this.quizzForm.value;
-        console.log(res);
         this.store.dispatch(new QuizzAddRequested({quizz: res}));
         this.quizzForm.reset();
         this.quizzForm.setControl('posts', new FormControl(null, Validators.required));

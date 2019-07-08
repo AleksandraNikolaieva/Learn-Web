@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WorkshopResourcesComponent } from './workshop-resources.component';
+import { MultiSelectComponent } from './multi-select.component';
 
-describe('WorkshopResourcesComponent', () => {
-  let component: WorkshopResourcesComponent;
-  let fixture: ComponentFixture<WorkshopResourcesComponent>;
+describe('MultiSelectComponent', () => {
+  let component: MultiSelectComponent;
+  let fixture: ComponentFixture<MultiSelectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WorkshopResourcesComponent ]
+      declarations: [ MultiSelectComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WorkshopResourcesComponent);
+    fixture = TestBed.createComponent(MultiSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

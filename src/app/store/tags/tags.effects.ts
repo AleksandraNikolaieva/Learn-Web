@@ -5,13 +5,15 @@ import { TagsActionTypes, TagsRequested, TagsReceived, TagsRequestFailed, TagAdd
 import { exhaustMap, map, catchError } from 'rxjs/operators';
 import { Tag } from 'src/app/shared/models';
 import { of } from 'rxjs';
+import { ToastService } from 'src/app/core/toast-message/toast.service';
 
 @Injectable()
 export class TagsEffects {
 
     constructor(
         private actions$: Actions,
-        private tagsService: TagsService
+        private tagsService: TagsService,
+        private toast: ToastService
     ) { }
 
     @Effect()
@@ -40,6 +42,7 @@ export class TagsEffects {
             return this.tagsService.createTag(tagName)
             .pipe(
                 map((tag: Tag) => {
+                    this.toast.show({type: 'info', text: 'Tag added'});
                     return new TagAdded({tag});
                 }),
                 catchError((error: any) => {

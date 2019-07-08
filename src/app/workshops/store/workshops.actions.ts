@@ -39,7 +39,7 @@ export class WorkshopsRequested implements Action {
 export class WorkshopsReceived implements Action {
     readonly type  = WorkshopsActionTypes.WorkshopsReceived;
 
-    constructor(public payload: {workshops: Article[]}) {}
+    constructor(public payload: {workshops: Article[], total: number}) {}
 }
 
 export class WorkshopsRequestFailed implements Action {

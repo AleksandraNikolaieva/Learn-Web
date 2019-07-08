@@ -5,7 +5,6 @@ import { WorkshopPageComponent } from './workshop-page/workshop-page.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { WorkshopCommentsComponent } from './workshop-comments/workshop-comments.component';
 import { WorkshopQuizzesComponent } from './workshop-quizzes/workshop-quizzes.component';
-import { WorkshopResourcesComponent } from './workshop-resources/workshop-resources.component';
 import { AuxiliaryContentComponent } from '../shared/auxiliary-content/auxiliary-content.component';
 import { WsFormComponent } from './ws-form/ws-form.component';
 
@@ -51,10 +50,6 @@ const workshopsRoutes: Routes = [
                     {
                         path: 'comments',
                         component: WorkshopCommentsComponent
-                    },
-                    {
-                        path: 'resources',
-                        component: WorkshopResourcesComponent
                     },
                     {
                         path: 'quizzes',

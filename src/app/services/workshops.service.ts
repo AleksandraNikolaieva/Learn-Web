@@ -22,9 +22,6 @@ export class WorkshopsService {
 
     getAllPosts(params: WorkshopsFeedParams): Observable<Array<Article>> {
         return this.apiService.getRequest('posts', params)
-        .pipe(
-            map(res => res.posts)
-        );
     }
 
     getPostById(id: string): Observable<Article> {
@@ -48,5 +45,9 @@ export class WorkshopsService {
 
     setStoredWS(workshops: Array<Article>): void {
         this.storedWS$.next(workshops);
+    }
+
+    getMyFavoritePosts(myId: string) {
+        this.apiService.getRequest(`reactions/getpostids/${myId}/likes`);
     }
 }

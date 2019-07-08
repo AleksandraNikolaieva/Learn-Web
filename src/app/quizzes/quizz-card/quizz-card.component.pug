@@ -3,7 +3,9 @@ app-card
         h3 {{quizz.name}}
     div.user(content '*ngIf'='usersMap[quizz.author] as author')
         app-user-pic('[user]'='author')
-        span {{author?.firstName + ' ' + author?.lastName}}
+        span('*ngIf'='author.firstname || author.lastName; else noName') {{author?.firstName + ' ' + author?.lastName}}
+        ng-template(#noName='')
+            span
     ng-container(footer)
         app-timestamp('toFormat'='day', [date]='quizz.updatedAt')
         div.button-space

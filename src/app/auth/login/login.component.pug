@@ -1,7 +1,9 @@
 form([formGroup]='loginForm', (submit)='logIn()')
     h3 Welcome:
     input(placeholder='Login' 'formControlName'='username')
+    app-error-message('[field]'='loginForm.get("username")')
     input(type='password' placeholder='Password' 'formControlName'='password')
+    app-error-message('[field]'='loginForm.get("password")')
     .row
-        input(type='submit' value='SignIn')
-        input(type='button' value='SignUp' '(click)'='signUp()')
+        input(type='submit' value='Sign In')
+        input(type='button' value='Sign Up' '(click)'='signUp()')

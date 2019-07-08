@@ -1,0 +1,16 @@
+label('*ngIf'='label' '[for]'='id') {{label}}
+select(
+    '[id]'='id'
+    '[(ngModel)]'='value'
+    '(ngModelChange)'='onChange(value)'
+)
+    option('value'='null' disabled selected hidden) {{placeholder}}
+    option('*ngFor'='let option of options' '[ngValue]'='option[toGet]' '[label]'='option[toShow] | lowercase')
+div('*ngIf'='selectedArray.length')
+    span Click to remove:
+    div.selected
+        button(
+            '*ngFor'='let item of selectedArray' 
+            'type'='button'
+            '(click)'='removeItem(item)'
+        ) {{entities.get(item)[toShow]}}

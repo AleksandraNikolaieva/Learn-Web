@@ -16,13 +16,17 @@ app-viewport
             app-error-message('[field]'='workshopForm.get("description")')
             app-textarea('label'='Text:' 'placeholder'='Main text' 'formControlName'='text')
             app-error-message('[field]'='workshopForm.get("text")')
-            app-dropdown(
-                'formControlName'='tags'
-                '[options]'='tags$ | async'
-                'label'='Select tags:'
-                'toShow'='name'
-                'toGet'='seq'
-                'size'='4'
-            )
+            .tags
+                app-multi-select(
+                    'formControlName'='tags'
+                    '[options$]'='tags$'
+                    'label'='Select tags:'
+                    'toShow'='name'
+                    'toGet'='seq'
+                    'size'='4'
+                )
+                .new-tag
+                    app-text-input('label'='Add new tag:' 'id'='new tag' 'placeholder'='Tag name' #newTag='' autocomplete='off')
+                    button('type'='button', '(click)'='addNewTag(newTag.value)') Add tag
             button Submit
 

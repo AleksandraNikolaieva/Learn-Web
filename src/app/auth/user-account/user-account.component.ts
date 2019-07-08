@@ -9,6 +9,7 @@ import { AppState } from 'src/app/store/reducers';
 import { SignedOut, SignedIn, ChangeUserInfoRequested } from '../store/auth.actions';
 import { selectAuthData } from '../store/auth.selectors';
 import { AuthData } from '../models';
+import { ToastService } from 'src/app/core/toast-message/toast.service';
 
 @Component({
     selector: 'app-user-account',
@@ -24,7 +25,8 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     constructor(
         private store: Store<AppState>,
         private usersService: UsersService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private toast: ToastService
     ) { }
 
     ngOnInit() {
@@ -60,7 +62,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     deleteProfile(): void {
         this.usersService.deleteUserById(this.user._id).subscribe(res => {
             if (res) {
-                alert('Profile successfully deleted');
+                this.toast.show({type: 'info', text: 'Profile successfully deleted'});
                 this.logOut();
             }
         });

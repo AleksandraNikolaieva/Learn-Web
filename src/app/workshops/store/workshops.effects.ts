@@ -42,8 +42,8 @@ export class WorkshopsEffects {
         exhaustMap(({params}: {params: WorkshopsFeedParams}) => {
             return this.workshopsService.getAllPosts(params)
             .pipe(
-                map((workshops: Article[]) => {
-                    return new WorkshopsReceived({workshops});
+                map((res: any) => {
+                    return new WorkshopsReceived({workshops: res.posts, total: res.total});
                 }),
                 catchError(error => {
                     return of(new WorkshopsRequestFailed({error}));
