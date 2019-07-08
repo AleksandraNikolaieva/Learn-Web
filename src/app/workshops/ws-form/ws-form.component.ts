@@ -64,7 +64,7 @@ export class WsFormComponent implements OnInit {
                 control.markAsTouched();
             });
         } else {
-            /* if (this.action === 'add') {
+            if (this.action === 'add') {
                 this.store.dispatch(new WorkshopAddRequested({workshopData: this.workshopForm.value}));
             } else {
                 this.store.dispatch(new WorkshopEditRequested(
@@ -73,7 +73,7 @@ export class WsFormComponent implements OnInit {
                         workshopData: this.workshopForm.value
                     }
                 ));
-            } */
+            }
         }
     }
 

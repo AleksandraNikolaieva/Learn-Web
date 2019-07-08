@@ -29,4 +29,9 @@ export const selectActiveTags = createSelector(
     (state: WorkshopsState) => state.activeTags
 );
 
+export const selectTotalWorkshops = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.totalWorkshops
+);
+
 

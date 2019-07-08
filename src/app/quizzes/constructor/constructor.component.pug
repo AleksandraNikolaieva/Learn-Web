@@ -6,9 +6,9 @@ form('[formGroup]'='quizzForm' '(submit)'='onSubmit()' autocomplete='off')
         'placeholder'='Start typing...'
     )
     app-error-message('[field]'='quizzForm.get("name")')
-    app-dropdown(
+    app-multi-select(
         'formControlName'='posts'
-        '[options]'='workshops$ | async'
+        '[options$]'='workshops$'
         '[label]'='"Select related workshops: "'
         '[id]'='"posts"'
         'toShow'='title'

@@ -11,10 +11,10 @@ import { Tag } from '../../shared/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, Observable, zip } from 'rxjs';
 import { enterLeaveHeight } from 'src/app/common/animations';
-import { take, skip } from 'rxjs/operators';
+import { take, skip, tap } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers';
-import { selectWorkshops, selectWorkshopsState, selectWorshopsLoadedMark } from '../store/workshops.selectors';
+import { selectWorkshops, selectWorkshopsState, selectWorshopsLoadedMark, selectTotalWorkshops } from '../store/workshops.selectors';
 import {
         WorkshopsRequested,
         CategoryActivated,
@@ -46,8 +46,8 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     loggedUser: User;
     isLoaded: Observable<boolean>;
     currentPage: number;
-    pagesNum  = 3; // mock number as we don't know how many articles all together in the database
-    pages =  new Array(this.pagesNum);
+    pagesNum: number;
+    pages: Array<any>;
 
     activeTags: Array<string> = [];
     activeCategory: string;
@@ -72,11 +72,16 @@ export class WorkshopsFeedComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private cdr: ChangeDetectorRef
     ) {}
 
     ngOnInit() {
         this.isLoaded = this.store.select(selectWorshopsLoadedMark);
+        this.store.select(selectTotalWorkshops).subscribe(res => {
+            this.pagesNum = Math.ceil(res / 10);
+            this.pages =  new Array(this.pagesNum);
+        });
 
         this.getLoggedUser();
         this.checkStore();

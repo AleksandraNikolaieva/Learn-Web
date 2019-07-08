@@ -9,6 +9,7 @@ import { Article, WorkshopsFeedParams } from 'src/app/workshops/models';
 import { WorkshopsRequested } from 'src/app/workshops/store/workshops.actions';
 import { Observable } from 'rxjs';
 import { selectWorkshops } from 'src/app/workshops/store/workshops.selectors';
+import { selectAuthData } from 'src/app/auth/store/auth.selectors';
 
 @Component({
     selector: 'app-constructor',
@@ -26,7 +27,11 @@ export class ConstructorComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.store.dispatch(new WorkshopsRequested({params: new WorkshopsFeedParams()}));
+        this.store.select(selectAuthData).subscribe(res => {
+            if (res._id) {
+                this.store.dispatch(new WorkshopsRequested({params: new WorkshopsFeedParams(undefined, undefined, res._id)}));
+            }
+        });
         this.workshops$ = this.store.select(selectWorkshops);
 
         this.quizzForm = this.fb.group({
@@ -42,11 +47,10 @@ export class ConstructorComponent implements OnInit {
             return;
         }
         const res = this.quizzForm.value;
-        console.log(res);
-        /* this.store.dispatch(new QuizzAddRequested({quizz: res}));
+        this.store.dispatch(new QuizzAddRequested({quizz: res}));
         this.quizzForm.reset();
         this.quizzForm.setControl('posts', new FormControl(null, Validators.required));
-        this.quizzForm.setControl('questions', this.fb.array([], this.arrLengthValidation(1))); */
+        this.quizzForm.setControl('questions', this.fb.array([], this.arrLengthValidation(1)));
     }
 
     showErrors(formgroup: FormGroup) {
